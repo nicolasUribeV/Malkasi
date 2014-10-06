@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package sessionsbeans;
+package sessionbeans;
 
 import entities.Academic;
 import java.util.List;

@@ -1,10 +1,6 @@
 package managedbeans;
 
 import entities.Academic;
-import managedbeans.util.JsfUtil;
-import managedbeans.util.JsfUtil.PersistAction;
-import sb.AcademicFacade;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,19 +8,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
+import managedbeans.util.JsfUtil;
+import managedbeans.util.JsfUtil.PersistAction;
+
+import sessionbeans.AcademicFacadeLocal;
 
 @Named("academicController")
 @SessionScoped
 public class AcademicController implements Serializable {
 
     @EJB
-    private sb.AcademicFacade ejbFacade;
+    private AcademicFacadeLocal ejbFacade;
     private List<Academic> items = null;
     private Academic selected;
 
@@ -45,7 +45,7 @@ public class AcademicController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private AcademicFacade getFacade() {
+    private AcademicFacadeLocal getFacade() {
         return ejbFacade;
     }
 

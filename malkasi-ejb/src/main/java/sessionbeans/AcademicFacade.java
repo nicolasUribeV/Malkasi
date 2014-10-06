@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package sb;
+package sessionbeans;
 
 import entities.Academic;
 import javax.ejb.Stateless;
@@ -16,8 +16,8 @@ import javax.persistence.PersistenceContext;
  * @author Nico_
  */
 @Stateless
-public class AcademicFacade extends AbstractFacade<Academic> {
-    @PersistenceContext(unitName = "com.mycompany_malkasi-web_war_1.0-SNAPSHOTPU")
+public class AcademicFacade extends AbstractFacade<Academic> implements AcademicFacadeLocal {
+    @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
 
     @Override
