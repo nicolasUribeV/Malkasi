@@ -22,6 +22,8 @@ public class Academic implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    private String username;
 
     public Long getId() {
         return id;
@@ -54,6 +56,14 @@ public class Academic implements Serializable {
     @Override
     public String toString() {
         return "entities.Academic[ id=" + id + " ]";
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
     
 }

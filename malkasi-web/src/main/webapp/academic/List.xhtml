@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/layout/1column.xhtml">
 
 
         <ui:define name="title">
@@ -37,7 +37,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAcademicTitle_userName}"/>
                             </f:facet>
-                            <h:outputText value="#{item.userName}"/>
+                            <h:outputText value="#{item.username}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{academicController.prepareCreate}" update=":AcademicCreateForm" oncomplete="PF('AcademicCreateDialog').show()"/>

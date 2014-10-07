@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.CreateAcademicLabel_id}" for="id" />
                         <p:inputText id="id" value="#{academicController.selected.id}" title="#{bundle.CreateAcademicTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateAcademicLabel_userName}" for="userName" />
-                        <p:inputText id="userName" value="#{academicController.selected.userName}" title="#{bundle.CreateAcademicTitle_userName}" />
+                        <p:inputText id="userName" value="#{academicController.selected.username}" title="#{bundle.CreateAcademicTitle_userName}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{academicController.create}" value="#{bundle.Save}" update="display,:AcademicListForm:datalist,:growl" oncomplete="handleSubmit(args,'AcademicCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AcademicCreateDialog.hide()"/>

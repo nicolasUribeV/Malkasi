@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundle.EditAcademicLabel_id}" for="id" />
                         <p:inputText id="id" value="#{academicController.selected.id}" title="#{bundle.EditAcademicTitle_id}" />
                         <p:outputLabel value="#{bundle.EditAcademicLabel_userName}" for="userName" />
-                        <p:inputText id="userName" value="#{academicController.selected.userName}" title="#{bundle.EditAcademicTitle_userName}" />
+                        <p:inputText id="userName" value="#{academicController.selected.username}" title="#{bundle.EditAcademicTitle_userName}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{academicController.update}" value="#{bundle.Save}" update="display,:AcademicListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AcademicEditDialog.hide()"/>

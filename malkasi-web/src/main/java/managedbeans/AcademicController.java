@@ -16,7 +16,6 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 import managedbeans.util.JsfUtil;
 import managedbeans.util.JsfUtil.PersistAction;
-
 import sessionbeans.AcademicFacadeLocal;
 
 @Named("academicController")
