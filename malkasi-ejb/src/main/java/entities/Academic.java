@@ -24,6 +24,10 @@ public class Academic implements Serializable {
     private Long id;
     
     private String username;
+    
+    private String nombre;
+    
+    private String apellido;
 
     public Long getId() {
         return id;
