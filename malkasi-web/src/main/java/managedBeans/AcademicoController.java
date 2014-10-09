@@ -1,6 +1,10 @@
-package managedbeans;
+package managedBeans;
 
-import entities.Academic;
+import entities.Academico;
+import managedBeans.util.JsfUtil;
+import managedBeans.util.JsfUtil.PersistAction;
+import sessionbeans.AcademicoFacadeLocal;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -8,33 +12,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Named;
-import managedbeans.util.JsfUtil;
-import managedbeans.util.JsfUtil.PersistAction;
-import sessionbeans.AcademicFacadeLocal;
 
-@Named("academicController")
+@Named("academicoController")
 @SessionScoped
-public class AcademicController implements Serializable {
+public class AcademicoController implements Serializable {
 
     @EJB
-    private AcademicFacadeLocal ejbFacade;
-    private List<Academic> items = null;
-    private Academic selected;
+    private AcademicoFacadeLocal ejbFacade;
+    private List<Academico> items = null;
+    private Academico selected;
 
-    public AcademicController() {
+    public AcademicoController() {
     }
 
-    public Academic getSelected() {
+    public Academico getSelected() {
         return selected;
     }
 
-    public void setSelected(Academic selected) {
+    public void setSelected(Academico selected) {
         this.selected = selected;
     }
 
@@ -44,36 +45,36 @@ public class AcademicController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private AcademicFacadeLocal getFacade() {
+    private AcademicoFacadeLocal getFacade() {
         return ejbFacade;
     }
 
-    public Academic prepareCreate() {
-        selected = new Academic();
+    public Academico prepareCreate() {
+        selected = new Academico();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AcademicCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AcademicUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("AcademicDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("AcademicoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Academic> getItems() {
+    public List<Academico> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -108,38 +109,38 @@ public class AcademicController implements Serializable {
         }
     }
 
-    public Academic getAcademic(java.lang.Long id) {
+    public Academico getAcademico(java.lang.String id) {
         return getFacade().find(id);
     }
 
-    public List<Academic> getItemsAvailableSelectMany() {
+    public List<Academico> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Academic> getItemsAvailableSelectOne() {
+    public List<Academico> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Academic.class)
-    public static class AcademicControllerConverter implements Converter {
+    @FacesConverter(forClass = Academico.class)
+    public static class AcademicoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AcademicController controller = (AcademicController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "academicController");
-            return controller.getAcademic(getKey(value));
+            AcademicoController controller = (AcademicoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "academicoController");
+            return controller.getAcademico(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        java.lang.String getKey(String value) {
+            java.lang.String key;
+            key = value;
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(java.lang.String value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
@@ -150,11 +151,11 @@ public class AcademicController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Academic) {
-                Academic o = (Academic) object;
-                return getStringKey(o.getId());
+            if (object instanceof Academico) {
+                Academico o = (Academico) object;
+                return getStringKey(o.getRut());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Academic.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Academico.class.getName()});
                 return null;
             }
         }

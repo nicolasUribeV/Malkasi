@@ -17,18 +17,18 @@ import javax.persistence.Id;
  * @author Nico_
  */
 @Entity
-public class Academic implements Serializable {
+public class GradoAcademico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    private String username;
-    
-    private String nombre;
-    
-    private String apellido;
 
+    private String Titulo;
+    
+    private int Agno;
+    
+    private String Insitucion;
+    
     public Long getId() {
         return id;
     }
@@ -47,10 +47,10 @@ public class Academic implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Academic)) {
+        if (!(object instanceof GradoAcademico)) {
             return false;
         }
-        Academic other = (Academic) object;
+        GradoAcademico other = (GradoAcademico) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -59,15 +59,31 @@ public class Academic implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Academic[ id=" + id + " ]";
+        return "entities.GradoAcademico[ id=" + id + " ]";
     }
 
-    public String getUsername() {
-        return username;
+    public String getTitulo() {
+        return Titulo;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setTitulo(String Titulo) {
+        this.Titulo = Titulo;
+    }
+
+    public int getAgno() {
+        return Agno;
+    }
+
+    public void setAgno(int Agno) {
+        this.Agno = Agno;
+    }
+
+    public String getInsitucion() {
+        return Insitucion;
+    }
+
+    public void setInsitucion(String Insitucion) {
+        this.Insitucion = Insitucion;
     }
     
 }

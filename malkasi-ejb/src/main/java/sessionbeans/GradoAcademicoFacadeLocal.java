@@ -6,7 +6,7 @@
 
 package sessionbeans;
 
-import entities.Academic;
+import entities.GradoAcademico;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,19 +15,19 @@ import javax.ejb.Local;
  * @author Nico_
  */
 @Local
-public interface AcademicFacadeLocal {
+public interface GradoAcademicoFacadeLocal {
 
-    void create(Academic academic);
+    void create(GradoAcademico gradoAcademico);
 
-    void edit(Academic academic);
+    void edit(GradoAcademico gradoAcademico);
 
-    void remove(Academic academic);
+    void remove(GradoAcademico gradoAcademico);
 
-    Academic find(Object id);
+    GradoAcademico find(Object id);
 
-    List<Academic> findAll();
+    List<GradoAcademico> findAll();
 
-    List<Academic> findRange(int[] range);
+    List<GradoAcademico> findRange(int[] range);
 
     int count();
     

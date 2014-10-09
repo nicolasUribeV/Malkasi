@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GradoAcademicoEditDlg" widgetVar="GradoAcademicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditGradoAcademicoTitle}">
+            <h:form id="GradoAcademicoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{gradoAcademicoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{gradoAcademicoController.selected.id}" title="#{bundle.EditGradoAcademicoTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_titulo}" for="titulo" />
+                        <p:inputText id="titulo" value="#{gradoAcademicoController.selected.titulo}" title="#{bundle.EditGradoAcademicoTitle_titulo}" />
+                        <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_agno}" for="agno" />
+                        <p:inputText id="agno" value="#{gradoAcademicoController.selected.agno}" title="#{bundle.EditGradoAcademicoTitle_agno}" />
+                        <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_insitucion}" for="insitucion" />
+                        <p:inputText id="insitucion" value="#{gradoAcademicoController.selected.insitucion}" title="#{bundle.EditGradoAcademicoTitle_insitucion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{gradoAcademicoController.update}" value="#{bundle.Save}" update="display,:GradoAcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'GradoAcademicoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="GradoAcademicoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

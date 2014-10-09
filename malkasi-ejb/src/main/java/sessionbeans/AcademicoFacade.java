@@ -6,7 +6,7 @@
 
 package sessionbeans;
 
-import entities.Academic;
+import entities.Academico;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Nico_
  */
 @Stateless
-public class AcademicFacade extends AbstractFacade<Academic> implements AcademicFacadeLocal {
+public class AcademicoFacade extends AbstractFacade<Academico> implements AcademicoFacadeLocal {
     @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -25,8 +25,8 @@ public class AcademicFacade extends AbstractFacade<Academic> implements Academic
         return em;
     }
 
-    public AcademicFacade() {
-        super(Academic.class);
+    public AcademicoFacade() {
+        super(Academico.class);
     }
     
 }

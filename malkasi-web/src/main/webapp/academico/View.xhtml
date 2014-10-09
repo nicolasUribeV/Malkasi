@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AcademicoViewDlg" widgetVar="AcademicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAcademicoTitle}">
+            <h:form id="AcademicoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAcademicoLabel_rut}"/>
+                        <h:outputText value="#{academicoController.selected.rut}" title="#{bundle.ViewAcademicoTitle_rut}"/>
+                        <h:outputText value="#{bundle.ViewAcademicoLabel_nombres}"/>
+                        <h:outputText value="#{academicoController.selected.nombres}" title="#{bundle.ViewAcademicoTitle_nombres}"/>
+                        <h:outputText value="#{bundle.ViewAcademicoLabel_apellidos}"/>
+                        <h:outputText value="#{academicoController.selected.apellidos}" title="#{bundle.ViewAcademicoTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewAcademicoLabel_mail}"/>
+                        <h:outputText value="#{academicoController.selected.mail}" title="#{bundle.ViewAcademicoTitle_mail}"/>
+                        <h:outputText value="#{bundle.ViewAcademicoLabel_resegna}"/>
+                        <h:outputText value="#{academicoController.selected.resegna}" title="#{bundle.ViewAcademicoTitle_resegna}"/>
+                        <h:outputText value="#{bundle.ViewAcademicoLabel_grados}"/>
+                        <h:outputText value="#{academicoController.selected.grados}" title="#{bundle.ViewAcademicoTitle_grados}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AcademicoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

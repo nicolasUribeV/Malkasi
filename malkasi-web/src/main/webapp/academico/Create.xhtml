@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AcademicoCreateDlg" widgetVar="AcademicoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAcademicoTitle}">
+            <h:form id="AcademicoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_rut}" for="rut" />
+                        <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.CreateAcademicoTitle_rut}" />
+                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.CreateAcademicoTitle_nombres}" />
+                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{academicoController.selected.apellidos}" title="#{bundle.CreateAcademicoTitle_apellidos}" />
+                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_mail}" for="mail" />
+                        <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.CreateAcademicoTitle_mail}" />
+                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_resegna}" for="resegna" />
+                        <p:inputText id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.CreateAcademicoTitle_resegna}" />
+                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_grados}" for="grados" />
+                        <p:inputText id="grados" value="#{academicoController.selected.grados}" title="#{bundle.CreateAcademicoTitle_grados}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{academicoController.create}" value="#{bundle.Save}" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AcademicoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AcademicoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
