@@ -24,7 +24,7 @@ public class Publicacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long code;
+    private Long id;
     
     private String nombrePublicacion;
     
@@ -47,18 +47,18 @@ public class Publicacion implements Serializable {
     
     private String institucion;
 
-    public Long getCode() {
-        return code;
+    public Long getId() {
+        return id;
     }
 
-    public void setId(Long code) {
-        this.code = code;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (code != null ? code.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -69,7 +69,7 @@ public class Publicacion implements Serializable {
             return false;
         }
         Publicacion other = (Publicacion) object;
-        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -77,7 +77,7 @@ public class Publicacion implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Publicacion[ id=" + code + " ]";
+        return "entities.Publicacion[ id=" + id + " ]";
     }
 
     public String getNombrePublicacion() {

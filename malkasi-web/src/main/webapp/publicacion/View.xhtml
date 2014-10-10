@@ -12,8 +12,8 @@
             <h:form id="PublicacionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPublicacionLabel_code}"/>
-                        <h:outputText value="#{publicacionController.selected.code}" title="#{bundle.ViewPublicacionTitle_code}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_id}"/>
+                        <h:outputText value="#{publicacionController.selected.id}" title="#{bundle.ViewPublicacionTitle_id}"/>
                         <h:outputText value="#{bundle.ViewPublicacionLabel_nombrePublicacion}"/>
                         <h:outputText value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.ViewPublicacionTitle_nombrePublicacion}"/>
                         <h:outputText value="#{bundle.ViewPublicacionLabel_pais}"/>

@@ -153,7 +153,7 @@ public class PublicacionController implements Serializable {
             }
             if (object instanceof Publicacion) {
                 Publicacion o = (Publicacion) object;
-                return getStringKey(o.getCode());
+                return getStringKey(o.getId());
             } else {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Publicacion.class.getName()});
                 return null;

@@ -12,8 +12,8 @@
             <h:form id="PublicacionEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_code}" for="code" />
-                        <p:inputText id="code" value="#{publicacionController.selected.code}" title="#{bundle.EditPublicacionTitle_code}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{publicacionController.selected.id}" title="#{bundle.EditPublicacionTitle_id}" />
                         <p:outputLabel value="#{bundle.EditPublicacionLabel_nombrePublicacion}" for="nombrePublicacion" />
                         <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.EditPublicacionTitle_nombrePublicacion}" />
                         <p:outputLabel value="#{bundle.EditPublicacionLabel_pais}" for="pais" />

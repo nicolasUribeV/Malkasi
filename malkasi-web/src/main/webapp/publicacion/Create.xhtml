@@ -12,8 +12,8 @@
             <h:form id="PublicacionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePublicacionLabel_code}" for="code" />
-                        <p:inputText id="code" value="#{publicacionController.selected.code}" title="#{bundle.CreatePublicacionTitle_code}" />
+                        <p:outputLabel value="#{bundle.CreatePublicacionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{publicacionController.selected.id}" title="#{bundle.CreatePublicacionTitle_id}" />
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_nombrePublicacion}" for="nombrePublicacion" />
                         <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" />
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_pais}" for="pais" />
