@@ -24,6 +24,9 @@ public class Academico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    
+    @Size(min=1, message="El campo RUT no puede estar vacío")
     private String rut;
     
     @Size(min=1, message="El campo Nombre no puede estar vacío")
@@ -111,6 +114,14 @@ public class Academico implements Serializable {
 
     public void setGrados(List<GradoAcademico> Grados) {
         this.Grados = Grados;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long Id) {
+        this.id = Id;
     }
     
 }
