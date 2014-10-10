@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PublicacionViewDlg" widgetVar="PublicacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPublicacionTitle}">
+            <h:form id="PublicacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_code}"/>
+                        <h:outputText value="#{publicacionController.selected.code}" title="#{bundle.ViewPublicacionTitle_code}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_nombrePublicacion}"/>
+                        <h:outputText value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.ViewPublicacionTitle_nombrePublicacion}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_pais}"/>
+                        <h:outputText value="#{publicacionController.selected.pais}" title="#{bundle.ViewPublicacionTitle_pais}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_ciudad}"/>
+                        <h:outputText value="#{publicacionController.selected.ciudad}" title="#{bundle.ViewPublicacionTitle_ciudad}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_fechaPublicacion}"/>
+                        <h:outputText value="#{publicacionController.selected.fechaPublicacion}" title="#{bundle.ViewPublicacionTitle_fechaPublicacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_nombreLibro}"/>
+                        <h:outputText value="#{publicacionController.selected.nombreLibro}" title="#{bundle.ViewPublicacionTitle_nombreLibro}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_referencia}"/>
+                        <h:outputText value="#{publicacionController.selected.referencia}" title="#{bundle.ViewPublicacionTitle_referencia}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_editorial}"/>
+                        <h:outputText value="#{publicacionController.selected.editorial}" title="#{bundle.ViewPublicacionTitle_editorial}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_url}"/>
+                        <h:outputText value="#{publicacionController.selected.url}" title="#{bundle.ViewPublicacionTitle_url}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_nombreCongreso}"/>
+                        <h:outputText value="#{publicacionController.selected.nombreCongreso}" title="#{bundle.ViewPublicacionTitle_nombreCongreso}"/>
+                        <h:outputText value="#{bundle.ViewPublicacionLabel_institucion}"/>
+                        <h:outputText value="#{publicacionController.selected.institucion}" title="#{bundle.ViewPublicacionTitle_institucion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PublicacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

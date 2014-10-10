@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PublicacionEditDlg" widgetVar="PublicacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPublicacionTitle}">
+            <h:form id="PublicacionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{publicacionController.selected.code}" title="#{bundle.EditPublicacionTitle_code}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_nombrePublicacion}" for="nombrePublicacion" />
+                        <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.EditPublicacionTitle_nombrePublicacion}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_pais}" for="pais" />
+                        <p:inputText id="pais" value="#{publicacionController.selected.pais}" title="#{bundle.EditPublicacionTitle_pais}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_ciudad}" for="ciudad" />
+                        <p:inputText id="ciudad" value="#{publicacionController.selected.ciudad}" title="#{bundle.EditPublicacionTitle_ciudad}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_fechaPublicacion}" for="fechaPublicacion" />
+                        <p:calendar id="fechaPublicacion" pattern="MM/dd/yyyy" value="#{publicacionController.selected.fechaPublicacion}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_nombreLibro}" for="nombreLibro" />
+                        <p:inputText id="nombreLibro" value="#{publicacionController.selected.nombreLibro}" title="#{bundle.EditPublicacionTitle_nombreLibro}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_referencia}" for="referencia" />
+                        <p:inputText id="referencia" value="#{publicacionController.selected.referencia}" title="#{bundle.EditPublicacionTitle_referencia}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_editorial}" for="editorial" />
+                        <p:inputText id="editorial" value="#{publicacionController.selected.editorial}" title="#{bundle.EditPublicacionTitle_editorial}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_url}" for="url" />
+                        <p:inputText id="url" value="#{publicacionController.selected.url}" title="#{bundle.EditPublicacionTitle_url}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_nombreCongreso}" for="nombreCongreso" />
+                        <p:inputText id="nombreCongreso" value="#{publicacionController.selected.nombreCongreso}" title="#{bundle.EditPublicacionTitle_nombreCongreso}" />
+                        <p:outputLabel value="#{bundle.EditPublicacionLabel_institucion}" for="institucion" />
+                        <p:inputText id="institucion" value="#{publicacionController.selected.institucion}" title="#{bundle.EditPublicacionTitle_institucion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{publicacionController.update}" value="#{bundle.Save}" update="display,:PublicacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PublicacionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PublicacionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
