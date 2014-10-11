@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sessionbeans;
 
 import entities.Publicacion;
@@ -12,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Nico_
+ * @author elias
  */
 @Local
 public interface PublicacionFacadeLocal {

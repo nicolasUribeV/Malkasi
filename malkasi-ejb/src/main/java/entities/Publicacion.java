@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -7,20 +7,35 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.faces.model.SelectItem;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Nico_
- */
+
+
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Publicacion.findAll", query = "SELECT a FROM Publicacion a")  
+})
+
 public class Publicacion implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,8 +44,6 @@ public class Publicacion implements Serializable {
     private String nombrePublicacion;
     
     private String pais;
-    
-    private String ciudad;
     
     @Temporal(TemporalType.DATE) 
     private Date fechaPublicacion;
@@ -46,7 +59,28 @@ public class Publicacion implements Serializable {
     private String nombreCongreso;
     
     private String institucion;
+    
+    @ManyToOne
+    private TipoPublicacion tipoPublicacion;
 
+    public TipoPublicacion getTipoPublicacion() {
+        return tipoPublicacion;
+    }
+
+    public void setTipoPublicacion(TipoPublicacion tipoPublicacion) {
+        this.tipoPublicacion = tipoPublicacion;
+    }
+    
+    @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
+    private EntityManager em;
+
+    public void persist(Object object) {
+        em.persist(object);
+    }
+     public void edit(Object object) {
+        em.merge(object);
+    }
+    
     public Long getId() {
         return id;
     }
@@ -94,14 +128,6 @@ public class Publicacion implements Serializable {
 
     public void setPais(String pais) {
         this.pais = pais;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
     }
 
     public Date getFechaPublicacion() {
@@ -159,5 +185,4 @@ public class Publicacion implements Serializable {
     public void setInstitucion(String institucion) {
         this.institucion = institucion;
     }
-    
 }

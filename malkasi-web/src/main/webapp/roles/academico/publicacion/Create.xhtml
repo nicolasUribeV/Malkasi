@@ -12,14 +12,18 @@
             <h:form id="PublicacionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePublicacionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{publicacionController.selected.id}" title="#{bundle.CreatePublicacionTitle_id}" />
+                        <p:outputLabel value="TipoPublicacion" for="tipoPublicacion" />
+                        <p:selectOneMenu id="tipoPublicacion" required="true" value="#{publicacionController.selected.tipoPublicacion}">   
+                            <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre"
+                                           itemLabel="#{nombre.nombreTipo}"/>
+                        </p:selectOneMenu>
+                        
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_nombrePublicacion}" for="nombrePublicacion" />
                         <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" />
-                        <p:outputLabel value="#{bundle.CreatePublicacionLabel_pais}" for="pais" />
-                        <p:inputText id="pais" value="#{publicacionController.selected.pais}" title="#{bundle.CreatePublicacionTitle_pais}" />
-                        <p:outputLabel value="#{bundle.CreatePublicacionLabel_ciudad}" for="ciudad" />
-                        <p:inputText id="ciudad" value="#{publicacionController.selected.ciudad}" title="#{bundle.CreatePublicacionTitle_ciudad}" />
+                        
+                        <p:outputLabel value="Pais" for="pais" />          
+                        <p:inputText id="pais" value="#{publicacionController.selected.pais}" title="PublicacionPais" />
+                       
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_fechaPublicacion}" for="fechaPublicacion" />
                         <p:calendar id="fechaPublicacion" pattern="MM/dd/yyyy" value="#{publicacionController.selected.fechaPublicacion}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_nombreLibro}" for="nombreLibro" />
