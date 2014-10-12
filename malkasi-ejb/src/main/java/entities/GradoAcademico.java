@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -27,7 +28,10 @@ public class GradoAcademico implements Serializable {
     
     private int Agno;
     
-    private String Insitucion;
+    private String Institucion;
+    
+    @ManyToOne
+    private Academico miAcademico;
     
     public Long getId() {
         return id;
@@ -77,13 +81,21 @@ public class GradoAcademico implements Serializable {
     public void setAgno(int Agno) {
         this.Agno = Agno;
     }
-
-    public String getInsitucion() {
-        return Insitucion;
-    }
-
-    public void setInsitucion(String Insitucion) {
-        this.Insitucion = Insitucion;
-    }
     
+    public String getInstitucion() {
+        return Institucion;
+    }
+
+    public void setInstitucion(String Institucion) {
+        this.Institucion = Institucion;
+    }
+
+    public Academico getMiAcademico() {
+        return miAcademico;
+    }
+
+    public void setMiAcademico(Academico miAcademico) {
+        this.miAcademico = miAcademico;
+    }
+
 }

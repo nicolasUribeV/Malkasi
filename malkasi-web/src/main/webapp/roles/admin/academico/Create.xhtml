@@ -18,13 +18,11 @@
                         <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.CreateAcademicoTitle_nombres}" />
                         <p:outputLabel value="#{bundle.CreateAcademicoLabel_apellidos}" for="apellidos" />
                         <p:inputText id="apellidos" value="#{academicoController.selected.apellidos}" title="#{bundle.CreateAcademicoTitle_apellidos}" />
-                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_mail}" for="mail" />
+                        <p:outputLabel value="Correo" for="mail" />
                         <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.CreateAcademicoTitle_mail}" />
-                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_resegna}" for="resegna" />
+                        <p:outputLabel value="Reseña" for="resegna" />
                         <p:inputText id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.CreateAcademicoTitle_resegna}" />
-                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_grados}" for="grados" />
-                        <p:inputText id="grados" value="#{academicoController.selected.grados}" title="#{bundle.CreateAcademicoTitle_grados}" />
-                    </p:panelGrid>
+                     </p:panelGrid>
                     <p:commandButton actionListener="#{academicoController.create}" value="#{bundle.Save}" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AcademicoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AcademicoCreateDialog.hide()"/>
                 </h:panelGroup>

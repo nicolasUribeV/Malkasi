@@ -1,10 +1,7 @@
 package managedBeans;
 
+import entities.Academico;
 import entities.GradoAcademico;
-import managedBeans.util.JsfUtil;
-import managedBeans.util.JsfUtil.PersistAction;
-import sessionbeans.GradoAcademicoFacadeLocal;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,12 +9,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
+import managedBeans.util.JsfUtil;
+import managedBeans.util.JsfUtil.PersistAction;
+import sessionbeans.AcademicoFacadeLocal;
+import sessionbeans.GradoAcademicoFacadeLocal;
 
 @Named("gradoAcademicoController")
 @SessionScoped
@@ -25,6 +26,7 @@ public class GradoAcademicoController implements Serializable {
 
     @EJB
     private GradoAcademicoFacadeLocal ejbFacade;
+    private AcademicoFacadeLocal ejbAcademicoFacade;
     private List<GradoAcademico> items = null;
     private GradoAcademico selected;
 
@@ -54,7 +56,19 @@ public class GradoAcademicoController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-
+    
+    public GradoAcademico prepareCreateWhitAcademic(Academico academico) {
+        selected = new GradoAcademico();
+        selected.setMiAcademico(academico);
+        initializeEmbeddableKey();
+        return selected;
+    }
+    
+    public void prepareViewWhitAcademic(Academico academico) {
+        items = academico.getGrados();
+        JsfUtil.redirect("/faces/roles/admin/academico/ListGA.xhtml");
+    }
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("GradoAcademicoCreated"));
         if (!JsfUtil.isValidationFailed()) {
