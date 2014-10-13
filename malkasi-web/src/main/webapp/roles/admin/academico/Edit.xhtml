@@ -13,13 +13,21 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_rut}" for="rut" />
-                        <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.EditAcademicoTitle_rut}" />
+                        <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.EditAcademicoTitle_rut}" >
+                            <f:validator validatorId="RutValidator"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_nombres}" for="nombres" />
-                        <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.EditAcademicoTitle_nombres}" />
+                        <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.EditAcademicoTitle_nombres}" >
+                            <f:validator validatorId="NombreValidator"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_apellidos}" for="apellidos" />
-                        <p:inputText id="apellidos" value="#{academicoController.selected.apellidos}" title="#{bundle.EditAcademicoTitle_apellidos}" />
+                        <p:inputText id="apellidos" value="#{academicoController.selected.apellidos}" title="#{bundle.EditAcademicoTitle_apellidos}" >
+                            <f:validator validatorId="ApellidoValidator"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_mail}" for="mail" />
-                        <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" />
+                        <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
+                            <f:validator validatorId="CorreoValidator"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_resegna}" for="resegna" />
                         <p:inputText id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" />
                         </p:panelGrid>
