@@ -14,6 +14,19 @@
         </ui:define>
 
         <ui:define name="body">
+            <h:form>  
+                <p:menubar>
+                    <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
+                    </p:menuitem>
+                    <p:menuitem value="Gestión Academicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml">
+                    </p:menuitem>
+                    <p:menuitem value="Ver Publicaciones" icon="ui-icon-document" url="#">
+                    </p:menuitem>
+                </p:menubar>
+            </h:form>
+            <h:form>  
+                
+            </h:form>
             <h:form id="AcademicoListForm">
                 <p:panel header="#{bundle.ListAcademicoTitle}">
                     <p:dataTable id="datalist" value="#{academicoController.items}" var="item"

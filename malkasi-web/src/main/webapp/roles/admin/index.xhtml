@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/layout/1column.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="Bienvenido"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form>  
+                <p:menubar>
+                    <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
+                    </p:menuitem>
+                    <p:menuitem value="Gestión Academicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml">
+                    </p:menuitem>
+                    <p:menuitem value="Ver Publicaciones" icon="ui-icon-document" url="#">
+                    </p:menuitem>
+                </p:menubar>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

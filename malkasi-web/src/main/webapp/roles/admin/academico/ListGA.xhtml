@@ -14,6 +14,19 @@
         </ui:define>
 
         <ui:define name="body">
+            <h:form>  
+                <p:menubar>
+                    <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
+                    </p:menuitem>
+                    <p:menuitem value="Gestión Academicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml">
+                    </p:menuitem>
+                    <p:menuitem value="Ver Publicaciones" icon="ui-icon-document" url="#">
+                    </p:menuitem>
+                </p:menubar>
+            </h:form>
+            <h:form>  
+                
+            </h:form>
             <h:form id="GradoAcademicoListForm">
                 <p:panel header="#{bundle.ListGradoAcademicoTitle}">
                     <p:dataTable id="datalistGA" value="#{gradoAcademicoController.items}" var="item"
@@ -55,6 +68,7 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":GradoAcademicoViewForm" oncomplete="PF('GradoAcademicoViewDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":GradoAcademicoEditForm" oncomplete="PF('GradoAcademicoEditDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{academico_GradoAcademicoController.Delete(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.EliminarGradoAcademico(gradoAcademicoController.selected))}" update=":growl,datalistGA" disabled="#{empty gradoAcademicoController.selected}"/>
+                            <p:button id="volverButton" value="Volver" href="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.setSelected(null)}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
@@ -62,6 +76,7 @@
 
             <ui:include src="EditGA.xhtml"/>
             <ui:include src="ViewGA.xhtml"/>
+            
         </ui:define>
     </ui:composition>
 
