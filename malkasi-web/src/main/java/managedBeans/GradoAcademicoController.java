@@ -65,6 +65,7 @@ public class GradoAcademicoController implements Serializable {
     }
     
     public void prepareViewWhitAcademic(Academico academico) {
+        prepareCreate();
         items = academico.getGrados();
         JsfUtil.redirect("/faces/roles/admin/academico/ListGA.xhtml");
     }
@@ -74,6 +75,7 @@ public class GradoAcademicoController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+
     }
 
     public void update() {
@@ -93,6 +95,11 @@ public class GradoAcademicoController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+    
+    public GradoAcademico EliminarGradoAcademico(GradoAcademico gradoAcademico){
+        this.items.remove(gradoAcademico);
+        return gradoAcademico;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

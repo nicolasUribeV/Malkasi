@@ -30,7 +30,7 @@ public class GradoAcademico implements Serializable {
     
     private String Institucion;
     
-    @ManyToOne
+    @ManyToOne(optional= false)
     private Academico miAcademico;
     
     public Long getId() {

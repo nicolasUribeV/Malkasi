@@ -9,6 +9,8 @@ package sessionbeans;
 import entities.Academico;
 import java.util.List;
 import javax.ejb.Local;
+import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -30,5 +32,4 @@ public interface AcademicoFacadeLocal {
     List<Academico> findRange(int[] range);
 
     int count();
-    
 }

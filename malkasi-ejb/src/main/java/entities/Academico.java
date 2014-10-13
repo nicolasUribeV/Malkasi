@@ -8,6 +8,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,10 +43,7 @@ public class Academico implements Serializable {
     
     private String resegna;
     
-    @OneToMany
-    @JoinTable(name="ACADEMICO_GRADOACADEMICO",
-        joinColumns={@JoinColumn(name="Grados_ID")}, 
-        inverseJoinColumns={@JoinColumn(name="Academico_ID")})
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "miAcademico")
     private List<GradoAcademico> Grados;
     
     public String getRut() {

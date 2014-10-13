@@ -19,7 +19,7 @@
                         <p:outputLabel value="Institución" for="insitucion" />
                         <p:inputText id="insitucion" value="#{gradoAcademicoController.selected.institucion}" title="#{bundle.CreateGradoAcademicoTitle_insitucion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{gradoAcademicoController.create}" value="#{bundle.Save}" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'GradoAcademicoCreateDialog');"/>
+                    <p:commandButton actionListener="#{academico_GradoAcademicoController.NuevaDependecia(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.selected)}" value="#{bundle.Save}" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'GradoAcademicoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="GradoAcademicoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

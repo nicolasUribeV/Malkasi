@@ -54,7 +54,7 @@
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":GradoAcademicoViewForm" oncomplete="PF('GradoAcademicoViewDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":GradoAcademicoEditForm" oncomplete="PF('GradoAcademicoEditDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{gradoAcademicoController.destroy}" update=":growl,datalistGA" disabled="#{empty gradoAcademicoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{academico_GradoAcademicoController.Delete(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.EliminarGradoAcademico(gradoAcademicoController.selected))}" update=":growl,datalistGA" disabled="#{empty gradoAcademicoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
