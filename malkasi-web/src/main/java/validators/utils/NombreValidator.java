@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
@@ -16,6 +17,7 @@ import javax.faces.validator.ValidatorException;
  *
  * @author Rodrigo
  */
+@FacesValidator("NombreValidator")
 public class NombreValidator implements Validator{
 
     @Override

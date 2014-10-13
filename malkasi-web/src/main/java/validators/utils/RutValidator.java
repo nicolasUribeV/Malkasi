@@ -12,7 +12,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator("Validator.RutValidator")
+@FacesValidator("RutValidator")
 public class RutValidator implements Validator {
 
     private String rut;
