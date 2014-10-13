@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
@@ -14,95 +13,90 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="PublicacionListForm">
-                <p:panel header="#{bundle.ListPublicacionTitle}">
-                    <p:dataTable id="datalist" value="#{publicacionController.items}" var="item"
+            <h:form id="form">
+                <p:panel header="Listado de publicaciones">
+                    <p:dataTable id="datalist"  value="#{publicacionController.items}" var="item"
                                  selectionMode="single" selection="#{publicacionController.selected}"
-                                 paginator="true"
+                                 paginator = "true"
                                  rowKey="#{item.id}"
+
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
+                        <p:ajax event="rowSelect" update="editarBoton"/>
+                        <p:ajax event="rowUnselect" update="editarBoton"/>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_id}"/>
+                                <h:outputText value="ID" />
                             </f:facet>
-                            <h:outputText value="#{item.id}"/>
+                            <h:outputText value="#{item.id}"/>    
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_nombrePublicacion}"/>
+                                <h:outputText value="Nombre Publicacion" />
                             </f:facet>
-                            <h:outputText value="#{item.nombrePublicacion}"/>
+                            <h:outputText value="#{item.nombrePublicacion}"/>    
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_pais}"/>
+                                <h:outputText value="Pais" />
                             </f:facet>
-                            <h:outputText value="#{item.pais}"/>
+                            <h:outputText value="#{item.pais}"/>    
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_fechaPublicacion}"/>
+                                <h:outputText value="Fecha de publicacion" />
                             </f:facet>
-                            <h:outputText value="#{item.fechaPublicacion}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
+                            <h:outputText value="#{item.fechaPublicacion}"/>    
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_nombreLibro}"/>
+                                <h:outputText value="Nombre libro" />
                             </f:facet>
-                            <h:outputText value="#{item.nombreLibro}"/>
+                            <h:outputText value="#{item.nombreLibro}"/>    
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_referencia}"/>
+                                <h:outputText value="Referencia" />
                             </f:facet>
-                            <h:outputText value="#{item.referencia}"/>
+                            <h:outputText value="#{item.referencia}"/>    
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_editorial}"/>
+                                <h:outputText value="Editorial" />
                             </f:facet>
-                            <h:outputText value="#{item.editorial}"/>
+                            <h:outputText value="#{item.editorial}"/>    
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_url}"/>
+                                <h:outputText value="URL" />
                             </f:facet>
-                            <h:outputText value="#{item.url}"/>
+                            <h:outputText value="#{item.url}"/>    
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_nombreCongreso}"/>
+                                <h:outputText value="Congreso" />
                             </f:facet>
-                            <h:outputText value="#{item.nombreCongreso}"/>
+                            <h:outputText value="#{item.nombreCongreso}"/>    
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPublicacionTitle_institucion}"/>
+                                <h:outputText value="Institucion" />
                             </f:facet>
-                            <h:outputText value="#{item.institucion}"/>
+                            <h:outputText value="#{item.institucion}"/>    
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{publicacionController.prepareCreate}" update=":PublicacionCreateForm" oncomplete="PF('PublicacionCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PublicacionViewForm" oncomplete="PF('PublicacionViewDialog').show()" disabled="#{empty publicacionController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PublicacionEditForm" oncomplete="PF('PublicacionEditDialog').show()" disabled="#{empty publicacionController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{publicacionController.destroy}" update=":growl,datalist" disabled="#{empty publicacionController.selected}"/>
+                            <p:commandButton id="editarBoton" update=":PublicacionEditForm"  icon="ui-icon-pencil" value="Editar" oncomplete="PF('PublicacionEditDialog').show()" disabled="#{empty publicacionController.selected}"/>
+                            <p:commandButton id="atras" value="Volver" actionListener="#{publicacionController.prepareCreate()}" action="/faces/roles/academico/index.xhtml" />
                         </f:facet>
                     </p:dataTable>
-                </p:panel>
-            </h:form>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+                </p:panel>
+
+            </h:form>
+            <ui:include src="Editar.xhtml"/>
         </ui:define>
+
     </ui:composition>
 
 </html>

@@ -22,9 +22,7 @@
                         <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" />
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_resegna}" for="resegna" />
                         <p:inputText id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" />
-                        <p:outputLabel value="#{bundle.EditAcademicoLabel_grados}" for="grados" />
-                        <p:inputText id="grados" value="#{academicoController.selected.grados}" title="#{bundle.EditAcademicoTitle_grados}" />
-                    </p:panelGrid>
+                        </p:panelGrid>
                     <p:commandButton actionListener="#{academicoController.update}" value="#{bundle.Save}" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AcademicoEditDialog.hide()"/>
                 </h:panelGroup>

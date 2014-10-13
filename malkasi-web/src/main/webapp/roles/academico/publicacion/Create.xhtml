@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition>
-
-        <p:dialog id="PublicacionCreateDlg" widgetVar="PublicacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePublicacionTitle}">
+    <ui:composition template="/layout/1column.xhtml">
+        <ui:define name="body">
+            <h3>Agregar actividad academica</h3>
             <h:form id="PublicacionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
                         <p:outputLabel value="TipoPublicacion" for="tipoPublicacion" />
-                        <p:selectOneMenu id="tipoPublicacion" required="true" value="#{publicacionController.selected.tipoPublicacion}">   
+                        <p:selectOneMenu id="tipoPublicacion" required="true" value="#{publicacionController.selected.tipoPublicacion}">
                             <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre"
                                            itemLabel="#{nombre.nombreTipo}"/>
                         </p:selectOneMenu>
-                        
+
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_nombrePublicacion}" for="nombrePublicacion" />
-                        <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" />
-                        
-                        <p:outputLabel value="Pais" for="pais" />          
-                        <p:inputText id="pais" value="#{publicacionController.selected.pais}" title="PublicacionPais" />
-                       
+                        <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" required="true" requiredMessage="Nombre publicacion es campo obligatorio" />
+
+                        <p:outputLabel value="Pais" for="pais" />
+                        <p:inputText id="pais" value="#{publicacionController.selected.pais}" title="PublicacionPais" required="true" requiredMessage="Pais es campo obligatorio"  />
+
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_fechaPublicacion}" for="fechaPublicacion" />
-                        <p:calendar id="fechaPublicacion" pattern="MM/dd/yyyy" value="#{publicacionController.selected.fechaPublicacion}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}"  showOn="button"/>
+                        <p:calendar id="fechaPublicacion" pattern="MM/dd/yyyy" value="#{publicacionController.selected.fechaPublicacion}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_nombreLibro}" for="nombreLibro" />
                         <p:inputText id="nombreLibro" value="#{publicacionController.selected.nombreLibro}" title="#{bundle.CreatePublicacionTitle_nombreLibro}" />
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_referencia}" for="referencia" />
@@ -39,11 +38,11 @@
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_institucion}" for="institucion" />
                         <p:inputText id="institucion" value="#{publicacionController.selected.institucion}" title="#{bundle.CreatePublicacionTitle_institucion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{publicacionController.create}" value="#{bundle.Save}" update="display,:PublicacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'PublicacionCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PublicacionCreateDialog.hide()"/>
+                    <h4>* Representa que el campo es obligatorio</h4>
+                    <p:commandButton actionListener="#{publicacionController.create()}" value="Crear" update=":growl,display" oncomplete="handleSubmit(args,'PublicacionCreateDialog');"/>
+                    <p:button value="Volver" href="/faces/roles/academico/index.xhtml" />
                 </h:panelGroup>
             </h:form>
-        </p:dialog>
-
+            </ui:define>
     </ui:composition>
 </html>

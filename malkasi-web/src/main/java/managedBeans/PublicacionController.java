@@ -1,6 +1,7 @@
 package managedBeans;
 
 import entities.Publicacion;
+import java.awt.event.ActionEvent;
 import managedBeans.util.JsfUtil;
 import managedBeans.util.JsfUtil.PersistAction;
 import sessionbeans.PublicacionFacadeLocal;
@@ -22,7 +23,7 @@ import javax.faces.convert.FacesConverter;
 @Named("publicacionController")
 @SessionScoped
 public class PublicacionController implements Serializable {
-
+    
     @EJB
     private PublicacionFacadeLocal ejbFacade;
     private List<Publicacion> items = null;
@@ -33,6 +34,10 @@ public class PublicacionController implements Serializable {
 
     public Publicacion getSelected() {
         return selected;
+    }
+    
+    public void deleteSelected(){
+        this.selected = null;
     }
 
     public void setSelected(Publicacion selected) {
@@ -60,8 +65,10 @@ public class PublicacionController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        prepareCreate();
+        //JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
-
+    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PublicacionUpdated"));
     }
@@ -119,6 +126,10 @@ public class PublicacionController implements Serializable {
 
     public List<Publicacion> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    private void addMessage(String ha_agregado_correctamente_la_actividad_ac) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @FacesConverter(forClass = Publicacion.class)
