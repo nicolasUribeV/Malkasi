@@ -62,6 +62,9 @@ public class Publicacion implements Serializable {
     
     @ManyToOne
     private TipoPublicacion tipoPublicacion;
+    
+    @ManyToOne(optional= false)
+    private Academico miAcademico;
 
     public TipoPublicacion getTipoPublicacion() {
         return tipoPublicacion;
@@ -184,5 +187,13 @@ public class Publicacion implements Serializable {
 
     public void setInstitucion(String institucion) {
         this.institucion = institucion;
+    }
+
+    public Academico getMiAcademico() {
+        return miAcademico;
+    }
+
+    public void setMiAcademico(Academico miAcademico) {
+        this.miAcademico = miAcademico;
     }
 }

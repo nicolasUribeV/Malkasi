@@ -46,6 +46,9 @@ public class Academico implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "miAcademico")
     private List<GradoAcademico> Grados;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "miAcademico")
+    private List<Publicacion> Publicaciones;
+    
     public String getRut() {
         return rut;
     }
