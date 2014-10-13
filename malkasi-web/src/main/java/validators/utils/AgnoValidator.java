@@ -5,7 +5,6 @@
  */
 package validators.utils;
 
-import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -17,7 +16,7 @@ import javax.faces.validator.ValidatorException;
  *
  * @author ihc
  */
-@FacesValidator("AgnoValidatorValidator")
+@FacesValidator("AgnoValidator")
 public class AgnoValidator implements Validator{
     
     @Override
