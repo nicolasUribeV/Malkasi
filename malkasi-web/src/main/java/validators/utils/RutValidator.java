@@ -24,7 +24,6 @@ public class RutValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         rut = value.toString();
         if (!validarRut(rut)) {
-
             FacesMessage msg = new FacesMessage("Rut inválido.", "Invalid Rut format.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);

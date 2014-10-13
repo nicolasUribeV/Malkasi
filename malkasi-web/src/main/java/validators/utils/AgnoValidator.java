@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
@@ -16,6 +17,7 @@ import javax.faces.validator.ValidatorException;
  *
  * @author ihc
  */
+@FacesValidator("AgnoValidatorValidator")
 public class AgnoValidator implements Validator{
     
     @Override
@@ -23,12 +25,9 @@ public class AgnoValidator implements Validator{
         int Year = (int) o;
         
         if(!validateYear(Year)) {
-            FacesMessage message = new FacesMessage();
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            message.setSummary("Año inválido");
-            message.setDetail("Año inválido");
-            fc.addMessage(":formAgregar:Año", message);
-            throw new ValidatorException(message);
+            FacesMessage msg = new FacesMessage("Año inválido.", "Invalid Year format.");
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
         }
         
     }

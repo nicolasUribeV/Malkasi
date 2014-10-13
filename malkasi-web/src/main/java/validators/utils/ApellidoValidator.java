@@ -15,23 +15,23 @@ import javax.faces.validator.ValidatorException;
 
 /**
  *
- * @author Rodrigo
+ * @author ihc
  */
-@FacesValidator("NombreValidator")
-public class NombreValidator implements Validator{
-
+@FacesValidator("ApellidoValidator")
+public class ApellidoValidator implements Validator{
+    
     @Override
     public void validate(FacesContext fc, UIComponent uic, Object o) throws ValidatorException {
         String nombre = (String) o;
 
-        if(!validarNombre(nombre)) {
-            FacesMessage msg = new FacesMessage("Nombre inválido.", "Invalid Name format.");
+        if(!validarApellido(nombre)) {
+            FacesMessage msg = new FacesMessage("Apellido inválido.", "Invalid Last Name format.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
     
-    public static boolean validarNombre(String nombre){
+    public static boolean validarApellido(String nombre){
         Pattern p = Pattern.compile("^[a-zA-Z ]+$");
         return nombre.matches(p.pattern());
     }

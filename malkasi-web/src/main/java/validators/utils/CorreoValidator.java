@@ -29,12 +29,9 @@ public class CorreoValidator implements Validator{
         String email = (String) o;
         
         if(!validateEmail(email)) {
-            FacesMessage message = new FacesMessage();
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            message.setSummary("Email inválido");
-            message.setDetail("Email inválido");
-            fc.addMessage(":formAgregar:email", message);
-            throw new ValidatorException(message);
+            FacesMessage msg = new FacesMessage("Correo inválido.", "Invalid Mail format.");
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
         }
         
     }

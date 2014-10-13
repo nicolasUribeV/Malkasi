@@ -22,7 +22,7 @@
                         </p:inputText>
                         <p:outputLabel value="#{bundle.CreateAcademicoLabel_apellidos}" for="apellidos" />
                         <p:inputText id="apellidos" value="#{academicoController.selected.apellidos}" title="#{bundle.CreateAcademicoTitle_apellidos}" >
-                            <f:validator validatorId="NombreValidator"/>
+                            <f:validator validatorId="ApellidoValidator"/>
                         </p:inputText>
                         <p:outputLabel value="Correo" for="mail" />
                         <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.CreateAcademicoTitle_mail}" >
