@@ -26,19 +26,20 @@
             </h:form>
             <h:form>   
                 
+            <br></br>
             </h:form>
             <h:form id="AcademicoListForm">
-                <p:panel header="#{bundle.ListAcademicoTitle}">
+                <p:panel header="Académicos">
                     <p:dataTable id="datalist" value="#{academicoController.items}" var="item"
                                  selectionMode="single" selection="#{academicoController.selected}"
                                  paginator="true"
                                  rowKey="#{item.rut}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,20,30,40"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton agregarGradosAcademicos verGradosAcademicos"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton agregarGradosAcademicos verGradosAcademicos"/>
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton agregarGradosAcademicos verGradosAcademicos"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton agregarGradosAcademicos verGradosAcademicos"/>
 
                         <p:column>
                             <f:facet name="header">
@@ -65,11 +66,10 @@
                             <h:outputText value="#{item.resegna}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{academicoController.prepareCreate}" update=":AcademicoCreateForm" oncomplete="PF('AcademicoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AcademicoViewForm" oncomplete="PF('AcademicoViewDialog').show()" disabled="#{empty academicoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AcademicoEditForm" oncomplete="PF('AcademicoEditDialog').show()" disabled="#{empty academicoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{academicoController.destroy}" update=":growl,datalist" disabled="#{empty academicoController.selected}"/>
-                            <p:commandButton id="agregarGradosAcademicos" icon="ui-icon-plus" value="agregar grados academicos" actionListener="#{gradoAcademicoController.prepareCreateWhitAcademic(academicoController.selected)}" update=":GradoAcademicoCreateForm" oncomplete="PF('GradoAcademicoCreateDialog').show()" disabled="#{empty academicoController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{academicoController.prepareCreate}" update=":AcademicoCreateForm" oncomplete="PF('AcademicoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":AcademicoViewForm" oncomplete="PF('AcademicoViewDialog').show()" disabled="#{empty academicoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Editar" update=":AcademicoEditForm" oncomplete="PF('AcademicoEditDialog').show()" disabled="#{empty academicoController.selected}"/>
+                            <p:commandButton id="agregarGradosAcademicos" icon="ui-icon-plus" value="Agregar grados academicos" actionListener="#{gradoAcademicoController.prepareCreateWhitAcademic(academicoController.selected)}" update=":GradoAcademicoCreateForm" oncomplete="PF('GradoAcademicoCreateDialog').show()" disabled="#{empty academicoController.selected}"/>
                             <p:commandButton id="verGradosAcademicos"   icon="ui-icon-search" value="Ver grados academicos" actionListener="#{gradoAcademicoController.prepareViewWhitAcademic(academicoController.selected)}" disabled="#{empty academicoController.selected}"/>
                         </f:facet>
                     </p:dataTable>

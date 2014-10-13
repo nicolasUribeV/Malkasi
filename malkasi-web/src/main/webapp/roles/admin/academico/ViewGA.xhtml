@@ -8,20 +8,18 @@
 
     <ui:composition>
 
-        <p:dialog id="GradoAcademicoViewDlg" widgetVar="GradoAcademicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewGradoAcademicoTitle}">
+        <p:dialog id="GradoAcademicoViewDlg" widgetVar="GradoAcademicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Ver">
             <h:form id="GradoAcademicoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{gradoAcademicoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewGradoAcademicoLabel_id}"/>
-                        <h:outputText value="#{gradoAcademicoController.selected.id}" title="#{bundle.ViewGradoAcademicoTitle_id}"/>
                         <h:outputText value="#{bundle.ViewGradoAcademicoLabel_titulo}"/>
                         <h:outputText value="#{gradoAcademicoController.selected.titulo}" title="#{bundle.ViewGradoAcademicoTitle_titulo}"/>
-                        <h:outputText value="#{bundle.ViewGradoAcademicoLabel_agno}"/>
+                        <h:outputText value="Año"/>
                         <h:outputText value="#{gradoAcademicoController.selected.agno}" title="#{bundle.ViewGradoAcademicoTitle_agno}"/>
-                        <h:outputText value="#{bundle.ViewGradoAcademicoLabel_insitucion}"/>
+                        <h:outputText value="Institución"/>
                         <h:outputText value="#{gradoAcademicoController.selected.institucion}" title="#{bundle.ViewGradoAcademicoTitle_insitucion}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="GradoAcademicoViewDialog.hide()"/>
+                    <p:commandButton value="Cancelar" onclick="GradoAcademicoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

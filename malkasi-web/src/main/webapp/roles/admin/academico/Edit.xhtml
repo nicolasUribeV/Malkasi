@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="AcademicoEditDlg" widgetVar="AcademicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAcademicoTitle}">
+        <p:dialog id="AcademicoEditDlg" widgetVar="AcademicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar Academico">
             <h:form id="AcademicoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
@@ -28,11 +28,11 @@
                         <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
                             <f:validator validatorId="CorreoValidator"/>
                         </p:inputText>
-                        <p:outputLabel value="#{bundle.EditAcademicoLabel_resegna}" for="resegna" />
+                        <p:outputLabel value="Reseña" for="resegna" />
                         <p:inputText id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" />
                         </p:panelGrid>
-                    <p:commandButton actionListener="#{academicoController.update}" value="#{bundle.Save}" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="AcademicoEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{academicoController.update}" value="Guardar" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoEditDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="AcademicoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

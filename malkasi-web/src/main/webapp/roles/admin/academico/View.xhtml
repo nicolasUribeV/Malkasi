@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="AcademicoViewDlg" widgetVar="AcademicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAcademicoTitle}">
+        <p:dialog id="AcademicoViewDlg" widgetVar="AcademicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Ver Academico">
             <h:form id="AcademicoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
@@ -23,7 +23,7 @@
                         <h:outputText value="Reseña"/>
                         <h:outputText value="#{academicoController.selected.resegna}" title="#{bundle.ViewAcademicoTitle_resegna}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="AcademicoViewDialog.hide()"/>
+                    <p:commandButton value="Cerrar" onclick="AcademicoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

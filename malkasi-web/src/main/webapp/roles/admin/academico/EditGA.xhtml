@@ -8,23 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="GradoAcademicoEditDlg" widgetVar="GradoAcademicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditGradoAcademicoTitle}">
+        <p:dialog id="GradoAcademicoEditDlg" widgetVar="GradoAcademicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar Grado Académico">
             <h:form id="GradoAcademicoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{gradoAcademicoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{gradoAcademicoController.selected.id}" title="#{bundle.EditGradoAcademicoTitle_id}" />
                         <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_titulo}" for="titulo" />
                         <p:inputText id="titulo" value="#{gradoAcademicoController.selected.titulo}" title="#{bundle.EditGradoAcademicoTitle_titulo}" />
-                        <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_agno}" for="agno" />
+                        <p:outputLabel value="Año" for="agno" />
                         <p:inputText id="agno" value="#{gradoAcademicoController.selected.agno}" title="#{bundle.EditGradoAcademicoTitle_agno}" >
                             <f:validator validatorId="AgnoValidator"/>
                         </p:inputText>
-                        <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_insitucion}" for="insitucion" />
+                        <p:outputLabel value="Institución" for="insitucion" />
                         <p:inputText id="insitucion" value="#{gradoAcademicoController.selected.institucion}" title="#{bundle.EditGradoAcademicoTitle_insitucion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{gradoAcademicoController.update}" value="#{bundle.Save}" update="display,:GradoAcademicoListForm:datalistGA,:growl" oncomplete="handleSubmit(args, 'GradoAcademicoEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="GradoAcademicoEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{gradoAcademicoController.update}" value="Guardar" update="display,:GradoAcademicoListForm:datalistGA,:growl" oncomplete="handleSubmit(args, 'GradoAcademicoEditDialog');"/>
+                    <p:commandButton value="Cancelar" onclick="GradoAcademicoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
