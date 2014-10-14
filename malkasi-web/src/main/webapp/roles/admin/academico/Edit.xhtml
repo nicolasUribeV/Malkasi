@@ -29,7 +29,7 @@
                             <f:validator validatorId="CorreoValidator"/>
                         </p:inputText>
                         <p:outputLabel value="Reseña" for="resegna" />
-                        <p:inputText id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" />
+                        <p:inputTextarea id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" />
                         </p:panelGrid>
                     <p:commandButton actionListener="#{academicoController.update}" value="Guardar" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoEditDialog');"/>
                     <p:commandButton value="Cancelar" onclick="AcademicoEditDialog.hide()"/>
