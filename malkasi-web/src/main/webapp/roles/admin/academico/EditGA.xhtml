@@ -22,7 +22,7 @@
                         <p:inputText id="insitucion" value="#{gradoAcademicoController.selected.institucion}" title="#{bundle.EditGradoAcademicoTitle_insitucion}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{gradoAcademicoController.update}" value="Guardar" update="display,:GradoAcademicoListForm:datalistGA,:growl" oncomplete="handleSubmit(args, 'GradoAcademicoEditDialog');"/>
-                    <p:commandButton value="Cancelar" onclick="GradoAcademicoEditDialog.hide()"/>
+                    <p:commandButton value="Cancelar" immediate="true" onclick="GradoAcademicoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
