@@ -19,8 +19,6 @@
                 <f:facet name="header">
                     #{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}
                 </f:facet>
-                
-                Nombre: #{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}
                 Correo: #{sessionUtilTest.currentUser.mail}
                 
                 #{sessionUtilTest.currentUser.resegna}
@@ -34,11 +32,6 @@
         </ui:define>
         
         <ui:define name="body">
-            <h:form>
-                <p:breadCrumb style="text-transform: none;">
-                    <p:menuitem value="home" url="index.xhtml" />
-                </p:breadCrumb>
-            </h:form>
             <h4 class="white">Bienvenido <b>#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}</b></h4>
             <p:accordionPanel multiple="true">
                 <p:tab title="Tipo 1">
