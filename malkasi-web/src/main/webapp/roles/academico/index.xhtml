@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite">
 
     <ui:composition template="/layout/2columns-left.xhtml">
 
@@ -14,14 +15,20 @@
         </ui:define>
         
         <ui:define name="sidebar-left">
-            <p:dataList value="A" var="car" type="ordered">
+            <p:dataList value="A" var="car" type="definition">
                 <f:facet name="header">
                     #{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}
                 </f:facet>
+                
+                Nombre: #{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}
+                Correo: #{sessionUtilTest.currentUser.mail}
+                
+                #{sessionUtilTest.currentUser.resegna}
+                
             </p:dataList>
             <h:form>
                 <p:commandButton value="Agregar nueva Actividad Academica" icon="ui-icon-circle-plus" actionListener="#{publicacionController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
-                <p:commandButton value="Ver mis actividades" icon="ui-icon-circle-zoomin"/>
+                <p:commandButton value="Ver mis actividades" icon="ui-icon-circle-zoomin" actionListener="#{publicacionController.prepareCreateViewAcademic(sessionUtilTest.currentUser)}"/>
             </h:form>
 
         </ui:define>

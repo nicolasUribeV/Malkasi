@@ -44,7 +44,7 @@ public class AcademicoPublicacionFacade implements AcademicoPublicacionFacadeLoc
         
         //System.out.println("Academico: "+Academico.getNombres()+", Grado A Borrar: "+GradoAcademico.getTitulo());
         int Index = -1;
-        for (int i = 0; i < Academico.getGrados().size(); i++) {
+        for (int i = 0; i < Academico.getPublicaciones().size(); i++) {
             if(Publicacion.getId() == Academico.getPublicaciones().get(i).getId()){
                 Index = i;
                 break;

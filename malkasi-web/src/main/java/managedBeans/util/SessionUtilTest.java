@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package managedBeans.util;
 
 import entities.Academico;
@@ -23,59 +22,62 @@ public class SessionUtilTest implements Serializable {
 
     @EJB
     private AcademicoFacadeLocal ejbFacade;
-    
-    private String rut;
-    
+
+    private String userName = null;
+
     private Academico currentUser;
 
     public SessionUtilTest() {
     }
 
-    public String getRut() {
-        return rut;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setRut(String rut) {
-        this.rut = rut;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Academico getCurrentUser() {
-        currentUser = ejbFacade.FindWithRut(rut).get(0);
+        currentUser = ejbFacade.FindWithUserName(userName).get(0);
         return currentUser;
     }
 
     public void setCurrentUser(Academico currentUser) {
         this.currentUser = currentUser;
     }
-    
+
     public boolean login(String rut) {
-        if(ejbFacade.FindWithRut(rut) == null){
+        if (ejbFacade.FindWithUserName(rut) == null) {
             return false;
-        }
-        else{
-            this.rut = rut;
+        } else {
+            this.userName = rut;
             return true;
         }
     }
-    
+
     public String logout() {
-        this.rut = null;
+        this.userName = null;
         this.currentUser = null;
-        System.out.println("SessionUtil: Logout for " + rut);
+        System.out.println("SessionUtil: Logout for " + userName);
         return "/faces/index.xhtml";
     }
-    
-        public String route66() {
+
+    public String route66() {
         System.out.println("Calling SessionUtil.route66");
-        
-        Academico currentAccount = ejbFacade.FindWithRut(rut).get(0);
-        if(currentAccount.getTipoCuenta().compareTo("admin") == 0) {
+
+        Academico currentAccount = ejbFacade.FindWithUserName(userName).get(0);
+        if (currentAccount.getTipoCuenta().compareTo("admin") == 0) {
             return "/faces/roles/admin/index.xhtml";
         }
-        if(currentAccount.getTipoCuenta().compareTo("academico") == 0) {
+        if (currentAccount.getTipoCuenta().compareTo("academico") == 0) {
             return "/faces/roles/academico/index.xhtml";
         }
-        return "/faces/roles/index.xhtml";    
+        return "/faces/roles/index.xhtml";
     }
-    
+
+    public boolean hasIdentity() {
+        return this.userName != null;
+    }
+
 }

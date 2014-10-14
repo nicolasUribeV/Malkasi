@@ -45,6 +45,8 @@ public class Academico implements Serializable {
     
     private String tipoCuenta;
     
+    private String userName;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "miAcademico")
     private List<GradoAcademico> Grados;
     
@@ -146,6 +148,14 @@ public class Academico implements Serializable {
 
     public void setTipoCuenta(String tipoCuenta) {
         this.tipoCuenta = tipoCuenta;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     
     

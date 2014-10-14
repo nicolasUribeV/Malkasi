@@ -69,7 +69,18 @@ public class PublicacionController implements Serializable {
         JsfUtil.redirect("/faces/roles/academico/publicacion/Create.xhtml");
         return selected;
     }
-
+    
+    public Publicacion prepareCreateViewAcademic(Academico academico) {
+        prepareCreate();
+        items = academico.getPublicaciones();
+        JsfUtil.redirect("/faces/roles/academico/publicacion/List.xhtml");
+        return selected;
+    }
+     public Publicacion EliminarPublicacion(Publicacion publicacion){
+        this.items.remove(publicacion);
+        return publicacion;
+    }
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PublicacionCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -77,6 +88,9 @@ public class PublicacionController implements Serializable {
         }
         prepareCreate();
         //JsfUtil.redirect("/faces/roles/academico/index.xhtml");
+    }
+    public void comeBack(){
+        JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
     
     public void update() {
@@ -101,6 +115,11 @@ public class PublicacionController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+    
+    public void refresh(){
+        prepareCreate();
+        items = getFacade().findAll();
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

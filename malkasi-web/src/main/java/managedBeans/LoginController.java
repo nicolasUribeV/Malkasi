@@ -22,9 +22,9 @@ import managedBeans.util.SessionUtilTest;
 public class LoginController implements Serializable {
 
     @Inject 
-    SessionUtilTest sessionUtil;
+    SessionUtilTest sessionUtilTest;
     
-    private String rut;
+    private String userName;
     
     private String password;
     
@@ -34,13 +34,15 @@ public class LoginController implements Serializable {
     public LoginController() {
     }
 
-    public String getRut() {
-        return rut;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setRut(String rut) {
-        this.rut = rut;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
+
+    
 
     public String getPassword() {
         return password;
@@ -51,10 +53,10 @@ public class LoginController implements Serializable {
     }
     
     public void login() {
-        System.out.println("Calling login for " + rut);
-        if (sessionUtil.login(rut)) {
-            System.out.println("SessionController: Usuaro logeado de forma exitosa: " + rut);
-            JsfUtil.redirect(sessionUtil.route66());
+        System.out.println("Calling login for " + userName);
+        if (sessionUtilTest.login(userName)) {
+            System.out.println("SessionController: Usuaro logeado de forma exitosa: " + userName);
+            JsfUtil.redirect(sessionUtilTest.route66());
         } 
         else {
             System.out.println("SessionController: Login fail");
@@ -63,8 +65,8 @@ public class LoginController implements Serializable {
     }
     
     public void logout() {
-        sessionUtil.logout();
-        JsfUtil.redirect(sessionUtil.logout());
+        sessionUtilTest.logout();
+        JsfUtil.redirect(sessionUtilTest.logout());
     }
     
 }

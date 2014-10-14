@@ -12,6 +12,7 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import managedBeans.util.JsfUtil;
 import sessionbeans.AcademicoPublicacionFacadeLocal;
 /**
  *
@@ -28,6 +29,10 @@ public class Academico_Publicacion implements Serializable {
     public void NuevaDependecia(Publicacion publicacion){
         //System.out.println("Academico: "+Academico.getNombres()+", Grado: "+GradoAcademico.getTitulo());
         this.ejbFacade.Create(publicacion.getMiAcademico(), publicacion);
+        JsfUtil.redirect("/faces/roles/academico/index.xhtml");
+    }
+    public void Delete(Publicacion publicacion){
+        this.ejbFacade.Delete(publicacion.getMiAcademico(), publicacion);
     }
     
 }

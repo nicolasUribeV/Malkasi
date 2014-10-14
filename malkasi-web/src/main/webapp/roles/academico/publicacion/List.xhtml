@@ -87,7 +87,8 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="editarBoton" update=":PublicacionEditForm"  icon="ui-icon-pencil" value="Editar" oncomplete="PF('PublicacionEditDialog').show()" disabled="#{empty publicacionController.selected}"/>
-                            <p:commandButton id="atras" value="Volver" actionListener="#{publicacionController.prepareCreate()}" action="/faces/roles/academico/index.xhtml" />
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{academico_Publicacion.Delete(publicacionController.EliminarPublicacion(publicacionController.selected))}" update=":growl,datalist" disabled="#{empty publicacionController.selected}"/>
+                            <p:commandButton id="atras" value="Volver" actionListener="#{publicacionController.comeBack}" />
                         </f:facet>
                     </p:dataTable>
 

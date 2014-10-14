@@ -8,27 +8,43 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition>
-        
+
         <h:form>
-            
-        <nav class="navbar navbar-default navbar-static-top" role="navigation">
-            <div class="container">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                  </div>
-                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                    </ul>
-                  </div>
+
+            <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="container">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <c:if test="#{sessionUtilTest.hasIdentity()}">
+                                <a class="navbar-brand" href="/malkasi-web/faces/roles/#{sessionUtilTest.currentUser.tipoCuenta}/index.xhtml">
+                                </a>
+                            </c:if>
+                            <c:if test="#{!sessionUtilTest.hasIdentity()}">
+                                <a class="navbar-brand" href="/malkasi-web/">
+                                </a>
+                            </c:if>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <c:if test="#{sessionUtilTest.hasIdentity()}">
+                                        <ui:insert name="header-links"/>  
+                                        <li>
+                                            <p:commandLink type="submit" value="Cerrar sesión" immediate="true" action="#{loginController.logout}"></p:commandLink>
+                                        </li>
+                                    </c:if>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
         </h:form> 
     </ui:composition>
 </html>
