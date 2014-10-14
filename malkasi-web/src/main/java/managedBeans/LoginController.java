@@ -60,7 +60,7 @@ public class LoginController implements Serializable {
         } 
         else {
             System.out.println("SessionController: Login fail");
-            JsfUtil.addErrorMessage("El RUT y/o contraseña no coinciden");
+            JsfUtil.addErrorMessage("Nombre de Usuario inexistente");
         }
     }
     
