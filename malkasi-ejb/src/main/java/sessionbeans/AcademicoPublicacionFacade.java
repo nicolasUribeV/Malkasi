@@ -40,12 +40,14 @@ public class AcademicoPublicacionFacade implements AcademicoPublicacionFacadeLoc
     }
     
     @Override
-    public void Delete(Academico Academico, Publicacion Publicacion){
+    public void Delete(Academico academico, Publicacion publicacion){
         
-        //System.out.println("Academico: "+Academico.getNombres()+", Grado A Borrar: "+GradoAcademico.getTitulo());
+        System.out.println("Academico: "+academico.getNombres()+", publicacion A Borrar: "+publicacion.getNombrePublicacion());
+        System.out.println("Mi Academico: "+publicacion.getMiAcademico().getNombres());
         int Index = -1;
-        for (int i = 0; i < Academico.getPublicaciones().size(); i++) {
-            if(Publicacion.getId() == Academico.getPublicaciones().get(i).getId()){
+        for (int i = 0; i < publicacion.getMiAcademico().getPublicaciones().size(); i++) {
+            System.out.println("Publicación Encontrada: " + academico.getPublicaciones().get(i).getNombrePublicacion());
+            if(publicacion.getId() == publicacion.getMiAcademico().getPublicaciones().get(i).getId()){
                 Index = i;
                 break;
             }
@@ -55,9 +57,10 @@ public class AcademicoPublicacionFacade implements AcademicoPublicacionFacadeLoc
         }
         else{
             //System.out.println("Encontrado: "+Academico.getGrados().get(Index).getTitulo());
-            Academico.getPublicaciones().remove(Index);
-            this.em.remove(em.merge(Publicacion));
-            this.em.merge(Academico);
+            publicacion.getMiAcademico().getPublicaciones().remove(Index);
+            Academico Auxiliar = publicacion.getMiAcademico();
+            this.em.remove(em.merge(publicacion));
+            this.em.merge(Auxiliar);
         }
     }
 }

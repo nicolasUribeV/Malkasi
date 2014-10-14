@@ -65,7 +65,17 @@ public class Publicacion implements Serializable {
     
     @ManyToOne(optional= false)
     private Academico miAcademico;
+    
+    private String doi;
 
+    public String getDoi() {
+        return doi;
+    }
+
+    public void setDoi(String doi) {
+        this.doi = doi;
+    }
+    
     public TipoPublicacion getTipoPublicacion() {
         return tipoPublicacion;
     }
