@@ -1,11 +1,8 @@
 package managedBeans;
 
+import entities.Academico;
 import entities.Publicacion;
 import java.awt.event.ActionEvent;
-import managedBeans.util.JsfUtil;
-import managedBeans.util.JsfUtil.PersistAction;
-import sessionbeans.PublicacionFacadeLocal;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -13,12 +10,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
+import managedBeans.util.JsfUtil;
+import managedBeans.util.JsfUtil.PersistAction;
+import sessionbeans.AcademicoFacadeLocal;
+import sessionbeans.PublicacionFacadeLocal;
 
 @Named("publicacionController")
 @SessionScoped
@@ -26,6 +27,7 @@ public class PublicacionController implements Serializable {
     
     @EJB
     private PublicacionFacadeLocal ejbFacade;
+    private AcademicoFacadeLocal ejbFacadeAcademic;
     private List<Publicacion> items = null;
     private Publicacion selected;
 
@@ -59,6 +61,14 @@ public class PublicacionController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public Publicacion prepareCreateWithAcademic(Academico academico) {
+        this.selected = new Publicacion();
+        this.selected.setMiAcademico(academico);
+        initializeEmbeddableKey();   
+        JsfUtil.redirect("/faces/roles/academico/publicacion/Create.xhtml");
+        return selected;
+    }
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PublicacionCreated"));
@@ -71,6 +81,11 @@ public class PublicacionController implements Serializable {
     
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PublicacionUpdated"));
+    }
+    
+    public Publicacion CrearNueva(Publicacion Publicacion){
+        this.selected = null;
+        return Publicacion;
     }
 
     public void destroy() {

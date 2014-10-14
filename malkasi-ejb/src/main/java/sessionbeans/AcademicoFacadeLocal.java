@@ -32,4 +32,6 @@ public interface AcademicoFacadeLocal {
     List<Academico> findRange(int[] range);
 
     int count();
+
+    List<Academico> FindWithRut(String Rut);
 }

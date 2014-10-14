@@ -16,7 +16,10 @@
                             <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre"
                                            itemLabel="#{nombre.nombreTipo}"/>
                         </p:selectOneMenu>
-
+                        
+                        <p:outputLabel value="Academico" for="academico" />
+                        <p:inputText id="academico" value="#{publicacionController.selected.miAcademico.nombres} #{publicacionController.selected.miAcademico.apellidos}"  readonly="true"/>
+                        
                         <p:outputLabel value="#{bundle.CreatePublicacionLabel_nombrePublicacion}" for="nombrePublicacion" />
                         <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" required="true" requiredMessage="Nombre publicacion es campo obligatorio" />
 
@@ -39,7 +42,7 @@
                         <p:inputText id="institucion" value="#{publicacionController.selected.institucion}" title="#{bundle.CreatePublicacionTitle_institucion}" />
                     </p:panelGrid>
                     <h4>* Representa que el campo es obligatorio</h4>
-                    <p:commandButton actionListener="#{publicacionController.create()}" value="Crear" update=":growl,display" oncomplete="handleSubmit(args,'PublicacionCreateDialog');"/>
+                    <p:commandButton actionListener="#{academico_Publicacion.NuevaDependecia(publicacionController.CrearNueva(publicacionController.selected))}" value="Crear" update=":growl,display" oncomplete="handleSubmit(args,'PublicacionCreateDialog');"/>
                     <p:button value="Volver" href="/faces/roles/academico/index.xhtml" />
                 </h:panelGroup>
             </h:form>

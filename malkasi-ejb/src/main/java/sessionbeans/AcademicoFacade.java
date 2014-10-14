@@ -7,9 +7,11 @@
 package sessionbeans;
 
 import entities.Academico;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,18 @@ public class AcademicoFacade extends AbstractFacade<Academico> implements Academ
 
     public AcademicoFacade() {
         super(Academico.class);
+    }
+    
+    @Override
+    public List<Academico> FindWithRut(String Rut){
+        Query q = em.createQuery("SELECT c FROM Academico c WHERE c.rut = :rut");
+        q.setParameter("rut", Rut);
+        if(q.getResultList().size() == 0){
+            return null;
+        }
+        else{
+            return q.getResultList();
+        }
     }
     
 }

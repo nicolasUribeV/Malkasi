@@ -60,7 +60,7 @@ public class Publicacion implements Serializable {
     
     private String institucion;
     
-    @ManyToOne
+    @ManyToOne(optional= false)
     private TipoPublicacion tipoPublicacion;
     
     @ManyToOne(optional= false)

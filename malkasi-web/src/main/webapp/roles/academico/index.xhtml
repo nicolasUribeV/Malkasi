@@ -16,13 +16,14 @@
         <ui:define name="sidebar-left">
             <p:dataList value="A" var="car" type="ordered">
                 <f:facet name="header">
-                    NOMBRE ACADEMICO
+                    #{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}
                 </f:facet>
             </p:dataList>
-            <p:button value="Agregar nueva Actividad Academica" icon="ui-icon-circle-plus" href="/faces/roles/academico/publicacion/Create.xhtml"/>
+            <h:form>
+                <p:commandButton value="Agregar nueva Actividad Academica" icon="ui-icon-circle-plus" actionListener="#{publicacionController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
+                <p:commandButton value="Ver mis actividades" icon="ui-icon-circle-zoomin"/>
+            </h:form>
 
-            <p:button value="Ver mis actividades" icon="ui-icon-circle-zoomin" href="/faces/roles/academico/publicacion/List.xhtml">
-            </p:button>
         </ui:define>
         
         <ui:define name="body">
@@ -31,7 +32,7 @@
                     <p:menuitem value="home" url="index.xhtml" />
                 </p:breadCrumb>
             </h:form>
-            <h4 class="white">Bienvenido <b>NOMBRE_USUARIO</b></h4>
+            <h4 class="white">Bienvenido <b>#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}</b></h4>
             <p:accordionPanel multiple="true">
                 <p:tab title="Tipo 1">
                     <h:panelGrid columns="2" cellpadding="10">
