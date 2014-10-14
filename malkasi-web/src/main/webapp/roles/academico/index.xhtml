@@ -21,8 +21,6 @@
                 </f:facet>
                 Correo: #{sessionUtilTest.currentUser.mail}
                 
-                #{sessionUtilTest.currentUser.resegna}
-                
             </p:dataList>
             <h:form>
                 <p:commandButton value="Agregar nueva Actividad Academica" icon="ui-icon-circle-plus" actionListener="#{publicacionController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
@@ -34,10 +32,10 @@
         <ui:define name="body">
             <h4 class="white">Bienvenido <b>#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}</b></h4>
             <p:accordionPanel multiple="true">
-                <p:tab title="Tipo 1">
+                <p:tab title="Reseña">
                     <h:panelGrid columns="2" cellpadding="10">
                         <h:outputText
-                            value="acá van las cosas del tipo 1..." />
+                            value="#{sessionUtilTest.currentUser.resegna}" />
                     </h:panelGrid>
                 </p:tab>
                 <p:tab title="Tipo 2">

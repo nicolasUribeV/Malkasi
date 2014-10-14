@@ -10,24 +10,26 @@
             <h:form id="PublicacionEditForm">
                 <h:panelGroup id="display">
                 <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_nombrePublicacion}" for="nombrePublicacion" />
+                        <p:outputLabel value="Titulo Publicación" for="nombrePublicacion" />
                         <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.EditPublicacionTitle_nombrePublicacion}" />
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_pais}" for="pais" />
+                        <p:outputLabel value="País" for="pais" />
                         <p:inputText id="pais" value="#{publicacionController.selected.pais}" title="#{bundle.EditPublicacionTitle_pais}" />
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_fechaPublicacion}" for="fechaPublicacion" />
+                        <p:outputLabel value="Fecha Publicación" for="fechaPublicacion" />
                         <p:calendar id="fechaPublicacion" pattern="MM/dd/yyyy" value="#{publicacionController.selected.fechaPublicacion}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_nombreLibro}" for="nombreLibro" />
+                        <p:outputLabel value="Nombre Libro" for="nombreLibro" />
                         <p:inputText id="nombreLibro" value="#{publicacionController.selected.nombreLibro}" title="#{bundle.EditPublicacionTitle_nombreLibro}" />
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_referencia} (APA)" for="referencia" />
+                        <p:outputLabel value="Ubicación Bibliográfica" for="referencia" />
                         <p:inputText id="referencia" value="#{publicacionController.selected.referencia}" title="#{bundle.EditPublicacionTitle_referencia}" />
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_editorial}" for="editorial" />
+                        <p:outputLabel value="Editorial Revista" for="editorial" />
                         <p:inputText id="editorial" value="#{publicacionController.selected.editorial}" title="#{bundle.EditPublicacionTitle_editorial}" />
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_url}" for="url" />
+                        <p:outputLabel value="URL" for="url" />
                         <p:inputText id="url" value="#{publicacionController.selected.url}" title="#{bundle.EditPublicacionTitle_url}" />
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_nombreCongreso}" for="nombreCongreso" />
+                        <p:outputLabel value="Nombre Congreso" for="nombreCongreso" />
                         <p:inputText id="nombreCongreso" value="#{publicacionController.selected.nombreCongreso}" title="#{bundle.EditPublicacionTitle_nombreCongreso}" />
-                        <p:outputLabel value="#{bundle.EditPublicacionLabel_institucion}" for="institucion" />
+                        <p:outputLabel value="Institución" for="institucion" />
                         <p:inputText id="institucion" value="#{publicacionController.selected.institucion}" title="#{bundle.EditPublicacionTitle_institucion}" />
+                        <p:outputLabel value="DOI" for="doi" />
+                        <p:inputText id="doi" value="#{publicacionController.selected.doi}" title="doi" />
                 </p:panelGrid>  
                 <p:commandButton actionListener="#{publicacionController.update}" value="Guardar" update="display,:form:datalist,:growl" oncomplete="handleSubmit(args,'PublicacionEditDialog');"/>
                 <p:commandButton value="Cancelar" onclick="PublicacionEditDialog.hide()"/>

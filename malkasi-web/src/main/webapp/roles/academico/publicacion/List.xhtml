@@ -23,65 +23,38 @@
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-                        <p:ajax event="rowSelect" update="editarBoton"/>
-                        <p:ajax event="rowUnselect" update="editarBoton"/>
-                        <p:column>
+                        <p:ajax event="rowSelect" update="editarBoton viewButton"/>
+                        <p:ajax event="rowUnselect" update="editarBoton viewButton"/>
+                       <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Nombre Publicacion" />
+                                <h:outputText value="Titulo Publicación"/>
                             </f:facet>
-                            <h:outputText value="#{item.nombrePublicacion}"/>    
+                            <h:outputText value="#{item.nombrePublicacion}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Pais" />
+                                <h:outputText value="Pais"/>
                             </f:facet>
-                            <h:outputText value="#{item.pais}"/>    
+                            <h:outputText value="#{item.pais}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Fecha de publicacion" />
+                                <h:outputText value="Fecha de publicacion"/>
                             </f:facet>
-                            <h:outputText value="#{item.fechaPublicacion}"/>    
+                            <h:outputText value="#{item.fechaPublicacion}">
+                                <f:convertDateTime pattern="YYYY"/>
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Nombre libro" />
+                                <h:outputText value="Tipo de publicacion"/>
                             </f:facet>
-                            <h:outputText value="#{item.nombreLibro}"/>    
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Referencia" />
-                            </f:facet>
-                            <h:outputText value="#{item.referencia}"/>    
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Editorial" />
-                            </f:facet>
-                            <h:outputText value="#{item.editorial}"/>    
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="URL" />
-                            </f:facet>
-                            <h:outputText value="#{item.url}"/>    
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Congreso" />
-                            </f:facet>
-                            <h:outputText value="#{item.nombreCongreso}"/>    
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Institucion" />
-                            </f:facet>
-                            <h:outputText value="#{item.institucion}"/>    
+                            <h:outputText value="#{item.tipoPublicacion.nombreTipo}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="editarBoton" update=":PublicacionEditForm"  icon="ui-icon-pencil" value="Editar" oncomplete="PF('PublicacionEditDialog').show()" disabled="#{empty publicacionController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{academico_Publicacion.Delete(publicacionController.EliminarPublicacion(publicacionController.selected))}" update=":growl,datalist" disabled="#{empty publicacionController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":PublicacionViewForm" oncomplete="PF('PublicacionViewDialog').show()" disabled="#{empty publicacionController.selected}"/>
                             <p:commandButton id="atras" value="Volver" actionListener="#{publicacionController.comeBack}" />
                         </f:facet>
                     </p:dataTable>
@@ -90,6 +63,7 @@
 
             </h:form>
             <ui:include src="Editar.xhtml"/>
+            <ui:include src="View.xhtml"/>
         </ui:define>
 
     </ui:composition>

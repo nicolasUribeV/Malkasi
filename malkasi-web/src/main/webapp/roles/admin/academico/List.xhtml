@@ -61,9 +61,9 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Reseña"/>
+                                <h:outputText value="Nombre de Usuario"/>
                             </f:facet>
-                            <h:outputText value="#{item.resegna}"/>
+                            <h:outputText value="#{item.userName}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{academicoController.prepareCreate}" update=":AcademicoCreateForm" oncomplete="PF('AcademicoCreateDialog').show()"/>
