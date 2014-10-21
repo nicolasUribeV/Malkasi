@@ -55,7 +55,15 @@ public class AcademicoController implements Serializable {
         return selected;
     }
 
+    public String rutFinal(){
+        String nuevoRut = selected.getRut().replace("-", "");
+        nuevoRut = nuevoRut.replace(".", "");
+        return nuevoRut;
+    }
+    
     public void create() {
+        String rutNuevo = rutFinal();
+        selected.setRut(rutNuevo);
         selected.setTipoCuenta("academico");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoCreated"));
         if (!JsfUtil.isValidationFailed()) {
