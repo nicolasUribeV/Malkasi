@@ -45,8 +45,7 @@ public class Publicacion implements Serializable {
     
     private String pais;
     
-    @Temporal(TemporalType.DATE) 
-    private Date fechaPublicacion;
+    private int agno;
     
     private String nombreLibro;
     
@@ -131,6 +130,14 @@ public class Publicacion implements Serializable {
         return nombrePublicacion;
     }
 
+    public int getAgno() {
+        return agno;
+    }
+
+    public void setAgno(int agno) {
+        this.agno = agno;
+    }
+
     public void setNombrePublicacion(String nombrePublicacion) {
         this.nombrePublicacion = nombrePublicacion;
     }
@@ -141,14 +148,6 @@ public class Publicacion implements Serializable {
 
     public void setPais(String pais) {
         this.pais = pais;
-    }
-
-    public Date getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public void setFechaPublicacion(Date fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
     }
 
     public String getNombreLibro() {

@@ -47,7 +47,7 @@
                     </h:panelGrid>
                 </p:tab>
                 
-                <c:forEach  items="#{tipoPublicacionController.items}" var="tipoPublicacion">
+                <c:forEach  items="#{tipoPublicacionController.itemsAvailableSelectMany}" var="tipoPublicacion">
                     <p:tab title="#{tipoPublicacion.nombreTipo}" disabled="#{publicacionController.tienePublicaciones(sessionUtilTest.currentUser.publicaciones, tipoPublicacion.nombreTipo)}">
                         <h:panelGrid columns="2" cellpadding="10">
                             <c:forEach items="#{publicacionController.referenciasPorTipo(sessionUtilTest.currentUser.publicaciones, tipoPublicacion.nombreTipo)}" var="PublicacionesTipo">
