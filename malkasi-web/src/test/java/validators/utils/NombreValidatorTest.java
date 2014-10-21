@@ -35,21 +35,29 @@ public class NombreValidatorTest {
         result = NombreValidator.validarNombre(nombre);
         assertTrue("error un nombre",result);
         
-        nombre = "daniel esteban";
-        result = NombreValidator.validarNombre(nombre);
-        assertTrue("error dos nombre",result);
+        //nombre = "daniel esteban";
+        //result = NombreValidator.validarNombre(nombre);
+        //assertTrue("error dos nombre",result);
         
-        nombre = "daniel34232423 esteban";
-        result = NombreValidator.validarNombre(nombre);
-        assertFalse("error dos nombre",result);
+        //nombre = "daniel34232423 esteban";
+        //result = NombreValidator.validarNombre(nombre);
+        //assertFalse("error dos nombre",result);
         
-        nombre = "dani.....l esteban";
-        result = NombreValidator.validarNombre(nombre);
-        assertFalse("error dos nombre",result);
+        //nombre = "dani.....l esteban";
+        //result = NombreValidator.validarNombre(nombre);
+        //assertFalse("error dos nombre",result);
         
         nombre = "DiASFel Esteban";
         result = NombreValidator.validarNombre(nombre);
-        assertTrue("error dos nombre",result);
+        assertTrue("correcto dos nombre",result);
+        
+        nombre = "holaÑñáh";
+        result = NombreValidator.validarNombre(nombre);
+        assertTrue("correcto Ñ y tildes",result);
+        
+        nombre = "hola-chao";
+        result = NombreValidator.validarNombre(nombre);
+        assertTrue("correcto guion", result);
     }
     
 }

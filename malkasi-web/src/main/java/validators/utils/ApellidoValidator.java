@@ -32,7 +32,7 @@ public class ApellidoValidator implements Validator{
     }
     
     public static boolean validarApellido(String nombre){
-        Pattern p = Pattern.compile("^[a-zA-Z ]+$");
+        Pattern p = Pattern.compile("^[a-zA-ZñÑáéíóúÁÉÍÓÚ -]+$");
         return nombre.matches(p.pattern());
     }
 }
