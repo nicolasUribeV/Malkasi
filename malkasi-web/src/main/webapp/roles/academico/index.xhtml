@@ -17,16 +17,21 @@
         <ui:define name="sidebar-left">
             <p:dataList value="A" var="car" type="definition">
                 <f:facet name="header">
-                    #{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}
+                    <h:outputText value="#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}" />
                 </f:facet>
-                Correo: #{sessionUtilTest.currentUser.mail}
+                <p:panelGrid columns="1">
+                Correo: #{sessionUtilTest.currentUser.mail}    
                 <c:forEach items="#{sessionUtilTest.currentUser.grados}" var="gradosAcademicos">
-                    #{gradosAcademicos.agno} #{gradosAcademicos.titulo} #{gradosAcademicos.institucion}
-                </c:forEach>
+                    #{gradosAcademicos.agno} <br />
+                    #{gradosAcademicos.titulo} <br />
+                    #{gradosAcademicos.institucion} <br />
+                </c:forEach> 
+                </p:panelGrid>
             </p:dataList>
-            <h:form>
-                <p:commandButton value="Agregar nueva Actividad Academica" icon="ui-icon-circle-plus" actionListener="#{publicacionController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
-                <p:commandButton value="Ver mis actividades" icon="ui-icon-circle-zoomin" actionListener="#{publicacionController.prepareCreateViewAcademic(sessionUtilTest.currentUser)}"/>
+            <h:form >
+                
+                <p:commandButton value="Agregar nueva actividad academica" icon="ui-icon-circle-plus" actionListener="#{publicacionController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
+                <p:commandButton value="Ver mis actividades publicadas" icon="ui-icon-circle-zoomin" actionListener="#{publicacionController.prepareCreateViewAcademic(sessionUtilTest.currentUser)}"/>
             </h:form>
 
         </ui:define>
@@ -42,11 +47,12 @@
                     </h:panelGrid>
                 </p:tab>
                 
-                <c:forEach items="#{tipoPublicacionController.items}" var="tipoPublicacion">
+                <c:forEach  items="#{tipoPublicacionController.items}" var="tipoPublicacion">
                     <p:tab title="#{tipoPublicacion.nombreTipo}" disabled="#{publicacionController.tienePublicaciones(sessionUtilTest.currentUser.publicaciones, tipoPublicacion.nombreTipo)}">
                         <h:panelGrid columns="2" cellpadding="10">
                             <c:forEach items="#{publicacionController.referenciasPorTipo(sessionUtilTest.currentUser.publicaciones, tipoPublicacion.nombreTipo)}" var="PublicacionesTipo">
-                                <h:outputText value="#{PublicacionesTipo}" />
+                                <h:outputText value="#{PublicacionesTipo}" />  <br />
+                                <h:outputText value="      "/>  <br />
                             </c:forEach>
                         </h:panelGrid>
                     </p:tab>
