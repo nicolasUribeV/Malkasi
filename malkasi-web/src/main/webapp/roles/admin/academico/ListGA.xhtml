@@ -63,7 +63,7 @@
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":GradoAcademicoViewForm" oncomplete="PF('GradoAcademicoViewDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Editar" update=":GradoAcademicoEditForm" oncomplete="PF('GradoAcademicoEditDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{academico_GradoAcademicoController.Delete(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.EliminarGradoAcademico(gradoAcademicoController.selected))}" update=":growl,datalistGA" disabled="#{empty gradoAcademicoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{academico_GradoAcademicoController.Delete(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.selected)}" update=":growl,datalistGA" disabled="#{empty gradoAcademicoController.selected}"/>
                             <p:button id="volverButton" value="Volver" href="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.setSelected(null)}"/>
                         </f:facet>
                     </p:dataTable>

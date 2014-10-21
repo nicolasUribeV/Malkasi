@@ -1,10 +1,7 @@
 package managedBeans;
 
 import entities.Academico;
-import managedBeans.util.JsfUtil;
-import managedBeans.util.JsfUtil.PersistAction;
-import sessionbeans.AcademicoFacadeLocal;
-
+import entities.TipoPublicacion;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,12 +9,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
+import managedBeans.util.JsfUtil;
+import managedBeans.util.JsfUtil.PersistAction;
+import sessionbeans.AcademicoFacadeLocal;
 
 @Named("academicoController")
 @SessionScoped
@@ -128,6 +128,11 @@ public class AcademicoController implements Serializable {
 
     public List<Academico> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+    
+    public void refresh(){
+        prepareCreate();
+        items = getFacade().findAll();
     }
 
     @FacesConverter(forClass = Academico.class)

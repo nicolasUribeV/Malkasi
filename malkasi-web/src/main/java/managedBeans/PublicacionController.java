@@ -4,6 +4,7 @@ import entities.Academico;
 import entities.Publicacion;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -76,9 +77,26 @@ public class PublicacionController implements Serializable {
         JsfUtil.redirect("/faces/roles/academico/publicacion/List.xhtml");
         return selected;
     }
-     public Publicacion EliminarPublicacion(Publicacion publicacion){
+    public Publicacion EliminarPublicacion(Publicacion publicacion){
         this.items.remove(publicacion);
         return publicacion;
+    }
+    
+    public ArrayList<String> referenciasPorTipo(List<Publicacion> publicaciones, String Tipo){
+        ArrayList<String> pT = new ArrayList<>();
+        String Aux;
+        int cont = 1;
+        for (int i = 0; i < publicaciones.size(); i++) {
+            if(publicaciones.get(i).getTipoPublicacion().getNombreTipo().equals(Tipo)){
+                Aux = cont + ". " + getStringPublicacion(publicaciones.get(i)) ;
+                pT.add(Aux);
+                cont++;
+            }
+        }
+        if(publicaciones.isEmpty()){
+            pT.add("");
+        }
+        return pT;
     }
     
     public void create() {
@@ -98,9 +116,48 @@ public class PublicacionController implements Serializable {
     }
     
     public Publicacion CrearNueva(Publicacion Publicacion){
+        getStringPublicacion(this.selected);
         this.selected = null;
         return Publicacion;
     }
+    
+    public String getStringPublicacion(Publicacion publicacion){
+        String rP;
+        rP = publicacion.getMiAcademico().getApellidos();
+        rP = rP +", " + publicacion.getMiAcademico().getNombres().charAt(0)+".";
+        //rP = rP +", " + publicacion.getFechaPublicacion().;
+        rP = rP +", " + publicacion.getNombrePublicacion();
+        rP = rP +", " + publicacion.getNombreLibro();
+        rP = rP +", " + publicacion.getEditorial();
+        rP = rP +", " + publicacion.getReferencia();
+        rP = rP +", " + publicacion.getNombreCongreso();
+        rP = rP +", " + publicacion.getInstitucion();
+        rP = rP +", " + publicacion.getPais();
+        rP = rP +", " + publicacion.getUrl();
+        rP = rP +", " + publicacion.getDoi();
+        rP = rP +".";
+        return eliminaComas(rP);
+    }
+    
+    public String eliminaComas(String palabra){
+        String palabraNueva;
+        String palabraAntigua = palabra;
+        while(true){
+            palabraNueva = palabraAntigua.replace(", ,",",");
+            if(palabraAntigua.length()==palabraNueva.length()){
+                break;
+            }
+            palabraAntigua = palabraNueva;
+        }
+        palabraNueva = palabraAntigua.replace(", .", ".");
+        
+        System.out.println("---------------------------");
+        System.out.println(palabraNueva);
+        System.out.println("---------------------------");
+        
+        return palabraNueva;
+    }
+    
 
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("PublicacionDeleted"));
@@ -120,6 +177,15 @@ public class PublicacionController implements Serializable {
     public void refresh(){
         prepareCreate();
         items = getFacade().findAll();
+    }
+    
+    public Boolean tienePublicaciones(List<Publicacion> publicaciones, String Tipo){
+        for (int i = 0; i < publicaciones.size(); i++) {
+            if(publicaciones.get(i).getTipoPublicacion().getNombreTipo().equals(Tipo)){
+                return false;
+            } 
+        }
+        return true;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
