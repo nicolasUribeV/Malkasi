@@ -9,6 +9,7 @@
         <ui:define name="body">
             <h3>Agregar actividad academica</h3>
             <h:form id="PublicacionCreateForm">
+                <p:panelGrid columns="2" >
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
                         <p:outputLabel value="Tipo de Publicación" for="tipoPublicacion" />
@@ -18,35 +19,70 @@
                         </p:selectOneMenu>
                         
                         <p:outputLabel value="Académico" for="academico" />
-                        <p:inputText id="academico" value="#{publicacionController.selected.miAcademico.nombres} #{publicacionController.selected.miAcademico.apellidos}"  readonly="true"/>
+                        <p:inputText id="academico" value="#{publicacionController.selected.miAcademico.nombres} #{publicacionController.selected.miAcademico.apellidos}"  readonly="true">
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
                         
                         <p:outputLabel value="Titulo Publicación" for="nombrePublicacion" />
-                        <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" required="true" requiredMessage="Nombre publicacion es campo obligatorio" />
+                        <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" required="true" requiredMessage="Nombre publicacion es campo obligatorio" >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
 
                         <p:outputLabel value="País" for="pais" />
-                        <p:inputText id="pais" value="#{publicacionController.selected.pais}" title="PublicacionPais" required="true" requiredMessage="Pais es campo obligatorio"  />
+                        <p:inputText id="pais" value="#{publicacionController.selected.pais}" title="PublicacionPais" requiredMessage="Pais es campo obligatorio"  >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
 
                         <p:outputLabel value="Fecha Publicación" for="fechaPublicacion" />
-                        <p:calendar id="fechaPublicacion" pattern="MM/dd/yyyy" value="#{publicacionController.selected.fechaPublicacion}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}" showOn="button"/>
+                        <p:calendar id="fechaPublicacion" pattern="MM/dd/yyyy" value="#{publicacionController.selected.fechaPublicacion}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}" showOn="button">
+                            
+                        </p:calendar>
+                        
                         <p:outputLabel value="Nombre Libro" for="nombreLibro" />
-                        <p:inputText id="nombreLibro" value="#{publicacionController.selected.nombreLibro}" title="#{bundle.CreatePublicacionTitle_nombreLibro}" />
+                        <p:inputText id="nombreLibro" value="#{publicacionController.selected.nombreLibro}" title="#{bundle.CreatePublicacionTitle_nombreLibro}" >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
+                        
                         <p:outputLabel value="Ubicación Bibliográfica" for="referencia" />
-                        <p:inputText id="referencia" value="#{publicacionController.selected.referencia}" title="#{bundle.CreatePublicacionTitle_referencia}" />
+                        <p:inputText id="referencia" value="#{publicacionController.selected.referencia}" title="#{bundle.CreatePublicacionTitle_referencia}" >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
+                        
                         <p:outputLabel value="Editorial Revista" for="editorial" />
-                        <p:inputText id="editorial" value="#{publicacionController.selected.editorial}" title="#{bundle.CreatePublicacionTitle_editorial}" />
+                        <p:inputText id="editorial" value="#{publicacionController.selected.editorial}" title="#{bundle.CreatePublicacionTitle_editorial}" >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
+                        
                         <p:outputLabel value="URL" for="url" />
-                        <p:inputText id="url" value="#{publicacionController.selected.url}" title="#{bundle.CreatePublicacionTitle_url}" />
+                        <p:inputText id="url" value="#{publicacionController.selected.url}" title="#{bundle.CreatePublicacionTitle_url}" >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
+                        
                         <p:outputLabel value="Nombre Congreso" for="nombreCongreso" />
-                        <p:inputText id="nombreCongreso" value="#{publicacionController.selected.nombreCongreso}" title="#{bundle.CreatePublicacionTitle_nombreCongreso}" />
+                        <p:inputText id="nombreCongreso" value="#{publicacionController.selected.nombreCongreso}" title="#{bundle.CreatePublicacionTitle_nombreCongreso}" >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
+                        
                         <p:outputLabel value="Institución" for="institucion" />
-                        <p:inputText id="institucion" value="#{publicacionController.selected.institucion}" title="#{bundle.CreatePublicacionTitle_institucion}" />
+                        <p:inputText id="institucion" value="#{publicacionController.selected.institucion}" title="#{bundle.CreatePublicacionTitle_institucion}" >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
+                        
                         <p:outputLabel value="DOI" for="doi" />
-                        <p:inputText id="doi" value="#{publicacionController.selected.doi}" title="doi" />
+                        <p:inputText id="doi" value="#{publicacionController.selected.doi}" title="doi" >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
                     </p:panelGrid>
                     <h4>* Representa que el campo es obligatorio</h4>
                     <p:commandButton actionListener="#{academico_Publicacion.NuevaDependecia(publicacionController.CrearNueva(publicacionController.selected))}" value="Crear" update=":growl,display" oncomplete="handleSubmit(args,'PublicacionCreateDialog');"/>
                     <p:button value="Volver" href="/faces/roles/academico/index.xhtml" />
                 </h:panelGroup>
+                    <p:outputLabel id="previsualizacion">
+                        #{publicacionController.getStringPublicacion(publicacionController.selected)}
+                    </p:outputLabel>
+            
+                     
+                </p:panelGrid>  
             </h:form>
             </ui:define>
     </ui:composition>
