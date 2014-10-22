@@ -18,10 +18,10 @@
                                            itemLabel="#{nombre.nombreTipo}"/>
                         </p:selectOneMenu>
                         
-                        <p:outputLabel value="Académico" for="academico" />
-                        <p:inputText id="academico" value="#{publicacionController.selected.miAcademico.nombres} #{publicacionController.selected.miAcademico.apellidos}"  readonly="true">
-                            <p:ajax event="keyup" update="previsualizacion"  />
-                        </p:inputText>
+                        <p:outputLabel value="Académicos" for="academicos" />
+                        <p:pickList id="academicos" value="#{academico_Publicacion.initDoubleList(sessionUtilTest.currentUser)}" var="academicosL" itemLabel="#{academicosL.nombres} #{academicosL.apellidos}" itemValue="#{academicosL}">
+                           
+                        </p:pickList>
                         
                         <p:outputLabel value="Titulo Publicación" for="nombrePublicacion" />
                         <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" required="true" requiredMessage="Nombre publicacion es campo obligatorio" >
@@ -74,14 +74,12 @@
                         </p:inputText>
                     </p:panelGrid>
                     <h4>* Representa que el campo es obligatorio</h4>
-                    <p:commandButton actionListener="#{academico_Publicacion.NuevaDependecia(publicacionController.CrearNueva(publicacionController.selected))}" value="Crear" update=":growl,display" oncomplete="handleSubmit(args,'PublicacionCreateDialog');"/>
+                    <p:commandButton actionListener="#{academico_Publicacion.NuevaDependecia(publicacionController.CrearNueva(publicacionController.selected))}" value="Crear"/>
                     <p:button value="Volver" href="/faces/roles/academico/index.xhtml" />
                 </h:panelGroup>
                     <p:outputLabel id="previsualizacion">
                         #{publicacionController.getStringPublicacion(publicacionController.selected)}
                     </p:outputLabel>
-            
-                     
                 </p:panelGrid>  
             </h:form>
             </ui:define>

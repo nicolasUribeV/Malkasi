@@ -18,6 +18,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -63,10 +66,19 @@ public class Publicacion implements Serializable {
     @ManyToOne(optional= false)
     private TipoPublicacion tipoPublicacion;
     
-    @ManyToOne(optional= false)
-    private Academico miAcademico;
+    @ManyToMany
+    @JoinTable(name="ACADEMICO_PUBLICACION",
+        joinColumns={@JoinColumn(name="publicaciones_ID")}, 
+        inverseJoinColumns={@JoinColumn(name="academicos_ID")})
+    private List<Academico> academicos;
     
     private String doi;
+    
+    public Publicacion(){
+        if(academicos == null){
+            academicos = new ArrayList<Academico>();
+        }
+    }
 
     public String getDoi() {
         return doi;
@@ -199,11 +211,11 @@ public class Publicacion implements Serializable {
         this.institucion = institucion;
     }
 
-    public Academico getMiAcademico() {
-        return miAcademico;
+    public List<Academico> getAcademicos() {
+        return academicos;
     }
 
-    public void setMiAcademico(Academico miAcademico) {
-        this.miAcademico = miAcademico;
+    public void setAcademicos(List<Academico> academicos) {
+        this.academicos = academicos;
     }
 }
