@@ -33,10 +33,10 @@
                             <p:ajax event="keyup" update="previsualizacion"  />
                         </p:inputText>
 
-                        <p:outputLabel value="Fecha Publicación" for="fechaPublicacion" />
-                        <p:calendar id="fechaPublicacion" pattern="MM/dd/yyyy" value="#{publicacionController.selected.fechaPublicacion}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}" showOn="button">
-                            
-                        </p:calendar>
+                        <p:outputLabel value="Fecha Publicación" for="agno" />
+                        <p:inputText id="agno" value="#{publicacionController.selected.agno}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}"   >
+                            <p:ajax event="keyup" update="previsualizacion"  />
+                        </p:inputText>
                         
                         <p:outputLabel value="Nombre Libro" for="nombreLibro" />
                         <p:inputText id="nombreLibro" value="#{publicacionController.selected.nombreLibro}" title="#{bundle.CreatePublicacionTitle_nombreLibro}" >
