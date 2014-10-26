@@ -56,6 +56,49 @@ public class AcademicoPublicacionFacade extends AbstractFacade<Academico> implem
     }
     
     @Override
+    public void Update(List<Academico> academicos, Publicacion publicacion,Academico academico){
+        Log log = new Log();
+        log.setAccion("Editó");
+        log.setProfesor(academico.getNombres()+" "+academico.getApellidos());
+        log.setTitulo(publicacion.getNombrePublicacion());
+        java.util.Date Date = new java.util.Date();
+        log.setFecha(new java.sql.Timestamp(Date.getTime()));
+        this.em.persist(log);
+        Publicacion anterior = em.find(Publicacion.class,publicacion.getId());
+        
+        for (int j = 0; j < anterior.getAcademicos().size(); j++) {
+            int Index = -1;
+            for (int i = 0; i < anterior.getAcademicos().get(j).getPublicaciones().size(); i++) {
+                if(anterior.getId() == anterior.getAcademicos().get(j).getPublicaciones().get(i).getId()){
+                    Index = i;
+                    break;
+                }
+            }
+            if(Index == -1){
+                System.out.println("No se pudo Eliminar");
+            }
+            else{
+                anterior.getAcademicos().get(j).getPublicaciones().remove(Index);
+                Academico Auxiliar = anterior.getAcademicos().get(j);
+                this.em.merge(Auxiliar);
+            }
+        }
+        
+        
+        for (int i = 0; i < academicos.size(); i++) {
+            Academico academicoAuxiliar = em.find(Academico.class, academicos.get(i).getId());
+            if(academicoAuxiliar == null){
+                System.out.println("EL FEROZ ERROZ");
+            }
+            else{
+                academicoAuxiliar.getPublicaciones().add(publicacion);
+                this.em.merge(academicoAuxiliar);
+            }
+        }
+        this.em.merge(publicacion);
+    }
+    
+    @Override
     public void Delete(List<Academico> academicos, Publicacion publicacion, Academico academico){
         for (int j = 0; j < academicos.size(); j++) {
             int Index = -1;

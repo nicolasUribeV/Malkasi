@@ -19,6 +19,8 @@ import javax.ejb.Local;
 public interface AcademicoPublicacionFacadeLocal {
 
     void Create(List<Academico> academicos, Publicacion Publicacion,Academico academico);
+    
+    void Update(List<Academico> academicos, Publicacion Publicacion,Academico academico);
 
     void Delete(List<Academico> academicos, Publicacion Publicacion,Academico academico);
     

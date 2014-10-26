@@ -31,12 +31,15 @@ public class Academico_Publicacion implements Serializable {
     }
 
     public void NuevaDependecia(Publicacion publicacion,Academico academico){
-        System.out.println("Tratando de Crear a ");
-        System.out.println("Numero: " + publicacion.getAcademicos().size());
-        System.out.println("4");
         this.ejbFacade.Create(publicacion.getAcademicos(), publicacion,academico);
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
+    
+    public void ModificarDependecia(Publicacion publicacion,Academico academico){
+        this.ejbFacade.Update(publicacion.getAcademicos(), publicacion,academico);
+        JsfUtil.redirect("/faces/roles/academico/index.xhtml");
+    }
+    
     public void Delete(Publicacion publicacion,Academico academico){
         this.ejbFacade.Delete(publicacion.getAcademicos(), publicacion,academico);
     }
