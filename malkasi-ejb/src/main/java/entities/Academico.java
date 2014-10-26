@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
@@ -52,9 +53,12 @@ public class Academico implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "miAcademico")
     private List<GradoAcademico> Grados;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "miAcademico")
+    @ManyToMany(mappedBy = "Academicos")
+    @JoinTable(name="ACADEMICO_PUBLICACION",
+        joinColumns={@JoinColumn(name="publicaciones_ID")}, 
+        inverseJoinColumns={@JoinColumn(name="academicos_ID")})
     private List<Publicacion> Publicaciones;
-    
+   
     public String getRut() {
         return rut;
     }

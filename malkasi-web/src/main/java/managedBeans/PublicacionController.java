@@ -65,7 +65,16 @@ public class PublicacionController implements Serializable {
     
     public Publicacion prepareCreateWithAcademic(Academico academico) {
         this.selected = new Publicacion();
-        this.selected.setMiAcademico(academico);
+        this.selected.getAcademicos().add(academico);
+        this.selected.setDoi("");
+        this.selected.setEditorial("");
+        this.selected.setInstitucion("");
+        this.selected.setNombreCongreso("");
+        this.selected.setNombrePublicacion("");
+        this.selected.setNombreLibro("");
+        this.selected.setPais("");
+        this.selected.setReferencia("");
+        this.selected.setUrl("");
         initializeEmbeddableKey();   
         JsfUtil.redirect("/faces/roles/academico/publicacion/Create.xhtml");
         return selected;
@@ -80,6 +89,13 @@ public class PublicacionController implements Serializable {
     public Publicacion EliminarPublicacion(Publicacion publicacion){
         this.items.remove(publicacion);
         return publicacion;
+    }
+    
+    public List<Academico> updateAcademicos(){
+        for (int i = 0; i < this.selected.getAcademicos().size(); i++) {
+            System.out.println("N: "+this.selected.getAcademicos().get(i).getNombres());
+        }
+        return this.selected.getAcademicos();
     }
     
     public ArrayList<String> referenciasPorTipo(List<Publicacion> publicaciones, String Tipo){
@@ -99,6 +115,14 @@ public class PublicacionController implements Serializable {
         return pT;
     }
     
+    public ArrayList<String> usuariosDePublicacion(Publicacion publicacion){
+        ArrayList<String> usuarios = new ArrayList<>();
+        for (int i = 0; i < publicacion.getAcademicos().size() ; i++) {
+            usuarios.add(publicacion.getAcademicos().get(i).getNombres() + " " + publicacion.getAcademicos().get(i).getApellidos());
+        }
+        return usuarios;
+    }   
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PublicacionCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -115,16 +139,27 @@ public class PublicacionController implements Serializable {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PublicacionUpdated"));
     }
     
-    public Publicacion CrearNueva(Publicacion Publicacion){
-        getStringPublicacion(this.selected);
+    public Publicacion CrearNueva(Publicacion publicacion){
         this.selected = null;
-        return Publicacion;
+        return publicacion;
     }
     
     public String getStringPublicacion(Publicacion publicacion){
-        String rP;
-        rP = publicacion.getMiAcademico().getApellidos();
-        rP = rP +", " + publicacion.getMiAcademico().getNombres().charAt(0)+".";
+        String rP = "";
+        for (int i = 0; i < publicacion.getAcademicos().size(); i++) {
+            String[] aux = publicacion.getAcademicos().get(i).getApellidos().split(" ");
+            if(i == 0){
+                rP = aux[0] + ", " + publicacion.getAcademicos().get(i).getNombres().charAt(0)+".";
+            }
+            else{
+                if(i == publicacion.getAcademicos().size()-1){
+                    rP = rP + "& "+ aux[0] + ", " +  publicacion.getAcademicos().get(i).getNombres().charAt(0)+".";
+                }
+                else{
+                    rP = rP + ", "+ aux[0] + ", " +  publicacion.getAcademicos().get(i).getNombres().charAt(0)+".";
+                }
+            }
+        }
         //rP = rP +", " + publicacion.getFechaPublicacion().;
         rP = rP +", " + publicacion.getNombrePublicacion();
         rP = rP +", " + publicacion.getNombreLibro();
@@ -136,6 +171,7 @@ public class PublicacionController implements Serializable {
         rP = rP +", " + publicacion.getUrl();
         rP = rP +", " + publicacion.getDoi();
         rP = rP +".";
+        System.out.println("Ref: "+rP);
         return eliminaComas(rP);
     }
     
@@ -149,12 +185,7 @@ public class PublicacionController implements Serializable {
             }
             palabraAntigua = palabraNueva;
         }
-        palabraNueva = palabraAntigua.replace(", .", ".");
-        
-        System.out.println("---------------------------");
-        System.out.println(palabraNueva);
-        System.out.println("---------------------------");
-        
+        palabraNueva = palabraAntigua.replace(", .", ".");   
         return palabraNueva;
     }
     

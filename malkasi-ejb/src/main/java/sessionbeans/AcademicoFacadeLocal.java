@@ -34,4 +34,6 @@ public interface AcademicoFacadeLocal {
     int count();
 
     List<Academico> FindWithUserName(String userName);
+    
+    List<Academico> FindWithRut(String rut);
 }

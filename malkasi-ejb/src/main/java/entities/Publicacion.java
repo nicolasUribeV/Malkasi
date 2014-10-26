@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
@@ -61,6 +62,11 @@ public class Publicacion implements Serializable {
     private String nombreCongreso;
     
     private String institucion;
+    
+    @Column(length=1500)
+    private String abstractP;
+    
+    
     
     @ManyToOne(optional= false)
     private TipoPublicacion tipoPublicacion;
@@ -217,4 +223,14 @@ public class Publicacion implements Serializable {
     public void setAcademicos(List<Academico> academicos) {
         this.academicos = academicos;
     }
+
+    public String getAbstractP() {
+        return abstractP;
+    }
+
+    public void setAbstractP(String abstractP) {
+        this.abstractP = abstractP;
+    }
+    
+    
 }

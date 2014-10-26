@@ -9,6 +9,8 @@ package managedBeans;
 import entities.Academico;
 import entities.Publicacion;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -23,16 +25,23 @@ import sessionbeans.AcademicoPublicacionFacadeLocal;
 public class Academico_Publicacion implements Serializable {
     @EJB
     private AcademicoPublicacionFacadeLocal ejbFacade;
+
     
     public Academico_Publicacion() {
     }
+
     public void NuevaDependecia(Publicacion publicacion){
-        //System.out.println("Academico: "+Academico.getNombres()+", Grado: "+GradoAcademico.getTitulo());
-        this.ejbFacade.Create(publicacion.getMiAcademico(), publicacion);
+        System.out.println("Tratando de Crear a ");
+        System.out.println("Numero: " + publicacion.getAcademicos().size());
+        System.out.println("4");
+        this.ejbFacade.Create(publicacion.getAcademicos(), publicacion);
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
     public void Delete(Publicacion publicacion){
-        this.ejbFacade.Delete(publicacion.getMiAcademico(), publicacion);
+        this.ejbFacade.Delete(publicacion.getAcademicos(), publicacion);
     }
     
+    public List<Academico> getAcademicos() {
+        return ejbFacade.findAll();
+    }  
 }

@@ -60,9 +60,11 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Autor"/>
+                                <h:outputText value="Autores"/>
                             </f:facet>
-                            <h:outputText value="#{item.miAcademico.nombres} #{item.miAcademico.apellidos}"/>
+                            <c:forEach items="#{item.academicos.get(0)}" var="usuariosP">
+                                <h:outputText value="Hola" />
+                            </c:forEach>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":PublicacionViewForm" oncomplete="PF('PublicacionViewDialog').show()" disabled="#{empty publicacionController.selected}"/>

@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition>
 
@@ -18,9 +19,12 @@
                         <h:outputText value="Tipo Publicación"/>
                         <h:outputText value="#{publicacionController.selected.tipoPublicacion.nombreTipo}" title="Tipo Publicacion"/>
                         
-                        <h:outputText value="Académico"/>
-                        <h:outputText value="#{publicacionController.selected.miAcademico.nombres} #{publicacionController.selected.miAcademico.apellidos}" title="Academico"/>
-                        
+                        <h:outputText value="Académicos"/>
+                        <c:forEach items="#{publicacionController.usuariosDePublicacion(publicacionController.selected)}" var="UsuariosP">
+                                <h:outputText value="#{UsuariosP}" />
+                                 <h:outputText value="" />
+                        </c:forEach>
+                        <h:outputText value="" />
                         <h:outputText value="País"/>
                         <h:outputText value="#{publicacionController.selected.pais}" title="#{bundle.ViewPublicacionTitle_pais}"/>
                         <h:outputText value="Fecha Publicación"/>

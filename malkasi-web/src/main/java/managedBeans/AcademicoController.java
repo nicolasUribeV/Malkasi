@@ -3,6 +3,7 @@ package managedBeans;
 import entities.Academico;
 import entities.TipoPublicacion;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 import managedBeans.util.JsfUtil;
 import managedBeans.util.JsfUtil.PersistAction;
+import org.primefaces.model.DualListModel;
 import sessionbeans.AcademicoFacadeLocal;
 
 @Named("academicoController")
@@ -34,7 +36,7 @@ public class AcademicoController implements Serializable {
     public Academico getSelected() {
         return selected;
     }
-
+    
     public void setSelected(Academico selected) {
         this.selected = selected;
     }
@@ -124,6 +126,22 @@ public class AcademicoController implements Serializable {
 
     public List<Academico> getItemsAvailableSelectMany() {
         return getFacade().findAll();
+    }
+    
+    public List<Academico> getItemsAvailableSelectMany2() {
+        List<Academico> Aux = getFacade().findAll();
+        ArrayList<Integer> Index = new ArrayList<>();
+        for (int i = 0; i < Aux.size(); i++) {
+            if(Aux.get(i).getTipoCuenta().equals("admin")){
+                Index.add(i);
+            }
+        }
+        int count = 0;
+        for (int i = 0; i < Index.size(); i++) {
+            Aux.remove(Index.get(i)-count);
+            count++;
+        }
+        return Aux;
     }
 
     public List<Academico> getItemsAvailableSelectOne() {

@@ -43,4 +43,15 @@ public class AcademicoFacade extends AbstractFacade<Academico> implements Academ
         }
     }
     
+    @Override
+    public List<Academico> FindWithRut(String rut){
+        Query q = em.createQuery("SELECT c FROM Academico c WHERE c.rut = :rut");
+        q.setParameter("rut", rut);
+        if(q.getResultList().size() == 0){
+            return null;
+        }
+        else{
+            return q.getResultList();
+        }
+    }
 }

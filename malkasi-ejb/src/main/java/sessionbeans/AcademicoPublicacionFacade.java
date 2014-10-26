@@ -9,6 +9,7 @@ package sessionbeans;
 import entities.Academico;
 import entities.GradoAcademico;
 import entities.Publicacion;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,49 +20,54 @@ import javax.persistence.Query;
  * @author Nico_
  */
 @Stateless
-public class AcademicoPublicacionFacade implements AcademicoPublicacionFacadeLocal {
+public class AcademicoPublicacionFacade extends AbstractFacade<Academico> implements AcademicoPublicacionFacadeLocal {
     @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
+
+    public AcademicoPublicacionFacade() {
+        super(Academico.class);
+    }
 
     protected EntityManager getEntityManager() {
         return em;
     }
     
     @Override
-    public void Create(Academico academico, Publicacion publicacion){
+    public void Create(List<Academico> academicos, Publicacion publicacion){
         this.em.persist(publicacion);
-        Academico academicoAuxiliar = em.find(Academico.class, academico.getId());
-        if(academicoAuxiliar == null){
-            System.out.println("EL FEROZ ERROR");
-        }
-        else{
-            academicoAuxiliar.getPublicaciones().add(publicacion);
-            this.em.merge(academicoAuxiliar);
+        for (int i = 0; i < academicos.size(); i++) {
+            Academico academicoAuxiliar = em.find(Academico.class, academicos.get(i).getId());
+            if(academicoAuxiliar == null){
+                System.out.println("EL FEROZ ERROR");
+            }
+            else{
+                academicoAuxiliar.getPublicaciones().add(publicacion);
+                this.em.merge(academicoAuxiliar);
+            }
         }
     }
     
     @Override
-    public void Delete(Academico academico, Publicacion publicacion){
-        
-        System.out.println("Academico: "+academico.getNombres()+", publicacion A Borrar: "+publicacion.getNombrePublicacion());
-        System.out.println("Mi Academico: "+publicacion.getMiAcademico().getNombres());
-        int Index = -1;
-        for (int i = 0; i < publicacion.getMiAcademico().getPublicaciones().size(); i++) {
-            System.out.println("Publicación Encontrada: " + academico.getPublicaciones().get(i).getNombrePublicacion());
-            if(publicacion.getId() == publicacion.getMiAcademico().getPublicaciones().get(i).getId()){
-                Index = i;
-                break;
+    public void Delete(List<Academico> academicos, Publicacion publicacion){
+        for (int j = 0; j < academicos.size(); j++) {
+            
+            int Index = -1;
+            for (int i = 0; i < publicacion.getAcademicos().get(j).getPublicaciones().size(); i++) {
+                if(publicacion.getId() == publicacion.getAcademicos().get(j).getPublicaciones().get(i).getId()){
+                    Index = i;
+                    break;
+                }
             }
+            if(Index == -1){
+                System.out.println("No se pudo Eliminar");
+            }
+            else{
+                publicacion.getAcademicos().get(j).getPublicaciones().remove(Index);
+                Academico Auxiliar = publicacion.getAcademicos().get(j);
+                this.em.merge(Auxiliar);
+            }
+            
         }
-        if(Index == -1){
-            System.out.println("No se pudo Eliminar");
-        }
-        else{
-            //System.out.println("Encontrado: "+Academico.getGrados().get(Index).getTitulo());
-            publicacion.getMiAcademico().getPublicaciones().remove(Index);
-            Academico Auxiliar = publicacion.getMiAcademico();
-            this.em.remove(em.merge(publicacion));
-            this.em.merge(Auxiliar);
-        }
+        this.em.remove(em.merge(publicacion));
     }
 }

@@ -8,6 +8,7 @@ package sessionbeans;
 
 import entities.Academico;
 import entities.Publicacion;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -17,8 +18,10 @@ import javax.ejb.Local;
 @Local
 public interface AcademicoPublicacionFacadeLocal {
 
-    void Create(Academico Academico, Publicacion Publicacion);
+    void Create(List<Academico> academicos, Publicacion Publicacion);
 
-    void Delete(Academico Academico, Publicacion Publicacion);
+    void Delete(List<Academico> academicos, Publicacion Publicacion);
+    
+    List<Academico> findAll();
     
 }
