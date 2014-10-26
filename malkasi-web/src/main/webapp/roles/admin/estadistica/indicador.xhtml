@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/layout/1column.xhtml">
+        <ui:define name="body">
+            <h:form>  
+                <p:menubar>
+                    <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
+                    </p:menuitem>
+                    <p:menuitem value="Gestión Academicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
+                    </p:menuitem>
+                    <p:menuitem value="Ver Publicaciones" icon="ui-icon-document"  url="/faces/roles/admin/publicaciones/index.xhtml" onclick="#{publicacionController.refresh()}">
+                    </p:menuitem>
+                    <p:submenu label="Ver indicadores" icon="ui-icon-document">
+                        <p:menuitem value="Publicaciones por Tipo" url="/faces/roles/admin/estadistica/indicador.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
+                        <p:menuitem value="Publicaciones por académico" url="/faces/roles/admin/estadistica/indicadorAcademico.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
+                        <p:menuitem value="Publicaciones por académico y tipo de publicación" url="/faces/roles/admin/estadistica/indicadorAcademicoTipo.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
+                    </p:submenu>
+                </p:menubar>
+            </h:form> 
+            <br></br>
+            <h:form>
+                <p:panel>
+                    <h:panelGrid columns="1" cellpadding="2">
+                        <p:outputLabel for="tipoPublicacion" value="Tipo Publicacion: ">
+                            <p:selectOneMenu id="tipoPublicacion" value="#{indicadoresController.tipoPublicacionSeleccionada}">
+                                <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre" 
+                                               itemLabel="#{nombre.nombreTipo}" />     
+                            </p:selectOneMenu>
+                            
+                        </p:outputLabel>
+                    </h:panelGrid>
+                    <p:button value="Volver" href="/faces/roles/admin/index.xhtml"/>
+                    <p:commandButton value="Ver Grafico" actionListener="#{indicadoresController.setearGrafico()}" update="graficoBarra"/>
+                </p:panel>
+                <br></br>      
+                <p:panel>
+                    <h2 style="text-align: center">GŔAFICO POR TIPO DE PUBLICACIÓN</h2>
+                    <p:chart type="bar" id="graficoBarra" model="#{indicadoresController.barModel}" style="height:300px"/>
+                </p:panel>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

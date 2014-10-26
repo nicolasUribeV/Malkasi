@@ -44,6 +44,11 @@ public class TipoPublicacionController implements Serializable {
 
     protected void initializeEmbeddableKey() {
     }
+    
+    public void refresh(){
+        prepareCreate();
+        items = getFacade().findAll();
+    }
 
     private TipoPublicacionFacadeLocal getFacade() {
         return ejbFacade;
