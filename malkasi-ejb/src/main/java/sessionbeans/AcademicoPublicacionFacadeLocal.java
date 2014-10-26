@@ -18,9 +18,11 @@ import javax.ejb.Local;
 @Local
 public interface AcademicoPublicacionFacadeLocal {
 
-    void Create(List<Academico> academicos, Publicacion Publicacion);
+    void Create(List<Academico> academicos, Publicacion Publicacion,Academico academico);
+    
+    void Update(List<Academico> academicos, Publicacion Publicacion,Academico academico);
 
-    void Delete(List<Academico> academicos, Publicacion Publicacion);
+    void Delete(List<Academico> academicos, Publicacion Publicacion,Academico academico);
     
     List<Academico> findAll();
     

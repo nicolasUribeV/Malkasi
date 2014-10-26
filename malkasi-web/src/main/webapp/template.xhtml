@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title><ui:insert name="title">BIENVENIDOS</ui:insert></title>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
     </h:head>
@@ -21,7 +21,7 @@
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
                         <p:submenu label="#{bundle.Maintenance}">
-                            <p:menuitem value="academico" outcome="/academico/List.xhtml" />
+                            <p:menuitem value="Log" outcome="/roles/admin/log/List.xhtml" />
                         </p:submenu>
                     </p:menubar>
                 </h:form>

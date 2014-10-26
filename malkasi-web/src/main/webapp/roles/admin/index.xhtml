@@ -28,6 +28,10 @@
                         <p:menuitem value="Publicaciones por académico y tipo de publicación" url="/faces/roles/admin/estadistica/indicadorAcademicoTipo.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
                         <p:menuitem value="Cuadro Resumen de Publicaciones" url="/faces/roles/admin/estadistica/tablaResumen.xhtml" onclick="#{indicadoresController.llenarAgnos()}"></p:menuitem>
                     </p:submenu>
+
+                    <p:menuitem value="Ver Log" icon="ui-icon-document"  url="/faces/roles/admin/log/List.xhtml" onclick="#{logController.refresh()}">
+                    </p:menuitem>
+
                 </p:menubar>
             </h:form> 
         </ui:define>
