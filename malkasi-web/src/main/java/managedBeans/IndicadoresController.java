@@ -34,6 +34,7 @@ public class IndicadoresController implements Serializable {
     private List<String> years;
     @EJB
     private sessionbeans.PublicacionFacadeLocal publicacionFacade;
+    private sessionbeans.AcademicoFacadeLocal academicoFacade;
     private TipoPublicacion tipoPublicacionSeleccionada;
     private Academico academicoSeleccionado;
     List<Publicacion> todasPublicaciones = null;
@@ -226,8 +227,12 @@ public class IndicadoresController implements Serializable {
     
     public void datosTabla(){
         List<Academico> todosAcademicos = new ArrayList<Academico>();
-        
-        
+        todosAcademicos.addAll(todosAcademicos);
+        for (int i = 0; i < todosAcademicos.size(); i++) {
+            for (int j = 0; j < todosAcademicos.get(i).getPublicaciones().size(); j++) {
+                
+            }
+        }
     }
     
 }
