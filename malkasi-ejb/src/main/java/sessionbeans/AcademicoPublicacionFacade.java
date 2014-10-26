@@ -8,6 +8,7 @@ package sessionbeans;
 
 import entities.Academico;
 import entities.GradoAcademico;
+import entities.Log;
 import entities.Publicacion;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -33,12 +34,19 @@ public class AcademicoPublicacionFacade extends AbstractFacade<Academico> implem
     }
     
     @Override
-    public void Create(List<Academico> academicos, Publicacion publicacion){
+    public void Create(List<Academico> academicos, Publicacion publicacion,Academico academico){
+        Log log = new Log();
+        log.setAccion("Ingresó");
+        log.setProfesor(academico.getNombres()+" "+academico.getApellidos());
+        log.setTitulo(publicacion.getNombrePublicacion());
+        java.util.Date Date = new java.util.Date();
+        log.setFecha(new java.sql.Timestamp(Date.getTime()));
+        this.em.persist(log);
         this.em.persist(publicacion);
         for (int i = 0; i < academicos.size(); i++) {
             Academico academicoAuxiliar = em.find(Academico.class, academicos.get(i).getId());
             if(academicoAuxiliar == null){
-                System.out.println("EL FEROZ ERROR");
+                System.out.println("EL FEROZ ERROZ");
             }
             else{
                 academicoAuxiliar.getPublicaciones().add(publicacion);
@@ -48,9 +56,8 @@ public class AcademicoPublicacionFacade extends AbstractFacade<Academico> implem
     }
     
     @Override
-    public void Delete(List<Academico> academicos, Publicacion publicacion){
+    public void Delete(List<Academico> academicos, Publicacion publicacion, Academico academico){
         for (int j = 0; j < academicos.size(); j++) {
-            
             int Index = -1;
             for (int i = 0; i < publicacion.getAcademicos().get(j).getPublicaciones().size(); i++) {
                 if(publicacion.getId() == publicacion.getAcademicos().get(j).getPublicaciones().get(i).getId()){
@@ -68,6 +75,13 @@ public class AcademicoPublicacionFacade extends AbstractFacade<Academico> implem
             }
             
         }
+        Log log = new Log();
+        log.setAccion("Eliminó");
+        log.setProfesor(academico.getNombres()+" "+academico.getApellidos());
+        log.setTitulo(publicacion.getNombrePublicacion());
+        java.util.Date Date = new java.util.Date();
+        log.setFecha(new java.sql.Timestamp(Date.getTime()));
+        this.em.persist(log);
         this.em.remove(em.merge(publicacion));
     }
 }

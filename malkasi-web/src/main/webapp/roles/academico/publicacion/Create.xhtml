@@ -89,7 +89,7 @@
                         </p:inputText>
                     </p:panelGrid>
                     <h4>* Representa que el campo es obligatorio</h4>
-                    <p:commandButton actionListener="#{academico_Publicacion.NuevaDependecia(publicacionController.CrearNueva(publicacionController.selected))}" value="Crear"/>
+                    <p:commandButton actionListener="#{academico_Publicacion.NuevaDependecia(publicacionController.CrearNueva(publicacionController.selected),sessionUtilTest.currentUser)}" value="Crear"/>
                     <p:button value="Volver" href="/faces/roles/academico/index.xhtml" />
                 </h:panelGroup>
                 </p:panelGrid>  
