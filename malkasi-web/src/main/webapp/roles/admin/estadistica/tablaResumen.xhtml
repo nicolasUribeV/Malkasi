@@ -12,25 +12,43 @@
         <ui:define name="body">
             <h:form>
                 <p:panel>
+                    <p:outputLabel value="Desde: " for="desde" />
+                    <p:selectOneMenu id="desde" required="true" value="#{indicadoresController.agnoInicial}">
+                        <f:selectItems value="#{indicadoresController.agnos}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Hasta: " for="hasta" />
+                    <p:selectOneMenu id="hasta" required="true" value="#{indicadoresController.agnoFinal}">
+                        <f:selectItems value="#{indicadoresController.agnos}"/>
+                    </p:selectOneMenu>
+                    
                     <p:button value="Volver" href="/faces/roles/admin/index.xhtml"/>
-                    <p:commandButton value="Ver Grafico" actionListener="#{indicadoresController.llenaryears()}" update="columnAgnos"/>
+                    <p:commandButton value="Actualizar Tabla" update="columnAgnos"/>
                 </p:panel>
-                <p:dataTable id="columnAgnos" var="player" value="" style="margin-top:40px">
+                <p:dataTable id="columnAgnos" var="player" value="#{academicoController.items}" style="margin-top:40px">
                     <f:facet name="header">
-                        Dynamic Columns
+                        Cantidad de Publicaciones
                     </f:facet>
 
                     <p:columnGroup type="header">
                         <p:row>
                             <p:column rowspan="2" headerText="Académicos" />
-                            <p:column colspan="3" headerText="Tipos de Publicaciones"/>
+                            <p:column colspan="#{tipoPublicacionController.items.size()}" headerText="Tipos" />
                         </p:row>
                         <p:row>
-                            <ui:repeat  value="#{indicadoresController.years}" var="year">
-                                <p:column headerText="#{year.toString}" />
-                            </ui:repeat>
+                            <c:forEach items="#{tipoPublicacionController.items}" var="PublicacionesTipo">
+                                <p:column headerText="#{PublicacionesTipo.nombreTipo}" />
+                            </c:forEach>
                         </p:row>
                     </p:columnGroup>
+                    <p:column>
+                        <h:outputText value="#{player.nombres} #{player.apellidos}" />
+                    </p:column>
+                    <c:forEach items ="#{tipoPublicacionController.items}" var="PT">
+                        <p:column>
+                            <h:outputText value="#{indicadoresController.cantidadPublicacion(PT, player,indicadoresController.agnoInicial, indicadoresController.agnoFinal)}" />
+                        </p:column>
+                    </c:forEach>
                 </p:dataTable>
             </h:form>
         </ui:define>

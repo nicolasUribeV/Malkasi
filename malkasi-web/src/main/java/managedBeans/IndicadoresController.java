@@ -38,6 +38,8 @@ public class IndicadoresController implements Serializable {
     private TipoPublicacion tipoPublicacionSeleccionada;
     private Academico academicoSeleccionado;
     List<Publicacion> todasPublicaciones = null;
+    private int agnoInicial;
+    private int agnoFinal;
     
     
     public List<String> getYears() {
@@ -225,14 +227,48 @@ public class IndicadoresController implements Serializable {
 
     }
     
-    public void datosTabla(){
-        List<Academico> todosAcademicos = new ArrayList<Academico>();
-        todosAcademicos.addAll(todosAcademicos);
-        for (int i = 0; i < todosAcademicos.size(); i++) {
-            for (int j = 0; j < todosAcademicos.get(i).getPublicaciones().size(); j++) {
-                
+    public int cantidadPublicacion(TipoPublicacion tp, Academico a, int amin, int amax){
+        System.out.println("aI: " + amin);
+        System.out.println("aF: "+ amax);
+        System.out.println("Academico: "+a.getNombres());
+        System.out.println("Nombre TP: "+tp.getNombreTipo());
+        int cant = 0;
+        for (int i = 0; i < a.getPublicaciones().size(); i++) {
+            if(a.getPublicaciones().get(i).getTipoPublicacion().getId()== tp.getId()){
+                if(a.getPublicaciones().get(i).getAgno() >= amin && a.getPublicaciones().get(i).getAgno() <= amax){
+                    cant++;
+                }
             }
         }
+        System.out.println("cant: "+cant);
+        return cant;
     }
+    
+    public ArrayList<Integer> getAgnos(){
+        ArrayList<Integer> agnos = new ArrayList<>();
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        for (int i = 0; i < 10; i++) {
+            agnos.add(year);
+            year--;
+        }
+        return agnos;
+    }
+
+    public int getAgnoInicial() {
+        return agnoInicial;
+    }
+
+    public void setAgnoInicial(int agnoInicial) {
+        this.agnoInicial = agnoInicial;
+    }
+
+    public int getAgnoFinal() {
+        return agnoFinal;
+    }
+
+    public void setAgnoFinal(int agnoFinal) {
+        this.agnoFinal = agnoFinal;
+    }
+    
     
 }
