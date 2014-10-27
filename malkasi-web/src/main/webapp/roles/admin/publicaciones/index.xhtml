@@ -25,7 +25,12 @@
                         <p:menuitem value="Publicaciones por Tipo" url="/faces/roles/admin/estadistica/indicador.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
                         <p:menuitem value="Publicaciones por académico" url="/faces/roles/admin/estadistica/indicadorAcademico.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
                         <p:menuitem value="Publicaciones por académico y tipo de publicación" url="/faces/roles/admin/estadistica/indicadorAcademicoTipo.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
+                        <p:menuitem value="Cuadro Resumen de Publicaciones" url="/faces/roles/admin/estadistica/tablaResumen.xhtml" onclick="#{academicoController.refresh()}"></p:menuitem>
                     </p:submenu>
+
+                    <p:menuitem value="Ver Log" icon="ui-icon-document"  url="/faces/roles/admin/log/List.xhtml" onclick="#{logController.refresh()}">
+                    </p:menuitem>
+
                 </p:menubar>
             </h:form> 
             <h:form id="PublicacionListForm">
@@ -63,16 +68,8 @@
                             </f:facet>
                             <h:outputText value="#{item.tipoPublicacion.nombreTipo}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Autores"/>
-                            </f:facet>
-                            <c:forEach items="#{item.academicos.get(0)}" var="usuariosP">
-                                <h:outputText value="Hola" />
-                            </c:forEach>
-                        </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":PublicacionViewForm" oncomplete="PF('PublicacionViewDialog').show()" disabled="#{empty publicacionController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":PublicacionListForm" oncomplete="PF('PublicacionViewDialog').show()" disabled="#{empty publicacionController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

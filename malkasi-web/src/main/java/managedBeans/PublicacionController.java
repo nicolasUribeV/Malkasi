@@ -160,7 +160,7 @@ public class PublicacionController implements Serializable {
                 }
             }
         }
-        //rP = rP +", " + publicacion.getFechaPublicacion().;
+        rP = rP +" (" + publicacion.getAgno() + ").";
         rP = rP +", " + publicacion.getNombrePublicacion();
         rP = rP +", " + publicacion.getNombreLibro();
         rP = rP +", " + publicacion.getEditorial();
@@ -189,6 +189,12 @@ public class PublicacionController implements Serializable {
         return palabraNueva;
     }
     
+    public boolean academicoCheck (Academico academico, Academico current){
+        if(academico.getId() == current.getId()){
+            return true;
+        }
+        return false;
+    }
 
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("PublicacionDeleted"));
@@ -210,6 +216,11 @@ public class PublicacionController implements Serializable {
         items = getFacade().findAll();
     }
     
+    public void refresh2(){
+        selected = null;
+        items = getFacade().findAll();
+    }
+   
     public Boolean tienePublicaciones(List<Publicacion> publicaciones, String Tipo){
         for (int i = 0; i < publicaciones.size(); i++) {
             if(publicaciones.get(i).getTipoPublicacion().getNombreTipo().equals(Tipo)){

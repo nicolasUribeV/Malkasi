@@ -33,7 +33,7 @@
                         <p:outputLabel value="Académicos Asociados" for="academicos" />
                         <p:selectCheckboxMenu id="academicos" widgetVar="someVarName" value="#{publicacionController.selected.academicos}" label="AcademicosL"
                                               filter="true" filterMatchMode="startsWith" converter="academicoConverter" >
-                            <f:selectItems value="#{academicoController.itemsAvailableSelectMany2}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}" itemValue="#{AcademicosL}"/>
+                            <f:selectItems value="#{academicoController.itemsAvailableSelectMany2}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}" itemValue="#{AcademicosL}" itemDisabled="#{publicacionController.academicoCheck(AcademicosL,sessionUtilTest.currentUser)}"/>
                             <p:ajax event="change" update="previsualizacion,orden" process="@this"/>
                         </p:selectCheckboxMenu>
                         
