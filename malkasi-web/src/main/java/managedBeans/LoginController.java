@@ -54,13 +54,12 @@ public class LoginController implements Serializable {
     
     public void login() {
         System.out.println("Calling login for " + userName);
-        if (sessionUtilTest.login(userName)) {
-            System.out.println("SessionController: Usuaro logeado de forma exitosa: " + userName);
+        if (sessionUtilTest.login(userName,password)) {
+            System.out.println("SessionController: Usuario logeado de forma exitosa: " + userName);
             JsfUtil.redirect(sessionUtilTest.route66());
         } 
         else {
             System.out.println("SessionController: Login fail");
-            JsfUtil.addErrorMessage("Nombre de Usuario inexistente");
         }
     }
     
