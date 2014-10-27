@@ -216,8 +216,11 @@ public class PublicacionController implements Serializable {
         items = getFacade().findAll();
     }
     
-    public void refresh2(){
-        selected = null;
+    public void refresh2(Publicacion p){
+        if(p != null){
+            System.out.println(p.getNombrePublicacion());
+            selected = p;
+        }
         items = getFacade().findAll();
     }
    

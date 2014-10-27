@@ -18,7 +18,7 @@
                 <p:menubar>
                     <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
                     </p:menuitem>
-                    <p:menuitem value="Gestión Academicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
+                    <p:menuitem value="Gestión Académicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
                     </p:menuitem>
                     <p:menuitem value="Ver Publicaciones" icon="ui-icon-document"  url="/faces/roles/admin/publicaciones/index.xhtml" onclick="#{publicacionController.refresh()}">
                     </p:menuitem>
@@ -44,8 +44,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50" sortBy="#{item.fecha}" sortOrder="descending"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton"/>
+                        <p:ajax event="rowSelect"   update="viewButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton"/>
 
                         <p:column>
                             <f:facet name="header">
@@ -74,13 +74,11 @@
                             </h:outputText>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{logController.prepareCreate}" update=":LogCreateForm" oncomplete="PF('LogCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":LogViewForm" oncomplete="PF('LogViewDialog').show()" disabled="#{empty logController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
-            <ui:include src="Create.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>

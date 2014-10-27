@@ -17,7 +17,7 @@
                 <p:menubar>
                     <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
                     </p:menuitem>
-                    <p:menuitem value="Gestión Academicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
+                    <p:menuitem value="Gestión Académicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
                     </p:menuitem>
                     <p:menuitem value="Ver Publicaciones" icon="ui-icon-document"  url="/faces/roles/admin/publicaciones/index.xhtml" onclick="#{publicacionController.refresh()}">
                     </p:menuitem>
@@ -33,7 +33,7 @@
 
                 </p:menubar>
             </h:form> 
-            <h:form id="PublicacionListForm">
+            <h:form id="PublicacionListFormAdmin">
                 <p:panel header="Todas las publicaciones">
                     <p:dataTable id="datalist" value="#{publicacionController.items}" var="item"
                                  selectionMode="single" selection="#{publicacionController.selected}"
@@ -69,7 +69,7 @@
                             <h:outputText value="#{item.tipoPublicacion.nombreTipo}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":PublicacionListForm" oncomplete="PF('PublicacionViewDialog').show()" disabled="#{empty publicacionController.selected}"/>
+                            <p:commandButton id="viewButton" icon="ui-icon-search" value="Ver" oncomplete="PF('PublicacionViewDialogAdmin').show()" actionListener="#{publicacionController.refresh2(item)}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
