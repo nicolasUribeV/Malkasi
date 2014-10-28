@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/layout/1column.xhtml">
+        <ui:define name="body">
+            <h3>Agregar actividad academica</h3>
+              <h:form id="PublicacionCreateForm">
+                    <p:outputLabel id="previsualizacion">
+                        <br></br>
+                        Previsualización:    #{publicacionController.getStringPublicacion(publicacionController.selected)}
+                        <br></br>
+                    </p:outputLabel>
+                    <p:panelGrid columns="1" >
+                        <h:panelGroup id="display">
+                           
+                            <h:panelGrid  columns="3" rendered="#{publicacionController.selected != null}" >
+
+                                <p:outputLabel value="Titulo Publicación" for="nombrePublicacion" />
+                                <p:inputText id="nombrePublicacion" value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" required="true"  >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                </p:inputText>
+                                 <p:message id="msgTipoPublicacion" for="nombrePublicacion" style="padding: 20px" />
+                     
+                                
+
+                                <p:outputLabel value="Tipo de Publicación" for="tipoPublicacion" />
+                                <p:selectOneMenu id="tipoPublicacion" required="true" value="#{publicacionController.selected.tipoPublicacion}">
+                                    <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre"
+                                                   itemLabel="#{nombre.nombreTipo}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="" style="padding: 20px" />
+
+                                <p:outputLabel value="Académicos Asociados" for="academicos" />
+                                <p:selectCheckboxMenu id="academicos" widgetVar="someVarName" value="#{publicacionController.selected.academicos}" label="AcademicosL"
+                                                      filter="true" filterMatchMode="startsWith" converter="academicoConverter">
+                                    <f:selectItems value="#{academicoController.getItemsAvailableSelectMany2()}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}" itemValue="#{AcademicosL}" />
+                                    <p:ajax event="change" update="previsualizacion" process="@this"/>
+                                    <f:attribute name="currentUserLA" value="#{sessionUtilTest.currentUser}" />
+                                    <f:validator validatorId="academicoInsertValidator" />
+                                </p:selectCheckboxMenu>
+                                <p:outputLabel value="" style="padding: 20px" />
+                                <p:outputLabel value="" style="padding: 20px" />
+                                <p:outputLabel value="" style="padding: 20px" />
+                                <!--
+                                <p:outputLabel value="Orden" for="orden" />
+                                <p:orderList id="orden" value="#{publicacionController.selected.academicos}" var="orderA" controlsLocation="none" itemLabel="#{orderA.nombres} #{orderA.apellidos}" itemValue="#{orderA}" converter="academicoConverter" immediate="true" >
+                                </p:orderList>
+                                <p:outputLabel value="" style="padding: 100px" />
+                                -->
+                                <p:outputLabel value="Abstract" for="abstract" />
+                                <p:inputTextarea id="abstract" value="#{publicacionController.selected.abstractP}" title="Abstract" rows="7" cols="50" />
+                                <p:outputLabel value="" style="padding: 20px" />
+                                
+                                <p:outputLabel value="País" for="pais" />
+                                <p:inputText id="pais" value="#{publicacionController.selected.pais}" title="PublicacionPais" requiredMessage="Pais es campo obligatorio"  >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                </p:inputText>
+                                <p:outputLabel value="" style="padding: 20px" />
+                    
+                                <p:outputLabel value="Año" for="agno" />
+                                <p:inputMask id="agno" value="#{publicacionController.selected.agno}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}" mask="9999"  >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                    <f:validator validatorId="AgnoValidator" />
+                                </p:inputMask>
+                                <p:message id="msgAgno" for="agno" style="padding: 20px" />
+
+                                <p:outputLabel value="Nombre Libro/Revista" for="nombreLibro" />
+                                <p:inputText id="nombreLibro" value="#{publicacionController.selected.nombreLibro}" title="#{bundle.CreatePublicacionTitle_nombreLibro}" >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                </p:inputText>
+                                <p:outputLabel value="" style="width: 100px; padding: 20px"  />
+                                
+                                <p:outputLabel value="Número de Páginas" for="referencia" />
+                                <p:inputText id="referencia" value="#{publicacionController.selected.referencia}" title="#{bundle.CreatePublicacionTitle_referencia}" >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                </p:inputText>
+                                <p:outputLabel value=""  style="padding: 20px" />
+                                
+                                <p:outputLabel value="Editorial Revista" for="editorial" />
+                                <p:inputText id="editorial" value="#{publicacionController.selected.editorial}" title="#{bundle.CreatePublicacionTitle_editorial}" >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                </p:inputText>
+                                <p:outputLabel value="" style="padding: 20px"  />
+                                
+                                <p:outputLabel value="URL" for="url" />
+                                <p:inputText id="url" value="#{publicacionController.selected.url}" title="#{bundle.CreatePublicacionTitle_url}" >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                </p:inputText>
+                                <p:outputLabel value="" style="padding: 20px" />
+                                
+                                <p:outputLabel value="Nombre Congreso" for="nombreCongreso" />
+                                <p:inputText id="nombreCongreso" value="#{publicacionController.selected.nombreCongreso}" title="#{bundle.CreatePublicacionTitle_nombreCongreso}" >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                </p:inputText>
+                                <p:outputLabel value="" style="padding: 20px" />
+                                
+                                <p:outputLabel value="Institución" for="institucion" />
+                                <p:inputText id="institucion" value="#{publicacionController.selected.institucion}" title="#{bundle.CreatePublicacionTitle_institucion}" >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                </p:inputText>
+                                <p:outputLabel value="" style="padding: 20px" />
+                                
+                                <p:outputLabel value="DOI" for="doi" />
+                                <p:inputText id="doi" value="#{publicacionController.selected.doi}" title="doi" >
+                                    <p:ajax event="keyup" update="previsualizacion"  />
+                                </p:inputText>
+                                <p:outputLabel value="" style="padding: 20px" />
+                            </h:panelGrid>
+                            <h4>* Representa que el campo es obligatorio</h4>
+                            <p:commandButton actionListener="#{academico_Publicacion.NuevaDependecia(publicacionController.CrearNueva(publicacionController.selected),sessionUtilTest.currentUser)}" value="Crear" update="display" oncomplete="handleSubmit(args,'PublicacionCreateForm');"/>
+                            <p:button value="Volver" href="/faces/roles/academico/index.xhtml" />
+                        </h:panelGroup>
+                    </p:panelGrid>  
+                </h:form>
+          
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -40,7 +40,7 @@ public class IndicadoresController implements Serializable {
     List<Publicacion> todasPublicaciones = null;
     private int agnoInicial;
     private int agnoFinal;
-    
+    private ArrayList<Integer> getAgnos;
     
     public List<String> getYears() {
         return years;

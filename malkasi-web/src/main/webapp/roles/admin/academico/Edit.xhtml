@@ -24,6 +24,10 @@
                         <p:inputText id="apellidos" value="#{academicoController.selected.apellidos}" title="#{bundle.EditAcademicoTitle_apellidos}" >
                             <f:validator validatorId="ApellidoValidator"/>
                         </p:inputText>
+                        <p:outputLabel value="Nombre de Usuario" for="username" />
+                        <p:inputText id="username" value="#{academicoController.selected.userName}">
+                           
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_mail}" for="mail" />
                         <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
                             <f:validator validatorId="CorreoValidator"/>
