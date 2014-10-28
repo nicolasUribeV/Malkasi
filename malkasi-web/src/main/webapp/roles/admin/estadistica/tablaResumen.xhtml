@@ -34,12 +34,12 @@
             <h:form>
                 <p:panel>
                     <p:outputLabel value="Desde : " for="desde" />
-                    <p:selectOneMenu id="desde" value=" #{indicadoresController.agnoInicial}">
+                    <p:selectOneMenu id="desde" value="#{indicadoresController.agnoInicial}">
                         <f:selectItems value="#{indicadoresController.agnos}"/>
                     </p:selectOneMenu>
                     <br/>
                     <p:outputLabel value="Hasta   : " for="hasta" />
-                    <p:selectOneMenu id="hasta" value=" #{indicadoresController.agnoFinal}">
+                    <p:selectOneMenu id="hasta" value="#{indicadoresController.agnoFinal}">
                         <f:selectItems value="#{indicadoresController.agnos}"/>
                     </p:selectOneMenu>
                     <br/>
