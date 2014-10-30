@@ -34,7 +34,7 @@
                 </p:menubar>
             </h:form> 
             <h:form id="PublicacionListFormAdmin">
-                <p:panel header="Todas las publicaciones">
+                <p:panel header="Todas las Publicaciones">
                     <p:dataTable id="datalist" value="#{publicacionController.items}" var="item"
                                  selectionMode="single" selection="#{publicacionController.selected}"
                                  paginator="true"
@@ -50,13 +50,13 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Pais"/>
+                                <h:outputText value="País"/>
                             </f:facet>
                             <h:outputText value="#{item.pais}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Fecha de publicacion"/>
+                                <h:outputText value="Fecha de Publicación"/>
                             </f:facet>
                             <h:outputText value="#{item.agno}">
                                
@@ -64,7 +64,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Tipo de publicacion"/>
+                                <h:outputText value="Tipo de Publicación"/>
                             </f:facet>
                             <h:outputText value="#{item.tipoPublicacion.nombreTipo}"/>
                         </p:column>

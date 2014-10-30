@@ -13,11 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_rut}" for="rut" />
-                        <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.EditAcademicoTitle_rut}" >
+                        <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.EditAcademicoTitle_rut}"  >
                             <f:validator validatorId="RutValidator"/>
                         </p:inputText>
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_nombres}" for="nombres" />
-                        <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.EditAcademicoTitle_nombres}" >
+                        <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.EditAcademicoTitle_nombres}" disabled="true" >
                             <f:validator validatorId="NombreValidator"/>
                         </p:inputText>
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_apellidos}" for="apellidos" />
