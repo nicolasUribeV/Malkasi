@@ -8,24 +8,24 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 
-    <ui:composition template="/layout/1column.xhtml">
-        <ui:define name="body">
+    <ui:composition template="/layout/1column.xhtml" >
+        <ui:define name="body" >
             <h:form>  
                 <p:menubar>
-                    <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
+                    <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml" >
                     </p:menuitem>
-                    <p:menuitem value="Gestión Académicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
+                    <p:menuitem value="Gestión Académicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}" >
                     </p:menuitem>
-                    <p:menuitem value="Ver Publicaciones" icon="ui-icon-document"  url="/faces/roles/admin/publicaciones/index.xhtml" onclick="#{publicacionController.refresh()}">
+                    <p:menuitem value="Ver Publicaciones" icon="ui-icon-document"  url="/faces/roles/admin/publicaciones/index.xhtml" onclick="#{publicacionController.refresh()}" >
                     </p:menuitem>
                     <p:submenu label="Ver indicadores" icon="ui-icon-document">
-                        <p:menuitem value="Publicaciones por Tipo" url="/faces/roles/admin/estadistica/indicador.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
-                        <p:menuitem value="Publicaciones por académico" url="/faces/roles/admin/estadistica/indicadorAcademico.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
-                        <p:menuitem value="Publicaciones por académico y tipo de publicación" url="/faces/roles/admin/estadistica/indicadorAcademicoTipo.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
-                        <p:menuitem value="Cuadro Resumen de Publicaciones" url="/faces/roles/admin/estadistica/tablaResumen.xhtml" onclick="#{academicoController.refresh()}"></p:menuitem>
+                        <p:menuitem value="Publicaciones por Tipo" url="/faces/roles/admin/estadistica/indicador.xhtml" onclick="#{indicadoresController.refresh()}" ></p:menuitem>
+                        <p:menuitem value="Publicaciones por académico" url="/faces/roles/admin/estadistica/indicadorAcademico.xhtml" onclick="#{indicadoresController.refresh()}" ></p:menuitem>
+                        <p:menuitem value="Publicaciones por académico y tipo de publicación" url="/faces/roles/admin/estadistica/indicadorAcademicoTipo.xhtml" onclick="#{indicadoresController.refresh()}" ></p:menuitem>
+                        <p:menuitem value="Cuadro Resumen de Publicaciones" url="/faces/roles/admin/estadistica/tablaResumen.xhtml" onclick="#{academicoController.refresh()}" ></p:menuitem>
                     </p:submenu>
 
-                    <p:menuitem value="Ver Log" icon="ui-icon-document"  url="/faces/roles/admin/log/List.xhtml" onclick="#{logController.refresh()}">
+                    <p:menuitem value="Ver Log" icon="ui-icon-document"  url="/faces/roles/admin/log/List.xhtml" onclick="#{logController.refresh()}" >
                     </p:menuitem>
 
                 </p:menubar>
@@ -34,19 +34,19 @@
             <h:form>
                 <p:panel>
                     <p:outputLabel value="Desde : " for="desde" />
-                    <p:selectOneMenu id="desde" value=" #{indicadoresController.agnoInicial}">
-                        <f:selectItems value="#{indicadoresController.agnos}"/>
+                    <p:selectOneMenu id="desde" value="#{indicadoresController.agnoInicial}" >
+                        <f:selectItems value="#{indicadoresController.agnos}" />
                     </p:selectOneMenu>
                     <br/>
                     <p:outputLabel value="Hasta   : " for="hasta" />
-                    <p:selectOneMenu id="hasta" value=" #{indicadoresController.agnoFinal}">
-                        <f:selectItems value="#{indicadoresController.agnos}"/>
+                    <p:selectOneMenu id="hasta" value="#{indicadoresController.agnoFinal}" >
+                        <f:selectItems value="#{indicadoresController.agnos}" />
                     </p:selectOneMenu>
                     <br/>
-                    <p:button value="Volver" href="/faces/roles/admin/index.xhtml"/>
-                    <p:commandButton value="Actualizar Tabla" update="columnAgnos"/>
+                    <p:button value="Volver" href="/faces/roles/admin/index.xhtml" />
+                    <p:commandButton value="Actualizar Tabla" update="columnAgnos" />
                 </p:panel>
-                <p:dataTable id="columnAgnos" var="player" value="#{academicoController.items}" style="margin-top:40px">
+                <p:dataTable id="columnAgnos" var="player" value="#{academicoController.items}" style="margin-top:40px" >
                     <f:facet name="header">
                         Cantidad de Publicaciones
                     </f:facet>
@@ -57,7 +57,7 @@
                             <p:column colspan="#{tipoPublicacionController.items.size()}" headerText="Tipos" />
                         </p:row>
                         <p:row>
-                            <c:forEach items="#{tipoPublicacionController.items}" var="PublicacionesTipo">
+                            <c:forEach items="#{tipoPublicacionController.items}" var="PublicacionesTipo" >
                                 <p:column headerText="#{PublicacionesTipo.nombreTipo}" />
                             </c:forEach>
                         </p:row>
@@ -65,7 +65,7 @@
                     <p:column>
                         <h:outputText value="#{player.nombres} #{player.apellidos}" />
                     </p:column>
-                    <c:forEach items ="#{tipoPublicacionController.items}" var="PT">
+                    <c:forEach items ="#{tipoPublicacionController.items}" var="PT" >
                         <p:column>
                             <h:outputText value="#{indicadoresController.cantidadPublicacion(PT, player,indicadoresController.agnoInicial, indicadoresController.agnoFinal)}" />
                         </p:column>
