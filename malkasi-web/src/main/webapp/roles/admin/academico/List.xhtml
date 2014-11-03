@@ -14,26 +14,7 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form>  
-                <p:menubar>
-                    <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
-                    </p:menuitem>
-                    <p:menuitem value="Gestión Académicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
-                    </p:menuitem>
-                    <p:menuitem value="Ver Publicaciones" icon="ui-icon-document"  url="/faces/roles/admin/publicaciones/index.xhtml" onclick="#{publicacionController.refresh()}">
-                    </p:menuitem>
-                    <p:submenu label="Ver indicadores" icon="ui-icon-document">
-                        <p:menuitem value="Publicaciones por Tipo" url="/faces/roles/admin/estadistica/indicador.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
-                        <p:menuitem value="Publicaciones por académico" url="/faces/roles/admin/estadistica/indicadorAcademico.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
-                        <p:menuitem value="Publicaciones por académico y tipo de publicación" url="/faces/roles/admin/estadistica/indicadorAcademicoTipo.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
-                        <p:menuitem value="Cuadro Resumen de Publicaciones" url="/faces/roles/admin/estadistica/tablaResumen.xhtml" onclick="#{academicoController.refresh()}"></p:menuitem>
-                    </p:submenu>
-
-                    <p:menuitem value="Ver Log" icon="ui-icon-document"  url="/faces/roles/admin/log/List.xhtml" onclick="#{logController.refresh()}">
-                    </p:menuitem>
-
-                </p:menubar>
-            </h:form> 
+            
             <h:form>   
 
                 <br></br>
@@ -45,10 +26,10 @@
                                  paginator="true"
                                  rowKey="#{item.rut}"
                                  rows="5"
-                                 rowsPerPageTemplate="5,10,20,30,40"
+                                 rowsPerPageTemplate="5,10,20,30,40" 
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton agregarGradosAcademicos verGradosAcademicos"/>
+                        <p:ajax event="rowSelect" update="createButton viewButton editButton agregarGradosAcademicos verGradosAcademicos"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton agregarGradosAcademicos verGradosAcademicos"/>
 
                         <p:column>

@@ -55,12 +55,12 @@ public class SessionUtilTest implements Serializable {
 
     public boolean login(String username, String password) {
         
-        FacesContext context = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = context.getExternalContext();
-        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        //FacesContext context = FacesContext.getCurrentInstance();
+        //ExternalContext externalContext = context.getExternalContext();
+        //HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 
         try {
-            request.login(username, password);
+            //request.login(username, password);
             System.out.println("Usuario" + userName);
             if (ejbFacade.FindWithUserName(username) == null) {
                 JsfUtil.addErrorMessage("Usuario no registrado en el sistema");
@@ -71,9 +71,10 @@ public class SessionUtilTest implements Serializable {
                 this.userName = username;
                 return true;
             }
-        } catch (ServletException e) {
+        } catch (Exception e) {
+            //arriba iba un ServletException
             // Handle unknown username/password in request.login().
-            context.addMessage(null, new FacesMessage("Nombre usuario o contraseña incorrecto"));
+//            context.addMessage(null, new FacesMessage("Nombre usuario o contraseña incorrecto"));
             
             return false;
         }
@@ -82,8 +83,8 @@ public class SessionUtilTest implements Serializable {
     public String logout() {
         this.userName = null;
         this.currentUser = null;
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        externalContext.invalidateSession();
+        //ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        //externalContext.invalidateSession();
         System.out.println("SessionUtil: Logout for " + userName);
         return "/faces/index.xhtml";
     }
@@ -103,6 +104,11 @@ public class SessionUtilTest implements Serializable {
 
     public boolean hasIdentity() {
         return this.userName != null;
+    }
+    
+    public boolean isAdmin(){
+        Academico currentAccount = ejbFacade.FindWithUserName(userName).get(0);
+        return currentAccount.getTipoCuenta().compareTo("admin") == 0;
     }
 
 }

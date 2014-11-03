@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -149,10 +150,10 @@ public class AcademicoController implements Serializable {
     }
     
     public void refresh(){
-        prepareCreate();
+        selected = null;
         items = getFacade().findAll();
     }
-
+    
     @FacesConverter(forClass = Academico.class)
     public static class AcademicoControllerConverter implements Converter {
 

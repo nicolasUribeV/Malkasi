@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -56,20 +57,20 @@ public class GradoAcademicoController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-    
+
     public GradoAcademico prepareCreateWhitAcademic(Academico academico) {
         selected = new GradoAcademico();
         selected.setMiAcademico(academico);
         initializeEmbeddableKey();
         return selected;
     }
-    
+
     public void prepareViewWhitAcademic(Academico academico) {
-        prepareCreate();
+        selected = null;
         items = academico.getGrados();
         JsfUtil.redirect("/faces/roles/admin/academico/ListGA.xhtml");
     }
-    
+
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("GradoAcademicoCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -96,8 +97,8 @@ public class GradoAcademicoController implements Serializable {
         }
         return items;
     }
-    
-    public GradoAcademico EliminarGradoAcademico(GradoAcademico gradoAcademico){
+
+    public GradoAcademico EliminarGradoAcademico(GradoAcademico gradoAcademico) {
         this.items.remove(gradoAcademico);
         return gradoAcademico;
     }

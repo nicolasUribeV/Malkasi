@@ -48,6 +48,7 @@
                 </p:tab>
                 
                 <c:forEach  items="#{tipoPublicacionController.itemsAvailableSelectMany}" var="tipoPublicacion">
+                    <c:if test="#{!publicacionController.tienePublicaciones(sessionUtilTest.currentUser.publicaciones, tipoPublicacion.nombreTipo)}">
                     <p:tab title="#{tipoPublicacion.nombreTipo}" disabled="#{publicacionController.tienePublicaciones(sessionUtilTest.currentUser.publicaciones, tipoPublicacion.nombreTipo)}">
                         <h:panelGrid columns="2" cellpadding="10">
                             <c:forEach items="#{publicacionController.referenciasPorTipo(sessionUtilTest.currentUser.publicaciones, tipoPublicacion.nombreTipo)}" var="PublicacionesTipo">
@@ -56,6 +57,7 @@
                             </c:forEach>
                         </h:panelGrid>
                     </p:tab>
+                    </c:if>
                 </c:forEach>
             </p:accordionPanel>
         </ui:define>

@@ -81,7 +81,7 @@ public class PublicacionController implements Serializable {
     }
     
     public Publicacion prepareCreateViewAcademic(Academico academico) {
-        prepareCreate();
+        selected = null;
         items = academico.getPublicaciones();
         JsfUtil.redirect("/faces/roles/academico/publicacion/List.xhtml");
         return selected;
@@ -212,7 +212,7 @@ public class PublicacionController implements Serializable {
     }
     
     public void refresh(){
-        prepareCreate();
+        selected = null;
         items = getFacade().findAll();
     }
     

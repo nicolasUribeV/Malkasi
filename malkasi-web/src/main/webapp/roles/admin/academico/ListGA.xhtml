@@ -14,21 +14,7 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form>  
-                <p:menubar>
-                    <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
-                    </p:menuitem>
-                    <p:menuitem value="Gestión Academicos" icon="ui-icon-document" url="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
-                    </p:menuitem>
-                    <p:menuitem value="Ver Publicaciones" icon="ui-icon-document"  url="/faces/roles/admin/publicaciones/index.xhtml" onclick="#{publicacionController.refresh()}">
-                    </p:menuitem>
-                    <p:submenu label="Ver indicadores" icon="ui-icon-document">
-                        <p:menuitem value="Publicaciones por Tipo" url="/faces/roles/admin/estadistica/indicador.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
-                        <p:menuitem value="Publicaciones por académico" url="/faces/roles/admin/estadistica/indicadorAcademico.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
-                        <p:menuitem value="Publicaciones por académico y tipo de publicación" url="/faces/roles/admin/estadistica/indicadorAcademicoTipo.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
-                    </p:submenu>
-                </p:menubar>
-            </h:form>  
+
             <h:form>  
                 
             <br></br>
@@ -68,7 +54,7 @@
                         <f:facet name="footer">
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":GradoAcademicoViewForm" oncomplete="PF('GradoAcademicoViewDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Editar" update=":GradoAcademicoEditForm" oncomplete="PF('GradoAcademicoEditDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{academico_GradoAcademicoController.Delete(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.selected)}" update=":growl,datalistGA" disabled="#{empty gradoAcademicoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar"  actionListener="#{academico_GradoAcademicoController.Delete(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.selected)}" update="datalistGA" disabled="#{empty gradoAcademicoController.selected}" />
                             <p:button id="volverButton" value="Volver" href="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.setSelected(null)}"/>
                         </f:facet>
                     </p:dataTable>

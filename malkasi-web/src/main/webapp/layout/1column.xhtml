@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <link rel="shortcut icon" href="#{resource['images/favicon.ico']}" type="image/x-icon" />
@@ -15,15 +16,39 @@
     <h:body>
 
         <p:growl id="growl" life="3000" />
-        
+
         <div class="wrapper">
-        
+
             <ui:include src="header.xhtml"/>
 
             <div class="container">
-                
+
                 <div class="row">
                     <div class="col-md-12">
+                        <c:if test="#{sessionUtilTest.hasIdentity()}">
+                            <c:if test="#{sessionUtilTest.admin}">
+                                <h:form>  
+                                    <p:menubar>
+                                        <p:menuitem value="Inicio" url="/faces/roles/admin/index.xhtml">
+                                        </p:menuitem>
+                                        <p:menuitem value="Gestión Académicos" icon="ui-icon-document" outcome="/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
+                                        </p:menuitem>
+                                        <p:menuitem value="Ver Publicaciones" icon="ui-icon-document"  outcome="/roles/admin/publicaciones/index.xhtml" onclick="#{publiacacionController.refresh()}">
+                                        </p:menuitem>
+                                        <p:submenu label="Ver indicadores" icon="ui-icon-document">
+                                            <p:menuitem value="Publicaciones por Tipo" url="/faces/roles/admin/estadistica/indicador.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
+                                            <p:menuitem value="Publicaciones por académico" url="/faces/roles/admin/estadistica/indicadorAcademico.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
+                                            <p:menuitem value="Publicaciones por académico y tipo de publicación" url="/faces/roles/admin/estadistica/indicadorAcademicoTipo.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
+                                            <p:menuitem value="Cuadro Resumen de Publicaciones" url="/faces/roles/admin/estadistica/tablaResumen.xhtml" onclick="#{academicoController.refresh()}"></p:menuitem>
+                                        </p:submenu>
+
+                                        <p:menuitem value="Ver Log" icon="ui-icon-document"  url="/faces/roles/admin/log/List.xhtml" onclick="#{logController.refresh()}">
+                                        </p:menuitem>
+
+                                    </p:menubar>
+                                </h:form> 
+                            </c:if>
+                        </c:if>
                         <ui:insert name="body"/>
                     </div>
                 </div> 
@@ -31,10 +56,10 @@
             </div>
 
             <ui:include src="footer.xhtml"/>
-        
+
         </div>
-        
+
     </h:body>
-    
+
 </html>
 
