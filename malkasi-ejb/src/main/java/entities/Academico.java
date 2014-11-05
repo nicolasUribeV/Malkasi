@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
@@ -58,7 +59,13 @@ public class Academico implements Serializable {
         joinColumns={@JoinColumn(name="publicaciones_ID")}, 
         inverseJoinColumns={@JoinColumn(name="academicos_ID")})
     private List<Publicacion> Publicaciones;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "academico")
+    private List<RolProyecto> proyectos;
    
+    @ManyToOne(optional= false)
+    private Categoria categoria;
+    
     public String getRut() {
         return rut;
     }
@@ -163,6 +170,23 @@ public class Academico implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<RolProyecto> getProyectos() {
+        return proyectos;
+    }
+
+    public void setProyectos(List<RolProyecto> proyectos) {
+        this.proyectos = proyectos;
+    }
+    
     
     
 }

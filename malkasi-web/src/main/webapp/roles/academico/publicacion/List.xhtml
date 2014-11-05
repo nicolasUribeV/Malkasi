@@ -23,8 +23,8 @@
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-                        <p:ajax event="rowSelect" update="editarBoton viewButton"/>
-                        <p:ajax event="rowUnselect" update="editarBoton viewButton"/>
+                        <p:ajax event="rowSelect" update="editarBoton viewButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="editarBoton viewButton deleteButton"/>
                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Titulo Publicación"/>
@@ -52,8 +52,8 @@
                             <h:outputText value="#{item.tipoPublicacion.nombreTipo}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="editarBoton" update=":PublicacionEditForm"  icon="ui-icon-pencil" value="Editar" oncomplete="PF('PublicacionEditDialog').show()" disabled="#{empty publicacionController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{academico_Publicacion.Delete(publicacionController.selected,sessionUtilTest.currentUser)}" update=":growl,datalist" disabled="#{empty publicacionController.selected}"/>
+                            <p:commandButton id="editarBoton" value="Editar" actionListener="#{publicacionController.prepareEditWithAcademic(publicacionController.selected)}" disabled="#{empty publicacionController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{academico_Publicacion.Delete(publicacionController.selected,sessionUtilTest.currentUser)}" update=":growl, datalist" disabled="#{empty publicacionController.selected}"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":PublicacionViewForm" oncomplete="PF('PublicacionViewDialog').show()" disabled="#{empty publicacionController.selected}"/>
                             <p:commandButton id="atras" value="Volver" actionListener="#{publicacionController.comeBack}" />
                         </f:facet>
@@ -62,7 +62,6 @@
                 </p:panel>
 
             </h:form>
-            <ui:include src="Editar.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>
 

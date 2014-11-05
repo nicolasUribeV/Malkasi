@@ -46,6 +46,8 @@ public class AcademicoInsertValidator implements Validator {
     }
     public boolean validateList(ArrayList<Academico> ac, Academico cu){
         if (ac == null || cu == null){
+            if(cu == null){
+            }
             return false;
         }
         else{

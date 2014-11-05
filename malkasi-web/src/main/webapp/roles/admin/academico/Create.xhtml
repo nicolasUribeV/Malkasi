@@ -18,8 +18,16 @@
                         </p:inputText>
                         <p:outputLabel value="Nombre de Usuario" for="username" />
                         <p:inputText id="username" value="#{academicoController.selected.userName}" title="Nombre de Usuario" >
-                            
+
                         </p:inputText>
+
+                        <p:outputLabel value="Categoría" for="categoria" />
+                        <p:selectOneMenu id="categoria" required="true" value="#{academicoController.selected.categoria}">
+                            <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="nombre"
+                                           itemLabel="#{nombre.nombreCategoria}"/>
+                        </p:selectOneMenu>
+
+
                         <p:outputLabel value="#{bundle.CreateAcademicoLabel_nombres}" for="nombres" />
                         <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.CreateAcademicoTitle_nombres}" >
                             <f:validator validatorId="NombreValidator"/>

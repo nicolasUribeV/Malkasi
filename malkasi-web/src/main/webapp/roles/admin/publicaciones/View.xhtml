@@ -10,7 +10,7 @@
     <ui:composition>
 
         <p:dialog id="PublicacionViewDlg" widgetVar="PublicacionViewDialogAdmin" modal="true" resizable="false" appendTo="@(body)" header="Ver Publicación">
-            <h:form id="PublicacionViewForm">
+            <h:form id="PublicacionViewForm2">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
                         <h:outputText value="Titulo Publicación"/>
@@ -18,7 +18,13 @@
                         
                         <h:outputText value="Tipo Publicación"/>
                         <h:outputText value="#{publicacionController.selected.tipoPublicacion.nombreTipo}" title="Tipo Publicación"/>
-                       
+                        
+                        <h:outputText value="Académicos"/>
+                        <c:forEach items="#{publicacionController.usuariosDePublicacion(publicacionController.selected)}" var="UsuariosP">
+                                <h:outputText value="#{UsuariosP}" />
+                                <h:outputText value="" />
+                        </c:forEach>
+                        
                         <h:outputText value="País"/>
                         <h:outputText value="#{publicacionController.selected.pais}" title="#{bundle.ViewPublicacionTitle_pais}"/>
                         <h:outputText value="Fecha Publicación"/>

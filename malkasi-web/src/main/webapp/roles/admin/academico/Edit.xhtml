@@ -28,6 +28,13 @@
                         <p:inputText id="username" value="#{academicoController.selected.userName}">
                            
                         </p:inputText>
+                        
+                        <p:outputLabel value="Categoría" for="categoria" />
+                        <p:selectOneMenu id="categoria" required="true" value="#{academicoController.selected.categoria}">
+                            <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="nombre"
+                                           itemLabel="#{nombre.nombreCategoria}"/>
+                        </p:selectOneMenu>
+                        
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_mail}" for="mail" />
                         <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
                             <f:validator validatorId="CorreoValidator"/>

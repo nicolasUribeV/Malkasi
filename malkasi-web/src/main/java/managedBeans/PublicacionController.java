@@ -25,7 +25,7 @@ import sessionbeans.PublicacionFacadeLocal;
 @Named("publicacionController")
 @SessionScoped
 public class PublicacionController implements Serializable {
-    
+
     @EJB
     private PublicacionFacadeLocal ejbFacade;
     private AcademicoFacadeLocal ejbFacadeAcademic;
@@ -38,8 +38,8 @@ public class PublicacionController implements Serializable {
     public Publicacion getSelected() {
         return selected;
     }
-    
-    public void deleteSelected(){
+
+    public void deleteSelected() {
         this.selected = null;
     }
 
@@ -62,7 +62,7 @@ public class PublicacionController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-    
+
     public Publicacion prepareCreateWithAcademic(Academico academico) {
         this.selected = new Publicacion();
         this.selected.getAcademicos().add(academico);
@@ -75,54 +75,71 @@ public class PublicacionController implements Serializable {
         this.selected.setPais("");
         this.selected.setReferencia("");
         this.selected.setUrl("");
-        initializeEmbeddableKey();   
+        initializeEmbeddableKey();
         JsfUtil.redirect("/faces/roles/academico/publicacion/Create.xhtml");
         return selected;
     }
-    
+
     public Publicacion prepareCreateViewAcademic(Academico academico) {
         selected = null;
         items = academico.getPublicaciones();
         JsfUtil.redirect("/faces/roles/academico/publicacion/List.xhtml");
         return selected;
     }
-    public Publicacion EliminarPublicacion(Publicacion publicacion){
+    
+    public Publicacion prepareEditWithAcademic(Publicacion publicacion) {
+        selected = publicacion;
+        JsfUtil.redirect("/faces/roles/academico/publicacion/Editar.xhtml");
+        return selected;
+    }
+
+    public Publicacion EliminarPublicacion(Publicacion publicacion) {
         this.items.remove(publicacion);
         return publicacion;
     }
-    
-    public List<Academico> updateAcademicos(){
+
+    public List<Academico> updateAcademicos() {
         for (int i = 0; i < this.selected.getAcademicos().size(); i++) {
-            System.out.println("N: "+this.selected.getAcademicos().get(i).getNombres());
+            System.out.println("N: " + this.selected.getAcademicos().get(i).getNombres());
         }
         return this.selected.getAcademicos();
     }
-    
-    public ArrayList<String> referenciasPorTipo(List<Publicacion> publicaciones, String Tipo){
+
+    public ArrayList<String> referenciasPorTipo(List<Publicacion> publicaciones, String Tipo) {
         ArrayList<String> pT = new ArrayList<>();
         String Aux;
         int cont = 1;
         for (int i = 0; i < publicaciones.size(); i++) {
-            if(publicaciones.get(i).getTipoPublicacion().getNombreTipo().equals(Tipo)){
-                Aux = cont + ". " + getStringPublicacion(publicaciones.get(i)) ;
+            if (publicaciones.get(i).getTipoPublicacion().getNombreTipo().equals(Tipo)) {
+                Aux = cont + ". " + getStringPublicacion(publicaciones.get(i));
                 pT.add(Aux);
                 cont++;
             }
         }
-        if(publicaciones.isEmpty()){
+        if (publicaciones.isEmpty()) {
             pT.add("");
         }
         return pT;
     }
-    
-    public ArrayList<String> usuariosDePublicacion(Publicacion publicacion){
+
+    public ArrayList<String> usuariosDePublicacion(Publicacion publicacion) {
         ArrayList<String> usuarios = new ArrayList<>();
-        for (int i = 0; i < publicacion.getAcademicos().size() ; i++) {
-            usuarios.add(publicacion.getAcademicos().get(i).getNombres() + " " + publicacion.getAcademicos().get(i).getApellidos());
+        if (publicacion != null) {
+            for (int i = 0; i < publicacion.getAcademicos().size(); i++) {
+                usuarios.add(publicacion.getAcademicos().get(i).getNombres() + " " + publicacion.getAcademicos().get(i).getApellidos());
+            }
         }
         return usuarios;
-    }   
-    
+    }
+
+    public ArrayList<String> usuariosDePublicacion2() {
+        ArrayList<String> usuarios = new ArrayList<>();
+        for (int i = 0; i < selected.getAcademicos().size(); i++) {
+            usuarios.add(selected.getAcademicos().get(i).getNombres() + " " + selected.getAcademicos().get(i).getApellidos());
+        }
+        return usuarios;
+    }
+
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PublicacionCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -131,66 +148,73 @@ public class PublicacionController implements Serializable {
         prepareCreate();
         //JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
-    public void comeBack(){
+
+    public void comeBack() {
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
     
+    public void comeBackEdit() {
+        selected = null;
+        JsfUtil.redirect("/faces/roles/academico/publicacion/List.xhtml");
+    }
+
+
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PublicacionUpdated"));
     }
-    
-    public Publicacion CrearNueva(Publicacion publicacion){
+
+    public Publicacion CrearNueva(Publicacion publicacion) {
         this.selected = null;
         return publicacion;
     }
-    
-    public String getStringPublicacion(Publicacion publicacion){
+
+    public String getStringPublicacion(Publicacion publicacion) {
         String rP = "";
-        for (int i = 0; i < publicacion.getAcademicos().size(); i++) {
-            String[] aux = publicacion.getAcademicos().get(i).getApellidos().split(" ");
-            if(i == 0){
-                rP = aux[0] + ", " + publicacion.getAcademicos().get(i).getNombres().charAt(0)+".";
-            }
-            else{
-                if(i == publicacion.getAcademicos().size()-1){
-                    rP = rP + "& "+ aux[0] + ", " +  publicacion.getAcademicos().get(i).getNombres().charAt(0)+".";
+        if (publicacion != null) {
+            for (int i = 0; i < publicacion.getAcademicos().size(); i++) {
+                String[] aux = publicacion.getAcademicos().get(i).getApellidos().split(" ");
+                if (i == 0) {
+                    rP = aux[0] + ", " + publicacion.getAcademicos().get(i).getNombres().charAt(0) + ".";
+                } else {
+                    if (i == publicacion.getAcademicos().size() - 1) {
+                        rP = rP + "& " + aux[0] + ", " + publicacion.getAcademicos().get(i).getNombres().charAt(0) + ".";
+                    } else {
+                        rP = rP + ", " + aux[0] + ", " + publicacion.getAcademicos().get(i).getNombres().charAt(0) + ".";
+                    }
                 }
-                else{
-                    rP = rP + ", "+ aux[0] + ", " +  publicacion.getAcademicos().get(i).getNombres().charAt(0)+".";
-                }
             }
+            rP = rP + " (" + publicacion.getAgno() + ").";
+            rP = rP + ", " + publicacion.getNombrePublicacion();
+            rP = rP + ", " + publicacion.getNombreLibro();
+            rP = rP + ", " + publicacion.getEditorial();
+            rP = rP + ", " + publicacion.getReferencia();
+            rP = rP + ", " + publicacion.getNombreCongreso();
+            rP = rP + ", " + publicacion.getInstitucion();
+            rP = rP + ", " + publicacion.getPais();
+            rP = rP + ", " + publicacion.getUrl();
+            rP = rP + ", " + publicacion.getDoi();
+            rP = rP + ".";
+            System.out.println("Ref: " + rP);
         }
-        rP = rP +" (" + publicacion.getAgno() + ").";
-        rP = rP +", " + publicacion.getNombrePublicacion();
-        rP = rP +", " + publicacion.getNombreLibro();
-        rP = rP +", " + publicacion.getEditorial();
-        rP = rP +", " + publicacion.getReferencia();
-        rP = rP +", " + publicacion.getNombreCongreso();
-        rP = rP +", " + publicacion.getInstitucion();
-        rP = rP +", " + publicacion.getPais();
-        rP = rP +", " + publicacion.getUrl();
-        rP = rP +", " + publicacion.getDoi();
-        rP = rP +".";
-        System.out.println("Ref: "+rP);
         return eliminaComas(rP);
     }
-    
-    public String eliminaComas(String palabra){
+
+    public String eliminaComas(String palabra) {
         String palabraNueva;
         String palabraAntigua = palabra;
-        while(true){
-            palabraNueva = palabraAntigua.replace(", ,",",");
-            if(palabraAntigua.length()==palabraNueva.length()){
+        while (true) {
+            palabraNueva = palabraAntigua.replace(", ,", ",");
+            if (palabraAntigua.length() == palabraNueva.length()) {
                 break;
             }
             palabraAntigua = palabraNueva;
         }
-        palabraNueva = palabraAntigua.replace(", .", ".");   
+        palabraNueva = palabraAntigua.replace(", .", ".");
         return palabraNueva;
     }
-    
-    public boolean academicoCheck (Academico academico, Academico current){
-        if(academico.getId() == current.getId()){
+
+    public boolean academicoCheck(Academico academico, Academico current) {
+        if (academico.getId() == current.getId()) {
             return true;
         }
         return false;
@@ -210,25 +234,29 @@ public class PublicacionController implements Serializable {
         }
         return items;
     }
-    
-    public void refresh(){
-        selected = null;
+
+    public void refresh() {
+        prepareCreate();
         items = getFacade().findAll();
     }
-    
-    public void refresh2(Publicacion p){
-        if(p != null){
+
+    public void refresh2(Publicacion p) {
+        if (p != null) {
             System.out.println(p.getNombrePublicacion());
             selected = p;
         }
         items = getFacade().findAll();
     }
-   
-    public Boolean tienePublicaciones(List<Publicacion> publicaciones, String Tipo){
+
+    public boolean isEmptySelected() {
+        return selected == null;
+    }
+
+    public Boolean tienePublicaciones(List<Publicacion> publicaciones, String Tipo) {
         for (int i = 0; i < publicaciones.size(); i++) {
-            if(publicaciones.get(i).getTipoPublicacion().getNombreTipo().equals(Tipo)){
+            if (publicaciones.get(i).getTipoPublicacion().getNombreTipo().equals(Tipo)) {
                 return false;
-            } 
+            }
         }
         return true;
     }
