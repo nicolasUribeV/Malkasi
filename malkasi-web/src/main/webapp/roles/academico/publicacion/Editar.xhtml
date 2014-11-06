@@ -46,7 +46,7 @@
                             <p:selectCheckboxMenu id="academicos" widgetVar="someVarName" value="#{publicacionController.selected.academicos}" label="AcademicosL"
                                                   filter="true" filterMatchMode="startsWith" converter="academicoConverter">
                                 <f:selectItems value="#{academicoController.getItemsAvailableSelectMany2()}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}" itemValue="#{AcademicosL}" />
-                                <p:ajax event="change" update="previsualizacion" process="PublicacionEditForm"/>
+                                <p:ajax event="change" update="previsualizacion" process="@this"/>
                                 <f:attribute name="currentUserEdit" value="#{sessionUtilTest.currentUser}"/>
                                 <f:validator validatorId="academicoEditValidator" />
                             </p:selectCheckboxMenu>
