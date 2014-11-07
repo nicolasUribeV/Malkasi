@@ -41,6 +41,7 @@ public class IndicadoresController implements Serializable {
     private int agnoInicial;
     private int agnoFinal;
     private ArrayList<Integer> getAgnos;
+    private ArrayList<Integer> agnosTabla = null;
     
     public List<String> getYears() {
         return years;
@@ -89,6 +90,7 @@ public class IndicadoresController implements Serializable {
     }
 
     public List<Publicacion> getTodasPublicaciones() {
+        todasPublicaciones = publicacionFacade.findAll();
         return todasPublicaciones;
     }
 
@@ -228,10 +230,6 @@ public class IndicadoresController implements Serializable {
     }
     
     public int cantidadPublicacion(TipoPublicacion tp, Academico a, int amin, int amax){
-        System.out.println("aI: " + amin);
-        System.out.println("aF: "+ amax);
-        System.out.println("Academico: "+a.getNombres());
-        System.out.println("Nombre TP: "+tp.getNombreTipo());
         int cant = 0;
         for (int i = 0; i < a.getPublicaciones().size(); i++) {
             if(a.getPublicaciones().get(i).getTipoPublicacion().getId()== tp.getId()){
@@ -240,7 +238,18 @@ public class IndicadoresController implements Serializable {
                 }
             }
         }
-        System.out.println("cant: "+cant);
+        return cant;
+    }
+    
+    public int cantidadPublicacionTipo(int agno, TipoPublicacion tp){
+        int cant = 0;
+        for (int i = 0; i < getTodasPublicaciones().size(); i++) {
+            if(todasPublicaciones.get(i).getTipoPublicacion().getId()== tp.getId()){
+                if(todasPublicaciones.get(i).getAgno() == agno){
+                    cant++;
+                }
+            }
+        }
         return cant;
     }
     
@@ -269,6 +278,19 @@ public class IndicadoresController implements Serializable {
     public void setAgnoFinal(int agnoFinal) {
         this.agnoFinal = agnoFinal;
     }
+
+    public ArrayList<Integer> getAgnosTabla() {
+        agnosTabla = new ArrayList<>();
+        for (int i = agnoInicial; i <= agnoFinal; i++) {
+            agnosTabla.add(i);
+        }
+        return agnosTabla;
+    }
+
+    public void setAgnosTabla(ArrayList<Integer> agnosTabla) {
+        this.agnosTabla = agnosTabla;
+    }
+    
     
     
 }
