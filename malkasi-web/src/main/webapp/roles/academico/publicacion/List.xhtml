@@ -52,7 +52,7 @@
                             <h:outputText value="#{item.tipoPublicacion.nombreTipo}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="editarBoton" value="Editar" actionListener="#{publicacionController.prepareEditWithAcademic(publicacionController.selected)}" disabled="#{empty publicacionController.selected}"/>
+                            <p:commandButton id="editarBoton" value="Editar" update=":PublicacionEditForm" oncomplete="PF('PublicacionEditDialog').show()" actionListener="#{publicacionController.prepareEditWithAcademic(publicacionController.selected)}" disabled="#{empty publicacionController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{academico_Publicacion.Delete(publicacionController.selected,sessionUtilTest.currentUser)}" update=":growl, datalist" disabled="#{empty publicacionController.selected}"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":PublicacionViewForm" oncomplete="PF('PublicacionViewDialog').show()" disabled="#{empty publicacionController.selected}"/>
                             <p:commandButton id="atras" value="Volver" actionListener="#{publicacionController.comeBack}" />
@@ -63,6 +63,7 @@
 
             </h:form>
             <ui:include src="View.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
         </ui:define>
 
     </ui:composition>

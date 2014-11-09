@@ -10,9 +10,9 @@
 
     <ui:composition template="/layout/1column.xhtml">
         <ui:define name="body">
-            
+
             <br></br>
-            <h:form>
+            <h:form id="tablaResumen" >
                 <p:panel>
                     <p:outputLabel value="Desde : " for="desde" />
                     <p:selectOneMenu id="desde" value="#{indicadoresController.agnoInicial}" >
@@ -24,10 +24,19 @@
                         <f:selectItems value="#{indicadoresController.agnos}" />
                     </p:selectOneMenu>
                     <br/>
-                    <p:button value="Volver" href="/faces/roles/admin/index.xhtml" />
-                    <p:commandButton value="Actualizar Tabla" update="columnAgnos" />
+                    <p:outputLabel value="Categoria" for="categoria" />
+                    <p:selectOneMenu id="categoria" value="#{indicadoresController.categoriaElegida}"  >
+                        <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="categ"
+                                       itemLabel="#{categ.nombreCategoria}"/>
+                    </p:selectOneMenu>
+                    <br/>
                 </p:panel>
-                <p:dataTable id="columnAgnos" var="player" value="#{academicoController.items}" style="margin-top:40px" >
+                <p:button value="Volver" href="/faces/roles/admin/index.xhtml" />
+                <p:commandButton  value="Actualizar Tabla" actionListener="#{academicoController.listCategory(indicadoresController.categoriaElegida)}" >
+                    <f:ajax event="click" render="columnAgnos"></f:ajax>
+                </p:commandButton>
+
+                <p:dataTable id="columnAgnos" var="player" value="#{academicoController.academicsCategory}" style="margin-top:40px" >
                     <f:facet name="header">
                         Cantidad de Publicaciones
                     </f:facet>
@@ -52,6 +61,7 @@
                         </p:column>
                     </c:forEach>
                 </p:dataTable>
+
             </h:form>
         </ui:define>
     </ui:composition>

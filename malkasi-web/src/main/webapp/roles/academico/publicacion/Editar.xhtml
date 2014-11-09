@@ -42,12 +42,13 @@
                             </p:selectOneMenu>
                             <p:outputLabel value="" style="padding: 20px" />
 
-                            <p:outputLabel value="Académicos Asociados" for="academicos" />
-                            <p:selectCheckboxMenu id="academicos" widgetVar="someVarName" value="#{publicacionController.selected.academicos}" label="AcademicosL"
+                            <p:outputLabel value="Académicos Asociados" for="academicosEditar" />
+                            <p:selectCheckboxMenu id="academicosEditar" widgetVar="Var" value="#{publicacionController.selected.academicos}" label="AcademicosLista"
                                                   filter="true" filterMatchMode="startsWith" converter="academicoConverter">
-                                <f:selectItems value="#{academicoController.getItemsAvailableSelectMany2()}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}" itemValue="#{AcademicosL}" />
+                                <f:selectItems value="#{academicoController.getItemsAvailableSelectMany()}" var="AcademicosLista" itemLabel="#{AcademicosLista.nombres} #{AcademicosLista.apellidos}" itemValue="#{AcademicosL}" />
                                 <p:ajax event="change" update="previsualizacion" process="@this"/>
                                 <f:attribute name="currentUserEdit" value="#{sessionUtilTest.currentUser}"/>
+                                <f:attribute name="academicList" value="#{publicacionController.selected.academicos}" />
                                 <f:validator validatorId="academicoEditValidator" />
                             </p:selectCheckboxMenu>
                             <p:outputLabel value="" style="padding: 20px" />
