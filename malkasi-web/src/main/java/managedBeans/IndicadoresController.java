@@ -6,6 +6,7 @@
 package managedBeans;
 
 import entities.Academico;
+import entities.Categoria;
 import entities.Publicacion;
 import entities.TipoPublicacion;
 import java.io.Serializable;
@@ -42,6 +43,16 @@ public class IndicadoresController implements Serializable {
     private int agnoFinal;
     private ArrayList<Integer> getAgnos;
     private ArrayList<Integer> agnosTabla = null;
+    private Categoria categoriaElegida;
+
+    public Categoria getCategoriaElegida() {
+        return categoriaElegida;
+    }
+
+    public void setCategoriaElegida(Categoria categoriaElegida) {
+        this.categoriaElegida = categoriaElegida;
+    }
+    
     
     public List<String> getYears() {
         return years;

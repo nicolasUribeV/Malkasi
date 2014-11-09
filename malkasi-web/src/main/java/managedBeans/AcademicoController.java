@@ -1,6 +1,7 @@
 package managedBeans;
 
 import entities.Academico;
+import entities.Categoria;
 import entities.TipoPublicacion;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +31,24 @@ public class AcademicoController implements Serializable {
     private AcademicoFacadeLocal ejbFacade;
     private List<Academico> items = null;
     private Academico selected;
+    private ArrayList<Academico> academicsCategory;
+
+    public ArrayList<Academico> getAcademicsCategory() {
+        return academicsCategory;
+    }
+
+    public void listCategory(Categoria categ) {
+        academicsCategory = new ArrayList<Academico>();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getCategoria().getId() == categ.getId()) {
+                academicsCategory.add(items.get(i));
+            }
+        }
+    }
+
+    public void setAcademicsCategory(ArrayList<Academico> academicsCategory) {
+        this.academicsCategory = academicsCategory;
+    }
 
     public AcademicoController() {
     }
@@ -37,7 +56,7 @@ public class AcademicoController implements Serializable {
     public Academico getSelected() {
         return selected;
     }
-    
+
     public void setSelected(Academico selected) {
         this.selected = selected;
     }
@@ -58,12 +77,12 @@ public class AcademicoController implements Serializable {
         return selected;
     }
 
-    public String rutFinal(){
+    public String rutFinal() {
         String nuevoRut = selected.getRut().replace("-", "");
         nuevoRut = nuevoRut.replace(".", "");
         return nuevoRut;
     }
-    
+
     public void create() {
         String rutNuevo = rutFinal();
         selected.setRut(rutNuevo);
@@ -128,18 +147,18 @@ public class AcademicoController implements Serializable {
     public List<Academico> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
-    
+
     public List<Academico> getItemsAvailableSelectMany2() {
         List<Academico> Aux = getFacade().findAll();
         ArrayList<Integer> Index = new ArrayList<>();
         for (int i = 0; i < Aux.size(); i++) {
-            if(Aux.get(i).getTipoCuenta().equals("admin")){
+            if (Aux.get(i).getTipoCuenta().equals("admin")) {
                 Index.add(i);
             }
         }
         int count = 0;
         for (int i = 0; i < Index.size(); i++) {
-            Aux.remove(Index.get(i)-count);
+            Aux.remove(Index.get(i) - count);
             count++;
         }
         return Aux;
@@ -148,12 +167,12 @@ public class AcademicoController implements Serializable {
     public List<Academico> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
-    public void refresh(){
+
+    public void refresh() {
         selected = null;
         items = getFacade().findAll();
     }
-    
+
     @FacesConverter(forClass = Academico.class)
     public static class AcademicoControllerConverter implements Converter {
 

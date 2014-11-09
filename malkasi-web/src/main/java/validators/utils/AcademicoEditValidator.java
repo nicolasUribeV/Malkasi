@@ -21,11 +21,15 @@ public class AcademicoEditValidator implements Validator {
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        ArrayList<Academico> academicosSeleccionados;
+        ArrayList<Academico> academicosSeleccionados = null;
         Object currentUObject;
+        Object listAcademicObject;
         Academico currentU;
         try{
-             academicosSeleccionados = (ArrayList<Academico>) value;
+             listAcademicObject = component.getAttributes().get("academicList");
+             System.out.println("Booleano: " + listAcademicObject.toString());
+             academicosSeleccionados = (ArrayList<Academico>) listAcademicObject;
+             System.out.println("Largo es: " + academicosSeleccionados.size());
              currentUObject = component.getAttributes().get("currentUserEdit");
              currentU = (Academico) currentUObject;
         }
