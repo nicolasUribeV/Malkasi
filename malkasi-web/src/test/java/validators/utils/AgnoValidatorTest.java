@@ -13,11 +13,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
  * @author ihc
  */
+@Ignore
 public class AgnoValidatorTest {
     
     public AgnoValidatorTest() {
@@ -27,8 +29,9 @@ public class AgnoValidatorTest {
      * Test of validateYear method, of class AgnoValidator.
      */
     @Test
+    @Ignore
     public void testValidateYear() {
-        System.out.println("validateYear");
+        //System.out.println("validateYear");
         int Year = 0;
         boolean result = AgnoValidator.validateYear(Year);
         assertFalse("año menor", result);

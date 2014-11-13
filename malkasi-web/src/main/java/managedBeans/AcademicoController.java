@@ -4,7 +4,11 @@ import entities.Academico;
 import entities.TipoPublicacion;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +23,7 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 import managedBeans.util.JsfUtil;
 import managedBeans.util.JsfUtil.PersistAction;
+import org.eclipse.persistence.internal.core.helper.CoreClassConstants;
 import org.primefaces.model.DualListModel;
 import sessionbeans.AcademicoFacadeLocal;
 
@@ -30,7 +35,21 @@ public class AcademicoController implements Serializable {
     private AcademicoFacadeLocal ejbFacade;
     private List<Academico> items = null;
     private Academico selected;
-
+    private List<String> tipoCuentas;
+    
+    public void llenarTipoCuentas(){
+        tipoCuentas = new ArrayList<>();
+//        String cuentas = "admin-academico-visita-especial";
+//        String[] cuentas2 = cuentas.split("-");
+//        tipoCuentas.addAll(Arrays.asList(cuentas2));
+//        Collections.sort(tipoCuentas);
+        tipoCuentas.add("admin");
+        tipoCuentas.add("academico");
+        tipoCuentas.add("visita");
+        tipoCuentas.add("especial");
+       
+    }
+    
     public AcademicoController() {
     }
 
@@ -64,10 +83,11 @@ public class AcademicoController implements Serializable {
         return nuevoRut;
     }
     
+    
     public void create() {
         String rutNuevo = rutFinal();
         selected.setRut(rutNuevo);
-        selected.setTipoCuenta("academico");
+        //selected.setTipoCuenta("academico");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -128,6 +148,16 @@ public class AcademicoController implements Serializable {
     public List<Academico> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
+
+    public List<String> getTipoCuentas() {
+        return tipoCuentas;
+    }
+
+    public void setTipoCuentas(List<String> tipoCuentas) {
+        this.tipoCuentas = tipoCuentas;
+    }
+
+
     
     public List<Academico> getItemsAvailableSelectMany2() {
         List<Academico> Aux = getFacade().findAll();

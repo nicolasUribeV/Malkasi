@@ -22,10 +22,18 @@
                         </p:inputText>
 
                         <p:outputLabel value="Categoría" for="categoria" />
-                        <p:selectOneMenu id="categoria" required="true" value="#{academicoController.selected.categoria}">
+                        <p:selectOneMenu id="categoria" value="#{academicoController.selected.categoria}">
                             <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="nombre"
                                            itemLabel="#{nombre.nombreCategoria}"/>
                         </p:selectOneMenu>
+                        
+                        <h:outputText value="Rol" />
+                        <p:selectOneMenu  required ="true"  id="civil" value="#{academicoController.selected.tipoCuenta}">  
+                                        <f:selectItem itemLabel="admin" itemValue="admin" />  
+                                        <f:selectItem itemLabel="academico" itemValue="academico" />  
+                                        <f:selectItem itemLabel="visita" itemValue="visita" />  
+                        </p:selectOneMenu>
+                       
 
 
                         <p:outputLabel value="#{bundle.CreateAcademicoLabel_nombres}" for="nombres" />
