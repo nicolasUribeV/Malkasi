@@ -5,11 +5,12 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/layout/1column.xhtml">
+    <ui:composition template="/layout/3columns.xhtml">
         <ui:define name="body">
             <h:form>
-                <h1>Error 403</h1>
-                <h2>No tiene permisos para acceder a este lugar</h2>
+                <h1 style="color: red;alignment-adjust: auto">Error 403</h1>
+                <h2 style="alignment-adjust: auto">No tiene permisos para acceder a este lugar</h2>
+                <h:graphicImage style="alignment-adjust: auto" value="../resources/images/stop.png" width="300" height="300"/>
             </h:form>
 
         </ui:define>

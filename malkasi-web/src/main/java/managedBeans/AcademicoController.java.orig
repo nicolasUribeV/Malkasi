@@ -50,6 +50,12 @@ public class AcademicoController implements Serializable {
         tipoCuentas.add("especial");
        
     }
+    
+    private ArrayList<Academico> academicsCategory;
+
+    public ArrayList<Academico> getAcademicsCategory() {
+        return academicsCategory;
+    }
 
     public void listCategory(Categoria categ) {
         academicsCategory = new ArrayList<Academico>();
@@ -96,7 +102,6 @@ public class AcademicoController implements Serializable {
         nuevoRut = nuevoRut.replace(".", "");
         return nuevoRut;
     }
-
     public void create() {
         String rutNuevo = rutFinal();
         selected.setRut(rutNuevo);
@@ -161,7 +166,7 @@ public class AcademicoController implements Serializable {
     public List<Academico> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
-
+    
     public List<String> getTipoCuentas() {
         return tipoCuentas;
     }
@@ -171,12 +176,11 @@ public class AcademicoController implements Serializable {
     }
 
 
-    
     public List<Academico> getItemsAvailableSelectMany2() {
         List<Academico> Aux = getFacade().findAll();
         ArrayList<Integer> Index = new ArrayList<>();
         for (int i = 0; i < Aux.size(); i++) {
-            if(Aux.get(i).getTipoCuenta().equals("admin")){
+            if (Aux.get(i).getTipoCuenta().equals("admin")) {
                 Index.add(i);
             }
         }

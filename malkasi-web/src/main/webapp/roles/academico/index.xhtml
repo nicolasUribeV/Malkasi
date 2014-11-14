@@ -32,6 +32,8 @@
                 
                 <p:commandButton value="Agregar nueva actividad academica" icon="ui-icon-circle-plus" actionListener="#{publicacionController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
                 <p:commandButton value="Ver mis actividades publicadas" icon="ui-icon-circle-zoomin" actionListener="#{publicacionController.prepareCreateViewAcademic(sessionUtilTest.currentUser)}"/>
+                <p:button value="Agregar nuevos proyectos de trabajo" icon="ui-icon-circle-zoomin" href="/roles/academico/proyectos/index.xhtml"/>
+                <p:commandButton value="Gestión de académicos externos" icon="ui-icon-circle-plus" actionListener="#{academicoExternoController.prepareCreateViewAcademicExternal(sessionUtilTest.currentUser)}"/>    
             </h:form>
 
         </ui:define>
