@@ -26,15 +26,6 @@
                             <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="nombre"
                                            itemLabel="#{nombre.nombreCategoria}"/>
                         </p:selectOneMenu>
-                        
-                        <h:outputText value="Rol" />
-                        <p:selectOneMenu  required ="true"  id="civil" value="#{academicoController.selected.tipoCuenta}">  
-                                        <f:selectItem itemLabel="admin" itemValue="admin" />  
-                                        <f:selectItem itemLabel="academico" itemValue="academico" />  
-                                        <f:selectItem itemLabel="visita" itemValue="visita" />  
-                        </p:selectOneMenu>
-                       
-
 
                         <p:outputLabel value="#{bundle.CreateAcademicoLabel_nombres}" for="nombres" />
                         <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.CreateAcademicoTitle_nombres}" >
@@ -50,6 +41,11 @@
                         </p:inputText>
                         <p:outputLabel value="Reseña" for="resegna" />
                         <p:inputTextarea id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.CreateAcademicoTitle_resegna}" rows="10" cols="50" />
+                    
+                        <h:outputText value="Permiso de Administrador" />
+                        <p:selectBooleanCheckbox value="#{academicoController.selected.permisoAdmin}" />
+                       
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{academicoController.create}" value="Guardar" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AcademicoCreateDialog');"/>
                     <p:commandButton value="Cancelar" immediate="true" onclick="AcademicoCreateDialog.hide()"/>

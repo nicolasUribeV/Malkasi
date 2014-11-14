@@ -88,8 +88,8 @@ public class PublicacionController implements Serializable {
     }
     
     public void prepareEditWithAcademic(Publicacion publicacion) {
-        selected = ejbFacade.find(publicacion.getId());
-        //JsfUtil.redirect("/faces/roles/academico/publicacion/Edit.xhtml");
+        setSelected(ejbFacade.find(publicacion.getId()));
+        JsfUtil.redirect("/faces/roles/academico/publicacion/Editar.xhtml");
     }
 
     public Publicacion EliminarPublicacion(Publicacion publicacion) {

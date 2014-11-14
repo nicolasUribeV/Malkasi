@@ -45,10 +45,16 @@
                                 <li>
                                     <c:if test="#{sessionUtilTest.hasIdentity()}">
                                         <ui:insert name="header-links"/>  
+                                        <c:if test="#{sessionUtilTest.currentUser.permisoAdmin}">
+                                            <li>
+                                                <p:commandLink type="submit" value="Cambiar de Rol" immediate="true" action="#{sessionUtilTest.cambiarRol()}"></p:commandLink>
+                                            </li>
+                                        </c:if>
                                         <li>
                                             <p:commandLink type="submit" value="Cerrar sesión" immediate="true" action="#{loginController.logout}"></p:commandLink>
                                         </li>
                                     </c:if>
+
                                 </li>
                             </ul>
                         </div>
