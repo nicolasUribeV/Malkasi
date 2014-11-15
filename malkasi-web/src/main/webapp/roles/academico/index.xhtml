@@ -30,7 +30,7 @@
             </p:dataList>
             <h:form >
                 
-                <p:commandButton value="Agregar nueva actividad academica" icon="ui-icon-circle-plus" actionListener="#{publicacionController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
+                <p:commandButton value="Agregar nueva actividad academica" icon="ui-icon-circle-plus" actionListener="#{wizardController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
                 <p:commandButton value="Ver mis actividades publicadas" icon="ui-icon-circle-zoomin" actionListener="#{publicacionController.prepareCreateViewAcademic(sessionUtilTest.currentUser)}"/>
                 <p:commandButton value="Agregar nuevos proyectos de trabajo" icon="ui-icon-circle-zoomin" actionListener="#{proyectoController.prepareCreateViewProyecto()}" />
                 <p:commandButton value="Gestión de académicos externos" icon="ui-icon-circle-plus" actionListener="#{academicoExternoController.prepareCreateViewAcademicExternal(sessionUtilTest.currentUser)}"/>    

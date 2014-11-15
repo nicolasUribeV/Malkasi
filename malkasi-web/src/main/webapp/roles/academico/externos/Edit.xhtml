@@ -11,16 +11,21 @@
         <p:dialog id="AcademicoExternoEditDlg" widgetVar="AcademicoExternoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar académico externo">
             <h:form id="AcademicoExternoEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="pg">
                         <p:outputLabel value="Nombres" for="nombres" />
-                        <p:inputText id="nombres" value="#{academicoExternoController.selected.nombres}" title="Nombres" />
-                        <p:outputLabel value="Apellidos" for="apellidos" />
-                        <p:inputText id="apellidos" value="#{academicoExternoController.selected.apellidos}" title="Apellidos" />
+                        <p:inputText id="nombres" required="true" value="#{academicoExternoController.selected.nombres}" title="Nombres"  >
+                            <f:validator validatorId="AcademicoExternoNameValidator"  /> 
+                            <f:attribute name="apellidos" value="#{academicoExternoController.selected.apellidos}" />   
+                        </p:inputText>
+                        <p:outputLabel value="Apellidos" for="apellidoss" />
+                        <p:inputText id="apellidoss" required="true" value="#{academicoExternoController.selected.apellidos}"   title="Apellidos" >
+                            <p:ajax event="change"  update="panel"/>
+                        </p:inputText>
                     </p:panelGrid>
                     <br></br>
                     <p:outputLabel value="Filiación" />
                     <br></br>
-                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="panel">
                         <p:outputLabel value="Pais" for="pais" />
                         <p:inputText id="pais" value="#{academicoExternoController.selected.pais}" title="Pais" />
                         <p:outputLabel value="Universidad" for="universidad" />

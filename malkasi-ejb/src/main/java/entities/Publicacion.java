@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -79,6 +80,12 @@ public class Publicacion implements Serializable {
     
     private String doi;
     
+    @ManyToMany
+    @JoinTable(name="ACADEMICOE_PUBLICACION",
+        joinColumns={@JoinColumn(name="publicaciones_ID")}, 
+        inverseJoinColumns={@JoinColumn(name="academicosExternos_ID")})
+    private List<AcademicoExterno> academicosExternos;
+    
     public Publicacion(){
         if(academicos == null){
             academicos = new ArrayList<Academico>();
@@ -99,6 +106,14 @@ public class Publicacion implements Serializable {
 
     public void setTipoPublicacion(TipoPublicacion tipoPublicacion) {
         this.tipoPublicacion = tipoPublicacion;
+    }
+
+    public List<AcademicoExterno> getAcademicosExternos() {
+        return academicosExternos;
+    }
+
+    public void setAcademicosExternos(List<AcademicoExterno> academicosExternos) {
+        this.academicosExternos = academicosExternos;
     }
     
     @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")

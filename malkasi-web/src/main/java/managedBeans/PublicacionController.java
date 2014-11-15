@@ -76,15 +76,14 @@ public class PublicacionController implements Serializable {
         this.selected.setReferencia("");
         this.selected.setUrl("");
         initializeEmbeddableKey();
-        JsfUtil.redirect("/faces/roles/academico/publicacion/Create.xhtml");
+        JsfUtil.redirect("/faces/roles/academico/publicacion/wizardCreate.xhtml");
         return selected;
     }
 
-    public Publicacion prepareCreateViewAcademic(Academico academico) {
+    public void prepareCreateViewAcademic(Academico academico) {
         selected = null;
         items = academico.getPublicaciones();
         JsfUtil.redirect("/faces/roles/academico/publicacion/List.xhtml");
-        return selected;
     }
     
     public void prepareEditWithAcademic(Publicacion publicacion) {
@@ -98,9 +97,6 @@ public class PublicacionController implements Serializable {
     }
 
     public List<Academico> updateAcademicos() {
-        for (int i = 0; i < this.selected.getAcademicos().size(); i++) {
-            System.out.println("N: " + this.selected.getAcademicos().get(i).getNombres());
-        }
         return this.selected.getAcademicos();
     }
 
@@ -193,7 +189,6 @@ public class PublicacionController implements Serializable {
             rP = rP + ", " + publicacion.getUrl();
             rP = rP + ", " + publicacion.getDoi();
             rP = rP + ".";
-            System.out.println("Ref: " + rP);
         }
         return eliminaComas(rP);
     }
@@ -241,7 +236,6 @@ public class PublicacionController implements Serializable {
 
     public void refresh2(Publicacion p) {
         if (p != null) {
-            System.out.println(p.getNombrePublicacion());
             selected = p;
         }
         items = getFacade().findAll();

@@ -61,7 +61,6 @@ public class SessionUtilTest implements Serializable {
 
         try {
             request.login(username, password);
-            System.out.println("Usuario" + userName);
             if (ejbFacade.FindWithUserName(username) == null) {
                 JsfUtil.addErrorMessage("Usuario no registrado en el sistema");
                 logout();
@@ -106,18 +105,15 @@ public class SessionUtilTest implements Serializable {
         String tipoCuenta;
         //tipoCuenta = currentUser.getTipoCuenta();
         Academico currentAccount = ejbFacade.FindWithUserName(userName).get(0);
-        System.out.println("tipoCuenta" + currentAccount.getTipoCuenta());
         tipoCuenta = currentAccount.getTipoCuenta();
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         StringBuffer url = request.getRequestURL();
-        System.out.println("La URL es la siguiente " + url);
         String direccion= url.toString();
         String componentes[] = direccion.split("/");
         int flag = 0;
         for (int i = 0; i < componentes.length; i++) {
-            System.out.println("componentes pls" + componentes[i]);
             if(componentes[i].equals("roles")){
                 if(!(componentes[i+1].equals(tipoCuenta))){
                     if(currentAccount.isPermisoAdmin()){

@@ -6,10 +6,14 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Size;
 
 /**
@@ -34,6 +38,12 @@ public class AcademicoExterno implements Serializable {
     
     @Size(min=1, message="El campo universidad no puede estar vacío")
     private String universidad;
+    
+    @ManyToMany(mappedBy = "AcademicosExternos")
+    @JoinTable(name="ACADEMICOE_PUBLICACION",
+        joinColumns={@JoinColumn(name="publicaciones_ID")}, 
+        inverseJoinColumns={@JoinColumn(name="academicosExternos_ID")})
+    private List<Publicacion> Publicaciones;
     
     public Long getId() {
         return id;
