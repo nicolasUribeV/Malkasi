@@ -1,10 +1,8 @@
 package managedBeans;
 
-import entities.Academico;
-import entities.AcademicoExterno;
+import entities.Proyecto;
 import managedBeans.util.JsfUtil;
 import managedBeans.util.JsfUtil.PersistAction;
-import sessionbeans.AcademicoExternoFacadeLocal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,24 +17,25 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import sessionbeans.ProyectoFacadeLocal;
 
-@Named("academicoExternoController")
+@Named("proyectoController")
 @SessionScoped
-public class AcademicoExternoController implements Serializable {
+public class ProyectoController implements Serializable {
 
     @EJB
-    private AcademicoExternoFacadeLocal ejbFacade;
-    private List<AcademicoExterno> items = null;
-    private AcademicoExterno selected;
+    private ProyectoFacadeLocal ejbFacade;
+    private List<Proyecto> items = null;
+    private Proyecto selected;
 
-    public AcademicoExternoController() {
+    public ProyectoController() {
     }
 
-    public AcademicoExterno getSelected() {
+    public Proyecto getSelected() {
         return selected;
     }
 
-    public void setSelected(AcademicoExterno selected) {
+    public void setSelected(Proyecto selected) {
         this.selected = selected;
     }
 
@@ -46,53 +45,55 @@ public class AcademicoExternoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private AcademicoExternoFacadeLocal getFacade() {
+    private ProyectoFacadeLocal getFacade() {
         return ejbFacade;
     }
 
-    public AcademicoExterno prepareCreate() {
-        selected = new AcademicoExterno();
+    public Proyecto prepareCreate() {
+        selected = new Proyecto();
         initializeEmbeddableKey();
+        JsfUtil.redirect("/faces/roles/academico/proyectos/crear.xhtml");
         return selected;
     }
-
+    
+    public Proyecto prepareCreateViewProyecto () {
+        selected = null;
+        //items = academico.getPublicaciones();
+        JsfUtil.redirect("/faces/roles/academico/proyectos/List.xhtml");
+        return selected;
+    }
+    
+    public Proyecto viewProyecto(Proyecto proyecto){
+        selected = proyecto;
+        JsfUtil.redirect("/faces/roles/academico/proyectos/verProyecto.xhtml");
+        return selected;
+    }
+    
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoExternoCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ProyectoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoExternoUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ProyectoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("AcademicoExternoDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ProyectoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<AcademicoExterno> getItems() {
+    public List<Proyecto> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
         return items;
     }
-    
-    public AcademicoExterno prepareCreateViewAcademicExternal(Academico academico) {
-        selected = null;
-        //items = academico.getPublicaciones();
-        JsfUtil.redirect("/faces/roles/academico/externos/List.xhtml");
-        return selected;
-    }
-    
-    public void comeBack() {
-        JsfUtil.redirect("/faces/roles/academico/index.xhtml");
-    }
-    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -122,29 +123,29 @@ public class AcademicoExternoController implements Serializable {
         }
     }
 
-    public AcademicoExterno getAcademicoExterno(java.lang.Long id) {
+    public Proyecto getProyecto(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<AcademicoExterno> getItemsAvailableSelectMany() {
+    public List<Proyecto> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<AcademicoExterno> getItemsAvailableSelectOne() {
+    public List<Proyecto> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
-    @FacesConverter(forClass = AcademicoExterno.class)
-    public static class AcademicoExternoControllerConverter implements Converter {
+
+    @FacesConverter(forClass = Proyecto.class)
+    public static class ProyectoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AcademicoExternoController controller = (AcademicoExternoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "academicoExternoController");
-            return controller.getAcademicoExterno(getKey(value));
+            ProyectoController controller = (ProyectoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "proyectoController");
+            return controller.getProyecto(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -164,11 +165,11 @@ public class AcademicoExternoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof AcademicoExterno) {
-                AcademicoExterno o = (AcademicoExterno) object;
+            if (object instanceof Proyecto) {
+                Proyecto o = (Proyecto) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), AcademicoExterno.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Proyecto.class.getName()});
                 return null;
             }
         }

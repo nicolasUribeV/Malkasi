@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/layout/2columns-left.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{proyectoController.selected.nombreProyecto}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="sidebar-left">
+            <h:form>
+                <p:panelGrid style="color: #127ba3" columns="2" rendered="#{proyectoController.selected != null}">
+                    <h:outputText value="#{bundle.ViewProyectoLabel_nombreProyecto}"/>
+                    <h:outputText value="#{proyectoController.selected.nombreProyecto}" title="#{bundle.ViewProyectoTitle_nombreProyecto}"/>
+                    <h:outputText value="#{bundle.ViewProyectoLabel_codigoProyecto}"/>
+                    <h:outputText value="#{proyectoController.selected.codigoProyecto}" title="#{bundle.ViewProyectoTitle_codigoProyecto}"/>
+                    <h:outputText value="#{bundle.ViewProyectoLabel_fechaInicioProyecto}"/>
+                    <h:outputText value="#{proyectoController.selected.fechaInicioProyecto}" title="#{bundle.ViewProyectoTitle_fechaInicioProyecto}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewProyectoLabel_duracionProyecto}"/>
+                    <h:outputText value="#{proyectoController.selected.duracionProyecto}" title="#{bundle.ViewProyectoTitle_duracionProyecto}"/>
+                    <h:outputText value="#{bundle.ViewProyectoLabel_estadoProyecto}"/>
+                    <h:outputText value="#{proyectoController.selected.estadoProyecto}" title="#{bundle.ViewProyectoTitle_estadoProyecto}"/>
+                    <h:outputText value="#{bundle.ViewProyectoLabel_tipoFinanciamiento}"/>
+                    <h:outputText value="#{proyectoController.selected.tipoFinanciamiento}" title="#{bundle.ViewProyectoTitle_tipoFinanciamiento}"/>
+                </p:panelGrid>
+            </h:form>
+
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h2 style="color: #158cba">#{proyectoController.selected.nombreProyecto} </h2>
+
+            <p:panel style="text-align: justify;font-size: 100%">
+                <h:outputText value="#{bundle.ViewProyectoLabel_descripcionProyecto}"/>
+                <h:outputText value="#{proyectoController.selected.descripcionProyecto}" title="#{bundle.ViewProyectoTitle_descripcionProyecto}"/>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+
+</html>
