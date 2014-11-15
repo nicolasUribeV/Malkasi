@@ -6,13 +6,18 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,7 +30,22 @@ public class Proyecto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    private String codigoProyecto;
+    
     private String nombreProyecto;
+    
+    @Column(length=1500)
+    private String descripcionProyecto;
+    
+    @Temporal(TemporalType.DATE)
+    private Date fechaInicioProyecto;
+    
+    private int duracionProyecto;
+    
+    private String estadoProyecto;
+    
+    @ManyToOne(optional= false)
+    private TipoFinanciamiento tipoFinanciamiento;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
     private List<RolProyecto> academicos;
@@ -78,5 +98,55 @@ public class Proyecto implements Serializable {
     public void setAcademicos(List<RolProyecto> academicos) {
         this.academicos = academicos;
     }
+
+    public String getCodigoProyecto() {
+        return codigoProyecto;
+    }
+
+    public void setCodigoProyecto(String codigoProyecto) {
+        this.codigoProyecto = codigoProyecto;
+    }
+
+    public String getDescripcionProyecto() {
+        return descripcionProyecto;
+    }
+
+    public void setDescripcionProyecto(String descripcionProyecto) {
+        this.descripcionProyecto = descripcionProyecto;
+    }
+
+    public Date getFechaInicioProyecto() {
+        return fechaInicioProyecto;
+    }
+
+    public void setFechaInicioProyecto(Date fechaInicioProyecto) {
+        this.fechaInicioProyecto = fechaInicioProyecto;
+    }
+
+    public int getDuracionProyecto() {
+        return duracionProyecto;
+    }
+
+    public void setDuracionProyecto(int duracionProyecto) {
+        this.duracionProyecto = duracionProyecto;
+    }
+
+    public String getEstadoProyecto() {
+        return estadoProyecto;
+    }
+
+    public void setEstadoProyecto(String estadoProyecto) {
+        this.estadoProyecto = estadoProyecto;
+    }
+
+    public TipoFinanciamiento getTipoFinanciamiento() {
+        return tipoFinanciamiento;
+    }
+
+    public void setTipoFinanciamiento(TipoFinanciamiento tipoFinanciamiento) {
+        this.tipoFinanciamiento = tipoFinanciamiento;
+    }
+    
+    
     
 }
