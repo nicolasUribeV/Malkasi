@@ -3,6 +3,9 @@
   <persistence-unit name="com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>jdbc/malkasi</jta-data-source>
     <class>entities.TipoFinanciamiento</class>
+    <class>entities.Academico</class>
+    <class>entities.Proyecto</class>
+    <class>entities.RolProyecto</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
