@@ -29,9 +29,27 @@ public class AcademicoController implements Serializable {
 
     @EJB
     private AcademicoFacadeLocal ejbFacade;
-    private List<Academico> items;
+    private List<Academico> items = null;
     private Academico selected;
-    
+    private ArrayList<Academico> academicsCategory;
+
+    public ArrayList<Academico> getAcademicsCategory() {
+        return academicsCategory;
+    }
+
+    public void listCategory(Categoria categ) {
+        academicsCategory = new ArrayList<Academico>();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getCategoria().getId() == categ.getId()) {
+                academicsCategory.add(items.get(i));
+            }
+        }
+    }
+
+    public void setAcademicsCategory(ArrayList<Academico> academicsCategory) {
+        this.academicsCategory = academicsCategory;
+    }
+
     public AcademicoController() {
     }
 
@@ -152,7 +170,6 @@ public class AcademicoController implements Serializable {
 
     public void refresh() {
         selected = null;
-        items = new ArrayList<Academico>();
         items = getFacade().findAll();
     }
 
