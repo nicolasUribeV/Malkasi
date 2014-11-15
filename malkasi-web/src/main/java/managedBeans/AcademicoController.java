@@ -29,7 +29,7 @@ public class AcademicoController implements Serializable {
 
     @EJB
     private AcademicoFacadeLocal ejbFacade;
-    private List<Academico> items = null;
+    private List<Academico> items;
     private Academico selected;
     private ArrayList<Academico> academicsCategory;
 
@@ -37,11 +37,25 @@ public class AcademicoController implements Serializable {
         return academicsCategory;
     }
 
-    public void listCategory(Categoria categ) {
-        academicsCategory = new ArrayList<Academico>();
+    public void listCategory(long categ) {
+        items = ejbFacade.findAll();
+        ArrayList<Academico> aux = new ArrayList<Academico>();
         for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getCategoria().getId() == categ.getId()) {
-                academicsCategory.add(items.get(i));
+            if (items.get(i).getCategoria() != null) {
+                aux.add(items.get(i));
+            }
+        }
+        academicsCategory = null;
+        academicsCategory = new ArrayList<Academico>();
+        if (categ == 0) {
+            academicsCategory.addAll(aux);
+        } else {
+            System.out.println("Entré al for");
+            for (int i = 0; i < aux.size(); i++) {
+                if (aux.get(i).getCategoria().getId() == categ) {
+                    academicsCategory.add(aux.get(i));
+                    System.out.println("Agregué al: " + aux.get(i).getApellidos());
+                }
             }
         }
     }
@@ -89,7 +103,7 @@ public class AcademicoController implements Serializable {
         selected.setTipoCuenta("academico");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoCreated"));
         if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+            items = null; // Invalidate list of items to trigger re-query.
         }
     }
 
@@ -101,7 +115,7 @@ public class AcademicoController implements Serializable {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("AcademicoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
-            items = null;    // Invalidate list of items to trigger re-query.
+            items = null; // Invalidate list of items to trigger re-query.
         }
     }
 
@@ -170,6 +184,7 @@ public class AcademicoController implements Serializable {
 
     public void refresh() {
         selected = null;
+        items = new ArrayList<Academico>();
         items = getFacade().findAll();
     }
 
@@ -211,7 +226,5 @@ public class AcademicoController implements Serializable {
                 return null;
             }
         }
-
     }
-
 }

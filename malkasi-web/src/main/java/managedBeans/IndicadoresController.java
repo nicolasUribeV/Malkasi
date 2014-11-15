@@ -43,17 +43,16 @@ public class IndicadoresController implements Serializable {
     private int agnoFinal;
     private ArrayList<Integer> getAgnos;
     private ArrayList<Integer> agnosTabla = null;
-    private Categoria categoriaElegida;
+    private long categoriaElegida;
 
-    public Categoria getCategoriaElegida() {
+    public long getCategoriaElegida() {
         return categoriaElegida;
     }
 
-    public void setCategoriaElegida(Categoria categoriaElegida) {
+    public void setCategoriaElegida(long categoriaElegida) {
         this.categoriaElegida = categoriaElegida;
     }
-    
-    
+
     public List<String> getYears() {
         return years;
     }
@@ -62,7 +61,7 @@ public class IndicadoresController implements Serializable {
         this.years = years;
     }
 
-    public void llenaryears(){
+    public void llenaryears() {
         years = null;
         years = new ArrayList<String>();
         years.add("Revistas indexadas");
@@ -70,8 +69,8 @@ public class IndicadoresController implements Serializable {
         years.add("lakasddfewkfsdkfsdklfksdlklsdkflsdkflsdlfksd");
         System.out.println("Lista 1 es: " + years.get(0));
     }
-    
-    public int contadorYears(){
+
+    public int contadorYears() {
         return years.size();
     }
 
@@ -140,7 +139,6 @@ public class IndicadoresController implements Serializable {
         cantidadPublicaciones.addAll(llenarCeros());
         ArrayList<ArrayList<Integer>> ano = new ArrayList<ArrayList<Integer>>();
         ChartSeries publicacion = new ChartSeries();
-
         ano.add(agnos);
         ano.add(cantidadPublicaciones);
         System.out.println("Tipo Publicacion: " + tipoPublicacionSeleccionada.getNombreTipo());
@@ -156,7 +154,6 @@ public class IndicadoresController implements Serializable {
                 }
             }
         }
-
         for (int i = 0; i < 7; i++) {
             publicacion.set(ano.get(0).get(i).toString(), ano.get(1).get(i));
         }
@@ -170,15 +167,10 @@ public class IndicadoresController implements Serializable {
         tipoPublicacionSeleccionada = null;
         academicoSeleccionado = null;
         barModel = new BarChartModel();
-
-        
-
         Axis xAxis = barModel.getAxis(AxisType.X);
         xAxis.setLabel("Años");
-
         Axis yAxis = barModel.getAxis(AxisType.Y);
         yAxis.setLabel("Cantidad Publicaciones");
-
         ChartSeries A = new ChartSeries();
         for (int i = 0; i < 7; i++) {
             A.set(llenarAgnos().get(i).toString(), 0);
@@ -229,7 +221,6 @@ public class IndicadoresController implements Serializable {
                     }
                     break;
                 }
-
             }
         }
         for (int i = 0; i < 7; i++) {
@@ -237,34 +228,33 @@ public class IndicadoresController implements Serializable {
         }
         barModel.clear();
         barModel.addSeries(publicacion);
-
     }
-    
-    public int cantidadPublicacion(TipoPublicacion tp, Academico a, int amin, int amax){
+
+    public int cantidadPublicacion(TipoPublicacion tp, Academico a, int amin, int amax) {
         int cant = 0;
         for (int i = 0; i < a.getPublicaciones().size(); i++) {
-            if(a.getPublicaciones().get(i).getTipoPublicacion().getId()== tp.getId()){
-                if(a.getPublicaciones().get(i).getAgno() >= amin && a.getPublicaciones().get(i).getAgno() <= amax){
+            if (a.getPublicaciones().get(i).getTipoPublicacion().getId() == tp.getId()) {
+                if (a.getPublicaciones().get(i).getAgno() >= amin && a.getPublicaciones().get(i).getAgno() <= amax) {
                     cant++;
                 }
             }
         }
         return cant;
     }
-    
-    public int cantidadPublicacionTipo(int agno, TipoPublicacion tp){
+
+    public int cantidadPublicacionTipo(int agno, TipoPublicacion tp) {
         int cant = 0;
         for (int i = 0; i < getTodasPublicaciones().size(); i++) {
-            if(todasPublicaciones.get(i).getTipoPublicacion().getId()== tp.getId()){
-                if(todasPublicaciones.get(i).getAgno() == agno){
+            if (todasPublicaciones.get(i).getTipoPublicacion().getId() == tp.getId()) {
+                if (todasPublicaciones.get(i).getAgno() == agno) {
                     cant++;
                 }
             }
         }
         return cant;
     }
-    
-    public ArrayList<Integer> getAgnos(){
+
+    public ArrayList<Integer> getAgnos() {
         ArrayList<Integer> agnos = new ArrayList<>();
         int year = Calendar.getInstance().get(Calendar.YEAR);
         for (int i = 0; i < 10; i++) {
@@ -301,7 +291,4 @@ public class IndicadoresController implements Serializable {
     public void setAgnosTabla(ArrayList<Integer> agnosTabla) {
         this.agnosTabla = agnosTabla;
     }
-    
-    
-    
 }

@@ -6,11 +6,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-
-
     <ui:composition template="/layout/1column.xhtml">
         <ui:define name="body">
-
             <br></br>
             <h:form id="tablaResumen" >
                 <p:panel>
@@ -19,28 +16,27 @@
                         <f:selectItems value="#{indicadoresController.agnos}" />
                     </p:selectOneMenu>
                     <br/>
-                    <p:outputLabel value="Hasta   : " for="hasta" />
+                    <p:outputLabel value="Hasta : " for="hasta" />
                     <p:selectOneMenu id="hasta" value="#{indicadoresController.agnoFinal}" >
                         <f:selectItems value="#{indicadoresController.agnos}" />
                     </p:selectOneMenu>
                     <br/>
                     <p:outputLabel value="Categoria" for="categoria" />
-                    <p:selectOneMenu id="categoria" value="#{indicadoresController.categoriaElegida}"  >
+                    <p:selectOneMenu id="categoria" value="#{indicadoresController.categoriaElegida}" >
+                        <f:selectItem itemLabel="Todas las categorías" itemValue="#{null}" />
                         <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="categ"
-                                       itemLabel="#{categ.nombreCategoria}"/>
+                                       itemLabel="#{categ.nombreCategoria}" itemValue="#{categ.id}"/>
                     </p:selectOneMenu>
                     <br/>
                 </p:panel>
                 <p:button value="Volver" href="/faces/roles/admin/index.xhtml" />
-                <p:commandButton  value="Actualizar Tabla" actionListener="#{academicoController.listCategory(indicadoresController.categoriaElegida)}" >
+                <p:commandButton value="Actualizar Tabla" actionListener="#{academicoController.listCategory(indicadoresController.categoriaElegida)}">
                     <f:ajax event="click" render="columnAgnos"></f:ajax>
                 </p:commandButton>
-
                 <p:dataTable id="columnAgnos" var="player" value="#{academicoController.academicsCategory}" style="margin-top:40px" >
                     <f:facet name="header">
                         Cantidad de Publicaciones
                     </f:facet>
-
                     <p:columnGroup type="header">
                         <p:row>
                             <p:column rowspan="2" headerText="Académicos" />
@@ -61,7 +57,6 @@
                         </p:column>
                     </c:forEach>
                 </p:dataTable>
-
             </h:form>
         </ui:define>
     </ui:composition>
