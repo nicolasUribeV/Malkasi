@@ -7,11 +7,13 @@ package validators.utils;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
  * @author ihc
  */
+@Ignore
 public class RutValidatorTest {
     
     public RutValidatorTest() {
@@ -19,6 +21,7 @@ public class RutValidatorTest {
     }
     
     @Test
+    @Ignore
     public void testValidator(){
         String test1 = "16416-7";                
         boolean restTest1 = RutValidator.validarRut(test1);

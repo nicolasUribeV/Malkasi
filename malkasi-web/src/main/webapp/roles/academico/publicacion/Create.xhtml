@@ -7,14 +7,6 @@
 
     <ui:composition template="/layout/1column.xhtml">
         <ui:define name="body">
-
-            <h:form>
-                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
-                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>     
-                </p:confirmDialog>
-            </h:form>
-
             <h3>Agregar actividad academica</h3>
             <h:form id="PublicacionCreateForm">
                 <p:outputLabel id="previsualizacion">
@@ -32,9 +24,6 @@
                                 <p:ajax event="keyup" update="previsualizacion"  />
                             </p:inputText>
                             <p:message id="msgTipoPublicacion" for="nombrePublicacion" style="padding: 20px" />
-
-
-
                             <p:outputLabel value="Tipo de Publicación" for="tipoPublicacion" />
                             <p:selectOneMenu id="tipoPublicacion" required="true" value="#{publicacionController.selected.tipoPublicacion}">
                                 <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre"

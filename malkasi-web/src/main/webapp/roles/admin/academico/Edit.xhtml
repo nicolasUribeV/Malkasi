@@ -41,7 +41,11 @@
                         </p:inputText>
                         <p:outputLabel value="Reseña" for="resegna" />
                         <p:inputTextarea id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" rows="10" cols="50"  />
-                        </p:panelGrid>
+                        
+                        <h:outputText value="Permiso de Administrador" />
+                        <p:selectBooleanCheckbox value="#{academicoController.selected.permisoAdmin}" />
+                    </p:panelGrid>
+                        
                     <p:commandButton actionListener="#{academicoController.update}" value="Guardar" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoEditDialog');"/>
                     <p:commandButton value="Cancelar" immediate="true" onclick="AcademicoEditDialog.hide()"/>
                 </h:panelGroup>

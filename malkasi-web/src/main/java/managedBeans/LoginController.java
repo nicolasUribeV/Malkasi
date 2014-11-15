@@ -67,5 +67,4 @@ public class LoginController implements Serializable {
         sessionUtilTest.logout();
         JsfUtil.redirect(sessionUtilTest.logout());
     }
-    
 }

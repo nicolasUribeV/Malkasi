@@ -13,11 +13,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
  * @author ihc
  */
+@Ignore
 public class NombreValidatorTest {
     
     public NombreValidatorTest() {
@@ -25,8 +27,9 @@ public class NombreValidatorTest {
 
 
     @Test
+    @Ignore
     public void testValidarNombre() {
-        System.out.println("validarNombre");
+        //System.out.println("validarNombre");
         String nombre = "";
         boolean result = NombreValidator.validarNombre(nombre);
         assertFalse("error",result);

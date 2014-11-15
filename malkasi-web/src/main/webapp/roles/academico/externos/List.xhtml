@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template= "/layout/1column.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Academicos externos"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AcademicoExternoListForm">
+                <p:panel header="Lista de academicos externos">
+                    <p:dataTable id="datalist" value="#{academicoExternoController.items}" var="item"
+                                 selectionMode="single" selection="#{academicoExternoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombres"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Apellidos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Pais"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pais}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Universidad"/>
+                            </f:facet>
+                            <h:outputText value="#{item.universidad}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{academicoExternoController.prepareCreate}" update=":AcademicoExternoCreateForm" oncomplete="PF('AcademicoExternoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AcademicoExternoViewForm" oncomplete="PF('AcademicoExternoViewDialog').show()" disabled="#{empty academicoExternoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AcademicoExternoEditForm" oncomplete="PF('AcademicoExternoEditDialog').show()" disabled="#{empty academicoExternoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{academicoExternoController.destroy}" update=":growl,datalist" disabled="#{empty academicoExternoController.selected}"/>
+                            <p:commandButton id="atras" value="Volver" actionListener="#{academicoExternoController.comeBack()}" />
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

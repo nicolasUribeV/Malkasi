@@ -101,6 +101,67 @@ public class SessionUtilTest implements Serializable {
         }
         return "/faces/roles/index.xhtml";
     }
+   
+    public void routebyRole(){
+        String tipoCuenta;
+        //tipoCuenta = currentUser.getTipoCuenta();
+        Academico currentAccount = ejbFacade.FindWithUserName(userName).get(0);
+        System.out.println("tipoCuenta" + currentAccount.getTipoCuenta());
+        tipoCuenta = currentAccount.getTipoCuenta();
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        StringBuffer url = request.getRequestURL();
+        System.out.println("La URL es la siguiente " + url);
+        String direccion= url.toString();
+        String componentes[] = direccion.split("/");
+        int flag = 0;
+        for (int i = 0; i < componentes.length; i++) {
+            System.out.println("componentes pls" + componentes[i]);
+            if(componentes[i].equals("roles")){
+                if(!(componentes[i+1].equals(tipoCuenta))){
+                    if(currentAccount.isPermisoAdmin()){
+                        flag = 0;
+                    }
+                    else{
+                        flag = 1;
+                    }
+                    break;
+                }
+                
+            }
+        }
+        if(flag == 1){
+            JsfUtil.redirect("/faces/error/error403.xhtml");
+        }
+
+    }
+    
+    public void cambiarRol() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        StringBuffer url = request.getRequestURL();
+        String direccion= url.toString();
+        String componentes[] = direccion.split("/");
+        int flag = 0;
+        for (int i = 0; i < componentes.length; i++) {
+            if(componentes[i].equals("roles")){
+                if(!(componentes[i+1].equals("admin"))){
+                    flag = 1;
+                    break;
+                }
+                
+            }
+        }
+        if(flag == 1){
+            JsfUtil.redirect("/faces/roles/admin/index.xhtml");
+        }
+        else{
+            JsfUtil.redirect("/faces/roles/academico/index.xhtml");
+        }
+    }
+    
 
     public boolean hasIdentity() {
         return this.userName != null;
@@ -108,7 +169,23 @@ public class SessionUtilTest implements Serializable {
     
     public boolean isAdmin(){
         Academico currentAccount = ejbFacade.FindWithUserName(userName).get(0);
-        return currentAccount.getTipoCuenta().compareTo("admin") == 0;
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        StringBuffer url = request.getRequestURL();
+        String direccion= url.toString();
+        String componentes[] = direccion.split("/");
+        int flag = 0;
+        for (int i = 0; i < componentes.length; i++) {
+            if(componentes[i].equals("roles")){
+                if((componentes[i+1].equals("admin"))){
+                    flag = 1;
+                    break;
+                }
+                
+            }
+        }
+        return flag == 1;
     }
 
 }

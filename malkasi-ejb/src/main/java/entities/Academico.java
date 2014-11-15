@@ -66,6 +66,8 @@ public class Academico implements Serializable {
     @ManyToOne(optional= false)
     private Categoria categoria;
     
+    private boolean permisoAdmin;
+    
     public String getRut() {
         return rut;
     }
@@ -185,6 +187,14 @@ public class Academico implements Serializable {
 
     public void setProyectos(List<RolProyecto> proyectos) {
         this.proyectos = proyectos;
+    }
+
+    public boolean isPermisoAdmin() {
+        return permisoAdmin;
+    }
+
+    public void setPermisoAdmin(boolean permisoAdmin) {
+        this.permisoAdmin = permisoAdmin;
     }
     
     
