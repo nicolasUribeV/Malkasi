@@ -89,7 +89,7 @@ public class AcademicoController implements Serializable {
         selected.setTipoCuenta("academico");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoCreated"));
         if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+            items = null; // Invalidate list of items to trigger re-query.
         }
     }
 
@@ -101,7 +101,7 @@ public class AcademicoController implements Serializable {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("AcademicoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
-            items = null;    // Invalidate list of items to trigger re-query.
+            items = null; // Invalidate list of items to trigger re-query.
         }
     }
 
@@ -211,7 +211,5 @@ public class AcademicoController implements Serializable {
                 return null;
             }
         }
-
     }
-
 }

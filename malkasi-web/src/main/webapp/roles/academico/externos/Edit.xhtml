@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="AcademicoExternoEditDlg" widgetVar="AcademicoExternoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAcademicoExternoTitle}">
+        <p:dialog id="AcademicoExternoEditDlg" widgetVar="AcademicoExternoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar académico externo">
             <h:form id="AcademicoExternoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}">
@@ -16,13 +16,24 @@
                         <p:inputText id="nombres" value="#{academicoExternoController.selected.nombres}" title="Nombres" />
                         <p:outputLabel value="Apellidos" for="apellidos" />
                         <p:inputText id="apellidos" value="#{academicoExternoController.selected.apellidos}" title="Apellidos" />
+                    </p:panelGrid>
+                    <br></br>
+                    <p:outputLabel value="Filiación" />
+                    <br></br>
+                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}">
                         <p:outputLabel value="Pais" for="pais" />
                         <p:inputText id="pais" value="#{academicoExternoController.selected.pais}" title="Pais" />
                         <p:outputLabel value="Universidad" for="universidad" />
                         <p:inputText id="universidad" value="#{academicoExternoController.selected.universidad}" title="Universidad" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{academicoExternoController.update}" value="#{bundle.Save}" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoExternoEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="AcademicoExternoEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{academicoExternoController.update}" value="#{bundle.Save}" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoExternoEditDialog');">
+                        <p:confirm header="Confirmación" message="Está seguro que desea editar la información? Esto implica cambiar toda la información en los proyectos/publicaciones asociadas " icon="ui-icon-alert" />
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" >
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                    <p:button value="Cancelar" href="/faces/roles/academico/externos/List.xhtml" />
                 </h:panelGroup>
             </h:form>
         </p:dialog>
