@@ -8,18 +8,19 @@
 
     <ui:composition>
 
-        <p:dialog id="AcademicoExternoViewDlg" widgetVar="AcademicoExternoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAcademicoExternoTitle}">
+        <p:dialog id="AcademicoExternoViewDlg" widgetVar="AcademicoExternoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Ver información ">
             <h:form id="AcademicoExternoViewForm">
                 <h:panelGroup id="display">
+                    <h:outputLabel value="Nombres"/>
+                    <br></br>
                     <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}">
-                        <h:outputText value="Nombres"/>
-                        <h:outputText value="#{academicoExternoController.selected.nombres}" title="Nombres"/>
-                        <h:outputText value="Apellidos"/>
-                        <h:outputText value="#{academicoExternoController.selected.apellidos}" title="Apellidos"/>
-                        <h:outputText value="Pais"/>
-                        <h:outputText value="#{academicoExternoController.selected.pais}" title="Pais"/>
-                        <h:outputText value="Universidad"/>
-                        <h:outputText value="#{academicoExternoController.selected.universidad}" title="Universidad"/>
+                        <h:outputText value="#{academicoExternoController.selected.nombres} #{academicoExternoController.selected.apellidos} " title="Nombre"/>
+                    </p:panelGrid>
+                    <br></br>
+                    <p:outputLabel value="Filiación" />
+                    <br></br>
+                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}">
+                        <h:outputText value="#{academicoExternoController.selected.universidad} (#{academicoExternoController.selected.pais})" title="Universidad"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="AcademicoExternoViewDialog.hide()"/>
                 </h:panelGroup>

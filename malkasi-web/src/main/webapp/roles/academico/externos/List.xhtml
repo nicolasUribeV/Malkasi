@@ -24,39 +24,26 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton "/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton "/>
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Nombres"/>
+                                <h:outputText value="Nombre"/>
                             </f:facet>
-                            <h:outputText value="#{item.nombres}"/>
+                            <h:outputText value="#{item.nombres} #{item.apellidos}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Apellidos"/>
+                                <h:outputText value="Filiación"/>
                             </f:facet>
-                            <h:outputText value="#{item.apellidos}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Pais"/>
-                            </f:facet>
-                            <h:outputText value="#{item.pais}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Universidad"/>
-                            </f:facet>
-                            <h:outputText value="#{item.universidad}"/>
+                            <h:outputText value="#{item.universidad} ( #{item.pais} )"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{academicoExternoController.prepareCreate}" update=":AcademicoExternoCreateForm" oncomplete="PF('AcademicoExternoCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AcademicoExternoViewForm" oncomplete="PF('AcademicoExternoViewDialog').show()" disabled="#{empty academicoExternoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AcademicoExternoEditForm" oncomplete="PF('AcademicoExternoEditDialog').show()" disabled="#{empty academicoExternoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{academicoExternoController.destroy}" update=":growl,datalist" disabled="#{empty academicoExternoController.selected}"/>
-                            <p:commandButton id="atras" value="Volver" actionListener="#{academicoExternoController.comeBack()}" />
+                            <p:commandButton id="atras" icon="ui-icon-arrowreturnthick-1-w" value="Volver" actionListener="#{academicoExternoController.comeBack()}" />
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

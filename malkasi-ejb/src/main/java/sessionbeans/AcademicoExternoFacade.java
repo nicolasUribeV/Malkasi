@@ -6,9 +6,11 @@
 package sessionbeans;
 
 import entities.AcademicoExterno;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +29,16 @@ public class AcademicoExternoFacade extends AbstractFacade<AcademicoExterno> imp
     public AcademicoExternoFacade() {
         super(AcademicoExterno.class);
     }
-    
+    @Override
+    public boolean FindWithNombreApellido(String nombres, String apellidos){
+        Query q = em.createQuery("SELECT c FROM AcademicoExterno c WHERE c.nombres = :nombres AND c.apellidos = :apellidos");
+        q.setParameter("nombres", nombres);
+        q.setParameter("apellidos", apellidos);
+        if(q.getResultList().size() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
