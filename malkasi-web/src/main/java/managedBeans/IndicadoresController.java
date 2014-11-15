@@ -35,6 +35,7 @@ public class IndicadoresController implements Serializable {
     private List<String> years;
     @EJB
     private sessionbeans.PublicacionFacadeLocal publicacionFacade;
+    @EJB
     private sessionbeans.AcademicoFacadeLocal academicoFacade;
     private TipoPublicacion tipoPublicacionSeleccionada;
     private Academico academicoSeleccionado;
@@ -44,6 +45,39 @@ public class IndicadoresController implements Serializable {
     private ArrayList<Integer> getAgnos;
     private ArrayList<Integer> agnosTabla = null;
     private long categoriaElegida;
+    private ArrayList<Academico> academicsCategory;
+    private List<Academico> items;
+
+    public ArrayList<Academico> getAcademicsCategory() {
+        return academicsCategory;
+    }
+
+    public void listCategory(long categ) {
+        items = academicoFacade.findAll();
+        ArrayList<Academico> aux = new ArrayList<Academico>();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getCategoria() != null) {
+                aux.add(items.get(i));
+            }
+        }
+        academicsCategory = null;
+        academicsCategory = new ArrayList<Academico>();
+        if (categ == 0) {
+            academicsCategory.addAll(aux);
+        } else {
+            System.out.println("Entré al for");
+            for (int i = 0; i < aux.size(); i++) {
+                if (aux.get(i).getCategoria().getId() == categ) {
+                    academicsCategory.add(aux.get(i));
+                    System.out.println("Agregué al: " + aux.get(i).getApellidos());
+                }
+            }
+        }
+    }
+
+    public void setAcademicsCategory(ArrayList<Academico> academicsCategory) {
+        this.academicsCategory = academicsCategory;
+    }
 
     public long getCategoriaElegida() {
         return categoriaElegida;

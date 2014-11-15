@@ -30,10 +30,10 @@
                     <br/>
                 </p:panel>
                 <p:button value="Volver" href="/faces/roles/admin/index.xhtml" />
-                <p:commandButton value="Actualizar Tabla" actionListener="#{academicoController.listCategory(indicadoresController.categoriaElegida)}">
+                <p:commandButton value="Actualizar Tabla" actionListener="#{indicadoresController.listCategory(indicadoresController.categoriaElegida)}">
                     <f:ajax event="click" render="columnAgnos"></f:ajax>
                 </p:commandButton>
-                <p:dataTable id="columnAgnos" var="player" value="#{academicoController.academicsCategory}" style="margin-top:40px" >
+                <p:dataTable id="columnAgnos" var="player" value="#{indicadoresController.academicsCategory}" style="margin-top:40px" >
                     <f:facet name="header">
                         Cantidad de Publicaciones
                     </f:facet>

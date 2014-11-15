@@ -31,39 +31,7 @@ public class AcademicoController implements Serializable {
     private AcademicoFacadeLocal ejbFacade;
     private List<Academico> items;
     private Academico selected;
-    private ArrayList<Academico> academicsCategory;
-
-    public ArrayList<Academico> getAcademicsCategory() {
-        return academicsCategory;
-    }
-
-    public void listCategory(long categ) {
-        items = ejbFacade.findAll();
-        ArrayList<Academico> aux = new ArrayList<Academico>();
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getCategoria() != null) {
-                aux.add(items.get(i));
-            }
-        }
-        academicsCategory = null;
-        academicsCategory = new ArrayList<Academico>();
-        if (categ == 0) {
-            academicsCategory.addAll(aux);
-        } else {
-            System.out.println("Entré al for");
-            for (int i = 0; i < aux.size(); i++) {
-                if (aux.get(i).getCategoria().getId() == categ) {
-                    academicsCategory.add(aux.get(i));
-                    System.out.println("Agregué al: " + aux.get(i).getApellidos());
-                }
-            }
-        }
-    }
-
-    public void setAcademicsCategory(ArrayList<Academico> academicsCategory) {
-        this.academicsCategory = academicsCategory;
-    }
-
+    
     public AcademicoController() {
     }
 
