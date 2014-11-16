@@ -104,23 +104,8 @@ public class WizardController implements Serializable {
         }
     }
 
-    public ArrayList<String> getListaOrden() {
-        if (this.publicacion.getAcademicoOrden() == null) {
-            listaOrden.removeAll(listaOrden);
-            for (int i = 0; i < this.publicacion.getAcademicos().size(); i++) {
-                String s = this.publicacion.getAcademicos().get(i).getNombres() + "_" + this.publicacion.getAcademicos().get(i).getApellidos();
-                listaOrden.add(s);
-                
-            }
-            if (this.publicacion.getAcademicosExternos() != null) {
-                for (int i = 0; i < this.publicacion.getAcademicosExternos().size(); i++) {
-                    String s = this.publicacion.getAcademicosExternos().get(i).getNombres() + "_" + this.publicacion.getAcademicosExternos().get(i).getApellidos();
-                    listaOrden.add(s);
-                    
-                }
-            };
-        }
-        this.publicacion.setAcademicoOrden(listaOrden);
+    public ArrayList<String> getListaOrden(){
+        
         return listaOrden;
     }
     
@@ -133,16 +118,31 @@ public class WizardController implements Serializable {
     }
 
     public void updateOrden() {
-        ArrayList<String> listaO = new ArrayList<>();
-        for (int i = 0; i < publicacion.getAcademicos().size(); i++) {
-            String s = publicacion.getAcademicos().get(i).getNombres() + " " + publicacion.getAcademicos().get(i).getApellidos();
-            listaO.add(s);
+        ArrayList<String> listaActual = new ArrayList<>();
+        for (int i = 0; i < this.publicacion.getAcademicos().size(); i++) {
+            String s = this.publicacion.getAcademicos().get(i).getNombres() + "_" + this.publicacion.getAcademicos().get(i).getApellidos();
+            listaActual.add(s);
+
         }
-        for (int i = 0; i < publicacion.getAcademicosExternos().size(); i++) {
-            String s = publicacion.getAcademicosExternos().get(i).getNombres() + " " + publicacion.getAcademicosExternos().get(i).getApellidos();
-            listaO.add(s);
+        if (this.publicacion.getAcademicosExternos() != null) {
+            for (int i = 0; i < this.publicacion.getAcademicosExternos().size(); i++) {
+                String s = this.publicacion.getAcademicosExternos().get(i).getNombres() + "_" + this.publicacion.getAcademicosExternos().get(i).getApellidos();
+                listaActual.add(s);
+
+            }
         }
-        publicacion.setAcademicoOrden(listaO);
+        this.listaOrden.removeAll(this.listaOrden);
+        this.listaOrden.addAll(listaActual);
+        this.publicacion.setAcademicoOrden(listaActual);
     }
+    
+    public void updateListOrden(){
+        this.publicacion.setAcademicoOrden(listaOrden);
+    }
+    
+    public String cleanName(String name){
+        String[] a = name.split("_");
+        return a[0] + " " + a[1];
+     }
 
 }
