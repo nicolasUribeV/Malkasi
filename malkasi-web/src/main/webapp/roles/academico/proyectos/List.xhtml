@@ -30,7 +30,7 @@
             </p:dataList>
             
             <h:form>
-                <p:commandButton  style="width: 100%" id="createButton" icon="ui-icon-plus"   value="Crear proyecto" actionListener="#{proyectoController.prepareCreate()}" />
+                <p:commandButton  style="width: 100%" id="createButton" icon="ui-icon-plus"   value="Crear proyecto" actionListener="#{proyetoWizard.prepareCreate(sessionUtilTest.currentUser)}" />
             </h:form>
 
 

@@ -32,37 +32,45 @@ import sessionbeans.ProyectoFacadeLocal;
 public class ProyetoWizard implements Serializable {
 
     private Proyecto proyecto;
-    
+
     private Academico academico;
-    
+
     private List<RolProyecto> roles;
-    
+
     private RolProyecto rolSeleccionado;
-    
+
     private List<Academico> academicos = null;
-   
+
     @EJB
     private ProyectoFacadeLocal proyectoFacade;
-    
+
     @EJB
     private AcademicoFacadeLocal academicoFacade;
-    
-    
+
+    private String rol;
+
     public ProyetoWizard() {
     }
-    
 
+    public String getRol() {
+        return rol;
+    }
 
-    
-    public Proyecto prepareCreate() {
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public Proyecto prepareCreate(Academico currentU) {
         proyecto = new Proyecto();
         academicos = academicoFacade.findAll();
+        ArrayList<RolProyecto> listaAux = new ArrayList<RolProyecto>();
+        roles = listaAux;
         initializeEmbeddableKey();
         JsfUtil.redirect("/faces/roles/academico/proyectos/crear.xhtml");
         return proyecto;
     }
-    
-    public List<Academico> getAcademicos(){
+
+    public List<Academico> getAcademicos() {
         return academicoFacade.findAll();
     }
 
@@ -73,12 +81,11 @@ public class ProyetoWizard implements Serializable {
     public void setRolSeleccionado(RolProyecto rolSeleccionado) {
         this.rolSeleccionado = rolSeleccionado;
     }
-    
-    
+
     public void save() {
         FacesMessage msg = new FacesMessage("Exito", "Proyecto :" + proyecto.getNombreProyecto() + "creado");
         FacesContext.getCurrentInstance().addMessage(null, msg);
-        
+
     }
 
     public Proyecto getProyecto() {
@@ -104,13 +111,49 @@ public class ProyetoWizard implements Serializable {
     public void setRoles(List<RolProyecto> roles) {
         this.roles = roles;
     }
-    
-    
-    
-    
 
-    public String onFlowProcess(FlowEvent event) {    
-            return event.getNewStep();
+    public void crearRol(Academico academico, String rol) {
+        boolean agregado = false;
+        academicos = academicoFacade.findAll();
+        for (int i = 0; i < roles.size(); i++) {
+            if (roles.get(i).getAcademico().getId() == academico.getId()) {
+                agregado = true;
+            }
+        }
+        if (agregado == false) {
+            RolProyecto rp = new RolProyecto();
+            rp.setAcademico(academico);
+            rp.setProyecto(proyecto);
+            rp.setRol(rol);
+            roles.add(rp);
+        }
+        actualizarListaAcademicos();
+
+    }
+    
+    public void eliminarRol(Academico academico){
+        academicos = academicoFacade.findAll();
+        for (int i = 0; i < roles.size(); i++) {
+            if (roles.get(i).getAcademico().getId() == academico.getId()) {
+                System.out.println("Eliminé: " + roles.get(i).getAcademico().getNombres());
+                roles.remove(i);
+            }
+        }
+        actualizarListaAcademicos();
+    }
+
+    public void actualizarListaAcademicos(){
+        for (int i = 0; i < roles.size(); i++) {
+            for (int j = 0; j < academicos  .size(); j++) {
+                if (roles.get(i).getAcademico().getId() == academicos.get(j).getId()) {
+                    academicos.remove(j);
+                }
+            }
+        }
+    }
+    
+    public String onFlowProcess(FlowEvent event) {
+        return event.getNewStep();
     }
 
     private void initializeEmbeddableKey() {

@@ -16,21 +16,21 @@
                 <p:wizard flowListener="#{proyetoWizard.onFlowProcess}" nextLabel="Siguiente" backLabel="Volver">
                     <p:tab id="basicos" title="Información básica">
                         <p:panel header="Datos básicos del proyecto">
-                            <p:panelGrid columns="2" rendered="#{proyectoController.selected != null}">
+                            <p:panelGrid columns="2">
                                 <p:outputLabel value="#{bundle.CreateProyectoLabel_nombreProyecto}" for="nombreProyecto" />
-                                <p:inputText id="nombreProyecto" value="#{proyectoController.selected.nombreProyecto}" title="#{bundle.CreateProyectoTitle_nombreProyecto}" />
+                                <p:inputText id="nombreProyecto" value="#{proyetoWizard.proyecto.nombreProyecto}" title="#{bundle.CreateProyectoTitle_nombreProyecto}" />
                                 <p:outputLabel value="#{bundle.CreateProyectoLabel_codigoProyecto}" for="codigoProyecto" />
-                                <p:inputText id="codigoProyecto" value="#{proyectoController.selected.codigoProyecto}" title="#{bundle.CreateProyectoTitle_codigoProyecto}" />
+                                <p:inputText id="codigoProyecto" value="#{proyetoWizard.proyecto.codigoProyecto}" title="#{bundle.CreateProyectoTitle_codigoProyecto}" />
                                 <p:outputLabel value="#{bundle.CreateProyectoLabel_descripcionProyecto}" for="descripcionProyecto" />
-                                <p:inputTextarea id="descripcionProyecto" value="#{proyectoController.selected.descripcionProyecto}" title="#{bundle.CreateProyectoTitle_descripcionProyecto}" />
+                                <p:inputTextarea id="descripcionProyecto" value="#{proyetoWizard.proyecto.descripcionProyecto}" title="#{bundle.CreateProyectoTitle_descripcionProyecto}" />
                                 <p:outputLabel value="#{bundle.CreateProyectoLabel_fechaInicioProyecto}" for="fechaInicioProyecto" />
-                                <p:calendar id="fechaInicioProyecto" pattern="MM/dd/yyyy" value="#{proyectoController.selected.fechaInicioProyecto}" title="#{bundle.EditProyectoTitle_fechaInicioProyecto}"  showOn="button"/>
+                                <p:calendar id="fechaInicioProyecto" pattern="MM/dd/yyyy" value="#{proyetoWizard.proyecto.fechaInicioProyecto}" title="#{bundle.EditProyectoTitle_fechaInicioProyecto}"  showOn="button"/>
                                 <p:outputLabel value="#{bundle.CreateProyectoLabel_duracionProyecto}" for="duracionProyecto" />
-                                <p:inputText id="duracionProyecto" value="#{proyectoController.selected.duracionProyecto}" title="#{bundle.CreateProyectoTitle_duracionProyecto}" />
+                                <p:inputText id="duracionProyecto" value="#{proyetoWizard.proyecto.duracionProyecto}" title="#{bundle.CreateProyectoTitle_duracionProyecto}" />
                                 <p:outputLabel value="#{bundle.CreateProyectoLabel_estadoProyecto}" for="estadoProyecto" />
-                                <p:inputText id="estadoProyecto" value="#{proyectoController.selected.estadoProyecto}" title="#{bundle.CreateProyectoTitle_estadoProyecto}" />
+                                <p:inputText id="estadoProyecto" value="#{proyetoWizard.proyecto.estadoProyecto}" title="#{bundle.CreateProyectoTitle_estadoProyecto}" />
                                 <p:outputLabel value="#{bundle.CreateProyectoLabel_tipoFinanciamiento}" for="tipoFinanciamiento" />
-                                <p:selectOneMenu id="tipoFinanciamiento" value="#{proyectoController.selected.tipoFinanciamiento}" >
+                                <p:selectOneMenu id="tipoFinanciamiento" value="#{proyetoWizard.proyecto.tipoFinanciamiento}" >
                                     <f:selectItems value="#{tipoFinanciamientoController.itemsAvailableSelectOne}"
                                                    var="tipoFinanciamientoItem"
                                                    itemValue="#{tipoFinanciamientoItem}"/>
@@ -40,21 +40,29 @@
                     </p:tab>
 
                     <p:tab id="agregarAcademicos" title="Académicos">
-                        <p:panel header="Agregar académicos">
+                        <p:panel id="panelAcademicos" header="Agregar académicos">
                             <p:panelGrid columns="2" >
-                                <h:outputLabel value="HOLA" />
-                                <p:selectOneMenu id="academicos" value="#{proyetoWizard.academico}" >
-                                    <f:selectItems value="#{proyetoWizard.academicos}" var="academ" itemLabel="#{academ.nombres}"/>
+                                <h:outputLabel value="Academico" />
+                                <p:selectOneMenu id="academicos" value="#{proyetoWizard.academico}" converter="academicoConverter" >
+                                    <f:selectItems value="#{proyetoWizard.academicos}" var="academ" itemLabel="#{academ.nombres} #{academ.apellidos}" itemValue="#{academ}"/>
                                 </p:selectOneMenu>
-
-
+                                <p:outputLabel value="Rol: "/>
+                                <p:inputText value = "#{proyetoWizard.rol}"/>
                             </p:panelGrid>
-
+                            <p:commandButton value="Agregar académico" actionListener="#{proyetoWizard.crearRol(proyetoWizard.academico,proyetoWizard.rol)}" update="lista panelAcademicos"/>
                         </p:panel>
-
-
-
-                    </p:tab>
+                        <p:panel id="lista">
+                            <p:panelGrid>
+                                <p:outputLabel value="Académicos agregados"/>
+                                <p:selectOneListbox style="height:200px; width: 220px">
+                                    <f:selectItems value="#{proyetoWizard.roles}" var="academicos"
+                                                   itemLabel="#{academicos.academico.nombres} #{academicos.academico.apellidos}"/>
+                                </p:selectOneListbox>
+                            </p:panelGrid>
+                            <p:commandButton value="Quitar académico" actionListener="#{proyetoWizard.eliminarRol(proyetoWizard.academico)}" update="lista panelAcademicos"/>
+                        
+                        </p:panel>
+                   </p:tab>
 
 
 
@@ -81,7 +89,7 @@
                                     <h:outputText value="#{bundle.CreateProyectoLabel_estadoProyecto}" styleClass="outputLabel"/>
 
                                     <h:outputText value="Tipo financiamiento del proyecto" />
-                                    <h:outputText value="#{proyectoController.selected.tipoFinanciamiento}" styleClass="outputLabel"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.tipoFinanciamiento}" styleClass="outputLabel"/>
 
                                 </h:panelGrid>
 
