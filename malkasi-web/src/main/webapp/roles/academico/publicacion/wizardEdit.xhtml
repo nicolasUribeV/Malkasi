@@ -103,15 +103,17 @@
                                 <p:outputLabel value="Académicos Departamento" style="color: #0c2465"/>
                                 <p:selectCheckboxMenu id="academicos" widgetVar="someVarName" value="#{wizardController.publicacion.academicos}" label="Academicos Departamento"
                                                       filter="true" filterMatchMode="startsWith" converter="academicoConverter">
-                                    <f:selectItems value="#{academicoController.getItemsAvailableSelectMany2()}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}"/>
-
+                                    <f:selectItems value="#{academicoController.getItemsAvailableSelectMany2()}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}" itemValue="#{AcademicosL}" actionListener="#{wizardController.updateOrden()}" />
+                                    <p:ajax event="change" listener="#{wizardController.updateOrden()}" process="@this"/>
+                                    
                                 </p:selectCheckboxMenu>
                                 <p:outputLabel value="" style="padding: 20px" />
                                 <p:outputLabel value="" style="padding: 20px" />
                                 <p:outputLabel value="Académicos Externos" style="color: #0c2465"/>
                                 <p:selectCheckboxMenu id="academicosE" widgetVar="someVarName1" value="#{wizardController.publicacion.academicosExternos}" label="Academicos Externos"
                                                       filter="true" filterMatchMode="startsWith" converter="academicoExternoConverter">
-                                    <f:selectItems value="#{academicoExternoController.itemsAvailableSelectMany}" var="AcademicosL2" itemLabel="#{AcademicosL2.nombres} #{AcademicosL2.apellidos} (#{AcademicosL2.universidad})" itemValue="#{AcademicosL2}" />
+                                    <f:selectItems value="#{academicoExternoController.itemsAvailableSelectMany}" var="AcademicosL2" itemLabel="#{AcademicosL2.nombres} #{AcademicosL2.apellidos} (#{AcademicosL2.universidad})" itemValue="#{AcademicosL2}" actionListener="#{wizardController.updateOrden()}" />
+                                    <p:ajax event="change" listener="#{wizardController.updateOrden()}" process="@this"/>
                                 </p:selectCheckboxMenu>
                                 <p:outputLabel value="" style="padding: 20px" />
                                 <p:outputLabel value="" style="padding: 20px" />
@@ -121,11 +123,11 @@
 
                     <p:tab id="personalizate" title="Personalización" >
                         <p:panel header="Personalización">
-                            <p:panel header="Personalización">
-                                <p:orderList id="orden" value="#{wizardController.listaOrden}" var="city" controlsLocation="none" itemLabel="#{city}" itemValue="#{city}" />
-
+                            <p:outputPanel id="myOrderListEnvelopId">
+                                <p:orderList id="orden" styleClass="mySelector" value="#{wizardController.publicacion.academicoOrden}" var="city" controlsLocation="none" itemLabel="#{wizardController.cleanName(city)}" itemValue="#{city}"/>
+                               
                                 <p:outputLabel value="" style="padding: 100px" />
-                            </p:panel>
+                            </p:outputPanel>
                         </p:panel>
 
                     </p:tab>
