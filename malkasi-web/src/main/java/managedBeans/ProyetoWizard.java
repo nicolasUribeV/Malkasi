@@ -82,7 +82,10 @@ public class ProyetoWizard implements Serializable {
         this.rolSeleccionado = rolSeleccionado;
     }
 
-    public void save() {
+    public void save(Proyecto proyectoP, List<RolProyecto> rolesP) {
+        System.out.println("agregando-----------------" + proyectoP.getNombreProyecto() + rolesP.get(0).getAcademico().getUserName() + rolesP.get(0).getRol());
+        proyectoFacade.Create(proyectoP, rolesP);
+        
         FacesMessage msg = new FacesMessage("Exito", "Proyecto :" + proyecto.getNombreProyecto() + "creado");
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
@@ -126,8 +129,23 @@ public class ProyetoWizard implements Serializable {
             rp.setProyecto(proyecto);
             rp.setRol(rol);
             roles.add(rp);
+            for (int i = 0; i < roles.size(); i++) {
+                System.out.println("Gente en ROLES: --------------------" + roles.get(i).getAcademico().getUserName());
+            }
+            int index = -1;
+            for (int i = 0; i < academicos.size(); i++) {
+                if(academico.getId() == academicos.get(i).getId()){
+                    index = i;
+                }
+            }
+            if(index != -1){
+                System.out.println("Eliminando: --------------------------" + academicos.get(index).getUserName());
+                academicos.remove(index);
+            }
+            for (int i = 0; i < academicos.size(); i++) {
+                System.out.println("Gente en ACADEMICOS: ---------------------" + academicos.get(i).getUserName());
+            }   
         }
-        actualizarListaAcademicos();
 
     }
     
@@ -144,7 +162,7 @@ public class ProyetoWizard implements Serializable {
 
     public void actualizarListaAcademicos(){
         for (int i = 0; i < roles.size(); i++) {
-            for (int j = 0; j < academicos  .size(); j++) {
+            for (int j = 0; j < academicos.size(); j++) {
                 if (roles.get(i).getAcademico().getId() == academicos.get(j).getId()) {
                     academicos.remove(j);
                 }
@@ -158,5 +176,7 @@ public class ProyetoWizard implements Serializable {
 
     private void initializeEmbeddableKey() {
     }
+    
+    
 
 }

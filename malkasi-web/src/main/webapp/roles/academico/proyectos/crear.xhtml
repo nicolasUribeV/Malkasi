@@ -42,14 +42,18 @@
                     <p:tab id="agregarAcademicos" title="Académicos">
                         <p:panel id="panelAcademicos" header="Agregar académicos">
                             <p:panelGrid columns="2" >
-                                <h:outputLabel value="Academico" />
+                                <h:outputLabel value="Academico" for="academicos" />
                                 <p:selectOneMenu id="academicos" value="#{proyetoWizard.academico}" converter="academicoConverter" >
-                                    <f:selectItems value="#{proyetoWizard.academicos}" var="academ" itemLabel="#{academ.nombres} #{academ.apellidos}" itemValue="#{academ}"/>
+                                    <f:selectItems id= "SelecItem" value="#{proyetoWizard.academicos}" var="academ" itemLabel="#{academ.nombres} #{academ.apellidos}" itemValue="#{academ}"/>
+
                                 </p:selectOneMenu>
                                 <p:outputLabel value="Rol: "/>
                                 <p:inputText value = "#{proyetoWizard.rol}"/>
                             </p:panelGrid>
-                            <p:commandButton value="Agregar académico" actionListener="#{proyetoWizard.crearRol(proyetoWizard.academico,proyetoWizard.rol)}" update="lista panelAcademicos"/>
+                            <p:commandButton value="Agregar académico" actionListener="#{proyetoWizard.crearRol(proyetoWizard.academico,proyetoWizard.rol)}" update="lista">
+
+                            </p:commandButton>
+
                         </p:panel>
                         <p:panel id="lista">
                             <p:panelGrid>
@@ -60,48 +64,51 @@
                                 </p:selectOneListbox>
                             </p:panelGrid>
                             <p:commandButton value="Quitar académico" actionListener="#{proyetoWizard.eliminarRol(proyetoWizard.academico)}" update="lista panelAcademicos"/>
-                        
+
+
                         </p:panel>
-                   </p:tab>
+                    </p:tab>
 
 
 
                     <p:tab id="confirm" title="Confirmation" >
                         <p:panel header="Confirmation">
-                            <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid">
+                            <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid">
                                 <h:panelGrid columns="2" columnClasses="label, value" >
-                                    <h:outputText value="Nombre de proyecto " />
-                                    <h:outputText value="#{bundle.CreateProyectoLabel_nombreProyecto}" styleClass="outputLabel"/>
+                                    <h:outputText value="Nombre de proyecto " style="color: #158cba;font-size: large;size: letter"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.nombreProyecto}" styleClass="outputLabel" style="font-size: medium"/>
 
-                                    <h:outputText value="Código del proyecto" />
-                                    <h:outputText value="#{bundle.CreateProyectoLabel_codigoProyecto}" styleClass="outputLabel"/>
+                                    <h:outputText value="Código del proyecto" style="color: #158cba;font-size: large;top: 20px" />
+                                    <h:outputText value="#{proyetoWizard.proyecto.codigoProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Descripción del proyecto" />
-                                    <h:outputText value="#{bundle.CreateProyectoLabel_descripcionProyecto}" styleClass="outputLabel"/>
+                                    <h:outputText value="Descripción del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.descripcionProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Inicio del proyecto" />
-                                    <h:outputText value="#{bundle.CreateProyectoLabel_fechaInicioProyecto}" styleClass="outputLabel"/>
+                                    <h:outputText value="Inicio del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.fechaInicioProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Duración del proyecto" />
-                                    <h:outputText value="#{bundle.CreateProyectoLabel_duracionProyecto}" styleClass="outputLabel"/>
+                                    <h:outputText value="Duración del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.duracionProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Estado del proyecto" />
-                                    <h:outputText value="#{bundle.CreateProyectoLabel_estadoProyecto}" styleClass="outputLabel"/>
+                                    <h:outputText value="Estado del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.estadoProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Tipo financiamiento del proyecto" />
+                                    <h:outputText value="Tipo financiamiento del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
                                     <h:outputText value="#{proyetoWizard.proyecto.tipoFinanciamiento}" styleClass="outputLabel"/>
 
                                 </h:panelGrid>
 
-                                <h:panelGrid columns="2" >
-
-
-                                </h:panelGrid>
-
-                                <p:commandButton value="Crear proyecto" actionListener="#{proyetoWizard.save()}" update="growl" process="@this"/>
-
+                                <p:panelGrid>
+                                    <p:outputLabel value="Académicos agregados"/>
+                                    <p:selectOneListbox style="height:200px; width: 220px" >
+                                        <f:selectItems value="#{proyetoWizard.roles}" var="academicos" 
+                                                       itemLabel="#{academicos.academico.nombres} #{academicos.academico.apellidos}"/>
+                                    </p:selectOneListbox>
+                                </p:panelGrid>
+                                
 
                             </h:panelGrid>
+                            <p:commandButton value="Crear proyecto" actionListener="#{proyetoWizard.save(proyetoWizard.proyecto, proyetoWizard.roles)}" update="growl" process="@this"/>
 
                         </p:panel>
                     </p:tab>

@@ -33,15 +33,16 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
     
     @Override
     public void Create(Proyecto proyecto, List<RolProyecto> roles){
-        
+        this.em.persist(proyecto);
         for(int i = 0; i < roles.size(); i++){
             Academico academicoAuxiliar = em.find(Academico.class, roles.get(i).getAcademico().getId());
             this.em.persist(roles);
             academicoAuxiliar.getProyectos().add(roles.get(i));
             this.em.merge(academicoAuxiliar);
         }
+        this.em.merge(proyecto);
         proyecto.setAcademicos(roles);
-        this.em.persist(proyecto);
+        
         
     }
 }
