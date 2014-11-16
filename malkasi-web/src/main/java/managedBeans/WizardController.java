@@ -10,6 +10,7 @@ import entities.Publicacion;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -98,6 +99,19 @@ public class WizardController implements Serializable {
         } else {
             return event.getNewStep();
         }
+    }
+    
+    public void updateOrden(){
+        ArrayList<String> listaO = new ArrayList<>();
+        for (int i = 0; i < publicacion.getAcademicos().size(); i++) {
+            String s = publicacion.getAcademicos().get(i).getNombres()+" "+publicacion.getAcademicos().get(i).getApellidos(); 
+            listaO.add(s);
+        }
+        for (int i = 0; i < publicacion.getAcademicosExternos().size(); i++) {
+            String s = publicacion.getAcademicosExternos().get(i).getNombres()+" "+publicacion.getAcademicosExternos().get(i).getApellidos(); 
+            listaO.add(s);
+        }
+        publicacion.setAcademicoOrden(listaO);
     }
 
 }

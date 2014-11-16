@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entities;
 
 import java.io.Serializable;
@@ -33,75 +32,85 @@ import javax.persistence.Query;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
-
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Publicacion.findAll", query = "SELECT a FROM Publicacion a")  
+    @NamedQuery(name = "Publicacion.findAll", query = "SELECT a FROM Publicacion a")
 })
 
 public class Publicacion implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String nombrePublicacion;
-    
+
     private String pais;
-    
+
     private int agno;
-    
+
     private String nombreLibro;
-    
+
     private String referencia;
-    
+
     private String editorial;
-    
+
     private String url;
-    
+
     private String nombreCongreso;
-    
+
     private String institucion;
-    
-    @Column(length=1500)
+
+    @Column(length = 1500)
     private String abstractP;
-    
-    
-    
-    @ManyToOne(optional= false)
+
+    @ManyToOne(optional = false)
     private TipoPublicacion tipoPublicacion;
-    
+
     @ManyToMany
-    @JoinTable(name="ACADEMICO_PUBLICACION",
-        joinColumns={@JoinColumn(name="publicaciones_ID")}, 
-        inverseJoinColumns={@JoinColumn(name="academicos_ID")})
+    @JoinTable(name = "ACADEMICO_PUBLICACION",
+            joinColumns = {
+                @JoinColumn(name = "publicaciones_ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "academicos_ID")})
     private List<Academico> academicos;
-    
+
     private String doi;
-    
+
     @ManyToMany
-    @JoinTable(name="ACADEMICOE_PUBLICACION",
-        joinColumns={@JoinColumn(name="publicaciones_ID")}, 
-        inverseJoinColumns={@JoinColumn(name="academicosExternos_ID")})
+    @JoinTable(name = "ACADEMICOE_PUBLICACION",
+            joinColumns = {
+                @JoinColumn(name = "publicaciones_ID")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "academicosExternos_ID")})
     private List<AcademicoExterno> academicosExternos;
-    
-    @ElementCollection
-    private ArrayList<String> academicoOrden;
+
+    private String academicoOrden;
 
     public ArrayList<String> getAcademicoOrden() {
-        return academicoOrden;
+        ArrayList<String> listaOrden = new ArrayList<String>();
+        String palabra[] = academicoOrden.split(";");
+        for (int i = 0; i < palabra.length; i++) {
+            listaOrden.add(palabra[i]);
+        }
+        return listaOrden;
     }
 
-    public void setAcademicoOrden(ArrayList<String> academicoOrden) {
-        this.academicoOrden = academicoOrden;
+    public void setAcademicoOrden(ArrayList<String> listaAcademicos) {
+        academicoOrden = "";
+        for (int i = 0; i < listaAcademicos.size(); i++) {
+            if(i == 0){
+                academicoOrden = listaAcademicos.get(i);
+            }
+            else{
+                academicoOrden = academicoOrden + ";" + listaAcademicos.get(i);
+            }
+        }
     }
-    
-    
-    
-    public Publicacion(){
-        if(academicos == null){
+
+    public Publicacion() {
+        if (academicos == null) {
             academicos = new ArrayList<Academico>();
         }
     }
@@ -113,7 +122,7 @@ public class Publicacion implements Serializable {
     public void setDoi(String doi) {
         this.doi = doi;
     }
-    
+
     public TipoPublicacion getTipoPublicacion() {
         return tipoPublicacion;
     }
@@ -129,17 +138,18 @@ public class Publicacion implements Serializable {
     public void setAcademicosExternos(List<AcademicoExterno> academicosExternos) {
         this.academicosExternos = academicosExternos;
     }
-    
+
     @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
 
     public void persist(Object object) {
         em.persist(object);
     }
-     public void edit(Object object) {
+
+    public void edit(Object object) {
         em.merge(object);
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -260,6 +270,5 @@ public class Publicacion implements Serializable {
     public void setAbstractP(String abstractP) {
         this.abstractP = abstractP;
     }
-    
-    
+
 }

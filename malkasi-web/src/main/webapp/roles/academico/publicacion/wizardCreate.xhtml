@@ -104,6 +104,7 @@
                                 <p:selectCheckboxMenu id="academicos" widgetVar="someVarName" value="#{wizardController.publicacion.academicos}" label="Academicos Departamento"
                                                       filter="true" filterMatchMode="startsWith" converter="academicoConverter">
                                     <f:selectItems value="#{academicoController.getItemsAvailableSelectMany2()}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}" itemValue="#{AcademicosL}" />
+                                    <p:ajax event="change" update="#{wizardController.updateOrden()}" process="@this"/>
                                     <f:attribute name="currentUserLA" value="#{sessionUtilTest.currentUser}" />
                                     <f:validator validatorId="academicoInsertValidator" />
                                 </p:selectCheckboxMenu>
@@ -113,6 +114,7 @@
                                 <p:selectCheckboxMenu id="academicosE" widgetVar="someVarName1" value="#{wizardController.publicacion.academicosExternos}" label="Academicos Externos"
                                                       filter="true" filterMatchMode="startsWith" converter="academicoExternoConverter">
                                     <f:selectItems value="#{academicoExternoController.itemsAvailableSelectMany}" var="AcademicosL2" itemLabel="#{AcademicosL2.nombres} #{AcademicosL2.apellidos} (#{AcademicosL2.universidad})" itemValue="#{AcademicosL2}" />
+                                    <p:ajax event="change" update="#{wizardController.updateOrden()}" process="@this"/>
                                 </p:selectCheckboxMenu>
                                 <p:outputLabel value="" style="padding: 20px" />
                                 <p:outputLabel value="" style="padding: 20px" />
@@ -122,7 +124,10 @@
 
                     <p:tab id="personalizate" title="Personalización" >
                         <p:panel header="Personalización">
-
+                            <p:outputLabel value="Orden" for="orden" />
+                            <p:orderList id="orden" value="#{wizardController.publicacion.academicoOrden}" var="orderA" immediate="true" >
+                            </p:orderList>
+                            <p:outputLabel value="" style="padding: 100px" />
                         </p:panel>
 
                     </p:tab>
