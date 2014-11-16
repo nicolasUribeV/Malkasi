@@ -65,9 +65,10 @@ public class ProyectoController implements Serializable {
     
     public Proyecto viewProyecto(Proyecto proyecto){
         selected = proyecto;
-        JsfUtil.redirect("/faces/roles/academico/proyectos/verProyecto.xhtml");
+        JsfUtil.redirect("/faces/roles/academico/proyectos/ver.xhtml");
         return selected;
     }
+  
     
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ProyectoCreated"));

@@ -23,6 +23,14 @@ public class TipoFinanciamiento implements Serializable {
     private Long id;
     
     private String nombreFinanciamiento;
+
+    public String getNombreFinanciamiento() {
+        return nombreFinanciamiento;
+    }
+
+    public void setNombreFinanciamiento(String nombreFinanciamiento) {
+        this.nombreFinanciamiento = nombreFinanciamiento;
+    }
     
     
 

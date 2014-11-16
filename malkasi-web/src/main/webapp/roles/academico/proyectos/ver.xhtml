@@ -43,7 +43,12 @@
                 <h:outputText value="#{bundle.ViewProyectoLabel_descripcionProyecto}"/>
                 <h:outputText value="#{proyectoController.selected.descripcionProyecto}" title="#{bundle.ViewProyectoTitle_descripcionProyecto}"/>
             </p:panel>
+            <h:form>
+                <p:button icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal " href="/faces/roles/academico/proyectos/List.xhtml" />  
+            </h:form>    
         </ui:define>
+        
+        
     </ui:composition>
 
 </html>

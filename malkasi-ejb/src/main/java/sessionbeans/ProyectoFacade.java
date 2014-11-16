@@ -36,12 +36,13 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
         this.em.persist(proyecto);
         for(int i = 0; i < roles.size(); i++){
             Academico academicoAuxiliar = em.find(Academico.class, roles.get(i).getAcademico().getId());
-            this.em.persist(roles);
+            this.em.persist(roles.get(i));
             academicoAuxiliar.getProyectos().add(roles.get(i));
             this.em.merge(academicoAuxiliar);
         }
-        this.em.merge(proyecto);
+        
         proyecto.setAcademicos(roles);
+        this.em.merge(proyecto);
         
         
     }

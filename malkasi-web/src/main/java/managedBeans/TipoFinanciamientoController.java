@@ -5,6 +5,7 @@ import managedBeans.util.JsfUtil;
 import managedBeans.util.PaginationHelper;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -180,12 +181,12 @@ public class TipoFinanciamientoController implements Serializable {
         return "List";
     }
 
-    public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+   public List<TipoFinanciamiento> getItemsAvailableSelectMany() {
+        return getFacade().findAll();
     }
 
-    public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+    public List<TipoFinanciamiento> getItemsAvailableSelectOne() {
+        return getFacade().findAll();
     }
 
     public TipoFinanciamiento getTipoFinanciamiento(java.lang.Long id) {

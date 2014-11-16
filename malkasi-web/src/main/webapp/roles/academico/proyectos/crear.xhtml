@@ -32,8 +32,8 @@
                                 <p:outputLabel value="#{bundle.CreateProyectoLabel_tipoFinanciamiento}" for="tipoFinanciamiento" />
                                 <p:selectOneMenu id="tipoFinanciamiento" value="#{proyetoWizard.proyecto.tipoFinanciamiento}" >
                                     <f:selectItems value="#{tipoFinanciamientoController.itemsAvailableSelectOne}"
-                                                   var="tipoFinanciamientoItem"
-                                                   itemValue="#{tipoFinanciamientoItem}"/>
+                                                   var="tipoFinanciamientoItem" itemValue="#{tipoFinanciamientoItem}"
+                                                   itemLabel="#{tipoFinanciamientoItem.nombreFinanciamiento}"/>
                                 </p:selectOneMenu>
                             </p:panelGrid>
                         </p:panel>
@@ -48,7 +48,7 @@
 
                                 </p:selectOneMenu>
                                 <p:outputLabel value="Rol: "/>
-                                <p:inputText value = "#{proyetoWizard.rol}"/>
+                                <p:inputText required="true" value = "#{proyetoWizard.rol}"/>
                             </p:panelGrid>
                             <p:commandButton value="Agregar académico" actionListener="#{proyetoWizard.crearRol(proyetoWizard.academico,proyetoWizard.rol)}" update="lista">
 
@@ -71,41 +71,50 @@
 
 
 
-                    <p:tab id="confirm" title="Confirmation" >
-                        <p:panel header="Confirmation">
+                    <p:tab id="confirm" title="Confirmación" >
+                        <p:panel header="Confirmación">
                             <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid">
                                 <h:panelGrid columns="2" columnClasses="label, value" >
-                                    <h:outputText value="Nombre de proyecto " style="color: #158cba;font-size: large;size: letter"/>
+                                    <h:outputText value="Nombre de proyecto : " style="color: #158cba;font-size: large;size: letter"/>
                                     <h:outputText value="#{proyetoWizard.proyecto.nombreProyecto}" styleClass="outputLabel" style="font-size: medium"/>
 
-                                    <h:outputText value="Código del proyecto" style="color: #158cba;font-size: large;top: 20px" />
+                                    <h:outputText value="Código del proyecto :" style="color: #158cba;font-size: large;top: 20px" />
                                     <h:outputText value="#{proyetoWizard.proyecto.codigoProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Descripción del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="Descripción del proyecto :" style="color: #158cba;font-size: large;top: 20px"/>
                                     <h:outputText value="#{proyetoWizard.proyecto.descripcionProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Inicio del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="Inicio del proyecto :" style="color: #158cba;font-size: large;top: 20px"/>
                                     <h:outputText value="#{proyetoWizard.proyecto.fechaInicioProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Duración del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="Duración del proyecto :" style="color: #158cba;font-size: large;top: 20px"/>
                                     <h:outputText value="#{proyetoWizard.proyecto.duracionProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Estado del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="Estado del proyecto :" style="color: #158cba;font-size: large;top: 20px"/>
                                     <h:outputText value="#{proyetoWizard.proyecto.estadoProyecto}" styleClass="outputLabel"/>
 
-                                    <h:outputText value="Tipo financiamiento del proyecto" style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="Tipo financiamiento del proyecto :" style="color: #158cba;font-size: large;top: 20px"/>
                                     <h:outputText value="#{proyetoWizard.proyecto.tipoFinanciamiento}" styleClass="outputLabel"/>
 
                                 </h:panelGrid>
-
-                                <p:panelGrid>
-                                    <p:outputLabel value="Académicos agregados"/>
-                                    <p:selectOneListbox style="height:200px; width: 220px" >
-                                        <f:selectItems value="#{proyetoWizard.roles}" var="academicos" 
-                                                       itemLabel="#{academicos.academico.nombres} #{academicos.academico.apellidos}"/>
-                                    </p:selectOneListbox>
-                                </p:panelGrid>
                                 
+                                <br></br>
+                                <br></br>
+                                <h:panelGrid>
+                                <p:dataTable style="height: 250px; width: 300px" scrollHeight="true" value="#{proyetoWizard.roles}" var="academicos"  >
+                                    <br></br>
+                                    <p:column headerText="Nombres">
+                                        <h:outputText value="#{academicos.academico.nombres} #{academicos.academico.apellidos}" />
+                                    </p:column>
+                                    <p:column headerText="Rol">
+                                        <h:outputText value="#{academicos.rol}" />
+                                    </p:column>
+                                </p:dataTable>
+                                </h:panelGrid>    
+
+
+                                
+
 
                             </h:panelGrid>
                             <p:commandButton value="Crear proyecto" actionListener="#{proyetoWizard.save(proyetoWizard.proyecto, proyetoWizard.roles)}" update="growl" process="@this"/>
@@ -114,6 +123,15 @@
                     </p:tab>
                 </p:wizard>
 
+            </h:form>
+            <h:form>
+                <p:commandButton  icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal" actionListener="#{wizardController.comeBack()}">
+                    <p:confirm header="Confirmación" message="¿Está seguro que desea Volver?" icon="ui-icon-alert" />
+                </p:commandButton>
+                <p:confirmDialog global="true" showEffect="fade" >
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
             </h:form>
         </ui:define>
 

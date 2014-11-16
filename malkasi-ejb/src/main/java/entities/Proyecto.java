@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -30,18 +31,22 @@ public class Proyecto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @Size(min = 1, message="El código del proyecto no puede estar vacío")
     private String codigoProyecto;
     
+    @Size(min = 1, message="El nombre del proyecto no puede estar vacío")
     private String nombreProyecto;
     
     @Column(length=1500)
     private String descripcionProyecto;
+    
     
     @Temporal(TemporalType.DATE)
     private Date fechaInicioProyecto;
     
     private int duracionProyecto;
     
+    @Size(min = 1, message="El estado del proyecto no puede estar vacío")
     private String estadoProyecto;
     
     @ManyToOne(optional= false)

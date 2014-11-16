@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -29,6 +30,7 @@ public class RolProyecto implements Serializable {
     @ManyToOne(optional= false)
     private Academico academico;
     
+    @Size(min = 1, message="El rol no puede ser nulo")
     private String rol;
 
     public Long getId() {

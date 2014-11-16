@@ -15,7 +15,7 @@
         </ui:define>
         <ui:define name="sidebar-left">
 
-            <p:dataList value="A" var="car" type="definition">
+            <p:dataList id="data" value="A" var="car" type="definition">
                 <f:facet name="header">
                     <h:outputText value="#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}" />
                 </f:facet>
@@ -38,7 +38,7 @@
         </ui:define>
         <ui:define name="body">
             <h:form>
-                <p:dataGrid var="proyecto" value="#{proyectoController.items}" columns="3" layout="grid"
+                <p:dataGrid var="proyecto" value="#{sessionUtilTest.currentUser.proyectos}" columns="3" layout="grid"
                             rows="12" paginator="true" id="proyectos"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="6,12,16">
@@ -47,11 +47,11 @@
                         Proyectos
                     </f:facet>
 
-                    <p:panel header="#{proyecto.nombreProyecto}" style="text-align:center">
+                    <p:panel header="#{proyecto.proyecto.nombreProyecto}" style="text-align:center">
                         <h:panelGrid columns="1" style="width:100%">
 
-                            <h:outputText value="#{proyecto.nombreProyecto}" />
-                            <p:commandButton value="Ver proyecto" icon="ui-icon-circle-zoomin" actionListener="#{proyectoController.viewProyecto(proyecto)}" >
+                            <h:outputText value="#{proyecto.proyecto.nombreProyecto}" />
+                            <p:commandButton value="Ver proyecto" icon="ui-icon-circle-zoomin" actionListener="#{proyectoController.viewProyecto(proyecto.proyecto)}" >
                             </p:commandButton>
 
                         </h:panelGrid>
@@ -59,6 +59,7 @@
 
                 </p:dataGrid>
             </h:form>
+             
         </ui:define>
     </ui:composition>
 

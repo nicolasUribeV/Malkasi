@@ -88,7 +88,7 @@ public class ProyetoWizard implements Serializable {
         
         FacesMessage msg = new FacesMessage("Exito", "Proyecto :" + proyecto.getNombreProyecto() + "creado");
         FacesContext.getCurrentInstance().addMessage(null, msg);
-
+        JsfUtil.redirect("/faces/roles/academico/proyectos/List.xhtml");
     }
 
     public Proyecto getProyecto() {
