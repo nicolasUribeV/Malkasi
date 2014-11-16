@@ -15,6 +15,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
@@ -85,6 +86,19 @@ public class Publicacion implements Serializable {
         joinColumns={@JoinColumn(name="publicaciones_ID")}, 
         inverseJoinColumns={@JoinColumn(name="academicosExternos_ID")})
     private List<AcademicoExterno> academicosExternos;
+    
+    @ElementCollection
+    private ArrayList<String> academicoOrden;
+
+    public ArrayList<String> getAcademicoOrden() {
+        return academicoOrden;
+    }
+
+    public void setAcademicoOrden(ArrayList<String> academicoOrden) {
+        this.academicoOrden = academicoOrden;
+    }
+    
+    
     
     public Publicacion(){
         if(academicos == null){

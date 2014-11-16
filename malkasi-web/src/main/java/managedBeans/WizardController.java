@@ -49,6 +49,12 @@ public class WizardController implements Serializable {
         return publicacion;
     }
     
+    public Publicacion prepareEditWhitAcademic(Publicacion publicacion){
+        this.publicacion = publicacion;
+        JsfUtil.redirect("/faces/roles/academico/publicacion/wizardEdit.xhtml");
+        return this.publicacion;
+    }
+    
     public void comeBack(){
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
@@ -62,10 +68,12 @@ public class WizardController implements Serializable {
     }
 
     public void save(Publicacion publicacion,Academico academico) {
-        for (int i = 0; i < publicacion.getAcademicosExternos().size(); i++) {
-            System.out.println("CON: -----------------------------" + publicacion.getAcademicosExternos().get(i).getNombres());
-        }
         this.ejbFacade.Create(publicacion.getAcademicos(), publicacion,academico);
+        JsfUtil.redirect("/faces/roles/academico/index.xhtml");
+    }
+    
+    public void edit(Publicacion publicacion,Academico academico){
+        this.ejbFacade.Update(publicacion.getAcademicos(), publicacion,academico);
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
 

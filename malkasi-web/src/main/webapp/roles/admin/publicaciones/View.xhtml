@@ -23,6 +23,14 @@
                         <c:forEach items="#{publicacionController.usuariosDePublicacion(publicacionController.selected)}" var="UsuariosP">
                                 <h:outputText value="#{UsuariosP}" />  <br></br>
                         </c:forEach>
+                        
+                        <h:outputText value="" />
+                        <h:outputText value="Académicos Externos"/>
+                        <c:forEach items="#{publicacionController.usuariosExternosDePublicacion(publicacionController.selected)}" var="UsuariosP">
+                            <h:outputText value="#{UsuariosP}" />
+                            <h:outputText value="" />
+                        </c:forEach>
+                        
                         <h:outputText value="" />
                         <h:outputText value="País"/>
                         <h:outputText value="#{publicacionController.selected.pais}" title="#{bundle.ViewPublicacionTitle_pais}"/>

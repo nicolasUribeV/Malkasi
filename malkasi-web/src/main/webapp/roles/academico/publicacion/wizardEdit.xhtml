@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/layout/1column.xhtml">
+        <ui:define name="body">
+            <h3>Editar actividad academica</h3>
+
+            <h:form>
+
+                <p:growl id="growl" sticky="true" showDetail="true"/>
+
+                <p:wizard flowListener="#{wizardController.onFlowProcess}" nextLabel="Siguiente" backLabel="Volver a sección anterior">
+                    <p:tab id="personal" title="Información Principal">
+                        <p:panel header="Información Principal">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Titulo Publicación" style="color: #0c2465"/>
+                                <p:inputText  value="#{wizardController.publicacion.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" required="true"  >
+                                </p:inputText>
+
+                                <h:outputText value="Tipo de Publicación" style="color: #0c2465" />
+                                <p:selectOneMenu required="true" value="#{wizardController.publicacion.tipoPublicacion}">
+                                    <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre"
+                                                   itemLabel="#{nombre.nombreTipo}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Abstract" style="color: #0c2465"  />
+                                <p:inputTextarea value="#{wizardController.publicacion.abstractP}" title="Abstract" rows="7" cols="50" />
+
+
+                                <p:outputLabel value="País" style="color: #0c2465" />
+                                <p:inputText value="#{wizardController.publicacion.pais}" title="PublicacionPais" requiredMessage="Pais es campo obligatorio"  />
+
+
+                                <p:outputLabel value="Año" style="color: #0c2465"  />
+                                <p:inputMask value="#{wizardController.publicacion.agno}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}" mask="9999"  >                                 
+                                    <f:validator validatorId="AgnoValidator" />
+                                </p:inputMask>
+
+
+                            </h:panelGrid>
+                        </p:panel>  
+
+                    </p:tab>
+
+                    <p:tab id="infoEsp" title="Información Especifica">
+                        <p:panel header="Información Especifica">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <p:outputLabel value="Nombre Libro/Revista" style="color: #0c2465"  />
+                                <p:inputText  value="#{wizardController.publicacion.nombreLibro}" title="#{bundle.CreatePublicacionTitle_nombreLibro}" >
+
+                                </p:inputText>
+
+
+                                <p:outputLabel value="Número de Páginas" style="color: #0c2465" />
+                                <p:inputText id="referencia" value="#{wizardController.publicacion.referencia}" title="#{bundle.CreatePublicacionTitle_referencia}" >
+
+                                </p:inputText>
+
+                                <p:outputLabel value="Editorial Revista" style="color: #0c2465"  />
+                                <p:inputText id="editorial" value="#{wizardController.publicacion.editorial}" title="#{bundle.CreatePublicacionTitle_editorial}" >
+
+                                </p:inputText>
+
+                                <p:outputLabel value="URL" style="color: #0c2465"  />
+                                <p:inputText id="url" value="#{wizardController.publicacion.url}" title="#{bundle.CreatePublicacionTitle_url}" >
+
+                                </p:inputText>
+
+
+                                <p:outputLabel value="Nombre Congreso" style="color: #0c2465"  /> 
+                                <p:inputText id="nombreCongreso" value="#{wizardController.publicacion.nombreCongreso}" title="#{bundle.CreatePublicacionTitle_nombreCongreso}" >
+
+                                </p:inputText>
+
+
+                                <p:outputLabel value="Institución" style="color: #0c2465"  />
+                                <p:inputText id="institucion" value="#{wizardController.publicacion.institucion}" title="#{bundle.CreatePublicacionTitle_institucion}" >
+
+                                </p:inputText>
+
+
+                                <p:outputLabel value="DOI" style="color: #0c2465"  />
+                                <p:inputText id="doi" value="#{wizardController.publicacion.doi}" title="doi" >
+
+                                </p:inputText>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="contact" title="Academicos Vinculados">
+                        <p:panel header="Académicos Vinculados">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <p:outputLabel value="" style="padding: 20px" />
+                                <p:outputLabel style="padding: 20px" />
+                                <p:outputLabel value="Académicos Departamento" style="color: #0c2465"/>
+                                <p:selectCheckboxMenu id="academicos" widgetVar="someVarName" value="#{wizardController.publicacion.academicos}" label="Academicos Departamento"
+                                                      filter="true" filterMatchMode="startsWith" converter="academicoConverter">
+                                    <f:selectItems value="#{academicoController.getItemsAvailableSelectMany2()}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}"/>
+
+                                </p:selectCheckboxMenu>
+                                <p:outputLabel value="" style="padding: 20px" />
+                                <p:outputLabel value="" style="padding: 20px" />
+                                <p:outputLabel value="Académicos Externos" style="color: #0c2465"/>
+                                <p:selectCheckboxMenu id="academicosE" widgetVar="someVarName1" value="#{wizardController.publicacion.academicosExternos}" label="Academicos Externos"
+                                                      filter="true" filterMatchMode="startsWith" converter="academicoExternoConverter">
+                                    <f:selectItems value="#{academicoExternoController.itemsAvailableSelectMany}" var="AcademicosL2" itemLabel="#{AcademicosL2.nombres} #{AcademicosL2.apellidos} (#{AcademicosL2.universidad})" itemValue="#{AcademicosL2}" />
+                                </p:selectCheckboxMenu>
+                                <p:outputLabel value="" style="padding: 20px" />
+                                <p:outputLabel value="" style="padding: 20px" />
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="personalizate" title="Personalización" >
+                        <p:panel header="Personalización">
+
+                        </p:panel>
+
+                    </p:tab>
+
+                    <p:tab id="confirm" title="Confirmación">
+                        <p:panel header="Confirmación">
+                            <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                                <br></br>
+                                Previsualización:    #{publicacionController.getStringPublicacion(wizardController.publicacion)}
+                                <br></br>
+                            </h:panelGrid>
+                            <p:commandButton value="Guardar" actionListener="#{wizardController.edit(wizardController.publicacion, sessionUtilTest.currentUser)}" update="growl" process="@this"/>
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+
+            </h:form>
+            <h:form>
+                <p:commandButton  icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal" actionListener="#{wizardController.comeBack()}">
+                    <p:confirm header="Confirmación" message="¿Está seguro que desea Volver?" icon="ui-icon-alert" />
+                </p:commandButton>
+                <p:confirmDialog global="true" showEffect="fade" >
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

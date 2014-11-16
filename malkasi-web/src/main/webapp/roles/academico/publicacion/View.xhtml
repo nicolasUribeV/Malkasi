@@ -15,18 +15,27 @@
                     <p:panelGrid columns="2" rendered="#{publicacionController.selected != null}">
                         <h:outputText value="Titulo Publicación"/>
                         <h:outputText value="#{publicacionController.selected.nombrePublicacion}" title="#{bundle.ViewPublicacionTitle_nombrePublicacion}"/>
-                        
+
                         <h:outputText value="Tipo Publicación"/>
                         <h:outputText value="#{publicacionController.selected.tipoPublicacion.nombreTipo}" title="Tipo Publicacion"/>
-                        
+
                         <h:outputText value="Abstract"/>
                         <h:outputText value="#{publicacionController.selected.abstractP}" title="Abstract"/>
-                        
+
                         <h:outputText value="Académicos"/>
                         <c:forEach items="#{publicacionController.usuariosDePublicacion(publicacionController.selected)}" var="UsuariosP">
-                                <h:outputText value="#{UsuariosP}" />
-                                <h:outputText value="" />
+                            <h:outputText value="#{UsuariosP}" />
+                            <h:outputText value="" />
+
                         </c:forEach>
+
+                        <h:outputText value="" />
+                        <h:outputText value="Académicos Externos"/>
+                        <c:forEach items="#{publicacionController.usuariosExternosDePublicacion(publicacionController.selected)}" var="UsuariosP">
+                            <h:outputText value="#{UsuariosP}" />
+                            <h:outputText value="" />
+                        </c:forEach>
+
                         <h:outputText value="" />
                         <h:outputText value="País"/>
                         <h:outputText value="#{publicacionController.selected.pais}" title="#{bundle.ViewPublicacionTitle_pais}"/>
