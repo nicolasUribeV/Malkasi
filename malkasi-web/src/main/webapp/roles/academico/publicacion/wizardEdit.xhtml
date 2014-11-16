@@ -121,7 +121,11 @@
 
                     <p:tab id="personalizate" title="Personalización" >
                         <p:panel header="Personalización">
+                            <p:panel header="Personalización">
+                                <p:orderList id="orden" value="#{wizardController.listaOrden}" var="city" controlsLocation="none" itemLabel="#{city}" itemValue="#{city}" />
 
+                                <p:outputLabel value="" style="padding: 100px" />
+                            </p:panel>
                         </p:panel>
 
                     </p:tab>

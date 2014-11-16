@@ -176,15 +176,18 @@ public class PublicacionController implements Serializable {
     public String getStringPublicacion(Publicacion publicacion) {
         String rP = "";
         if (publicacion != null) {
-            for (int i = 0; i < publicacion.getAcademicos().size(); i++) {
-                String[] aux = publicacion.getAcademicos().get(i).getApellidos().split(" ");
-                if (i == 0) {
-                    rP = aux[0] + ", " + publicacion.getAcademicos().get(i).getNombres().charAt(0) + ".";
-                } else {
-                    if (i == publicacion.getAcademicos().size() - 1) {
-                        rP = rP + "& " + aux[0] + ", " + publicacion.getAcademicos().get(i).getNombres().charAt(0) + ".";
+            if(publicacion.getAcademicoOrden()!=null){
+                for (int i = 0; i < publicacion.getAcademicoOrden().size(); i++) { 
+                    String[] academico = publicacion.getAcademicoOrden().get(i).split("_");
+                    String[] aux = academico[1].split(" ");
+                    if (i == 0) {
+                        rP = aux[0] + ", " + academico[0].charAt(0) + ".";
                     } else {
-                        rP = rP + ", " + aux[0] + ", " + publicacion.getAcademicos().get(i).getNombres().charAt(0) + ".";
+                        if (i == publicacion.getAcademicoOrden().size() - 1) {
+                            rP = rP + "& " + aux[0] + ", " + academico[0].charAt(0) + ".";
+                        } else {
+                            rP = rP + ", " + aux[0] + ", " + academico[0].charAt(0) + ".";
+                        }
                     }
                 }
             }

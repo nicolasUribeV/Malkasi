@@ -90,13 +90,16 @@ public class Publicacion implements Serializable {
 
     public ArrayList<String> getAcademicoOrden() {
         ArrayList<String> listaOrden = new ArrayList<String>();
+        if(academicoOrden == null){
+            return null;
+        }
         String palabra[] = academicoOrden.split(";");
         for (int i = 0; i < palabra.length; i++) {
             listaOrden.add(palabra[i]);
         }
         return listaOrden;
     }
-
+    
     public void setAcademicoOrden(ArrayList<String> listaAcademicos) {
         academicoOrden = "";
         for (int i = 0; i < listaAcademicos.size(); i++) {
