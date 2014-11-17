@@ -31,7 +31,7 @@
                         <p:outputLabel value="Universidad" for="universidad" />
                         <p:inputText id="universidad" value="#{academicoExternoController.selected.universidad}" title="Universidad" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{academicoExternoController.create}" value="#{bundle.Save}" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AcademicoExternoCreateDialog');"/>
+                    <p:commandButton actionListener="#{academicoExternoController.create}" value="Crear" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AcademicoExternoCreateDialog');"/>
                     <p:button value="Cancelar" href="/faces/roles/academico/externos/List.xhtml" />
 
                 </h:panelGroup>

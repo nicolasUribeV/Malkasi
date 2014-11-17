@@ -31,7 +31,7 @@
                         <p:outputLabel value="Universidad" for="universidad" />
                         <p:inputText id="universidad" value="#{academicoExternoController.selected.universidad}" title="Universidad" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{academicoExternoController.update}" value="#{bundle.Save}" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoExternoEditDialog');">
+                    <p:commandButton actionListener="#{academicoExternoController.update}" value="Guardar" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoExternoEditDialog');">
                         <p:confirm header="Confirmación" message="Está seguro que desea editar la información? Esto implica cambiar toda la información en los proyectos/publicaciones asociadas " icon="ui-icon-alert" />
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" >

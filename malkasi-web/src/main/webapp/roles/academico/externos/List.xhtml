@@ -40,9 +40,9 @@
                             <h:outputText value="#{item.universidad} ( #{item.pais} )"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{academicoExternoController.prepareCreate}" update=":AcademicoExternoCreateForm" oncomplete="PF('AcademicoExternoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AcademicoExternoViewForm" oncomplete="PF('AcademicoExternoViewDialog').show()" disabled="#{empty academicoExternoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AcademicoExternoEditForm" oncomplete="PF('AcademicoExternoEditDialog').show()" disabled="#{empty academicoExternoController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Crear" actionListener="#{academicoExternoController.prepareCreate}" update=":AcademicoExternoCreateForm" oncomplete="PF('AcademicoExternoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":AcademicoExternoViewForm" oncomplete="PF('AcademicoExternoViewDialog').show()" disabled="#{empty academicoExternoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Editar" update=":AcademicoExternoEditForm" oncomplete="PF('AcademicoExternoEditDialog').show()" disabled="#{empty academicoExternoController.selected}"/>
                             <p:commandButton id="atras" icon="ui-icon-arrowreturnthick-1-w" value="Volver" actionListener="#{academicoExternoController.comeBack()}" />
                         </f:facet>
                     </p:dataTable>
