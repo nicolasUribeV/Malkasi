@@ -58,6 +58,11 @@ public class ProyectoController implements Serializable {
         return selected;
     }
     
+    public Proyecto prepareEdit(Proyecto proyecto){
+        JsfUtil.redirect("/faces/roles/academico/proyectos/editar.xhtml");
+        return proyecto;
+    }
+    
     public Proyecto prepareCreateViewProyecto () {
         selected = null;
         //items = academico.getPublicaciones();

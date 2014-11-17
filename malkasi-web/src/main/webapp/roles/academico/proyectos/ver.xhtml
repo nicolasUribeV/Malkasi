@@ -14,10 +14,10 @@
         </ui:define>
 
         <ui:define name="sidebar-left">
-            <h:form>
-                <p:panelGrid style="color: #127ba3" columns="2" rendered="#{proyectoController.selected != null}">
-                    <h:outputText value="#{bundle.ViewProyectoLabel_nombreProyecto}"/>
-                    <h:outputText value="#{proyectoController.selected.nombreProyecto}" title="#{bundle.ViewProyectoTitle_nombreProyecto}"/>
+            <h:form >
+                <p:panelGrid style="color: #127ba3;border-right-width: 50px" columns="2" rendered="#{proyectoController.selected != null}">
+                    <h:outputText style="border-right-width: 293px" value="#{bundle.ViewProyectoLabel_nombreProyecto}"/>
+                    <h:outputText style="border-width: 50px" value="#{proyectoController.selected.nombreProyecto}" title="#{bundle.ViewProyectoTitle_nombreProyecto}"/>
                     <h:outputText value="#{bundle.ViewProyectoLabel_codigoProyecto}"/>
                     <h:outputText value="#{proyectoController.selected.codigoProyecto}" title="#{bundle.ViewProyectoTitle_codigoProyecto}"/>
                     <h:outputText value="#{bundle.ViewProyectoLabel_fechaInicioProyecto}"/>
@@ -31,6 +31,10 @@
                     <h:outputText value="#{bundle.ViewProyectoLabel_tipoFinanciamiento}"/>
                     <h:outputText value="#{proyectoController.selected.tipoFinanciamiento}" title="#{bundle.ViewProyectoTitle_tipoFinanciamiento}"/>
                 </p:panelGrid>
+                <p:commandButton style="width: 100%" value="Editar Proyecto" actionListener="#{proyectoController.prepareEdit(proyectoController.selected)}"/>
+                <p:commandButton style="width: 100%" value="Eliminar Proyecto" />
+                <p:button style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal " href="/faces/roles/academico/index.xhtml" />  
+
             </h:form>
 
         </ui:define>
@@ -43,12 +47,10 @@
                 <h:outputText value="#{bundle.ViewProyectoLabel_descripcionProyecto}"/>
                 <h:outputText value="#{proyectoController.selected.descripcionProyecto}" title="#{bundle.ViewProyectoTitle_descripcionProyecto}"/>
             </p:panel>
-            <h:form>
-                <p:button icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal " href="/faces/roles/academico/proyectos/List.xhtml" />  
-            </h:form>    
+
         </ui:define>
-        
-        
+
+
     </ui:composition>
 
 </html>
