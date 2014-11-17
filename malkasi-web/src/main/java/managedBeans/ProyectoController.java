@@ -1,10 +1,12 @@
 package managedBeans;
 
 import entities.Proyecto;
+import entities.RolProyecto;
 import managedBeans.util.JsfUtil;
 import managedBeans.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -134,6 +136,42 @@ public class ProyectoController implements Serializable {
 
     public List<Proyecto> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+    
+    public Boolean tieneProyectos(List<RolProyecto> proyectos) {
+        if(proyectos == null){
+            return false;
+        }
+        else if(proyectos.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+    
+    public ArrayList<String> referenciasProyectos(List<RolProyecto> proyectos) {
+        ArrayList<String> pT = new ArrayList<>();
+        String Aux;
+        int cont = 1;
+        for (int i = 0; i < proyectos.size(); i++) {
+            Aux = cont + ". " + getStringProyecto(proyectos.get(i));
+            pT.add(Aux);
+            cont++;
+        }
+        if (proyectos.isEmpty()) {
+            pT.add("");
+        }
+        return pT;
+    }
+    
+    public String getStringProyecto(RolProyecto proyecto){
+        String rP = "";
+        if (proyecto != null) {
+            rP = "'" + proyecto.getProyecto().getNombreProyecto() + "', ";
+            rP = rP + proyecto.getRol() + ", ";
+            rP = rP + proyecto.getProyecto().getTipoFinanciamiento().getNombreFinanciamiento() + ", ";
+            rP = rP + "codigo " + proyecto.getProyecto().getCodigoProyecto() + ".";
+        }
+        return rP;
     }
 
     @FacesConverter(forClass = Proyecto.class)
