@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="/layout/1column.xhtml">
 
@@ -17,10 +18,125 @@
 
         <ui:define name="body">
 
-            <h2 style="color: #c7254e">CHUPALO :) </h2>
-            <h3>#{proyectoController.selected.nombreProyecto}</h3>
+            <h3>Editando "#{proyectoController.selected.nombreProyecto}"</h3>
             
+             <h:form id="agregarProyecto">
 
+                <p:growl id="growl" sticky="true" showDetail="true"/>
+
+                <p:wizard flowListener="#{proyetoWizard.onFlowProcess}" nextLabel="Siguiente" backLabel="Volver">
+                    <p:tab id="basicos" title="Información básica">
+                        <p:panel header="Datos básicos del proyecto">
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Titulo Proyecto *" for="nombreProyecto" />
+                                <p:inputText id="nombreProyecto" value="#{proyetoWizard.proyecto.nombreProyecto}" title="#{bundle.CreateProyectoTitle_nombreProyecto}" />
+                                <p:outputLabel value="Código *" for="codigoProyecto" />
+                                <p:inputText id="codigoProyecto" value="#{proyetoWizard.proyecto.codigoProyecto}" title="#{bundle.CreateProyectoTitle_codigoProyecto}" />
+                                <p:outputLabel value="Resumen" for="descripcionProyecto" />
+                                <p:inputTextarea id="descripcionProyecto" value="#{proyetoWizard.proyecto.descripcionProyecto}" title="#{bundle.CreateProyectoTitle_descripcionProyecto}" />
+                                <p:outputLabel value="Fecha Inicio" for="fechaInicioProyecto" />
+                                <p:calendar id="fechaInicioProyecto" pattern="MM/dd/yyyy" value="#{proyetoWizard.proyecto.fechaInicioProyecto}" title="#{bundle.EditProyectoTitle_fechaInicioProyecto}"  showOn="button"/>
+                                <p:outputLabel value="Duración (meses)" for="duracionProyecto" />
+                                <p:inputText id="duracionProyecto" value="#{proyetoWizard.proyecto.duracionProyecto}" title="#{bundle.CreateProyectoTitle_duracionProyecto}" />
+                                <p:outputLabel value="Estado Proyecto" for="estadoProyecto" />
+                                <p:selectOneMenu id="estadoProyecto" value="#{proyetoWizard.proyecto.estadoProyecto}">  
+                                    <f:selectItem itemLabel="Presentado" itemValue="Presentado" />  
+                                    <f:selectItem itemLabel="Adjudicado" itemValue="Adjudicado" />  
+                                    <f:selectItem itemLabel="En Ejecución" itemValue="En Ejecución" />
+                                    <f:selectItem itemLabel="Terminado" itemValue="Terminado" />
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Tipo Financiamiento" for="tipoFinanciamiento" />
+                                <p:selectOneMenu id="tipoFinanciamiento" value="#{proyetoWizard.proyecto.tipoFinanciamiento}" >
+                                    <f:selectItems value="#{tipoFinanciamientoController.itemsAvailableSelectOne}"
+                                                   var="tipoFinanciamientoItem" itemValue="#{tipoFinanciamientoItem}"
+                                                   itemLabel="#{tipoFinanciamientoItem.nombreFinanciamiento}"/>
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="agregarAcademicos" title="Académicos">
+                        <p:panel id="panelAcademicos" header="Agregar académicos">
+                            <p:panelGrid columns="2" >
+                                <h:outputLabel value="Academico" for="academicos" />
+                                <p:selectOneMenu  required="true" requiredMessage="Debe ingresar al menos un acad[emico" id="academicos" value="#{proyetoWizard.academico}" converter="academicoConverter" >
+                                    <f:selectItems id= "SelecItem" value="#{proyetoWizard.academicos}" var="academ" itemLabel="#{academ.nombres} #{academ.apellidos}" itemValue="#{academ}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Rol: "/>
+                                <p:inputText id="rolInput" required="true" value = "#{proyetoWizard.rol}"/>
+                            </p:panelGrid>
+                            <p:commandButton value="Agregar académico" actionListener="#{proyetoWizard.crearRol(proyetoWizard.academico,proyetoWizard.rol)}" update="lista rolInput">
+
+                            </p:commandButton>
+
+                        </p:panel>
+                        <p:panel id="lista">
+                            <p:panelGrid>
+                                <p:outputLabel value="Académicos agregados"/>
+                                <p:selectOneListbox style="height:200px; width: 220px">
+                                    <f:selectItems value="#{proyetoWizard.roles}" var="academicos"
+                                                   itemLabel="#{academicos.rol}: #{academicos.academico.nombres} #{academicos.academico.apellidos}"/>
+                                    
+                                </p:selectOneListbox>
+                            </p:panelGrid>
+                            <p:commandButton value="Quitar académico" actionListener="#{proyetoWizard.eliminarRol(proyetoWizard.academico)}" update="lista panelAcademicos"/>
+
+
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="confirm" title="Confirmación" >
+                        <p:panel header="Confirmación">
+                            <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid">
+                                <h:panelGrid columns="2" columnClasses="label, value" >
+                                    <h:outputText value="Titulo de proyecto: " style="color: #158cba;font-size: large;size: letter"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.nombreProyecto}" styleClass="outputLabel" style="font-size: medium"/>
+
+                                    <h:outputText value="Código del proyecto: " style="color: #158cba;font-size: large;top: 20px" />
+                                    <h:outputText value="#{proyetoWizard.proyecto.codigoProyecto}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Resumen del proyecto: " style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.descripcionProyecto}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Inicio del proyecto: " style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.fechaInicioProyecto}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Duración del proyecto: " style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.duracionProyecto}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Estado del proyecto: " style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.estadoProyecto}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Tipo financiamiento: " style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="#{proyetoWizard.proyecto.tipoFinanciamiento.nombreFinanciamiento}" styleClass="outputLabel"/>
+                                    
+                                    <h:outputText value="Academicos Asociados: " style="color: #158cba;font-size: large;top: 20px"/>
+                                    <h:outputText value="" styleClass="outputLabel"/>
+                                     
+                                    <c:forEach items="#{proyetoWizard.roles}" var="roles">
+                                        <h:outputText value=" "/>
+                                        <h:outputText value="#{roles.academico.nombres} #{roles.academico.apellidos} (#{roles.rol})" styleClass="outputLabel"/>
+                
+                                    </c:forEach>
+                                </h:panelGrid>  
+
+                            </h:panelGrid>
+                            <p:commandButton icon="ui-icon-plus" value="Guardar Cambios" actionListener="#{proyetoWizard.edit(proyetoWizard.proyecto, proyetoWizard.roles, sessionUtilTest.currentUser)}" update="growl" process="@this"/>
+
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+            </h:form>
+            <h:form>
+                <p:commandButton  icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal" actionListener="#{wizardController.comeBack()}">
+                    <p:confirm header="Confirmación" message="¿Está seguro que desea Volver?" icon="ui-icon-alert" />
+                </p:commandButton>
+                <p:confirmDialog global="true" showEffect="fade" >
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </h:form>
                
         </ui:define>
         

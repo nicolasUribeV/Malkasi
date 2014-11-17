@@ -100,6 +100,25 @@ public class ProyetoWizard implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
+    
+    public void edit(Proyecto proyectoP, List<RolProyecto> rolesP, Academico cu) {
+        int flag = 0;
+        for (int i = 0; i < rolesP.size(); i++) {
+            if(cu.getId()==rolesP.get(i).getAcademico().getId()){
+                flag = 1;
+            }
+        }
+        if(flag == 1){
+            FacesMessage msg = new FacesMessage("Exito", "Proyecto :" + proyecto.getNombreProyecto() + "Editado");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            JsfUtil.redirect("/faces/roles/academico/proyectos/List.xhtml");
+        }
+        else{
+            FacesMessage msg = new FacesMessage("Error", "Usted debe estar incluido dentro del proyecto");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
 
     public Proyecto getProyecto() {
         return proyecto;
@@ -181,6 +200,11 @@ public class ProyetoWizard implements Serializable {
     private void initializeEmbeddableKey() {
     }
     
-    
+    public void prepareEdit(Proyecto proyecto){
+        this.proyecto = proyecto;
+        this.roles = proyecto.getAcademicos();
+        academicos = academicoFacade.findAll();
+        JsfUtil.redirect("/faces/roles/academico/proyectos/editar.xhtml");
+    }
 
 }

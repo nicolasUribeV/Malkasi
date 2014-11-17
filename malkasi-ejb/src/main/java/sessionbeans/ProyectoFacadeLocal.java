@@ -33,4 +33,6 @@ public interface ProyectoFacadeLocal {
     int count();
     
     public void Create(Proyecto proyecto, List<RolProyecto> roles);
+    
+    public void Update(Proyecto proyecto, List<RolProyecto> roles);
 }

@@ -31,7 +31,7 @@
 
             <h:form>
                 <p:commandButton  style="width: 100%" id="createButton" icon="ui-icon-plus"   value="Crear proyecto" actionListener="#{proyetoWizard.prepareCreate(sessionUtilTest.currentUser)}" />
-                <p:commandButton  style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal" actionListener="#{wizardController.comeBack()}"/>
+                <p:commandButton  style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal" actionListener="#{wizardController.comeBackIndex()}"/>
 
 
             </h:form>
@@ -50,9 +50,8 @@
 
                     <p:panel header="#{proyecto.proyecto.nombreProyecto}" style="text-align:center">
                         <h:panelGrid columns="1" style="width:100%">
-                            <c:forEach items="#{proyecto.proyecto.academicos}" var="academ">
-                                <h:outputText value="#{academ}"/>
-                            </c:forEach>
+                            <h:outputText value="#{proyecto.proyecto.codigoProyecto}"/>
+                            <h:outputText value="Rol: #{proyecto.rol}"/>
                             <h:outputText value="#{proyecto.proyecto.tipoFinanciamiento.nombreFinanciamiento}"/>
                             <p:commandButton value="Ver proyecto" icon="ui-icon-circle-zoomin" actionListener="#{proyectoController.viewProyecto(proyecto.proyecto)}" >
                             </p:commandButton>

@@ -60,8 +60,13 @@ public class WizardController implements Serializable {
     }
 
     public void comeBack() {
+        JsfUtil.redirect("/faces/roles/academico/proyectos/List.xhtml");
+    }
+    
+    public void comeBackIndex() {
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
+
 
     public Publicacion getPublicacion() {
         return publicacion;
@@ -77,8 +82,23 @@ public class WizardController implements Serializable {
     }
 
     public void edit(Publicacion publicacion, Academico academico) {
-        this.ejbFacade.Update(publicacion.getAcademicos(), publicacion, academico);
-        JsfUtil.redirect("/faces/roles/academico/index.xhtml");
+        
+        int flag = 0;
+        for (int i = 0; i < publicacion.getAcademicos().size(); i++) {
+            if(academico.getId()==publicacion.getAcademicos().get(i).getId()){
+                flag = 1;
+            }
+        }
+        if(flag == 1){   
+            this.ejbFacade.Update(publicacion.getAcademicos(), publicacion, academico);
+            JsfUtil.redirect("/faces/roles/academico/index.xhtml");
+        }
+        else{
+            FacesMessage msg = new FacesMessage("Error", "Usted debe estar incluido dentro de la publicación");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+        
+        
     }
 
     protected void setEmbeddableKeys() {

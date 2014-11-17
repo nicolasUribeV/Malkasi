@@ -30,9 +30,9 @@
                         <h:outputText style="color: #c35b00;font-size: large" value="#{bundle.ViewProyectoLabel_tipoFinanciamiento}"/>
                         <h:outputText value="#{proyectoController.selected.tipoFinanciamiento.nombreFinanciamiento}" title="#{bundle.ViewProyectoTitle_tipoFinanciamiento}"/>
                     </h:panelGrid>
-                    <p:commandButton style="width: 100%" value="Editar Proyecto" actionListener="#{proyectoController.prepareEdit(proyectoController.selected)}"/>
+                    <p:commandButton style="width: 100%" value="Editar Proyecto" actionListener="#{proyetoWizard.prepareEdit(proyectoController.selected)}"/>
                     <p:commandButton style="width: 100%" value="Eliminar Proyecto" />
-                    <p:button style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal " href="/faces/roles/academico/index.xhtml" />  
+                    <p:button style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal " href="/faces/roles/academico/proyectos/List.xhtml" />  
                 </p:panel>
             </h:form>
 
