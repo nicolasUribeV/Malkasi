@@ -129,7 +129,7 @@ public class PublicacionController implements Serializable {
     
     public ArrayList<String> usuariosExternosDePublicacion(Publicacion publicacion) {
         ArrayList<String> usuarios = new ArrayList<>();
-        if (publicacion != null) {
+        if (publicacion != null && publicacion.getAcademicosExternos()!= null) {
             for (int i = 0; i < publicacion.getAcademicosExternos().size(); i++) {
                 usuarios.add(publicacion.getAcademicosExternos().get(i).getNombres() + " " + publicacion.getAcademicosExternos().get(i).getApellidos());
             }

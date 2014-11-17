@@ -166,7 +166,7 @@ public class ProyectoController implements Serializable {
     public String getStringProyecto(RolProyecto proyecto){
         String rP = "";
         if (proyecto != null) {
-            rP = "'" + proyecto.getProyecto().getNombreProyecto() + "', ";
+            rP = "\"" + proyecto.getProyecto().getNombreProyecto() + "\", ";
             rP = rP + proyecto.getRol() + ", ";
             rP = rP + proyecto.getProyecto().getTipoFinanciamiento().getNombreFinanciamiento() + ", ";
             rP = rP + "codigo " + proyecto.getProyecto().getCodigoProyecto() + ".";

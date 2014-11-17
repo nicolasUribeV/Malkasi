@@ -60,8 +60,7 @@
                                 <p:selectOneListbox style="height:200px; width: 220px">
                                     <f:selectItems value="#{proyetoWizard.roles}" var="academicos"
                                                    itemLabel="#{academicos.academico.nombres} #{academicos.academico.apellidos}"/>
-                                    <f:attribute name="currentUserLA" value="#{sessionUtilTest.currentUser}" />
-                                    <f:validator validatorId="ProyectosValidator" />
+                                    
                                 </p:selectOneListbox>
                             </p:panelGrid>
                             <p:commandButton value="Quitar académico" actionListener="#{proyetoWizard.eliminarRol(proyetoWizard.academico)}" update="lista panelAcademicos"/>
