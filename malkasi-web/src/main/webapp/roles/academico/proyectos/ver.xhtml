@@ -14,34 +14,33 @@
         </ui:define>
 
         <ui:define name="sidebar-left">
-            <h:form >
-                <p:panelGrid style="color: #127ba3;border-right-width: 50px" columns="2" rendered="#{proyectoController.selected != null}">
-                    <h:outputText style="border-right-width: 293px" value="#{bundle.ViewProyectoLabel_nombreProyecto}"/>
-                    <h:outputText style="border-width: 50px" value="#{proyectoController.selected.nombreProyecto}" title="#{bundle.ViewProyectoTitle_nombreProyecto}"/>
-                    <h:outputText value="#{bundle.ViewProyectoLabel_codigoProyecto}"/>
-                    <h:outputText value="#{proyectoController.selected.codigoProyecto}" title="#{bundle.ViewProyectoTitle_codigoProyecto}"/>
-                    <h:outputText value="#{bundle.ViewProyectoLabel_fechaInicioProyecto}"/>
-                    <h:outputText value="#{proyectoController.selected.fechaInicioProyecto}" title="#{bundle.ViewProyectoTitle_fechaInicioProyecto}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewProyectoLabel_duracionProyecto}"/>
-                    <h:outputText value="#{proyectoController.selected.duracionProyecto}" title="#{bundle.ViewProyectoTitle_duracionProyecto}"/>
-                    <h:outputText value="#{bundle.ViewProyectoLabel_estadoProyecto}"/>
-                    <h:outputText value="#{proyectoController.selected.estadoProyecto}" title="#{bundle.ViewProyectoTitle_estadoProyecto}"/>
-                    <h:outputText value="#{bundle.ViewProyectoLabel_tipoFinanciamiento}"/>
-                    <h:outputText value="#{proyectoController.selected.tipoFinanciamiento}" title="#{bundle.ViewProyectoTitle_tipoFinanciamiento}"/>
-                </p:panelGrid>
-                <p:commandButton style="width: 100%" value="Editar Proyecto" actionListener="#{proyectoController.prepareEdit(proyectoController.selected)}"/>
-                <p:commandButton style="width: 100%" value="Eliminar Proyecto" />
-                <p:button style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal " href="/faces/roles/academico/index.xhtml" />  
-
+            <h:form>
+                <p:panel style="width: 263px;word-wrap: break-word">
+                    <h:panelGrid columns="1" rendered="#{proyectoController.selected != null}">
+                        <h:outputText style="color: #c35b00;font-size: large" value="#{bundle.ViewProyectoLabel_codigoProyecto}"/>
+                        <h:outputText value="#{proyectoController.selected.codigoProyecto}" title="#{bundle.ViewProyectoTitle_codigoProyecto}"/>
+                        <h:outputText style="color: #c35b00;font-size: large" value="#{bundle.ViewProyectoLabel_fechaInicioProyecto}"/>
+                        <h:outputText value="#{proyectoController.selected.fechaInicioProyecto}" title="#{bundle.ViewProyectoTitle_fechaInicioProyecto}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText style="color: #c35b00;font-size: large" value="#{bundle.ViewProyectoLabel_duracionProyecto}"/>
+                        <h:outputText value="#{proyectoController.selected.duracionProyecto}" title="#{bundle.ViewProyectoTitle_duracionProyecto}"/>
+                        <h:outputText style="color: #c35b00;font-size: large" value="#{bundle.ViewProyectoLabel_estadoProyecto}"/>
+                        <h:outputText value="#{proyectoController.selected.estadoProyecto}" title="#{bundle.ViewProyectoTitle_estadoProyecto}"/>
+                        <h:outputText style="color: #c35b00;font-size: large" value="#{bundle.ViewProyectoLabel_tipoFinanciamiento}"/>
+                        <h:outputText value="#{proyectoController.selected.tipoFinanciamiento.nombreFinanciamiento}" title="#{bundle.ViewProyectoTitle_tipoFinanciamiento}"/>
+                    </h:panelGrid>
+                    <p:commandButton style="width: 100%" value="Editar Proyecto" actionListener="#{proyectoController.prepareEdit(proyectoController.selected)}"/>
+                    <p:commandButton style="width: 100%" value="Eliminar Proyecto" />
+                    <p:button style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal " href="/faces/roles/academico/index.xhtml" />  
+                </p:panel>
             </h:form>
 
         </ui:define>
 
         <ui:define name="body">
 
-            <h2 style="color: #158cba">#{proyectoController.selected.nombreProyecto} </h2>
+            <h2 style="color: #158cba; word-wrap: break-word">#{proyectoController.selected.nombreProyecto} </h2>
 
             <p:panel style="text-align: justify;font-size: 100%">
                 <h:outputText value="#{bundle.ViewProyectoLabel_descripcionProyecto}"/>
