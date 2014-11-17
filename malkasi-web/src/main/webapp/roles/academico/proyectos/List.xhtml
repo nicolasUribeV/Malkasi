@@ -28,9 +28,12 @@
                     </c:forEach> 
                 </p:panelGrid>
             </p:dataList>
-            
+
             <h:form>
                 <p:commandButton  style="width: 100%" id="createButton" icon="ui-icon-plus"   value="Crear proyecto" actionListener="#{proyetoWizard.prepareCreate(sessionUtilTest.currentUser)}" />
+                <p:commandButton  style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal" actionListener="#{wizardController.comeBack()}"/>
+
+
             </h:form>
 
 
@@ -38,10 +41,8 @@
         </ui:define>
         <ui:define name="body">
             <h:form>
-                <p:dataGrid var="proyecto" value="#{sessionUtilTest.currentUser.proyectos}" columns="3" layout="grid"
-                            rows="12" paginator="true" id="proyectos"
-                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                            rowsPerPageTemplate="6,12,16">
+                <p:dataGrid var="proyecto" value="#{sessionUtilTest.currentUser.proyectos}" columns="2" layout="grid"
+                            id="proyectos">
 
                     <f:facet  name="header">
                         Proyectos
@@ -49,8 +50,10 @@
 
                     <p:panel header="#{proyecto.proyecto.nombreProyecto}" style="text-align:center">
                         <h:panelGrid columns="1" style="width:100%">
-
-                            <h:outputText value="#{proyecto.proyecto.nombreProyecto}" />
+                            <c:forEach items="#{proyecto.proyecto.academicos}" var="academ">
+                                <h:outputText value="#{academ}"/>
+                            </c:forEach>
+                            <h:outputText value="#{proyecto.proyecto.tipoFinanciamiento.nombreFinanciamiento}"/>
                             <p:commandButton value="Ver proyecto" icon="ui-icon-circle-zoomin" actionListener="#{proyectoController.viewProyecto(proyecto.proyecto)}" >
                             </p:commandButton>
 
@@ -59,7 +62,7 @@
 
                 </p:dataGrid>
             </h:form>
-             
+
         </ui:define>
     </ui:composition>
 
