@@ -82,13 +82,23 @@ public class ProyetoWizard implements Serializable {
         this.rolSeleccionado = rolSeleccionado;
     }
 
-    public void save(Proyecto proyectoP, List<RolProyecto> rolesP) {
-        System.out.println("agregando-----------------" + proyectoP.getNombreProyecto() + rolesP.get(0).getAcademico().getUserName() + rolesP.get(0).getRol());
-        proyectoFacade.Create(proyectoP, rolesP);
-        
-        FacesMessage msg = new FacesMessage("Exito", "Proyecto :" + proyecto.getNombreProyecto() + "creado");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        JsfUtil.redirect("/faces/roles/academico/proyectos/List.xhtml");
+    public void save(Proyecto proyectoP, List<RolProyecto> rolesP, Academico cu) {
+        int flag = 0;
+        for (int i = 0; i < rolesP.size(); i++) {
+            if(cu.getId()==rolesP.get(i).getAcademico().getId()){
+                flag = 1;
+            }
+        }
+        if(flag == 1){
+            proyectoFacade.Create(proyectoP, rolesP);
+            FacesMessage msg = new FacesMessage("Exito", "Proyecto :" + proyecto.getNombreProyecto() + "creado");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            JsfUtil.redirect("/faces/roles/academico/proyectos/List.xhtml");
+        }
+        else{
+            FacesMessage msg = new FacesMessage("Error", "Usted debe estar incluido dentro del proyecto");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 
     public Proyecto getProyecto() {
@@ -129,9 +139,6 @@ public class ProyetoWizard implements Serializable {
             rp.setProyecto(proyecto);
             rp.setRol(rol);
             roles.add(rp);
-            for (int i = 0; i < roles.size(); i++) {
-                System.out.println("Gente en ROLES: --------------------" + roles.get(i).getAcademico().getUserName());
-            }
             int index = -1;
             for (int i = 0; i < academicos.size(); i++) {
                 if(academico.getId() == academicos.get(i).getId()){
@@ -139,14 +146,11 @@ public class ProyetoWizard implements Serializable {
                 }
             }
             if(index != -1){
-                System.out.println("Eliminando: --------------------------" + academicos.get(index).getUserName());
                 academicos.remove(index);
             }
-            for (int i = 0; i < academicos.size(); i++) {
-                System.out.println("Gente en ACADEMICOS: ---------------------" + academicos.get(i).getUserName());
-            }   
+            this.rol = " ";
         }
-
+        
     }
     
     public void eliminarRol(Academico academico){
