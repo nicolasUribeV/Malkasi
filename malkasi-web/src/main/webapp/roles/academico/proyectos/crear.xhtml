@@ -43,9 +43,8 @@
                         <p:panel id="panelAcademicos" header="Agregar académicos">
                             <p:panelGrid columns="2" >
                                 <h:outputLabel value="Academico" for="academicos" />
-                                <p:selectOneMenu id="academicos" value="#{proyetoWizard.academico}" converter="academicoConverter" >
+                                <p:selectOneMenu  required="true" requiredMessage="Debe ingresar al menos un acad[emico" id="academicos" value="#{proyetoWizard.academico}" converter="academicoConverter" >
                                     <f:selectItems id= "SelecItem" value="#{proyetoWizard.academicos}" var="academ" itemLabel="#{academ.nombres} #{academ.apellidos}" itemValue="#{academ}"/>
-
                                 </p:selectOneMenu>
                                 <p:outputLabel value="Rol: "/>
                                 <p:inputText required="true" value = "#{proyetoWizard.rol}"/>
@@ -61,6 +60,8 @@
                                 <p:selectOneListbox style="height:200px; width: 220px">
                                     <f:selectItems value="#{proyetoWizard.roles}" var="academicos"
                                                    itemLabel="#{academicos.academico.nombres} #{academicos.academico.apellidos}"/>
+                                    <f:attribute name="currentUserLA" value="#{sessionUtilTest.currentUser}" />
+                                    <f:validator validatorId="ProyectosValidator" />
                                 </p:selectOneListbox>
                             </p:panelGrid>
                             <p:commandButton value="Quitar académico" actionListener="#{proyetoWizard.eliminarRol(proyetoWizard.academico)}" update="lista panelAcademicos"/>
@@ -117,7 +118,7 @@
 
 
                             </h:panelGrid>
-                            <p:commandButton value="Crear proyecto" actionListener="#{proyetoWizard.save(proyetoWizard.proyecto, proyetoWizard.roles)}" update="growl" process="@this"/>
+                            <p:commandButton icon="ui-icon-plus" value="Crear proyecto" actionListener="#{proyetoWizard.save(proyetoWizard.proyecto, proyetoWizard.roles)}" update="growl" process="@this"/>
 
                         </p:panel>
                     </p:tab>
