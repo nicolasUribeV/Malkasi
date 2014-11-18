@@ -31,7 +31,7 @@
                         <h:outputText value="#{proyectoController.selected.tipoFinanciamiento.nombreFinanciamiento}" title="#{bundle.ViewProyectoTitle_tipoFinanciamiento}"/>
                     </h:panelGrid>
                     <p:commandButton style="width: 100%" icon="ui-icon-plus" value="Editar Proyecto" actionListener="#{proyetoWizard.prepareEdit(proyectoController.selected)}"/>
-                    <p:commandButton style="width: 100%" icon="ui-icon-close" value="Eliminar Proyecto" />
+                    <p:commandButton style="width: 100%" icon="ui-icon-close" value="Eliminar Proyecto" disabled="true" />
                     <p:button style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal " href="/faces/roles/academico/proyectos/List.xhtml" />  
                 </p:panel>
             </h:form>
