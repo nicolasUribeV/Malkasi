@@ -2,11 +2,13 @@ package managedBeans;
 
 import entities.Academico;
 import entities.AcademicoExterno;
+import entities.Publicacion;
 import managedBeans.util.JsfUtil;
 import managedBeans.util.JsfUtil.PersistAction;
 import sessionbeans.AcademicoExternoFacadeLocal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import sessionbeans.PublicacionFacadeLocal;
 
 @Named("academicoExternoController")
 @SessionScoped
@@ -26,6 +29,8 @@ public class AcademicoExternoController implements Serializable {
 
     @EJB
     private AcademicoExternoFacadeLocal ejbFacade;
+    @EJB
+    private PublicacionFacadeLocal publicacionFacade;
     private List<AcademicoExterno> items = null;
     private AcademicoExterno selected;
 
@@ -64,6 +69,28 @@ public class AcademicoExternoController implements Serializable {
     }
 
     public void update() {
+
+        AcademicoExterno ae = ejbFacade.find(this.selected.getId());
+        List<Publicacion> publicaciones = publicacionFacade.findAll();
+        for (int i = 0; i < publicaciones.size(); i++) {
+            ArrayList<String> orden = publicaciones.get(i).getAcademicoOrden();
+            if (orden != null) {
+                int index = -1; 
+                for (int j = 0; j < orden.size(); j++) {
+                    String[] name = orden.get(j).split("_");
+                    if(ae.getNombres().equals(name[0]) && ae.getApellidos().equals(name[1])){
+                        System.out.println("Encontré a " +name[0] +" "+name[1]);
+                        index = j; 
+                    }
+                }
+                if(index != -1){
+                    String nuevo = this.selected.getNombres()+"_"+this.selected.getApellidos();
+                    orden.set(index, nuevo);
+                    publicaciones.get(i).setAcademicoOrden(orden);
+                    publicacionFacade.edit(publicaciones.get(i));
+                }
+            }
+        }
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoExternoUpdated"));
     }
 
@@ -81,18 +108,17 @@ public class AcademicoExternoController implements Serializable {
         }
         return items;
     }
-    
+
     public AcademicoExterno prepareCreateViewAcademicExternal(Academico academico) {
         selected = null;
         //items = academico.getPublicaciones();
         JsfUtil.redirect("/faces/roles/academico/externos/List.xhtml");
         return selected;
     }
-    
+
     public void comeBack() {
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
-    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -133,7 +159,7 @@ public class AcademicoExternoController implements Serializable {
     public List<AcademicoExterno> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
+
     @FacesConverter(forClass = AcademicoExterno.class)
     public static class AcademicoExternoControllerConverter implements Converter {
 

@@ -37,7 +37,6 @@ public class WizardController implements Serializable {
     public Publicacion prepareCreateWithAcademic(Academico academico) {
         this.publicacion = new Publicacion();
         this.listaOrden = new ArrayList<>();
-        this.publicacion.getAcademicos().add(academico);
         this.publicacion.setDoi("");
         this.publicacion.setEditorial("");
         this.publicacion.setInstitucion("");

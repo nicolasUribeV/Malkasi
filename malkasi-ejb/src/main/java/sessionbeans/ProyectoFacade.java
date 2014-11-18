@@ -45,6 +45,30 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
     
     @Override
     public void Update(Proyecto proyecto, List<RolProyecto> roles){
-
+        Proyecto anterior = em.find(Proyecto.class, proyecto.getId());
+        proyecto.setAcademicos(roles);
+        for (int i = 0; i < roles.size(); i++) {
+            em.merge(roles.get(i));
+        }
+        for (int i = 0; i < anterior.getAcademicos().size(); i++) {
+            Academico academicoAuxiliar = em.find(Academico.class, anterior.getAcademicos().get(i).getAcademico().getId());
+            int index = -1;
+            for (int j = 0; j < academicoAuxiliar.getProyectos().size(); j++) {
+                if(anterior.getAcademicos().get(i).getId() == academicoAuxiliar.getProyectos().get(j).getId()){
+                    index = j;
+                    break;
+                }
+            }
+            if(index != -1){
+                academicoAuxiliar.getProyectos().remove(index);
+            }
+            em.merge(academicoAuxiliar);
+        }
+        for(int i = 0; i < roles.size(); i++){
+            Academico academicoAuxiliar = em.find(Academico.class, roles.get(i).getAcademico().getId());
+            academicoAuxiliar.getProyectos().add(roles.get(i));
+            this.em.merge(academicoAuxiliar);
+        }
+        this.em.merge(proyecto);
     }
 }

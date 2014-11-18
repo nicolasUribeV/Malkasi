@@ -44,7 +44,8 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
                                     <c:if test="#{sessionUtilTest.hasIdentity()}">
-                                        <ui:insert name="header-links"/>  
+                                        <ui:insert name="header-links"/>
+                                        <h4 class="white">Bienvenido <b>#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}</b></h4>
                                         <c:if test="#{sessionUtilTest.currentUser.permisoAdmin}">
                                             <li>
                                                 <p:commandLink type="submit" value="Cambiar de Rol" immediate="true" action="#{sessionUtilTest.cambiarRol()}"></p:commandLink>
@@ -54,7 +55,8 @@
                                             <p:commandLink type="submit" value="Cerrar sesión" immediate="true" action="#{loginController.logout}"></p:commandLink>
                                         </li>
                                     </c:if>
-
+                                     
+                                        
                                 </li>
                             </ul>
                         </div>

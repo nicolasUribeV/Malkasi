@@ -109,6 +109,7 @@ public class ProyetoWizard implements Serializable {
             }
         }
         if(flag == 1){
+            proyectoFacade.Update(proyectoP, rolesP);
             FacesMessage msg = new FacesMessage("Exito", "Proyecto :" + proyecto.getNombreProyecto() + "Editado");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             JsfUtil.redirect("/faces/roles/academico/proyectos/List.xhtml");
