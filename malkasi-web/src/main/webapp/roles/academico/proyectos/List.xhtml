@@ -17,7 +17,7 @@
 
             <p:dataList id="data" value="A" var="car" type="definition">
                 <f:facet name="header">
-                    <h:outputText value="#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}" />
+                    <h:outputText style="font-weight: bold; font-size: x-large" value="#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}" />
                 </f:facet>
                 <p:panelGrid columns="1">
                     Correo: #{sessionUtilTest.currentUser.mail}    
