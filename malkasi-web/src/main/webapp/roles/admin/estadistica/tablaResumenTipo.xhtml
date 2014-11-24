@@ -10,22 +10,32 @@
 
     <ui:composition template="/layout/1column.xhtml">
         <ui:define name="body">
-            
-            <br></br>
+
+
             <h:form>
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/admin/index.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
+
                 <p:panel>
-                    <p:outputLabel value="Desde : " for="desde" />
-                    <p:selectOneMenu id="desde" value="#{indicadoresController.agnoInicial}" >
-                        <f:selectItems value="#{indicadoresController.agnos}" />
-                    </p:selectOneMenu>
-                    <br/>
-                    <p:outputLabel value="Hasta   : " for="hasta" />
-                    <p:selectOneMenu id="hasta" value="#{indicadoresController.agnoFinal}" >
-                        <f:selectItems value="#{indicadoresController.agnos}" />
-                    </p:selectOneMenu>
-                    <br/>
-                    <p:button value="Volver" href="/faces/roles/admin/index.xhtml" />
-                    <p:commandButton value="Actualizar Tabla" update="columnAgnos" />
+                    <h:outputText style="font-size: large;color: #0c516c" value="En esta sección se genera una tabla resumen con la cantidad de publicaciones por tipo para en el rango de años seleccionado" />
+                    <br></br><br></br>
+                    <p:outputLabel style="color: #1c94c4" value="Seleccione el rango de años que desee"/>
+                    <h:panelGrid style="width: 300px" columns="4">
+                        <p:outputLabel value="Desde : " for="desde" />
+                        <p:selectOneMenu id="desde" value="#{indicadoresController.agnoInicial}" >
+                            <f:selectItems value="#{indicadoresController.agnos}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Hasta   : " for="hasta" />
+                        <p:selectOneMenu id="hasta" value="#{indicadoresController.agnoFinal}" >
+                            <f:selectItems value="#{indicadoresController.agnos}" />
+                        </p:selectOneMenu>
+
+
+                    </h:panelGrid>
+                    <p:commandButton id="verTabla" value="Ver tabla" update="columnAgnos" />
+                    <p:tooltip id="ver" for="verTabla" value="Presione click para ver resultados" trackMouse="true" />
+
                 </p:panel>
                 <p:dataTable id="columnAgnos" var="player" value="#{tipoPublicacionController.items}" style="margin-top:40px" >
                     <f:facet name="header">

@@ -17,7 +17,7 @@
 
             <h:form id="GradoAcademicoListForm">
                 <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.setSelected(null)}"/>
-                <p:tooltip id="atras" for="volverButton" value="Haga click para volver" trackMouse="true" />
+                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
 
                 <p:panel header="Grados Académicos">
                     <p:dataTable id="datalistGA" value="#{gradoAcademicoController.items}" var="item"
