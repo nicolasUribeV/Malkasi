@@ -9,7 +9,7 @@
 
     <ui:composition>
 
-        <p:dialog id="AcademicoViewDlg" widgetVar="AcademicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Ver Academico">
+        <p:dialog id="AcademicoViewDlg" widgetVar="AcademicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Detalle usuario">
             <h:form id="AcademicoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
@@ -22,7 +22,9 @@
                         <h:outputText value="Correo"/>
                         <h:outputText value="#{academicoController.selected.mail}" title="#{bundle.ViewAcademicoTitle_mail}"/>
                         <h:outputText value="Reseña"/>
+                        <p:scrollPanel mode="native" style="width: 300px;height: 200px">
                         <h:outputText value="#{academicoController.selected.resegna}" title="#{bundle.ViewAcademicoTitle_resegna}"/>
+                        </p:scrollPanel>
                         <h:outputText value="Permiso de Adminstrador"/>
                         <c:if test="#{academicoController.selected.permisoAdmin}">
                             <h:outputText value="Si"/>

@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="AcademicoEditDlg" widgetVar="AcademicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar Academico">
+        <p:dialog id="AcademicoEditDlg" widgetVar="AcademicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar usuario">
             <h:form id="AcademicoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
@@ -26,26 +26,27 @@
                         </p:inputText>
                         <p:outputLabel value="Nombre de Usuario" for="username" />
                         <p:inputText id="username" value="#{academicoController.selected.userName}">
-                           
+
                         </p:inputText>
-                        
+
                         <p:outputLabel value="Categoría" for="categoria" />
                         <p:selectOneMenu id="categoria" required="true" value="#{academicoController.selected.categoria}">
                             <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="nombre"
                                            itemLabel="#{nombre.nombreCategoria}"/>
                         </p:selectOneMenu>
-                        
+
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_mail}" for="mail" />
                         <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
                             <f:validator validatorId="CorreoValidator"/>
                         </p:inputText>
                         <p:outputLabel value="Reseña" for="resegna" />
-                        <p:inputTextarea id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" rows="10" cols="50"  />
-                        
+                        <p:scrollPanel mode="native" style="width: 300px;height: 200px">
+                            <p:inputTextarea id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" rows="10" cols="50"  />
+                        </p:scrollPanel>
                         <h:outputText value="Permiso de Administrador" />
                         <p:selectBooleanCheckbox value="#{academicoController.selected.permisoAdmin}" />
                     </p:panelGrid>
-                        
+
                     <p:commandButton actionListener="#{academicoController.update}" value="Guardar" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoEditDialog');"/>
                     <p:commandButton value="Cancelar" immediate="true" onclick="AcademicoEditDialog.hide()"/>
                 </h:panelGroup>
