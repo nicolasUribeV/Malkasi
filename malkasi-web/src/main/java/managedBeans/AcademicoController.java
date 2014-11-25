@@ -80,6 +80,7 @@ public class AcademicoController implements Serializable {
     public String rutFinal() {
         String nuevoRut = selected.getRut().replace("-", "");
         nuevoRut = nuevoRut.replace(".", "");
+        nuevoRut = nuevoRut.replace("k", "K");
         return nuevoRut;
     }
 
@@ -94,6 +95,8 @@ public class AcademicoController implements Serializable {
     }
 
     public void update() {
+        String rutNuevo = rutFinal();
+        selected.setRut(rutNuevo);
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoUpdated"));
     }
 

@@ -15,10 +15,11 @@
                         <p:outputLabel value="#{bundle.CreateAcademicoLabel_rut}" for="rut" />
                         <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.CreateAcademicoTitle_rut}" >
                             <f:validator validatorId="RutValidator"/>
+                            <f:validator validatorId="SameRutValidator" />
                         </p:inputText>
                         <p:outputLabel value="Nombre de Usuario" for="username" />
                         <p:inputText id="username" value="#{academicoController.selected.userName}" title="Nombre de Usuario" >
-
+                            <f:validator validatorId="SameUserNameValidator" />
                         </p:inputText>
 
                         <p:outputLabel value="Categoría" for="categoria" />

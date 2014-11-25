@@ -55,7 +55,7 @@ public class AcademicoExternoNameValidator implements Validator{
     
     public boolean validate(String nombre, String apellido){
         
-        System.out.println("Debo revisar:" + nombre + " y " + apellido);
+        
         if(ejbFacade.FindWithNombreApellido(nombre, apellido)){
             return true;
         }
