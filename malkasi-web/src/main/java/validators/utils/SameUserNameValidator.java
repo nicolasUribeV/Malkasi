@@ -43,7 +43,7 @@ public class SameUserNameValidator implements Validator {
         boolean validacion = false;
         
         try {
-            if(ejbFacade.FindWithUserName(userName).size() == 0){
+            if(ejbFacade.FindWithUserName(userName) == null){
                 validacion = true;
             }
         } catch (Exception e) {

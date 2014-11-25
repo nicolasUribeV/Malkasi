@@ -42,7 +42,8 @@
         <ui:define name="body">
             <h:form>
                 <p:dataGrid var="proyecto" value="#{sessionUtilTest.currentUser.proyectos}" columns="2" layout="grid"
-                            id="proyectos">
+                            id="proyectos"
+                            emptyMessage="No existen proyectos para este académico">
 
                     <f:facet  name="header">
                         Proyectos

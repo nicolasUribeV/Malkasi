@@ -18,7 +18,8 @@
                             <f:validator validatorId="SameRutValidator" />
                         </p:inputText>
                         <p:outputLabel value="Nombre de Usuario" for="username" />
-                        <p:inputText id="username" value="#{academicoController.selected.userName}" title="Nombre de Usuario" >
+                        <p:inputText 
+                            requiredMessage="Este campo no puede estar vacío" required="true" id="username" value="#{academicoController.selected.userName}" title="Nombre de Usuario" >
                             <f:validator validatorId="SameUserNameValidator" />
                         </p:inputText>
 

@@ -31,7 +31,10 @@ public class SameRutValidator implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         rut = value.toString();
-        if (!validarRut(rut)) {
+        String nuevoRut = rut.replace("-", "");
+        nuevoRut = nuevoRut.replace(".", "");
+        nuevoRut = nuevoRut.replace("k", "K");
+        if (!validarRut(nuevoRut)) {
             FacesMessage msg = new FacesMessage("Rut ya ingresado en el sistema", "Invalid Rut format.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
@@ -41,9 +44,9 @@ public class SameRutValidator implements Validator {
     public boolean validarRut(String rut) {
         
         boolean validacion = false;
-        
         try {
-            if(ejbFacade.FindWithRut(rut).size() == 0){
+            
+            if(ejbFacade.FindWithRut(rut)==null){
                 validacion = true;
             }
         } catch (Exception e) {

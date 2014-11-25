@@ -15,6 +15,7 @@
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_rut}" for="rut" />
                         <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.EditAcademicoTitle_rut}"  >
                             <f:validator validatorId="RutValidator"/>
+                            
                         </p:inputText>
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_nombres}" for="nombres" />
                         <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.EditAcademicoTitle_nombres}"  >
@@ -26,7 +27,7 @@
                         </p:inputText>
                         <p:outputLabel value="Nombre de Usuario" for="username" />
                         <p:inputText id="username" value="#{academicoController.selected.userName}">
-
+                            
                         </p:inputText>
 
                         <p:outputLabel value="Categoría" for="categoria" />

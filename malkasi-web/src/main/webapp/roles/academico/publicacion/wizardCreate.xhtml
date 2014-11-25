@@ -33,7 +33,9 @@
 
 
                                 <p:outputLabel value="País" style="color: #0c2465" />
-                                <p:inputText value="#{wizardController.publicacion.pais}" title="PublicacionPais" requiredMessage="Pais es campo obligatorio"  >
+                                <p:inputText value="#{wizardController.publicacion.pais}" title="PublicacionPais" 
+                                             requiredMessage="Pais es campo obligatorio"
+                                             validatorMessage="El país no puede contener números">
                                     <f:validateRegex pattern="[a-zA-Z ]*" />
                                 </p:inputText>
 
