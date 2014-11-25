@@ -8,31 +8,42 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="/layout/1column.xhtml">
         <ui:define name="body">
-            <br></br>
+
             <h:form id="tablaResumen" >
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/admin/index.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+                <p:tooltip id="atras" for="volverButton" value="Haga click para volver" trackMouse="true" />
+
                 <p:panel>
-                    <p:outputLabel value="Desde : " for="desde" />
-                    <p:selectOneMenu id="desde" value="#{indicadoresController.agnoInicial}" >
-                        <f:selectItems value="#{indicadoresController.agnos}" />
-                    </p:selectOneMenu>
-                    <br/>
-                    <p:outputLabel value="Hasta : " for="hasta" />
-                    <p:selectOneMenu id="hasta" value="#{indicadoresController.agnoFinal}" >
-                        <f:selectItems value="#{indicadoresController.agnos}" />
-                    </p:selectOneMenu>
-                    <br/>
-                    <p:outputLabel value="Categoria" for="categoria" />
-                    <p:selectOneMenu id="categoria" value="#{indicadoresController.categoriaElegida}" >
-                        <f:selectItem itemLabel="Todas las categorías" itemValue="#{null}" />
-                        <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="categ"
-                                       itemLabel="#{categ.nombreCategoria}" itemValue="#{categ.id}"/>
-                    </p:selectOneMenu>
-                    <br/>
+                    <h:outputText style="font-size: large;color: #0c516c" value="En esta sección se genera una tabla resumen que muestra la cantidad de publicaciones por tipo para cada académico en el rango de años seleccionado." />
+                    <br></br><br></br>
+                    <p:outputLabel style="color: #1c94c4" value="Seleccione el rango de años que desee"/>
+                    <h:panelGrid style="width: 300px" columns="4">
+                        <p:outputLabel value="Desde: " for="desde" />
+                        <p:selectOneMenu   id="desde" value="#{indicadoresController.agnoInicial}" >
+                            <f:selectItems value="#{indicadoresController.agnos}" />
+                        </p:selectOneMenu>
+
+
+                        <p:outputLabel value="Hasta: " for="hasta" />
+                        <p:selectOneMenu  id="hasta" value="#{indicadoresController.agnoFinal}" >
+                            <f:selectItems value="#{indicadoresController.agnos}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Categoría: " for="categoria" />
+                        <p:selectOneMenu  id="categoria" value="#{indicadoresController.categoriaElegida}" >
+                            <f:selectItem itemLabel="Todas las categorías" itemValue="#{null}" />
+                            <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="categ"
+                                           itemLabel="#{categ.nombreCategoria}" itemValue="#{categ.id}"/>
+                        </p:selectOneMenu>
+
+                    </h:panelGrid>
+                    <p:commandButton id="verTabla" value="Ver tabla" actionListener="#{indicadoresController.listCategory(indicadoresController.categoriaElegida)}">
+                        <f:ajax event="click" render="columnAgnos"></f:ajax>
+                    </p:commandButton>
+                    <p:tooltip id="ver" for="verTabla" value="Presione click para ver resultados" trackMouse="true" />
+
                 </p:panel>
-                <p:button value="Volver" href="/faces/roles/admin/index.xhtml" />
-                <p:commandButton value="Actualizar Tabla" actionListener="#{indicadoresController.listCategory(indicadoresController.categoriaElegida)}">
-                    <f:ajax event="click" render="columnAgnos"></f:ajax>
-                </p:commandButton>
+
                 <p:dataTable id="columnAgnos" var="player" value="#{indicadoresController.academicsCategory}" style="margin-top:40px" >
                     <f:facet name="header">
                         Cantidad de Publicaciones

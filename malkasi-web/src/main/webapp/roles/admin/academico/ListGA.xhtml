@@ -15,11 +15,10 @@
 
         <ui:define name="body">
 
-            <h:form>  
-                
-            <br></br>
-            </h:form>
             <h:form id="GradoAcademicoListForm">
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
+
                 <p:panel header="Grados Académicos">
                     <p:dataTable id="datalistGA" value="#{gradoAcademicoController.items}" var="item"
                                  selectionMode="single" selection="#{gradoAcademicoController.selected}"
@@ -34,7 +33,7 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListGradoAcademicoTitle_titulo}"/>
+                                <h:outputText value="Título"/>
                             </f:facet>
                             <h:outputText value="#{item.titulo}"/>
                         </p:column>
@@ -50,20 +49,36 @@
                             </f:facet>
                             <h:outputText value="#{item.institucion}"/>
                         </p:column>
-                        <br></br>
-                        <f:facet name="footer">
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":GradoAcademicoViewForm" oncomplete="PF('GradoAcademicoViewDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Editar" update=":GradoAcademicoEditForm" oncomplete="PF('GradoAcademicoEditDialog').show()" disabled="#{empty gradoAcademicoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar"  actionListener="#{academico_GradoAcademicoController.Delete(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.selected)}" update="datalistGA, :GradoAcademicoListForm" disabled="#{empty gradoAcademicoController.selected}" />
-                            <p:button id="volverButton" value="Volver" href="/faces/roles/admin/academico/List.xhtml" onclick="#{academicoController.setSelected(null)}"/>
-                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acción"/>
+                            </f:facet>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search"  update=":GradoAcademicoViewForm" oncomplete="PF('GradoAcademicoViewDialog').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{gradoAcademicoController.selected}" />
+                            </p:commandButton>
+                            <p:tooltip id="verGrado" for="viewButton" value="Ver grado académico" trackMouse="true" />
+
+
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil"  update=":GradoAcademicoEditForm" oncomplete="PF('GradoAcademicoEditDialog').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{gradoAcademicoController.selected}" />
+                            </p:commandButton>
+                            <p:tooltip id="editarGrado" for="editButton" value="Editar grado académico" trackMouse="true" />
+
+
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  actionListener="#{academico_GradoAcademicoController.Delete(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.selected)}" update="datalistGA, :GradoAcademicoListForm" >
+                                <f:setPropertyActionListener value="#{item}" target="#{gradoAcademicoController.selected}" />  
+                            </p:commandButton>
+                            <p:tooltip id="editarAcademico" for="deleteButton" value="Eliminar grado académico" trackMouse="true" />
+
+                        </p:column>
+                        
                     </p:dataTable>
                 </p:panel>
             </h:form>
 
             <ui:include src="EditGA.xhtml"/>
             <ui:include src="ViewGA.xhtml"/>
-            
+
         </ui:define>
     </ui:composition>
 

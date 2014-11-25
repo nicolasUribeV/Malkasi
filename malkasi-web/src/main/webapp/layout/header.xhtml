@@ -46,26 +46,14 @@
                                     <c:if test="#{sessionUtilTest.hasIdentity()}">
                                         <ui:insert name="header-links"/>
                                         <h4 style="color: #e8ecf0" class="white">Bienvenido <b>#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}</b></h4>
-                                        <h:panelGrid style="float: right" columns="1" >
-                                            
+                                        <li>
+                                            <p:commandLink style="color: #fdae12; font-size: medium" type="submit" value="Cerrar sesión" immediate="true" action="#{loginController.logout}"></p:commandLink>
+                                        </li>
+                                        <c:if test="#{sessionUtilTest.currentUser.permisoAdmin}">
                                             <li>
-                                                <p:commandLink style="color: #fdae12; font-size: medium" type="submit" value="Cerrar sesión" immediate="true" action="#{loginController.logout}"></p:commandLink>
+                                                <p:commandLink style="color: #fdae12; font-size: medium" type="submit" value="Cambiar de Rol" immediate="true" action="#{sessionUtilTest.cambiarRol()}"></p:commandLink>
                                             </li>
-                                           
-                                        </h:panelGrid>
-                                        
-                                        <h:panelGrid style="float: right" columns="1" >
-                                            
-                                            <c:if test="#{sessionUtilTest.currentUser.permisoAdmin}">
-                                                <li>
-                                                    <p:commandLink style="color: #fdae12; font-size: medium" type="submit" value="Cambiar de Rol" immediate="true" action="#{sessionUtilTest.cambiarRol()}"></p:commandLink>
-                                                </li>
-                                            </c:if>
-                                            
-                                        </h:panelGrid>
-                                        
-                                        
-
+                                        </c:if>
                                     </c:if>
 
 

@@ -9,29 +9,34 @@
     <ui:composition template="/layout/1column.xhtml">
         <ui:define name="body">
            
-            <br></br>
+            <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/admin/index.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+            <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
+
             <h:form>
                 <p:panel>
-                    <h:panelGrid columns="1" cellpadding="2">
-                        <p:outputLabel for="academicoSel" value="Seleccione académico: ">
+                    <h:outputText style="font-size: large;color: #0c516c" value="El gráfico que se genera en esta sección muestra la cantidad del tipo de publicación que se desee, para el académico seleccionado." />
+                    <br></br><br></br>
+                    <h:panelGrid columns="2" cellpadding="2">
+                        <p:outputLabel  for="academicoSel" value="Seleccione académico: "/>
                             <p:selectOneMenu id="academicoSel" value="#{indicadoresController.academicoSeleccionado}" converter="academicoConverter">
                                 <f:selectItems value="#{academicoController.itemsAvailableSelectOne}" var="variable" 
                                                itemLabel="#{variable.nombres} #{variable.apellidos}"/>     
                             </p:selectOneMenu>
-                        </p:outputLabel>
-                        <p:outputLabel for="tipoPublicacionSel" value="Seleccione tipo Publicación: ">
+                        
+                        <p:outputLabel  for="tipoPublicacionSel" value="Seleccione tipo publicación: "/>
                             <p:selectOneMenu id="tipoPublicacionSel" value="#{indicadoresController.tipoPublicacionSeleccionada}" >
                                 <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre"
                                                itemLabel="#{nombre.nombreTipo}" />
                             </p:selectOneMenu>
-                        </p:outputLabel>
+                        
                     </h:panelGrid>
-                    <p:button value="Volver" href="/faces/roles/admin/index.xhtml"/>
-                    <p:commandButton value="Ver Gráfico" actionListener="#{indicadoresController.setearGraficoAcademicoTipo()}" update="graficoBarra"/>
+                    <p:commandButton id="vGrafico" value="Ver gráfico" actionListener="#{indicadoresController.setearGraficoAcademicoTipo()}" update="graficoBarra"/>
+                    <p:tooltip id="grafico" for="vGrafico" value="Presione click para ver gráfico" trackMouse="true" />
+
                 </p:panel>
-                <br></br>
+               
                 <p:panel>
-                    <h2 style="text-align: center">GRÁFICO POR ACADÉMICO Y TIPO DE PUBLICACIÓN</h2>
+                    <h2 style="text-align: center;color: #1c94c4">GRÁFICO POR ACADÉMICO Y TIPO DE PUBLICACIÓN</h2>
                     <p:chart type="bar" id="graficoBarra" model="#{indicadoresController.barModel}" style="height:300px"/>
                 </p:panel>
 

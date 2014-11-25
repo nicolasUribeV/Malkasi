@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="AcademicoExternoCreateDlg" widgetVar="AcademicoExternoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear academico externo">
+        <p:dialog id="AcademicoExternoCreateDlg" widgetVar="AcademicoExternoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear académico externo">
             <h:form id="AcademicoExternoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="pg">
@@ -26,7 +26,7 @@
                     <p:outputLabel value="Filiación" />
                     <br></br>
                     <p:panelGrid id="panel" columns="2" rendered="#{academicoExternoController.selected != null}">
-                        <p:outputLabel value="Pais" for="pais" />
+                        <p:outputLabel value="País" for="pais" />
                         <p:inputText id="pais" value="#{academicoExternoController.selected.pais}" title="Pais" />
                         <p:outputLabel value="Universidad" for="universidad" />
                         <p:inputText id="universidad" value="#{academicoExternoController.selected.universidad}" title="Universidad" />

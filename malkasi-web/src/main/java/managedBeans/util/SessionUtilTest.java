@@ -126,9 +126,18 @@ public class SessionUtilTest implements Serializable {
                 }
                 
             }
+            if((componentes[componentes.length-1].equals("malkasi-web")|| (componentes[i].equals("faces") && componentes[i+1].equals("index.xhtml"))) && userName != null){
+                    flag = 2;
+                    break;
+            }
         }
+        
         if(flag == 1){
             JsfUtil.redirect("/faces/error/error403.xhtml");
+        }
+        else if(flag == 2){
+            String indexRol = "/faces/roles/" + currentAccount.getTipoCuenta() + "/index.xhtml";
+            JsfUtil.redirect(indexRol);
         }
 
     }
