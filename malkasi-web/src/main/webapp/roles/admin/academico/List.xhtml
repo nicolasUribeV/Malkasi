@@ -48,31 +48,7 @@
                         <p:column filterBy="#{item.userName}" headerText="Nombre de Usuario" >
                             <h:outputText value="#{item.userName}  "  />
                         </p:column> 
-                        
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAcademicoTitle_rut}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.rut}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombres} #{item.apellidos}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Correo"/>
-                            </f:facet>
-                            <h:outputText value="#{item.mail}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre de Usuario"/>
-                            </f:facet>
-                            <h:outputText value="#{item.userName}"/>
-                        </p:column>
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Acción"/>
