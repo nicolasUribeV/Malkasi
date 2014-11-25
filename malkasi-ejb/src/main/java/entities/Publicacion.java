@@ -87,6 +87,46 @@ public class Publicacion implements Serializable {
     private List<AcademicoExterno> academicosExternos;
 
     private String academicoOrden;
+    
+       private boolean idexScielo;
+    
+    private boolean indexIsi;
+    
+    private boolean indexScopus;
+    
+    private boolean idexOther;
+
+    public boolean isIdexScielo() {
+        return idexScielo;
+    }
+
+    public void setIdexScielo(boolean idexScielo) {
+        this.idexScielo = idexScielo;
+    }
+
+    public boolean isIndexIsi() {
+        return indexIsi;
+    }
+
+    public void setIndexIsi(boolean indexIsi) {
+        this.indexIsi = indexIsi;
+    }
+
+    public boolean isIndexScopus() {
+        return indexScopus;
+    }
+
+    public void setIndexScopus(boolean indexScopus) {
+        this.indexScopus = indexScopus;
+    }
+
+    public boolean isIdexOther() {
+        return idexOther;
+    }
+
+    public void setIdexOther(boolean idexOther) {
+        this.idexOther = idexOther;
+    }
 
     public ArrayList<String> getAcademicoOrden() {
         ArrayList<String> listaOrden = new ArrayList<String>();
