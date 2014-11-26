@@ -150,31 +150,25 @@
 
                     <p:tab id="contact" title="Académicos Vinculados">
                         <p:panel header="Académicos Vinculados">
-
-                            <h:panelGrid columns="3" columnClasses="label, value">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
                                 <p:outputLabel value="" style="padding: 20px" />
                                 <p:outputLabel style="padding: 20px" />
-                               
-                                <p:outputLabel value="Académicos Departamento" style="color: #0c2465;font-size: small"/>
-                                <p:selectCheckboxMenu id="academicos" widgetVar="someVarName" value="#{wizardController.publicacion.academicos}" label="Académicos Departamento"
+                                <p:outputLabel value="Académicos Departamento" style="color: #0c2465"/>
+                                <p:selectCheckboxMenu id="academicos" widgetVar="someVarName" value="#{wizardController.publicacion.academicos}" label="Academicos Departamento"
                                                       filter="true" filterMatchMode="startsWith" converter="academicoConverter">
                                     <f:selectItems value="#{academicoController.getItemsAvailableSelectMany2()}" var="AcademicosL" itemLabel="#{AcademicosL.nombres} #{AcademicosL.apellidos}" itemValue="#{AcademicosL}" actionListener="#{wizardController.updateOrden()}" />
                                     <p:ajax event="change" listener="#{wizardController.updateOrden()}" process="@this"/>
-                                    <f:attribute name="currentUserLA" value="#{sessionUtilTest.currentUser}" />
                                     
                                 </p:selectCheckboxMenu>
-                                
                                 <p:outputLabel value="" style="padding: 20px" />
                                 <p:outputLabel value="" style="padding: 20px" />
-                                <p:outputLabel style="padding: 20px" />
-                                <p:outputLabel value="Académicos Externos" style="color: #0c2465;font-size: small"/>
-                                <p:selectCheckboxMenu id="academicosE" widgetVar="someVarName1" value="#{wizardController.publicacion.academicosExternos}" label="Académicos Externos"
+                                <p:outputLabel value="Académicos Externos" style="color: #0c2465"/>
+                                <p:selectCheckboxMenu id="academicosE" widgetVar="someVarName1" value="#{wizardController.publicacion.academicosExternos}" label="Academicos Externos"
                                                       filter="true" filterMatchMode="startsWith" converter="academicoExternoConverter">
                                     <f:selectItems value="#{academicoExternoController.itemsAvailableSelectMany}" var="AcademicosL2" itemLabel="#{AcademicosL2.nombres} #{AcademicosL2.apellidos} (#{AcademicosL2.universidad})" itemValue="#{AcademicosL2}" actionListener="#{wizardController.updateOrden()}" />
                                     <p:ajax event="change" listener="#{wizardController.updateOrden()}" process="@this"/>
                                 </p:selectCheckboxMenu>
-
-
                                 <p:outputLabel value="" style="padding: 20px" />
                                 <p:outputLabel value="" style="padding: 20px" />
                             </h:panelGrid>
@@ -207,7 +201,7 @@
                                 Previsualización:    #{publicacionController.getStringPublicacion(wizardController.publicacion)}
                                 <br></br>
                             </h:panelGrid>
-                            
+
                             <p:commandButton value="Guardar" actionListener="#{wizardController.edit(wizardController.publicacion,sessionUtilTest.currentUser)}" update="growl" process="@this">
                                 <p:confirm header="Confirmación" message="Se editará la publicación #{wizardController.publicacion.nombrePublicacion}" icon="ui-icon-refresh" />
                             </p:commandButton>
@@ -222,7 +216,7 @@
 
 
             </h:form>
-            
+
         </ui:define>
     </ui:composition>
 </html>
