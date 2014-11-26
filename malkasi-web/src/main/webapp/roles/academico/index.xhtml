@@ -30,10 +30,10 @@
             </p:dataList>
             <h:form >
 
-                <p:commandButton value="Agregar nueva actividad academica" icon="ui-icon-circle-plus" actionListener="#{wizardController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
-                <p:commandButton value="Ver mis actividades publicadas" icon="ui-icon-circle-zoomin" actionListener="#{publicacionController.prepareCreateViewAcademic(sessionUtilTest.currentUser)}"/>
-                <p:commandButton value="Gestión de proyectos de investigación" icon="ui-icon-circle-plus" actionListener="#{proyectoController.prepareCreateViewProyecto()}"  />
-                <p:commandButton value="Gestión de académicos externos" icon="ui-icon-circle-plus" actionListener="#{academicoExternoController.prepareCreateViewAcademicExternal(sessionUtilTest.currentUser)}"/>    
+                <p:commandButton style="width: 100%" value="Agregar actividad académica" icon="ui-icon-circle-plus" actionListener="#{wizardController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
+                <p:commandButton style="width: 100%" value="Ver actividades publicadas" icon="ui-icon-circle-zoomin" actionListener="#{publicacionController.prepareCreateViewAcademic(sessionUtilTest.currentUser)}"/>
+                <p:commandButton style="width: 100%" value="Gestión de proyectos de investigación" icon="ui-icon-circle-plus" actionListener="#{proyectoController.prepareCreateViewProyecto()}"  />
+                <p:commandButton style="width: 100%" value="Gestión de académicos externos" icon="ui-icon-circle-plus" actionListener="#{academicoExternoController.prepareCreateViewAcademicExternal(sessionUtilTest.currentUser)}"/>    
             </h:form>
 
         </ui:define>

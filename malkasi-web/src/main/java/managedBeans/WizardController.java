@@ -78,6 +78,9 @@ public class WizardController implements Serializable {
 
     public void save(Publicacion publicacion, Academico academico) {
         this.ejbFacade.Create(publicacion.getAcademicos(), publicacion, academico);
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Publicación creada", "Publicación creada");
+        FacesContext.getCurrentInstance().addMessage("Éxito", facesMsg);
+        //Thread.sleep(2000);
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
 

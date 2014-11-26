@@ -38,7 +38,7 @@ public class AcademicoInsertValidator implements Validator {
         }
 
         if(!validateList(academicosSeleccionados, currentU)) {
-            FacesMessage msg = new FacesMessage( "Usted debe estar en la lista de Académicos", "Usted debe estar en la lista de Académicos");
+            FacesMessage msg = new FacesMessage( "Usted debe estar en la lista de académicos", "Usted debe estar en la lista de Académicos");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             context.addMessage(":PublicacionCreateForm:academicos", msg);
             throw new ValidatorException(msg);

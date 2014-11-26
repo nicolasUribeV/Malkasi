@@ -45,15 +45,36 @@
                                 <li>
                                     <c:if test="#{sessionUtilTest.hasIdentity()}">
                                         <ui:insert name="header-links"/>
-                                        <h4 style="color: #e8ecf0" class="white">Bienvenido <b>#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}</b></h4>
-                                        <li>
-                                            <p:commandLink style="color: #fdae12; font-size: medium" type="submit" value="Cerrar sesión" immediate="true" action="#{loginController.logout}"></p:commandLink>
-                                        </li>
-                                        <c:if test="#{sessionUtilTest.currentUser.permisoAdmin}">
-                                            <li>
-                                                <p:commandLink style="color: #fdae12; font-size: medium" type="submit" value="Cambiar de Rol" immediate="true" action="#{sessionUtilTest.cambiarRol()}"></p:commandLink>
-                                            </li>
-                                        </c:if>
+                                        <h:panelGrid columns="1" style="float: right">
+                                            <h:panelGrid columns="1" style="float: right" >
+                                                <h4 style="color: #e8ecf0" class="white">Bienvenido <b>#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}</b></h4>
+                                            </h:panelGrid>
+
+                                            <h:panelGrid columns="3" style="float: right" >
+                                                <p:column>
+                                                    <c:if test="#{sessionUtilTest.currentUser.permisoAdmin}">
+                                                        <li>
+                                                            <p:commandLink style="color: #fdae12; font-size: medium" type="submit" value="Cambiar de rol" immediate="true" action="#{sessionUtilTest.cambiarRol()}"></p:commandLink>
+                                                            <h:outputText value="&#160;" />
+                                                        </li>
+                                                    </c:if>
+                                                </p:column>
+                                                <p:column>
+                                                    <h:outputText value="&#160;" />
+                                                    <h:outputText value="&#160;" />
+                                                </p:column>
+                                                <p:column>
+                                                    <li>
+                                                        <p:commandLink style="color: #fdae12; font-size: medium" type="submit" value="Cerrar sesión" immediate="true" action="#{loginController.logout}"></p:commandLink>
+                                                        <h:outputText value="&#160;" />
+                                                    </li>
+                                                </p:column>
+                                                
+                                                
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+
+
                                     </c:if>
 
 

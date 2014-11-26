@@ -64,7 +64,7 @@
 
 
                             </f:facet>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":LogViewForm" oncomplete="PF('LogViewDialog').show()" >
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" update=":LogViewForm" oncomplete="PF('LogViewDialog').show()" >
                                 <f:setPropertyActionListener value="#{item}" target="#{logController.selected}" for="verGradosAcademicos" />
                             </p:commandButton>
                              <p:tooltip id="verLog" for="viewButton" value="Ver detalle acción" trackMouse="true" />

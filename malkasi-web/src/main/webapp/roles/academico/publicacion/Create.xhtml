@@ -24,6 +24,7 @@
                                 <p:ajax event="keyup" update="previsualizacion"  />
                             </p:inputText>
                             <p:message id="msgTipoPublicacion" for="nombrePublicacion" style="padding: 20px" />
+                            
                             <p:outputLabel value="Tipo de Publicación" for="tipoPublicacion" />
                             <p:selectOneMenu id="tipoPublicacion" required="true" value="#{publicacionController.selected.tipoPublicacion}">
                                 <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre"
@@ -63,8 +64,7 @@
                                 <p:ajax event="keyup" update="previsualizacion"  />
                                 <f:validator validatorId="AgnoValidator" />
                             </p:inputMask>
-                            <p:message id="msgAgno" for="agno" style="padding: 20px" />
-
+                           
                             <p:outputLabel value="Nombre Libro/Revista" for="nombreLibro" />
                             <p:inputText id="nombreLibro" value="#{publicacionController.selected.nombreLibro}" title="#{bundle.CreatePublicacionTitle_nombreLibro}" >
                                 <p:ajax event="keyup" update="previsualizacion"  />

@@ -14,7 +14,10 @@
 
         <ui:define name="body">
             <h:form id="form">
-                <p:panel header="Listado de publicaciones">
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/academico/index.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
+
+                <p:panel header="Publicaciones">
                     <p:dataTable id="datalist"  value="#{publicacionController.items}" var="item"
                                  selectionMode="single" selection="#{publicacionController.selected}"
                                  paginator = "true"
@@ -25,38 +28,47 @@
                                  >
                         <p:ajax event="rowSelect" update="editarBoton viewButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="editarBoton viewButton deleteButton"/>
-                       <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Titulo Publicación"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombrePublicacion}"/>
+                        <p:column filterBy="#{item.nombrePublicacion}" headerText="Título publicación" >
+                            <h:outputText value="#{item.nombrePublicacion}  "  />
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Pais"/>
-                            </f:facet>
-                            <h:outputText value="#{item.pais}"/>
+                       
+                        <p:column filterBy="#{item.pais}" headerText="País" >
+                            <h:outputText value="#{item.pais}  "  />
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Fecha de publicacion"/>
-                            </f:facet>
-                            <h:outputText value="#{item.agno}">
-                                
-                            </h:outputText>
+                        
+                        <p:column filterBy="#{item.agno}" headerText="Año publicación" >
+                            <h:outputText value="#{item.agno}  "  />
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Tipo de publicacion"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tipoPublicacion.nombreTipo}"/>
+                        
+                        <p:column  filterBy="#{item.tipoPublicacion.nombreTipo}" headerText="Tipo publicación" >
+                            <h:outputText value="#{item.tipoPublicacion.nombreTipo}  "  />
                         </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="editarBoton" icon="ui-icon-plus" value="Editar" actionListener="#{wizardController.prepareEditWhitAcademic(publicacionController.selected)}" disabled="#{empty publicacionController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Borrar" actionListener="#{academico_Publicacion.Delete(publicacionController.selected,sessionUtilTest.currentUser)}" update=":growl, datalist" disabled="#{empty publicacionController.selected}"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver" update=":PublicacionViewForm" oncomplete="PF('PublicacionViewDialog').show()" disabled="#{empty publicacionController.selected}"/>
-                            <p:commandButton id="atras" icon="ui-icon-arrowreturnthick-1-w" value="Volver" actionListener="#{publicacionController.comeBack}" />
-                        </f:facet>
+                        
+                        <p:column style="width: 140px">
+                            <f:facet name="header">
+                                <h:outputText value="Acción"/>
+                            </f:facet>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search"  update=":PublicacionViewForm" oncomplete="PF('PublicacionViewDialog').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{publicacionController.selected}" /> 
+                            </p:commandButton>
+                            <p:tooltip id="verPublicacion" for="viewButton" value="Ver publicación" trackMouse="true" />                       
+
+                            <p:commandButton id="editarBoton" icon="ui-icon-pencil"  action="#{wizardController.prepareEditWhitAcademic(publicacionController.selected)}" >
+                                <f:setPropertyActionListener value="#{item}" target="#{publicacionController.selected}" for="editarBoton" /> 
+                            </p:commandButton>
+                            <p:tooltip id="editarPublicacion" for="editarBoton" value="Editar publicación" trackMouse="true" />
+
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"   action="#{academico_Publicacion.Delete(publicacionController.selected,sessionUtilTest.currentUser)}" update=":growl, datalist" >
+                                <f:setPropertyActionListener value="#{item}" target="#{publicacionController.selected}" for="deleteButton" /> 
+                                <p:confirm header="Confirmación" message="¿Está seguro de eliminar la publicación: #{publicacionController.selected.nombrePublicacion} ?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:tooltip id="borrarAcademico" for="deleteButton" value="Eliminar publicación" trackMouse="true" />
+                            <p:confirmDialog global="true" showEffect="fade" >
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </p:column>
+
                     </p:dataTable>
 
                 </p:panel>

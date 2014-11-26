@@ -13,8 +13,11 @@
             <h:outputText value="Bienvenido"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            
+
             <h:form id="PublicacionListFormAdmin">
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/admin/index.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
+                
                 <p:panel header="Todas las Publicaciones">
                     <p:dataTable id="datalist" value="#{publicacionController.items}" var="item"
                                  selectionMode="single" selection="#{publicacionController.selected}"
@@ -33,13 +36,24 @@
                         <p:column filterBy="#{item.agno}" headerText="Fecha de publicación" >
                             <h:outputText value="#{item.agno}  "  />
                         </p:column> 
-                        
+
                         <p:column filterBy="#{item.tipoPublicacion.nombreTipo}" headerText="Tipo de publicación" >
                             <h:outputText value="#{item.tipoPublicacion.nombreTipo}  "  />
-                        </p:column> 
-                        <f:facet name="footer">
-                            <p:commandButton id="viewButton" icon="ui-icon-search" value="Ver" update=":PublicacionViewForm2" oncomplete="PF('PublicacionViewDialogAdmin').show()"/>
-                        </f:facet>
+                        </p:column>
+                        <p:column style="width: 90px">
+                            <f:facet name="header">
+                                <h:outputText value="Detalle"/>
+                            </f:facet>
+                            <p:commandButton id="viewButton" icon="ui-icon-search" update=":PublicacionViewForm2" oncomplete="PF('PublicacionViewDialogAdmin').show()">
+
+                                <f:setPropertyActionListener value="#{item}" target="#{publicacionController.selected}" />  
+
+                            </p:commandButton>
+                            <p:tooltip id="verPublicacion" for="viewButton" value="Ver publicación" trackMouse="true" />
+
+
+                        </p:column>
+
                     </p:dataTable>
                 </p:panel>
             </h:form>
