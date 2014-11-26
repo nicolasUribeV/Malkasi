@@ -15,9 +15,9 @@
                         <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_titulo}" for="titulo" />
                         <p:inputText id="titulo" value="#{gradoAcademicoController.selected.titulo}" title="#{bundle.EditGradoAcademicoTitle_titulo}" />
                         <p:outputLabel value="Año" for="agno" />
-                        <p:inputText id="agno" value="#{gradoAcademicoController.selected.agno}" title="#{bundle.EditGradoAcademicoTitle_agno}" >
-                            <f:validator validatorId="AgnoValidator"/>
-                        </p:inputText>
+                        <p:inputMask id="agno" value="#{gradoAcademicoController.selected.agno}" title="#{bundle.CreateGradoAcademicoTitle_agno}" mask="9999"  >                                 
+                                    <f:validator validatorId="AgnoValidator" />
+                        </p:inputMask>
                         <p:outputLabel value="Institución" for="insitucion" />
                         <p:inputText id="insitucion" value="#{gradoAcademicoController.selected.institucion}" title="#{bundle.EditGradoAcademicoTitle_insitucion}" />
                     </p:panelGrid>
