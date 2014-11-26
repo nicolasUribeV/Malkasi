@@ -89,7 +89,19 @@
                                 <p:inputText id="doi" value="#{wizardController.publicacion.doi}" title="doi" >
 
                                 </p:inputText>
-
+                                
+                                <p:outputLabel value="Tipo de Indexación: " style="color: #0c2465" />
+                                <p:outputLabel value="" style="color: #0c2465" />
+                                <p:outputLabel value="scielo" style="color: #0c2465" />
+                                <p:selectBooleanCheckbox value="#{wizardController.publicacion.idexScielo}" />
+                                <p:outputLabel value="isi" style="color: #0c2465" />
+                                <p:selectBooleanCheckbox value="#{wizardController.publicacion.indexIsi}" />
+                                <p:outputLabel value="scopus" style="color: #0c2465" />
+                                <p:selectBooleanCheckbox value="#{wizardController.publicacion.indexScopus}" />
+                                <p:outputLabel value="otra" style="color: #0c2465" />
+                                <p:selectBooleanCheckbox value="#{wizardController.publicacion.idexOther}" />
+                                
+                                
                             </h:panelGrid>
                         </p:panel>
                     </p:tab>

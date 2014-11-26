@@ -22,33 +22,21 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No existen coincidencias"
                                  >
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Titulo Publicación"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombrePublicacion}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="País"/>
-                            </f:facet>
-                            <h:outputText value="#{item.pais}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Fecha de Publicación"/>
-                            </f:facet>
-                            <h:outputText value="#{item.agno}">
-                               
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Tipo de Publicación"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tipoPublicacion.nombreTipo}"/>
-                        </p:column>
+                        <p:column filterBy="#{item.nombrePublicacion}" headerText="Título Publicación" >
+                            <h:outputText value="#{item.nombrePublicacion}  "  />
+                        </p:column> 
+                        <p:column filterBy="#{item.pais}" headerText="País" >
+                            <h:outputText value="#{item.pais}  "  />
+                        </p:column> 
+                        <p:column filterBy="#{item.agno}" headerText="Fecha de publicación" >
+                            <h:outputText value="#{item.agno}  "  />
+                        </p:column> 
+                        
+                        <p:column filterBy="#{item.tipoPublicacion.nombreTipo}" headerText="Tipo de publicación" >
+                            <h:outputText value="#{item.tipoPublicacion.nombreTipo}  "  />
+                        </p:column> 
                         <f:facet name="footer">
                             <p:commandButton id="viewButton" icon="ui-icon-search" value="Ver" update=":PublicacionViewForm2" oncomplete="PF('PublicacionViewDialogAdmin').show()"/>
                         </f:facet>

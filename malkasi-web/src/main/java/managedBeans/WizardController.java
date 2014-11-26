@@ -7,6 +7,8 @@ package managedBeans;
 
 import entities.Academico;
 import entities.Publicacion;
+import static entities.Publicacion_.tipoPublicacion;
+import entities.TipoPublicacion;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import java.io.Serializable;
@@ -61,11 +63,10 @@ public class WizardController implements Serializable {
     public void comeBack() {
         JsfUtil.redirect("/faces/roles/academico/proyectos/List.xhtml");
     }
-    
+
     public void comeBackIndex() {
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
-
 
     public Publicacion getPublicacion() {
         return publicacion;
@@ -81,23 +82,21 @@ public class WizardController implements Serializable {
     }
 
     public void edit(Publicacion publicacion, Academico academico) {
-        
+
         int flag = 0;
         for (int i = 0; i < publicacion.getAcademicos().size(); i++) {
-            if(academico.getId()==publicacion.getAcademicos().get(i).getId()){
+            if (academico.getId() == publicacion.getAcademicos().get(i).getId()) {
                 flag = 1;
             }
         }
-        if(flag == 1){   
+        if (flag == 1) {
             this.ejbFacade.Update(publicacion.getAcademicos(), publicacion, academico);
             JsfUtil.redirect("/faces/roles/academico/index.xhtml");
-        }
-        else{
+        } else {
             FacesMessage msg = new FacesMessage("Error", "Usted debe estar incluido dentro de la publicación");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-        
-        
+
     }
 
     protected void setEmbeddableKeys() {
@@ -123,12 +122,12 @@ public class WizardController implements Serializable {
         }
     }
 
-    public ArrayList<String> getListaOrden(){
-        
+    public ArrayList<String> getListaOrden() {
+
         return listaOrden;
     }
-    
-    public ArrayList<String> getListaOrdenNoUpdate(){
+
+    public ArrayList<String> getListaOrdenNoUpdate() {
         return listaOrden;
     }
 
@@ -154,14 +153,24 @@ public class WizardController implements Serializable {
         this.listaOrden.addAll(listaActual);
         this.publicacion.setAcademicoOrden(listaActual);
     }
-    
-    public void updateListOrden(){
+
+    public void updateListOrden() {
         this.publicacion.setAcademicoOrden(listaOrden);
     }
-    
-    public String cleanName(String name){
+
+    public String cleanName(String name) {
         String[] a = name.split("_");
         return a[0] + " " + a[1];
-     }
+    }
+
+    public boolean isTipoConferencia(TipoPublicacion tp) {
+        if (tp != null) {
+
+            if (tp.getNombreTipo().equals("Congresos nacionales") || tp.getNombreTipo().equals("Congresos internacionales")) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
