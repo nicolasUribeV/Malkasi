@@ -29,7 +29,7 @@ public class CorreoValidator implements Validator{
         String email = (String) o;
         
         if(!validateEmail(email)) {
-            FacesMessage msg = new FacesMessage("Correo inválido.", "Invalid Mail format.");
+            FacesMessage msg = new FacesMessage("Correo inválido");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

@@ -25,17 +25,17 @@
                     <p:tab id="basicos" title="Información básica">
                         <p:panel header="Datos básicos del proyecto">
                             <h:panelGrid columns="3" columnClasses="label, value">
-                                <p:outputLabel value="Titulo Proyecto" for="nombreProyecto" style="color: #0c2465;font-size: small" />
+                                <h:outputLabel value="Titulo Proyecto*" for="nombreProyecto" style="color: #0c2465;font-size: small" />
                                 <p:inputText id="nombreProyecto" value="#{proyetoWizard.proyecto.nombreProyecto}" title="#{bundle.CreateProyectoTitle_nombreProyecto}" required="true" requiredMessage="Campo obligatorio" />
                                 <p:message id="msgNombreProyecto" for="nombreProyecto" style="padding: 20px" />
 
 
-                                <p:outputLabel value="Código" for="codigoProyecto" style="color: #0c2465;font-size: small"/>
+                                <h:outputLabel value="Código*" for="codigoProyecto" style="color: #0c2465;font-size: small"/>
                                 <p:inputText id="codigoProyecto" value="#{proyetoWizard.proyecto.codigoProyecto}" title="#{bundle.CreateProyectoTitle_codigoProyecto}" required="true" requiredMessage="Campo obligatorio"/>
                                 <p:message id="msgCodigoProyecto" for="codigoProyecto" style="padding: 20px" />
 
 
-                                <p:outputLabel value="Resumen" for="descripcionProyecto" style="color: #0c2465;font-weight: bold;font-size: small" />
+                                <h:outputLabel value="Resumen" for="descripcionProyecto" style="color: #0c2465;font-weight: bold;font-size: small" />
                                 <p:scrollPanel mode="native" style="width: 360px;height: 200px" styleClass=".ui-scrollpanel-vbar" >
 
                                     <p:inputTextarea id="descripcionProyecto" value="#{proyetoWizard.proyecto.descripcionProyecto}" style="width: 360px;height: 200px" />
@@ -44,12 +44,12 @@
 
 
 
-                                <p:outputLabel value="Fecha Inicio" for="fechaInicioProyecto" style="color: #0c2465;font-size: small"/>
+                                <h:outputLabel value="Fecha Inicio" for="fechaInicioProyecto" style="color: #0c2465;font-size: small"/>
                                 <p:calendar id="fechaInicioProyecto" pattern="MM/dd/yyyy" value="#{proyetoWizard.proyecto.fechaInicioProyecto}" title="#{bundle.EditProyectoTitle_fechaInicioProyecto}"  showOn="button"/>
                                 <p:outputLabel value="" style="padding: 20px" />
 
 
-                                <p:outputLabel value="Duración (meses)" for="duracionProyecto" style="color: #0c2465;font-size: small"/>
+                                <h:outputLabel value="Duración (meses)" for="duracionProyecto" style="color: #0c2465;font-size: small"/>
                                 <p:inputText id="duracionProyecto" value="#{proyetoWizard.proyecto.duracionProyecto}" title="#{bundle.CreateProyectoTitle_duracionProyecto}" />
                                 <p:outputLabel value="" style="padding: 20px" />
 
@@ -64,7 +64,7 @@
                                 <p:outputLabel value="" style="padding: 20px" />
 
 
-                                <p:outputLabel value="Tipo Financiamiento" for="tipoFinanciamiento" style="color: #0c2465;font-size: small"/>
+                                <h:outputLabel value="Tipo Financiamiento" for="tipoFinanciamiento" style="color: #0c2465;font-size: small"/>
                                 <p:selectOneMenu id="tipoFinanciamiento" value="#{proyetoWizard.proyecto.tipoFinanciamiento}" >
                                     <f:selectItems value="#{tipoFinanciamientoController.itemsAvailableSelectOne}"
                                                    var="tipoFinanciamientoItem" itemValue="#{tipoFinanciamientoItem}"

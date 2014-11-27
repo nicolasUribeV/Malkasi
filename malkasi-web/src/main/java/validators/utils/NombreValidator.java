@@ -25,7 +25,7 @@ public class NombreValidator implements Validator{
         String nombre = (String) o;
 
         if(!validarNombre(nombre)) {
-            FacesMessage msg = new FacesMessage("Nombre inválido.", "Invalid Name format.");
+            FacesMessage msg = new FacesMessage("Nombre inválido");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

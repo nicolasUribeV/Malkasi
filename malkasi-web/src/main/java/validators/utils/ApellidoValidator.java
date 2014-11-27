@@ -25,7 +25,7 @@ public class ApellidoValidator implements Validator{
         String nombre = (String) o;
 
         if(!validarApellido(nombre)) {
-            FacesMessage msg = new FacesMessage("Apellido inválido.", "Invalid Last Name format.");
+            FacesMessage msg = new FacesMessage("Apellido inválido");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

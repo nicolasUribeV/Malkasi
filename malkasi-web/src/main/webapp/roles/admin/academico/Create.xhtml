@@ -8,50 +8,70 @@
 
     <ui:composition>
 
-        <p:dialog id="AcademicoCreateDlg" widgetVar="AcademicoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear usuario">
+        <p:dialog id="AcademicoCreateDlg" widgetVar="AcademicoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear usuario" >
             <h:form id="AcademicoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_rut}" for="rut" />
-                        <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.CreateAcademicoTitle_rut}" >
+                    <h:panelGrid columns="3" rendered="#{academicoController.selected != null}" columnClasses="label, value" >
+                        <h:outputLabel value="Rut* " for="rut" style="color: #0c2465;font-size: small" />
+                        <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.CreateAcademicoTitle_rut}" style="width: 100%">
                             <f:validator validatorId="RutValidator"/>
                             <f:validator validatorId="SameRutValidator" />
                         </p:inputText>
-                        <p:outputLabel value="Nombre de Usuario" for="username" />
+                        <p:message id="msgRutAcademico" for="rut" style="padding: 20px" />
+
+                        
+                        <h:outputLabel value="Nombre de Usuario " for="username" style="color: #0c2465;font-size: small"/>
                         <p:inputText 
-                            requiredMessage="Este campo no puede estar vacío" required="true" id="username" value="#{academicoController.selected.userName}" title="Nombre de Usuario" >
+                            requiredMessage="Campo obligatorio" required="true" id="username" value="#{academicoController.selected.userName}" title="Nombre de Usuario" style="width: 100%">
                             <f:validator validatorId="SameUserNameValidator" />
                         </p:inputText>
+                        <p:message id="msgUsernameAcademico" for="username" style="padding: 20px" />
 
-                        <p:outputLabel value="Categoría" for="categoria" />
-                        <p:selectOneMenu id="categoria" value="#{academicoController.selected.categoria}">
+
+                        <h:outputLabel value="Categoría" for="categoria" style="color: #0c2465;font-size: small" />
+                        <p:selectOneMenu id="categoria" value="#{academicoController.selected.categoria}" style="width: 100%">
                             <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="nombre"
                                            itemLabel="#{nombre.nombreCategoria}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="" style="padding: 20px" />
 
-                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_nombres}" for="nombres" />
-                        <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.CreateAcademicoTitle_nombres}" >
+
+                        <h:outputLabel value="Nombres* " for="nombres" style="color: #0c2465;font-size: small"/>
+                        <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.CreateAcademicoTitle_nombres}" style="width: 100%">
                             <f:validator validatorId="NombreValidator"/>
                         </p:inputText>
-                        <p:outputLabel value="#{bundle.CreateAcademicoLabel_apellidos}" for="apellidos" />
-                        <p:inputText id="apellidos" value="#{academicoController.selected.apellidos}" title="#{bundle.CreateAcademicoTitle_apellidos}" >
+                        <p:message id="msgNombresAcademico" for="nombres" style="padding: 20px" />
+
+                        
+                        <h:outputLabel value="Apellidos* " for="apellidos" style="color: #0c2465;font-size: small"/>
+                        <p:inputText id="apellidos" value="#{academicoController.selected.apellidos}" title="#{bundle.CreateAcademicoTitle_apellidos}" style="width: 100%">
                             <f:validator validatorId="ApellidoValidator"/>
                         </p:inputText>
-                        <p:outputLabel value="Correo" for="mail" />
-                        <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.CreateAcademicoTitle_mail}" >
+                        <p:message id="msgApellidosAcademico" for="apellidos" style="padding: 20px" />
+
+                        
+                        <h:outputLabel value="Correo* " for="mail" style="color: #0c2465;font-size: small"/>
+                        <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.CreateAcademicoTitle_mail}" style="width: 100%">
                             <f:validator validatorId="CorreoValidator"/>
                         </p:inputText>
+                        <p:message id="msgMailAcademico" for="mail" style="padding: 20px" />
 
-                        <p:outputLabel value="Reseña" for="resegna" />
+
+                        <h:outputLabel value="Reseña" for="resegna" style="color: #0c2465;font-size: small"/>
                         <p:scrollPanel mode="native" style="width: 300px;height: 200px">
                             <p:inputTextarea id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.CreateAcademicoTitle_resegna}" rows="10" cols="50" />
                         </p:scrollPanel>
+                        <p:outputLabel value="" style="padding: 20px" />
 
-                        <h:outputText value="Permiso de Administrador" />
+
+                        <h:outputText value="Permiso de Administrador" style="color: #0c2465;font-size: small"/>
                         <p:selectBooleanCheckbox value="#{academicoController.selected.permisoAdmin}" />
+                        <p:outputLabel value="" style="padding: 20px" />
 
 
-                    </p:panelGrid>
+                    </h:panelGrid>
+                    <h5 style="text-align: center;color: #1c94c4;font-weight: bold">* Representa que el campo es obligatorio</h5>
+
                     <p:commandButton actionListener="#{academicoController.create}" value="Guardar" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AcademicoCreateDialog');"/>
                     <p:commandButton value="Cancelar" immediate="true" onclick="AcademicoCreateDialog.hide()"/>
                 </h:panelGroup>

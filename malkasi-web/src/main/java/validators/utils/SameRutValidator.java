@@ -34,14 +34,14 @@ public class SameRutValidator implements Validator {
         String nuevoRut = rut.replace("-", "");
         nuevoRut = nuevoRut.replace(".", "");
         nuevoRut = nuevoRut.replace("k", "K");
-        if (!validarRut(nuevoRut)) {
-            FacesMessage msg = new FacesMessage("Rut ya ingresado en el sistema", "Invalid Rut format.");
+        if (!validarRutDistinto(nuevoRut)) {
+            FacesMessage msg = new FacesMessage("Ya existe un usuario con el rut ingresado");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
 
-    public boolean validarRut(String rut) {
+    public boolean validarRutDistinto(String rut) {
         
         boolean validacion = false;
         try {

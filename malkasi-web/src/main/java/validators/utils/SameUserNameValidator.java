@@ -32,7 +32,7 @@ public class SameUserNameValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         userName = value.toString();
         if (!validarUserName(userName)) {
-            FacesMessage msg = new FacesMessage("Nombre de usuario ya ingresado en el sistema", "Invalid Rut format.");
+            FacesMessage msg = new FacesMessage("Nombre de usuario ya ingresado en el sistema");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

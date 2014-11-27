@@ -39,7 +39,7 @@ public class AgnoValidator implements Validator{
 //        @Min(10) @Max(20)
 //        int year;
         if(!validateYear(Year)) {
-            FacesMessage msg = new FacesMessage( "Año inválido.");
+            FacesMessage msg = new FacesMessage( "Año inválido");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             fc.addMessage(":PublicacionCreateForm:agno", msg);
             throw new ValidatorException(msg);
