@@ -29,36 +29,52 @@
                 <p:wizard flowListener="#{proyetoWizard.onFlowProcess}" nextLabel="Siguiente" backLabel="Volver">
                     <p:tab id="basicos" title="Información básica">
                         <p:panel header="Datos básicos del proyecto">
-                            <h:panelGrid columns="2" columnClasses="label, value">
-                                <p:outputLabel value="Titulo Proyecto *" for="nombreProyecto" style="color: #0c2465;font-size: small" />
-                                <p:inputText id="nombreProyecto" value="#{proyetoWizard.proyecto.nombreProyecto}" title="#{bundle.CreateProyectoTitle_nombreProyecto}" />
+                            <h:panelGrid columns="3" columnClasses="label, value">
+                                <h:outputLabel value="Título Proyecto *" for="nombreProyecto" style="color: #0c2465;font-size: small" />
+                                <p:inputText id="nombreProyecto" required="true" requiredMessage="Campo obligatorio" value="#{proyetoWizard.proyecto.nombreProyecto}" title="#{bundle.CreateProyectoTitle_nombreProyecto}" />
+                                <p:message id="msgNombreEditarProyecto" for="nombreProyecto" style="padding: 20px" />
 
 
-                                <p:outputLabel value="Código *" for="codigoProyecto" style="color: #0c2465;font-size: small"/>
-                                <p:inputText id="codigoProyecto" value="#{proyetoWizard.proyecto.codigoProyecto}" title="#{bundle.CreateProyectoTitle_codigoProyecto}" />
+                                <h:outputLabel value="Código *" for="codigoProyecto" style="color: #0c2465;font-size: small"/>
+                                <p:inputText id="codigoProyecto" required="true" requiredMessage="Campo obligatorio" value="#{proyetoWizard.proyecto.codigoProyecto}" title="#{bundle.CreateProyectoTitle_codigoProyecto}" />
+                                <p:message id="msgCodigoEditarProyecto" for="codigoProyecto" style="padding: 20px" />
 
-                                <p:outputLabel value="Resumen" for="descripcionProyecto" style="color: #0c2465;font-size: small"/>
-                                <p:inputTextarea id="descripcionProyecto" value="#{proyetoWizard.proyecto.descripcionProyecto}" title="#{bundle.CreateProyectoTitle_descripcionProyecto}" />
 
-                                <p:outputLabel value="Fecha Inicio" for="fechaInicioProyecto" style="color: #0c2465;font-size: small"/>
+                                <h:outputLabel value="Resumen" for="descripcionProyecto" style="color: #0c2465;font-size: small"/>
+                                <p:scrollPanel mode="native" style="width: 360px;height: 200px" styleClass=".ui-scrollpanel-vbar" >
+                                    <p:inputTextarea id="descripcionProyecto" value="#{proyetoWizard.proyecto.descripcionProyecto}" style="width: 360px;height: 200px" />
+                                </p:scrollPanel>
+                                <p:outputLabel value="" style="padding: 20px" />
+
+
+                                <h:outputLabel value="Fecha Inicio" for="fechaInicioProyecto" style="color: #0c2465;font-size: small"/>
                                 <p:calendar id="fechaInicioProyecto" pattern="MM/dd/yyyy" value="#{proyetoWizard.proyecto.fechaInicioProyecto}" title="#{bundle.EditProyectoTitle_fechaInicioProyecto}"  showOn="button"/>
+                                <p:outputLabel value="" style="padding: 20px" />
 
-                                <p:outputLabel value="Duración (meses)" for="duracionProyecto" style="color: #0c2465;font-size: small"/>
-                                <p:inputText id="duracionProyecto" value="#{proyetoWizard.proyecto.duracionProyecto}" title="#{bundle.CreateProyectoTitle_duracionProyecto}" />
+                                <h:outputLabel value="Duración (meses)" for="duracionProyecto" style="color: #0c2465;font-size: small"/>
+                                <p:inputText id="duracionProyecto" validatorMessage="Duración mínima de 1 mes y máxima de 24 meses" value="#{proyetoWizard.proyecto.duracionProyecto}" title="#{bundle.CreateProyectoTitle_duracionProyecto}" >
+                                    <f:validateLongRange minimum="1" maximum="24" />
+                                </p:inputText>
+                                <p:message id="msgDuracionEditarProyecto" for="duracionProyecto" style="padding: 20px" />
 
-                                <p:outputLabel value="Estado Proyecto" for="estadoProyecto" style="color: #0c2465;font-size: small"/>
+
+                                <h:outputLabel value="Estado Proyecto" for="estadoProyecto" style="color: #0c2465;font-size: small"/>
                                 <p:selectOneMenu id="estadoProyecto" value="#{proyetoWizard.proyecto.estadoProyecto}">  
                                     <f:selectItem itemLabel="Presentado" itemValue="Presentado" />  
                                     <f:selectItem itemLabel="Adjudicado" itemValue="Adjudicado" />  
                                     <f:selectItem itemLabel="En Ejecución" itemValue="En Ejecución" />
                                     <f:selectItem itemLabel="Terminado" itemValue="Terminado" />
                                 </p:selectOneMenu>
+                                <p:outputLabel value="" style="padding: 20px" />
+
                                 <p:outputLabel value="Tipo Financiamiento" for="tipoFinanciamiento" style="color: #0c2465;font-size: small" />
                                 <p:selectOneMenu id="tipoFinanciamiento" value="#{proyetoWizard.proyecto.tipoFinanciamiento}" >
                                     <f:selectItems value="#{tipoFinanciamientoController.itemsAvailableSelectOne}"
                                                    var="tipoFinanciamientoItem" itemValue="#{tipoFinanciamientoItem}"
                                                    itemLabel="#{tipoFinanciamientoItem.nombreFinanciamiento}"/>
                                 </p:selectOneMenu>
+                                <p:outputLabel value="" style="padding: 20px" />
+
 
                             </h:panelGrid>
                             <h5 style="text-align: center;color: #1c94c4;font-weight: bold">* Representa que el campo es obligatorio</h5>
@@ -84,7 +100,7 @@
 
 
 
-                                <p:outputLabel value="Rol* : " style="color: #0c2465;font-size: small"/>
+                                <h:outputLabel value="Rol* : " style="color: #0c2465;font-size: small"/>
                                 <p:inputText id="rolInput" style="width: 100%" required="true" requiredMessage="Debe ingresar un rol para el académico" value = "#{proyetoWizard.rol}"/>
                                 <p:message id="msgadsfecto" for="rolInput" style="padding: 20px" />
 
@@ -98,7 +114,7 @@
                         </p:panel>
                         <p:panel id="lista">
                             <p:panelGrid>
-                                <p:outputLabel value="Académicos agregados"/>
+                                <h:outputLabel value="Académicos agregados"/>
                                 <p:selectOneListbox style="height:200px; width: 220px">
                                     <f:selectItems value="#{proyetoWizard.roles}" var="academicos"
                                                    itemLabel="#{academicos.rol}: #{academicos.academico.nombres} #{academicos.academico.apellidos}"/>
