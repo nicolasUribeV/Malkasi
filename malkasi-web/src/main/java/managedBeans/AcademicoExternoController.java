@@ -75,16 +75,16 @@ public class AcademicoExternoController implements Serializable {
         for (int i = 0; i < publicaciones.size(); i++) {
             ArrayList<String> orden = publicaciones.get(i).getAcademicoOrden();
             if (orden != null) {
-                int index = -1; 
+                int index = -1;
                 for (int j = 0; j < orden.size(); j++) {
                     String[] name = orden.get(j).split("_");
-                    if(ae.getNombres().equals(name[0]) && ae.getApellidos().equals(name[1])){
-                        System.out.println("Encontré a " +name[0] +" "+name[1]);
-                        index = j; 
+                    if (ae.getNombres().equals(name[0]) && ae.getApellidos().equals(name[1])) {
+                        System.out.println("Encontré a " + name[0] + " " + name[1]);
+                        index = j;
                     }
                 }
-                if(index != -1){
-                    String nuevo = this.selected.getNombres()+"_"+this.selected.getApellidos();
+                if (index != -1) {
+                    String nuevo = this.selected.getNombres() + "_" + this.selected.getApellidos();
                     orden.set(index, nuevo);
                     publicaciones.get(i).setAcademicoOrden(orden);
                     publicacionFacade.edit(publicaciones.get(i));
@@ -109,9 +109,20 @@ public class AcademicoExternoController implements Serializable {
         return items;
     }
 
+    public List<AcademicoExterno> itemsExternos() {
+        items = getFacade().findAll();
+        return items;
+    }
+
+    public void refresh() {
+        selected = null;
+        items = null;
+        items = getFacade().findAll();
+    }
+
     public AcademicoExterno prepareCreateViewAcademicExternal(Academico academico) {
         selected = null;
-        //items = academico.getPublicaciones();
+        items = getFacade().findAll();
         JsfUtil.redirect("/faces/roles/academico/externos/List.xhtml");
         return selected;
     }

@@ -30,5 +30,5 @@ public interface AcademicoExternoFacadeLocal {
 
     int count();
     
-    boolean FindWithNombreApellido(String nombres, String apellidos);
+    boolean FindWithNombreApellido(String nombres, String apellidos, long id);
 }

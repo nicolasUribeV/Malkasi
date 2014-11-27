@@ -19,7 +19,7 @@
                 <p:tooltip id="atras" for="volverButton" value="Haga click para volver" trackMouse="true" />
 
                 <p:panel header="Académicos externos">
-                    <p:dataTable id="datalist" value="#{academicoExternoController.items}" var="item"
+                    <p:dataTable id="datalist" value="#{academicoExternoController.itemsExternos()}" var="item"
                                  selectionMode="single" selection="#{academicoExternoController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
