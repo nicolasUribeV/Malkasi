@@ -11,30 +11,42 @@
         <p:dialog id="AcademicoExternoCreateDlg" widgetVar="AcademicoExternoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear académico externo">
             <h:form id="AcademicoExternoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="pg">
-                        <p:outputLabel value="Nombres" for="nombres" />
-                        <p:inputText id="nombres" required="true" value="#{academicoExternoController.selected.nombres}" title="Nombres"  >
+                    <h:panelGrid columns="3" rendered="#{academicoExternoController.selected != null}" id="pg" columnClasses="label, value">
+                        <h:outputLabel value="Nombres*" for="nombres" style="color: #0c2465;font-size: small;width: 100px"/>
+                        <p:inputText id="nombres" required="true" requiredMessage="Campo obligatorio" value="#{academicoExternoController.selected.nombres}" title="Nombres"  >
                             <f:validator validatorId="AcademicoExternoNameValidator"  /> 
                             <f:attribute name="apellidos" value="#{academicoExternoController.selected.apellidos}" />   
                         </p:inputText>
-                        <p:outputLabel value="Apellidos" for="apellidoss" />
-                        <p:inputText id="apellidoss" required="true" value="#{academicoExternoController.selected.apellidos}"   title="Apellidos" >
+                        <p:message id="msgNombreExterno" for="nombres" style="padding: 20px" />
+
+                        
+                        <h:outputLabel value="Apellidos*" for="apellidoss" style="color: #0c2465;font-size: small;width: 100px"/>
+                        <p:inputText id="apellidoss" required="true" requiredMessage="Campo obligatorio" value="#{academicoExternoController.selected.apellidos}"   title="Apellidos" >
                             <p:ajax event="change"  update="panel"/>
                         </p:inputText>
-                    </p:panelGrid>
+                        <p:message id="msgApellidosExterno" for="apellidoss" style="padding: 20px" />
+
+                    </h:panelGrid>
                     <br></br>
                     <p:outputLabel value="Filiación" />
                     <br></br>
-                    <p:panelGrid id="panel" columns="2" rendered="#{academicoExternoController.selected != null}">
-                        <p:outputLabel value="País" for="pais" />
-                        <p:inputText id="pais" value="#{academicoExternoController.selected.pais}" title="Pais" />
-                        <p:outputLabel value="Universidad" for="universidad" />
-                        <p:inputText id="universidad" value="#{academicoExternoController.selected.universidad}" title="Universidad" />
-                    </p:panelGrid>
+                    <h:panelGrid id="panel" columns="3" rendered="#{academicoExternoController.selected != null}" columnClasses="label, value">
+                        <h:outputLabel value="País*" for="pais" style="color: #0c2465;font-size: small;width: 100px"/>
+                        <p:inputText id="pais" required="true" requiredMessage="Campo obligatorio" value="#{academicoExternoController.selected.pais}" title="Pais" />
+                        <p:message id="msgPaisE" for="pais" style="padding: 20px" />
+                        
+                        <h:outputLabel value="Universidad*" for="universidad" style="color: #0c2465;font-size: small;width: 100px"/>
+                        <p:inputText id="universidad" required="true" requiredMessage="Campo obligatorio" value="#{academicoExternoController.selected.universidad}" title="Universidad" />
+                        <p:message id="msgUniversidadE" for="universidad" style="padding: 20px" />
+
+                    </h:panelGrid>
+                    <h5 style="text-align: center;color: #1c94c4;font-weight: bold">* Representa que el campo es obligatorio</h5>
+
                     <p:commandButton actionListener="#{academicoExternoController.create}" value="Crear" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AcademicoExternoCreateDialog');"/>
                     <p:button value="Cancelar" href="/faces/roles/academico/externos/List.xhtml" />
-
+                    
                 </h:panelGroup>
+                
             </h:form>
         </p:dialog>
 

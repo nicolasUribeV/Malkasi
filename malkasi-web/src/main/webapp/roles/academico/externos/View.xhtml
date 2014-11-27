@@ -8,20 +8,20 @@
 
     <ui:composition>
 
-        <p:dialog id="AcademicoExternoViewDlg" widgetVar="AcademicoExternoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Ver información ">
+        <p:dialog id="AcademicoExternoViewDlg" widgetVar="AcademicoExternoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Información ">
             <h:form id="AcademicoExternoViewForm">
-                <h:panelGroup id="display">
-                    <h:outputLabel value="Nombres"/>
+                <h:panelGroup id="display" >
+                    <h:outputLabel value="Nombres" style="color: #1c94c4;font-size: small"/>
                     <br></br>
-                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}">
-                        <h:outputText value="#{academicoExternoController.selected.nombres} #{academicoExternoController.selected.apellidos} " title="Nombre"/>
-                    </p:panelGrid>
+                    <h:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" columnClasses="label, value" >
+                        <h:outputText value="#{academicoExternoController.selected.nombres} #{academicoExternoController.selected.apellidos} " title="Nombre" style="color: #0c2465;font-size: small"/>
+                    </h:panelGrid>
                     <br></br>
-                    <p:outputLabel value="Filiación" />
+                    <p:outputLabel value="Filiación" style="color: #1c94c4;font-size: small"/>
                     <br></br>
-                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}">
-                        <h:outputText value="#{academicoExternoController.selected.universidad} (#{academicoExternoController.selected.pais})" title="Universidad"/>
-                    </p:panelGrid>
+                    <h:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" columnClasses="label, value">
+                        <h:outputText value="#{academicoExternoController.selected.universidad} (#{academicoExternoController.selected.pais})" title="Universidad" style="color: #0c2465;font-size: small"/>
+                    </h:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="AcademicoExternoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

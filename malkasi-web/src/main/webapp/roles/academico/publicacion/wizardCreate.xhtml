@@ -16,9 +16,10 @@
             </span>
 
             <h:form id="publicacionForm" >
-                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/academico/index.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/academico/index.xhtml" onclick="#{academicoController.setSelected(null)}">
+                             
+                </p:button>
                 <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
-
                 <p:growl id="growl" sticky="true" showDetail="true"/>
 
 
@@ -50,12 +51,11 @@
 
 
                                 <p:outputLabel value="País" style="color: #0c2465;font-weight: bold;font-size: small" />
-                                <p:inputText value="#{wizardController.publicacion.pais}" title="PublicacionPais" 
-                                             requiredMessage="Pais es campo obligatorio"
+                                <p:inputText id="pais" value="#{wizardController.publicacion.pais}" title="PublicacionPais" 
                                              validatorMessage="El país no puede contener números">
                                     <f:validateRegex pattern="[a-zA-Z ]*" />
                                 </p:inputText>
-                                <p:outputLabel value="" style="padding: 20px" />
+                                <p:message id="msgPais" for="pais" style="padding: 20px" />
 
 
 
@@ -188,7 +188,7 @@
                             <br></br><br></br>
 
                             <p:column >
-                                <p:outputPanel id="myOrderListEnvelopId" style="text-align: center" >
+                                <p:outputPanel id="myOrderListEnvelopId" >
                                     <p:orderList id="orden" styleClass="mySelector" value="#{wizardController.publicacion.academicoOrden}" var="city" controlsLocation="none" itemLabel="#{wizardController.cleanName(city)}" itemValue="#{city}"/>
 
                                     <p:outputLabel value="" style="padding: 100px" />
@@ -208,7 +208,7 @@
                                 Previsualización:    #{publicacionController.getStringPublicacion(wizardController.publicacion)}
                                 <br></br>
                             </h:panelGrid>
-                            
+
                             <p:commandButton value="Guardar" actionListener="#{wizardController.save(wizardController.publicacion,sessionUtilTest.currentUser)}" update="growl" process="@this">
                                 <p:confirm header="Confirmación" message="Se creará la publicación #{wizardController.publicacion.nombrePublicacion}" icon="ui-icon-script" />
                             </p:commandButton>
@@ -223,7 +223,7 @@
 
 
             </h:form>
-            
+
         </ui:define>
     </ui:composition>
 </html>

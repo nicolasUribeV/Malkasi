@@ -37,5 +37,8 @@ public class Academico_GradoAcademicoController implements Serializable {
 
     public void Delete(Academico Academico, GradoAcademico GradoAcademico) {
         this.ejbFacade.Delete(Academico, GradoAcademico);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Grado académico eliminado"));
+
     }
 }

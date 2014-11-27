@@ -25,24 +25,30 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 emptyMessage="No existen coincidencias"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton "/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton "/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombres} #{item.apellidos}"/>
+                        <p:column filterBy="#{item.nombres}" headerText="Nombre">
+
+                            <h:outputText value="#{item.nombres}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Filiación"/>
-                            </f:facet>
-                            <h:outputText value="#{item.universidad} ( #{item.pais} )"/>
+                        <p:column filterBy="#{item.apellidos}" headerText="Apellido">
+
+                            <h:outputText value="#{item.apellidos}"/>
                         </p:column>
-                        <p:column style="width:200px">
+                        <p:column filterBy="#{item.universidad}" headerText="Universidad">
+
+                            <h:outputText value="#{item.universidad}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.pais}" headerText="País">
+
+                            <h:outputText value="#{item.pais}"/>
+
+                        </p:column>
+                        <p:column style="width:100px">
                             <f:facet name="header">
                                 <h:outputText value="Acción"/>
                             </f:facet>

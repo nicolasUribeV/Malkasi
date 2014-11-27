@@ -11,16 +11,16 @@
         <p:dialog id="AcademicoExternoEditDlg" widgetVar="AcademicoExternoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar académico externo">
             <h:form id="AcademicoExternoEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="pg">
-                        <p:outputLabel value="Nombres" for="nombres" />
+                    <h:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="pg" columnClasses="label, value">
+                        <h:outputLabel value="Nombres" for="nombres" style="color: #0c2465;font-size: small;width: 100px"/>
                         <p:inputText id="nombres" required="true" value="#{academicoExternoController.selected.nombres}"  title="Nombres" >
                             <p:ajax event="change"/>
                         </p:inputText>
-                        <p:outputLabel value="Apellidos" for="apellidoss" />
+                        <h:outputLabel value="Apellidos" for="apellidoss" style="color: #0c2465;font-size: small;width: 100px"/>
                         <p:inputText id="apellidoss" required="true" value="#{academicoExternoController.selected.apellidos}"   title="Apellidos" >
                             <p:ajax event="change"/>
                         </p:inputText>
-                    </p:panelGrid>
+                    </h:panelGrid>
                     <h:inputHidden value="true">
                         <f:validator validatorId="validatorNameAndLastName" />
                         <f:attribute name="nombres" value="#{academicoExternoController.selected.nombres}" />
@@ -28,14 +28,14 @@
                         <f:attribute name="ids" value="#{academicoExternoController.selected.id}" />
                     </h:inputHidden>
                     <br></br>
-                    <p:outputLabel value="Filiación" />
+                    <p:outputLabel value="Filiación" style="color: #1c94c4" />
                     <br></br>
-                    <p:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="panel">
-                        <p:outputLabel value="Pais" for="pais" />
+                    <h:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="panel" columnClasses="label, value">
+                        <h:outputLabel value="Pais" for="pais" style="color: #0c2465;font-size: small;width: 100px"/>
                         <p:inputText id="pais" value="#{academicoExternoController.selected.pais}" title="Pais" />
-                        <p:outputLabel value="Universidad" for="universidad" />
+                        <h:outputLabel value="Universidad" for="universidad" style="color: #0c2465;font-size: small;width: 100px"/>
                         <p:inputText id="universidad" value="#{academicoExternoController.selected.universidad}" title="Universidad" />
-                    </p:panelGrid>
+                    </h:panelGrid>
                     <p:commandButton actionListener="#{academicoExternoController.update}" value="Guardar" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoExternoEditDialog');">
                         <p:confirm header="Confirmación" message="Está seguro que desea editar la información? Esto implica cambiar toda la información en los proyectos/publicaciones asociadas " icon="ui-icon-alert" />
                     </p:commandButton>
@@ -43,7 +43,7 @@
                         <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                     </p:confirmDialog>
-                    <p:commandButton value="Volver" immediate="true" update="AcademicoExternoEditForm" actionListener="#{academicoExternoController.prepareCreateViewAcademicExternal(sessionUtilTest.currentUser)}" onclick="AcademicoExternoEditDialog.hide()"/>
+                    <p:commandButton value="Cancelar" immediate="true" update="AcademicoExternoEditForm" actionListener="#{academicoExternoController.prepareCreateViewAcademicExternal(sessionUtilTest.currentUser)}" onclick="AcademicoExternoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
