@@ -23,30 +23,35 @@
                         <h:outputText value="#{proyectoController.selected.fechaInicioProyecto}" title="#{bundle.ViewProyectoTitle_fechaInicioProyecto}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText style="color: #c35b00;font-size: large" value="#{bundle.ViewProyectoLabel_duracionProyecto}"/>
+                        <h:outputText style="color: #c35b00;font-size: large" value="Duración proyecto: "/>
                         <h:outputText value="#{proyectoController.selected.duracionProyecto} meses" title="#{bundle.ViewProyectoTitle_duracionProyecto}"/>
-                        <h:outputText style="color: #c35b00;font-size: large" value="#{bundle.ViewProyectoLabel_estadoProyecto}"/>
+                        <h:outputText style="color: #c35b00;font-size: large" value="Estado proyecto: "/>
                         <h:outputText value="#{proyectoController.selected.estadoProyecto}" title="#{bundle.ViewProyectoTitle_estadoProyecto}"/>
                         <h:outputText style="color: #c35b00;font-size: large" value="Tipo Financiamiento"/>
                         <h:outputText value="#{proyectoController.selected.tipoFinanciamiento.nombreFinanciamiento}" title="#{bundle.ViewProyectoTitle_tipoFinanciamiento}"/>
                     </h:panelGrid>
-                    <p:commandButton style="width: 100%" icon="ui-icon-plus" value="Editar Proyecto" actionListener="#{proyetoWizard.prepareEdit(proyectoController.selected)}"/>
+                    <p:commandButton style="width: 100%" icon="ui-icon-pencil" value="Editar Proyecto" actionListener="#{proyetoWizard.prepareEdit(proyectoController.selected)}"/>
                     <p:commandButton style="width: 100%" icon="ui-icon-close" value="Eliminar Proyecto" disabled="true" />
-                    <p:button style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal " href="/faces/roles/academico/proyectos/List.xhtml" />  
-                </p:panel>
+                      </p:panel>
             </h:form>
 
         </ui:define>
 
         <ui:define name="body">
+            <h:form>
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/academico/proyectos/List.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
 
-            <h2 style="color: #158cba; word-wrap: break-word">#{proyectoController.selected.nombreProyecto} </h2>
+                
+                   
+                        <h2 style="color: #158cba; word-wrap: break-word;width: 100%">#{proyectoController.selected.nombreProyecto} </h2>
+                 
+                    <h4 style="color: #158cba; word-wrap: break-word;width: 100%">Descripción del proyecto: </h4>
+                    <h:outputText value="#{proyectoController.selected.descripcionProyecto}" title="#{bundle.ViewProyectoTitle_descripcionProyecto}"/>
 
-            <p:panel style="text-align: justify;font-size: 100%">
-                <h:outputText value="#{bundle.ViewProyectoLabel_descripcionProyecto}"/>
-                <br></br>
-                <h:outputText value="#{proyectoController.selected.descripcionProyecto}" title="#{bundle.ViewProyectoTitle_descripcionProyecto}"/>
-            </p:panel>
+                
+            </h:form>
+
 
         </ui:define>
 

@@ -14,10 +14,12 @@
             <h:outputText value="#{bundle.ListProyectoTitle}"></h:outputText>
         </ui:define>
         <ui:define name="sidebar-left">
-
+            
+            
             <p:dataList id="data" value="A" var="car" type="definition">
                 <f:facet name="header">
-                    <h:outputText style="font-weight: bold; font-size: x-large" value="#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}" />
+
+                    <h:outputText style="font-weight: bold" value="#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}" />
                 </f:facet>
                 <p:panelGrid columns="1">
                     Correo: #{sessionUtilTest.currentUser.mail}    
@@ -31,7 +33,6 @@
 
             <h:form>
                 <p:commandButton  style="width: 100%" id="createButton" icon="ui-icon-plus"   value="Crear proyecto" actionListener="#{proyetoWizard.prepareCreate(sessionUtilTest.currentUser)}" />
-                <p:commandButton  style="width: 100%" icon="ui-icon-arrowreturnthick-1-w" value="Volver al menú principal" actionListener="#{wizardController.comeBackIndex()}"/>
 
 
             </h:form>
@@ -41,6 +42,9 @@
         </ui:define>
         <ui:define name="body">
             <h:form>
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/academico/index.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
+
                 <p:dataGrid var="proyecto" value="#{sessionUtilTest.currentUser.proyectos}" columns="2" layout="grid"
                             id="proyectos"
                             emptyMessage="No existen proyectos para este académico">
@@ -49,15 +53,30 @@
                         Proyectos
                     </f:facet>
 
-                    <p:panel header="#{proyecto.proyecto.nombreProyecto}" style="text-align:center">
-                        <h:panelGrid columns="1" style="width:100%">
-                            <h:outputText value="#{proyecto.proyecto.codigoProyecto}"/>
-                            <h:outputText value="Rol: #{proyecto.rol}"/>
-                            <h:outputText value="#{proyecto.proyecto.tipoFinanciamiento.nombreFinanciamiento}"/>
-                            <p:commandButton value="Ver proyecto" icon="ui-icon-circle-zoomin" actionListener="#{proyectoController.viewProyecto(proyecto.proyecto)}" >
-                            </p:commandButton>
+                    <p:panel header="#{proyecto.proyecto.nombreProyecto}" style="text-align:center;word-wrap: break-word">
+                        <h:panelGrid columns="3" style="width:100%">
+                            <p:column >
+                                <h:panelGrid columns="2" style="text-align: left">
+                                    <h:outputLabel value="Código: "/>
+                                    <h:outputText value="#{proyecto.proyecto.codigoProyecto}"/>
 
+                                    <h:outputLabel value="Rol: "/>
+                                    <h:outputText value="#{proyecto.rol}"/>
+
+                                    <h:outputLabel value="Fuente financiamiento: "/>
+                                    <h:outputText value="#{proyecto.proyecto.tipoFinanciamiento.nombreFinanciamiento}"/>
+
+                                </h:panelGrid>
+                            </p:column>
+
+                            <p:column>
+                                <p:commandButton id="viewButton" icon="ui-icon-search" actionListener="#{proyectoController.viewProyecto(proyecto.proyecto)}" >
+                                </p:commandButton>
+                                <p:tooltip id="verProyecto" for="viewButton" value="Ver detalle proyecto" trackMouse="true" />
+
+                            </p:column>
                         </h:panelGrid>
+                         
                     </p:panel>
 
                 </p:dataGrid>
