@@ -29,11 +29,14 @@ public class AcademicoExternoFacade extends AbstractFacade<AcademicoExterno> imp
     public AcademicoExternoFacade() {
         super(AcademicoExterno.class);
     }
+    
     @Override
-    public boolean FindWithNombreApellido(String nombres, String apellidos){
-        Query q = em.createQuery("SELECT c FROM AcademicoExterno c WHERE c.nombres = :nombres AND c.apellidos = :apellidos");
+    public boolean FindWithNombreApellido(String nombres, String apellidos, long id){
+        Query q = em.createQuery("SELECT c FROM AcademicoExterno c WHERE c.nombres = :nombres AND c.apellidos = :apellidos AND c.id <> :id");
         q.setParameter("nombres", nombres);
         q.setParameter("apellidos", apellidos);
+        q.setParameter("id", id);
+        System.out.println("Resultados encontrados: " + q.getResultList().size());
         if(q.getResultList().size() == 0){
             return true;
         }

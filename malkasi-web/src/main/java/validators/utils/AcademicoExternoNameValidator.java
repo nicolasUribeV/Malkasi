@@ -33,30 +33,35 @@ public class AcademicoExternoNameValidator implements Validator{
     
     @Override
     public void validate(FacesContext context, UIComponent component, Object n) throws ValidatorException {
-        
      
-
+        
+        
         String nombre = (String) n;
         Object a;
+        Object b;
         String apellido=null;
+        long id = 0;
         try{
             a = component.getAttributes().get("apellidos");
             apellido = (String) a;
+            b = component.getAttributes().get("ids");
+            id = (long) b;
         }
         catch (Exception e){
             a = null;
+            b = null;
         }
-        if(!validate(nombre, apellido)){
+        if(!validate(nombre, apellido, id)){
             FacesMessage msg = new FacesMessage("Este académico ya fue ingresado al sistema");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
     
-    public boolean validate(String nombre, String apellido){
+    public boolean validate(String nombre, String apellido, long id){
         
         
-        if(ejbFacade.FindWithNombreApellido(nombre, apellido)){
+        if(ejbFacade.FindWithNombreApellido(nombre, apellido, id)){
             return true;
         }
         else{
@@ -66,4 +71,3 @@ public class AcademicoExternoNameValidator implements Validator{
     }
     
 }
-
