@@ -17,7 +17,7 @@
 
             <h:form id="publicacionForm" >
                 <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/academico/index.xhtml" onclick="#{academicoController.setSelected(null)}">
-                             
+
                 </p:button>
                 <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
                 <p:growl id="growl" sticky="true" showDetail="true"/>
@@ -36,7 +36,7 @@
 
                                 <h:outputText value="Tipo de Publicación " style="color: #0c2465;font-weight: bold;font-size: small" />
                                 <p:selectOneMenu required="true" value="#{wizardController.publicacion.tipoPublicacion}">
-                                    <p:ajax event="change" update="flowL"/>
+                                    <p:ajax event="change" update="infoEspData"/>
                                     <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}" var="nombre"
                                                    itemLabel="#{nombre.nombreTipo}"/>
                                 </p:selectOneMenu>
@@ -77,41 +77,48 @@
                         <p:panel header="Información Especifica">
 
 
-                            <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:panelGrid id="infoEspData" columns="2" columnClasses="label, value">
 
-                                <p:outputLabel value="Nombre Libro/Revista" style="color: #0c2465;font-size: small"  />
-                                <p:inputText  value="#{wizardController.publicacion.nombreLibro}" title="#{bundle.CreatePublicacionTitle_nombreLibro}" >
-
-                                </p:inputText>
+                                <c:if test="#{!wizardController.isTipoConferencia(wizardController.publicacion.tipoPublicacion)}">
 
 
-                                <p:outputLabel value="Número de Páginas" style="color: #0c2465;font-size: small" />
-                                <p:inputText id="referencia" value="#{wizardController.publicacion.referencia}" title="#{bundle.CreatePublicacionTitle_referencia}" >
+                                    <p:outputLabel value="Nombre Libro/Revista" style="color: #0c2465;font-size: small"  />
+                                    <p:inputText  value="#{wizardController.publicacion.nombreLibro}" title="#{bundle.CreatePublicacionTitle_nombreLibro}" >
 
-                                </p:inputText>
-
-                                <p:outputLabel value="Editorial Libro/Revista" style="color: #0c2465;font-size: small"  />
-                                <p:inputText id="editorial" value="#{wizardController.publicacion.editorial}" title="#{bundle.CreatePublicacionTitle_editorial}" >
-
-                                </p:inputText>
+                                    </p:inputText>
 
 
+                                    <p:outputLabel value="Número de Páginas" style="color: #0c2465;font-size: small" />
+                                    <p:inputText id="referencia" value="#{wizardController.publicacion.referencia}" title="#{bundle.CreatePublicacionTitle_referencia}" >
+
+                                    </p:inputText>
+
+                                    <p:outputLabel value="Editorial Libro/Revista" style="color: #0c2465;font-size: small"  />
+                                    <p:inputText id="editorial" value="#{wizardController.publicacion.editorial}" title="#{bundle.CreatePublicacionTitle_editorial}" >
+
+                                    </p:inputText>
+
+                                </c:if>
                                 <p:outputLabel value="URL" style="color: #0c2465;font-size: small"  />
                                 <p:inputText id="url" value="#{wizardController.publicacion.url}" title="#{bundle.CreatePublicacionTitle_url}" >
 
                                 </p:inputText>
 
 
-                                <p:outputLabel value="Nombre Congreso" style="color: #0c2465;font-size: small"  /> 
-                                <p:inputText id="nombreCongreso" value="#{wizardController.publicacion.nombreCongreso}" title="#{bundle.CreatePublicacionTitle_nombreCongreso}" >
+                                <c:if test="#{wizardController.isTipoConferencia(wizardController.publicacion.tipoPublicacion)}">
 
-                                </p:inputText>
+                                    <p:outputLabel value="Nombre Congreso" style="color: #0c2465;font-size: small"  /> 
+                                    <p:inputText id="nombreCongreso" value="#{wizardController.publicacion.nombreCongreso}" title="#{bundle.CreatePublicacionTitle_nombreCongreso}" >
+
+                                    </p:inputText>
 
 
-                                <p:outputLabel value="Institución" style="color: #0c2465;font-size: small"  />
-                                <p:inputText id="institucion" value="#{wizardController.publicacion.institucion}" title="#{bundle.CreatePublicacionTitle_institucion}" >
+                                    <p:outputLabel value="Institución" style="color: #0c2465;font-size: small"  />
+                                    <p:inputText id="institucion" value="#{wizardController.publicacion.institucion}" title="#{bundle.CreatePublicacionTitle_institucion}" >
 
-                                </p:inputText>
+                                    </p:inputText>
+
+                                </c:if>
 
 
 
@@ -120,29 +127,32 @@
 
                                 </p:inputText>
 
-                                <p:outputLabel value="Tipo de Indexación: " style="color: #0c2465;font-size: small" />
-                                <h:panelGrid columns="1">
-                                    <p:column >
-                                        <p:outputLabel value="scielo" style="color: #0c2465;width: 70px" />
-                                        <p:selectBooleanCheckbox value="#{wizardController.publicacion.idexScielo}" />
-                                    </p:column>
+                                <c:if test="#{wizardController.isIndexada(wizardController.publicacion.tipoPublicacion)}">
 
-                                    <p:column >
-                                        <p:outputLabel value="isi" style="color: #0c2465;width: 70px" />
-                                        <p:selectBooleanCheckbox value="#{wizardController.publicacion.indexIsi}" />
-                                    </p:column>
+                                    <p:outputLabel value="Tipo de Indexación: " style="color: #0c2465;font-size: small" />
+                                    <h:panelGrid columns="1">
+                                        <p:column >
+                                            <p:outputLabel value="scielo" style="color: #0c2465;width: 70px" />
+                                            <p:selectBooleanCheckbox value="#{wizardController.publicacion.idexScielo}" />
+                                        </p:column>
 
-                                    <p:column>
-                                        <p:outputLabel value="scopus" style="color: #0c2465;width: 70px" />
-                                        <p:selectBooleanCheckbox value="#{wizardController.publicacion.indexScopus}" />
-                                    </p:column>
+                                        <p:column >
+                                            <p:outputLabel value="isi" style="color: #0c2465;width: 70px" />
+                                            <p:selectBooleanCheckbox value="#{wizardController.publicacion.indexIsi}" />
+                                        </p:column>
 
-                                    <p:column>
-                                        <p:outputLabel value="otra" style="color: #0c2465;width: 70px" />
-                                        <p:selectBooleanCheckbox value="#{wizardController.publicacion.idexOther}" />
-                                    </p:column>
+                                        <p:column>
+                                            <p:outputLabel value="scopus" style="color: #0c2465;width: 70px" />
+                                            <p:selectBooleanCheckbox value="#{wizardController.publicacion.indexScopus}" />
+                                        </p:column>
 
-                                </h:panelGrid>
+                                        <p:column>
+                                            <p:outputLabel value="otra" style="color: #0c2465;width: 70px" />
+                                            <p:selectBooleanCheckbox value="#{wizardController.publicacion.idexOther}" />
+                                        </p:column>
+
+                                    </h:panelGrid>
+                                </c:if>
                             </h:panelGrid>
                         </p:panel>
 
