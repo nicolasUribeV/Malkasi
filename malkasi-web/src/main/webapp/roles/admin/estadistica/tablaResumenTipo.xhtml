@@ -33,7 +33,7 @@
 
 
                     </h:panelGrid>
-                    <p:commandButton id="verTabla" value="Ver tabla" update="columnAgnos" />
+                    <p:commandButton id="verTabla" value="Ver tabla" update="columnAgnos columnAgnos2" />
                     <p:tooltip id="ver" for="verTabla" value="Presione click para ver resultados" trackMouse="true" />
 
                 </p:panel>
@@ -55,10 +55,36 @@
                     </p:columnGroup>
                     <p:column>
                         <h:outputText value="#{player.nombreTipo}" />
-                    </p:column>
+                    </p:column>                   
                     <c:forEach items ="#{indicadoresController.agnosTabla}" var="PT" >
                         <p:column>
                             <h:outputText value="#{indicadoresController.cantidadPublicacionTipo(PT, player)}" />
+                        </p:column>
+                    </c:forEach>
+                </p:dataTable>
+                <p:dataTable id="columnAgnos2" var="player2" value="#{indicadoresController.tiposIndexacion()}" style="margin-top:40px" >
+                    <f:facet name="header">
+                        Publicaciones indexadas
+                    </f:facet>
+
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column rowspan="2" headerText="Tipos de publicación indexada" />
+                            <p:column colspan="#{indicadoresController.agnosTabla.size()}" headerText="años" />
+                        </p:row>
+                        <p:row>
+                            <c:forEach items="#{indicadoresController.agnosTabla}" var="agnosSelected" >
+                                <p:column headerText="#{agnosSelected}" />
+                            </c:forEach>
+                        </p:row>
+                    </p:columnGroup>
+                    <p:column>
+                        <h:outputText value="#{player2}" />
+                    </p:column>
+                    
+                    <c:forEach items ="#{indicadoresController.agnosTabla}" var="PT" >
+                        <p:column>
+                            <h:outputText value="#{indicadoresController.cantidadPublicacionIndex(PT, player2)}" />
                         </p:column>
                     </c:forEach>
                 </p:dataTable>
