@@ -6,6 +6,7 @@
 
 package sessionbeans;
 
+import com.sun.istack.internal.logging.Logger;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -15,6 +16,9 @@ import javax.persistence.EntityManager;
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
+    
+    private final static Logger log = Logger.getLogger(AbstractFacade.class);
+
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -27,6 +31,7 @@ public abstract class AbstractFacade<T> {
     }
 
     public void edit(T entity) {
+        log.info("editing "+entity);
         getEntityManager().merge(entity);
     }
 
@@ -39,6 +44,8 @@ public abstract class AbstractFacade<T> {
     }
 
     public List<T> findAll() {
+        log.info("Getting "+entityClass.getName());
+        
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         return getEntityManager().createQuery(cq).getResultList();

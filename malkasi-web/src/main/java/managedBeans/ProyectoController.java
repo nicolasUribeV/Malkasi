@@ -57,26 +57,33 @@ public class ProyectoController implements Serializable {
         JsfUtil.redirect("/faces/roles/academico/proyectos/crear.xhtml");
         return selected;
     }
-    
-    public Proyecto prepareEdit(Proyecto proyecto){
+
+    public Proyecto prepareEdit(Proyecto proyecto) {
         JsfUtil.redirect("/faces/roles/academico/proyectos/editar.xhtml");
         return proyecto;
     }
+ 
     
-    public Proyecto prepareCreateViewProyecto () {
+
+    public Proyecto prepareCreateViewProyecto() {
         selected = null;
         //items = academico.getPublicaciones();
         JsfUtil.redirect("/faces/roles/academico/proyectos/List.xhtml");
         return selected;
     }
-    
-    public Proyecto viewProyecto(Proyecto proyecto){
+
+    public Proyecto viewProyecto(Proyecto proyecto) {
         selected = proyecto;
         JsfUtil.redirect("/faces/roles/academico/proyectos/ver.xhtml");
         return selected;
     }
-  
-    
+
+    public Proyecto viewProyectoAdmin(Proyecto proyecto) {
+        selected = proyecto;
+        JsfUtil.redirect("/faces/roles/admin/proyectos/View.xhtml");
+        return selected;
+    }
+
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ProyectoCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -142,17 +149,16 @@ public class ProyectoController implements Serializable {
     public List<Proyecto> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
+
     public Boolean tieneProyectos(List<RolProyecto> proyectos) {
-        if(proyectos == null){
+        if (proyectos == null) {
             return false;
-        }
-        else if(proyectos.isEmpty()){
+        } else if (proyectos.isEmpty()) {
             return false;
         }
         return true;
     }
-    
+
     public ArrayList<String> referenciasProyectos(List<RolProyecto> proyectos) {
         ArrayList<String> pT = new ArrayList<>();
         String Aux;
@@ -167,8 +173,8 @@ public class ProyectoController implements Serializable {
         }
         return pT;
     }
-    
-    public String getStringProyecto(RolProyecto proyecto){
+
+    public String getStringProyecto(RolProyecto proyecto) {
         String rP = "";
         if (proyecto != null) {
             rP = "\"" + proyecto.getProyecto().getNombreProyecto() + "\", ";

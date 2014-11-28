@@ -35,4 +35,8 @@ public interface ProyectoFacadeLocal {
     public void Create(Proyecto proyecto, List<RolProyecto> roles);
     
     public void Update(Proyecto proyecto, List<RolProyecto> roles);
+    
+    public List<Proyecto> busquedaProyectoNombre(String nombreProyecto);
+    
+    public List<Proyecto> busquedaProyectoCodigo(String codigoProyecto);
 }

@@ -6,8 +6,9 @@
 package validators.utils;
 
 import entities.Academico;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -22,6 +23,8 @@ public class SameUserNameValidator implements Validator {
 
     @EJB
     private AcademicoFacadeLocal ejbFacade;
+    
+    private final static Logger logger= Logger.getLogger(SameUserNameValidator.class.getName());
     
     private String userName;
 
@@ -38,17 +41,9 @@ public class SameUserNameValidator implements Validator {
         }
     }
 
-    public boolean validarUserName(String rut) {
-        
-        boolean validacion = false;
-        
-        try {
-            if(ejbFacade.FindWithUserName(userName) == null){
-                validacion = true;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return validacion;
+    public boolean validarUserName(String rut) {                
+        List<Academico> academicos = ejbFacade.FindWithUserName(userName);
+        return ValidationUtils.existUserName(rut,academicos );
     }
+    
 }

@@ -85,8 +85,10 @@ public class Proyecto implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Proyecto[ id=" + id + " ]";
+        return "Proyecto{" + "id=" + id + ", codigoProyecto=" + codigoProyecto + ", nombreProyecto=" + nombreProyecto + ", estadoProyecto=" + estadoProyecto + ", tipoFinanciamiento=" + tipoFinanciamiento + '}';
     }
+
+    
 
     public String getNombreProyecto() {
         return nombreProyecto;

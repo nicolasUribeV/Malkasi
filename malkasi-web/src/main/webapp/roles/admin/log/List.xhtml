@@ -26,6 +26,7 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50" sortBy="#{item.fecha}" sortOrder="descending"
+                                 emptyMessage="No hay acciones registradas en el sistema"
                                  >
 
                         <p:ajax event="rowSelect"   update="viewButton"/>

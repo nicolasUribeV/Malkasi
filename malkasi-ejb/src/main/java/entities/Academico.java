@@ -98,8 +98,10 @@ public class Academico implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Academico[ rut=" + rut + " ]";
+        return "Academico{" + "id=" + id + ", rut=" + rut + ", nombres=" + nombres + ", apellidos=" + apellidos + ", mail=" + mail + ", resegna=" + resegna + ", tipoCuenta=" + tipoCuenta + ", userName=" + userName + ", Grados=" + Grados + ", Publicaciones=" + Publicaciones + ", proyectos=" + proyectos + ", categoria=" + categoria + ", permisoAdmin=" + permisoAdmin + '}';
     }
+
+    
 
     public String getNombres() {
         return nombres;

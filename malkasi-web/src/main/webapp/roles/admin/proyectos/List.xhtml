@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/layout/1column.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListProyectoTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form>
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/admin/index.xhtml" onclick="#{academicoController.setSelected(null)}"/>
+                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
+
+
+                <h:panelGrid columns="3">
+                    <p:outputLabel value="Buscar"></p:outputLabel>
+                    <p:inputText value="#{buscadorController.buscado}"/>
+                    <p:commandButton update="proyectos" action="#{buscadorController.searchProyect()}" value="Ver"/>
+                </h:panelGrid>
+
+
+                <p:selectOneRadio requiredMessage="Campo requerido" required ="true"  id="buscado" value="#{buscadorController.opcion}">  
+                    <f:selectItem itemLabel="Codigo" itemValue="codigo" />  
+                    <f:selectItem itemLabel="Nombre Proyecto" itemValue="nombreProyecto" />
+                    <f:selectItem itemLabel="Mostrar todos" itemValue="todos" />
+                </p:selectOneRadio>
+                 
+                <p:dataGrid var="proyecto" value="#{buscadorController.buscados}" columns="3" 
+                                layout="grid"
+                                id="proyectos"
+                                emptyMessage="No hay proyectos para mostrar"
+                                >
+
+                        <f:facet  name="header">
+                            Proyectos
+                        </f:facet>
+
+                        <p:panel header="#{proyecto.nombreProyecto}" style="text-align:center;word-wrap: break-word">
+                            <h:panelGrid columns="3" style="width:100%">
+                                <p:column >
+                                    <h:panelGrid columns="2" style="text-align: left">
+                                        <h:outputLabel value="Código: "/>
+                                        <h:outputText value="#{proyecto.codigoProyecto}"/>
+
+
+
+                                        <h:outputLabel value="Fuente financiamiento: "/>
+                                        <h:outputText value="#{proyecto.tipoFinanciamiento.nombreFinanciamiento}"/>
+
+                                    </h:panelGrid>
+                                </p:column>
+
+                                <p:column>
+                                    <p:commandButton id="viewButton" icon="ui-icon-search" actionListener="#{proyectoController.viewProyectoAdmin(proyecto)}" >
+                                    </p:commandButton>
+                                    <p:tooltip id="verProyecto" for="viewButton" value="Ver detalle proyecto" trackMouse="true" />
+
+                                </p:column>
+                            </h:panelGrid>
+
+                        </p:panel>
+
+                    </p:dataGrid>
+               
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

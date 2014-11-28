@@ -6,7 +6,9 @@ html {
 
 body {
   margin: 0; }
-
+.centered {
+    margin: 0px auto;
+}
 article,
 aside,
 details,

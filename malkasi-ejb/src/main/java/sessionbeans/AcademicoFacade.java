@@ -6,6 +6,7 @@
 
 package sessionbeans;
 
+import com.sun.istack.internal.logging.Logger;
 import entities.Academico;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -21,6 +22,7 @@ import javax.persistence.Query;
 public class AcademicoFacade extends AbstractFacade<Academico> implements AcademicoFacadeLocal {
     @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
+    
 
     @Override
     protected EntityManager getEntityManager() {

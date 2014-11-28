@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -70,5 +71,29 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> implements Proyecto
             this.em.merge(academicoAuxiliar);
         }
         this.em.merge(proyecto);
+    }
+    
+    @Override
+    public List<Proyecto> busquedaProyectoNombre(String nombreProyecto){
+        Query q = em.createQuery("SELECT c FROM Proyecto c WHERE c.nombreProyecto = :nombreProyecto");
+        q.setParameter("nombreProyecto", nombreProyecto);
+        if(q.getResultList().size() == 0){
+            return null;
+        }
+        else{
+            return q.getResultList();
+        }
+    }
+    
+    @Override
+    public List<Proyecto> busquedaProyectoCodigo(String codigoProyecto){
+        Query q = em.createQuery("SELECT c FROM Proyecto c WHERE c.codigoProyecto = :codigoProyecto");
+        q.setParameter("codigoProyecto", codigoProyecto);
+        if(q.getResultList().size() == 0){
+            return null;
+        }
+        else{
+            return q.getResultList();
+        }
     }
 }

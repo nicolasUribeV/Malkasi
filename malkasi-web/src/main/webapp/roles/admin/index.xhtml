@@ -14,7 +14,42 @@
         </ui:define>
 
         <ui:define name="body">
-            
+            <h:form styleClass="centered" style="width: 900px">
+                <h:panelGrid columns="2">
+                    <p:column style="width: 450px">
+
+                        <p:outputPanel deferred="true" style="width: 450px">
+
+                            <h4 style="color: #5b6968">
+                                Puede ver indicadores de publicaciones, </h4>
+                            <br></br> <br></br> 
+
+
+                        </p:outputPanel>
+
+                    </p:column>
+                    <p:column style="width: 450px">
+                        <p:outputPanel deferred="true" style="width: 450px">
+
+                            <h4 style="color: #5b6968">
+                                Puede ver indicadores de publicaciones, </h4>
+                            <br></br> <br></br> 
+
+
+                        </p:outputPanel>
+                    </p:column>
+
+
+
+                </h:panelGrid>
+                <h:form styleClass="centered" style="width: 900px">
+                    <p:galleria value="#{homeController.images}" var="image" panelWidth="800" panelHeight="313" showCaption="true">
+
+                        <p:graphicImage library="images" name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
+                    </p:galleria>
+
+                </h:form>
+            </h:form> 
         </ui:define>
     </ui:composition>
 </html>
