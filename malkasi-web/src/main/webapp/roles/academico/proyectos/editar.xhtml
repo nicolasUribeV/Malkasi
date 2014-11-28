@@ -113,17 +113,30 @@
 
                         </p:panel>
                         <p:panel id="lista">
-                            <p:panelGrid>
-                                <h:outputLabel value="Académicos agregados"/>
-                                <p:selectOneListbox style="height:200px; width: 220px">
-                                    <f:selectItems value="#{proyetoWizard.roles}" var="academicos"
-                                                   itemLabel="#{academicos.rol}: #{academicos.academico.nombres} #{academicos.academico.apellidos}"/>
+                            <p:dataTable
+                                value="#{proyetoWizard.roles}" id="academicosSel" var="rolProyectos"
+                                rowKey="#{rolProyectos.id}" selection="#{proyetoWizard.rolSeleccionado}"
+                                selectionMode="single" emptyMessage="No existen académicos agregados" >
+                                
+                                <p:ajax event="rowSelect"   update="eliminarAcadem"/>
+                                
+                                
+                                <p:column headerText="Nombres">
+                                    <h:outputText value="#{rolProyectos.academico.nombres} #{rolProyectos.academico.apellidos}" />
+                                </p:column>
+                                <p:column headerText="Rol">
+                                    <h:outputText value="#{rolProyectos.rol}" />
+                                </p:column>
+                                <p:column headerText="Eliminar académico">
+                                    <p:commandButton id="eliminarAcadem"
+                                                    icon="ui-icon-trash"
+                                                     title="Eliminar"
+                                                     actionListener="#{proyetoWizard.eliminarAcademico()}"
+                                                     ajax="false" />
+                                </p:column>
 
-                                </p:selectOneListbox>
-                            </p:panelGrid>
-                            <p:commandButton value="Quitar académico" actionListener="#{proyetoWizard.eliminarRol(proyetoWizard.academico)}" update="lista panelAcademicos"/>
 
-
+                            </p:dataTable> 
                         </p:panel>
                     </p:tab>
 

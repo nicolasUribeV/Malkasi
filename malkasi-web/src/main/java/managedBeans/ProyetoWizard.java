@@ -12,8 +12,10 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -100,6 +102,10 @@ public class ProyetoWizard implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
+      public void eliminarAcademico(){
+        roles.remove(rolSeleccionado);
+        rolSeleccionado=null;
+    }
     
     public void edit(Proyecto proyectoP, List<RolProyecto> rolesP, Academico cu) {
         int flag = 0;
@@ -155,6 +161,8 @@ public class ProyetoWizard implements Serializable {
         }
         if (agregado == false) {
             RolProyecto rp = new RolProyecto();
+            Random rng = new Random(Calendar.getInstance().getTimeInMillis());
+            rp.setId(rng.nextLong());
             rp.setAcademico(academico);
             rp.setProyecto(proyecto);
             rp.setRol(rol);
