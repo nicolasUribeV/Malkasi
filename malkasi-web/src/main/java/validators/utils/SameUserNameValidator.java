@@ -34,16 +34,16 @@ public class SameUserNameValidator implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         userName = value.toString();
-        if (!validarUserName(userName)) {
+        if (validarUserName(userName)) {
             FacesMessage msg = new FacesMessage("Nombre de usuario ya ingresado en el sistema");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
 
-    public boolean validarUserName(String rut) {                
+    public boolean validarUserName(String userName) {                
         List<Academico> academicos = ejbFacade.FindWithUserName(userName);
-        return ValidationUtils.existUserName(rut,academicos );
+        return ValidationUtils.existUserName(userName,academicos);
     }
     
 }
