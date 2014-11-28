@@ -37,6 +37,8 @@ public class IndicadoresController implements Serializable {
     private sessionbeans.PublicacionFacadeLocal publicacionFacade;
     @EJB
     private sessionbeans.AcademicoFacadeLocal academicoFacade;
+    @EJB
+    private sessionbeans.CategoriaFacadeLocal categoriaFacade;
     private TipoPublicacion tipoPublicacionSeleccionada;
     private Academico academicoSeleccionado;
     List<Publicacion> todasPublicaciones = null;
@@ -47,12 +49,28 @@ public class IndicadoresController implements Serializable {
     private long categoriaElegida;
     private ArrayList<Academico> academicsCategory;
     private List<Academico> items;
+    ArrayList<ArrayList> matriz;
+    private List<Categoria> categorias;
+
+    public List<Categoria> listarCategorias(){
+        categorias = categoriaFacade.findAll();
+        return categorias;
+    }
+    
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
 
     public ArrayList<Academico> getAcademicsCategory() {
         return academicsCategory;
     }
 
     public void listCategory(long categ) {
+        listarCategorias();
         items = academicoFacade.findAll();
         ArrayList<Academico> aux = new ArrayList<Academico>();
         for (int i = 0; i < items.size(); i++) {

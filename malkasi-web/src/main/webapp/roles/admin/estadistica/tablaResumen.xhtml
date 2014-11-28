@@ -44,7 +44,7 @@
 
                 </p:panel>
 
-                <p:dataTable id="columnAgnos" var="player" value="#{indicadoresController.academicsCategory}" style="margin-top:40px" >
+                <p:dataTable id="columnAgnos" var="categoria" value="#{indicadoresController.categorias}" style="margin-top:40px" >
                     <f:facet name="header">
                         Cantidad de Publicaciones
                     </f:facet>
@@ -59,14 +59,11 @@
                             </c:forEach>
                         </p:row>
                     </p:columnGroup>
-                    <p:column>
-                        <h:outputText value="#{player.nombres} #{player.apellidos}" />
-                    </p:column>
-                    <c:forEach items ="#{tipoPublicacionController.items}" var="PT" >
-                        <p:column>
-                            <h:outputText value="#{indicadoresController.cantidadPublicacion(PT, player,indicadoresController.agnoInicial, indicadoresController.agnoFinal)}" />
-                        </p:column>
-                    </c:forEach>
+                    <p:subTable>
+                        <f:facet name="header">
+                            <h:outputText value="#{categoria.nombreCategoria}"/>
+                        </f:facet>
+                    </p:subTable>
                 </p:dataTable>
             </h:form>
         </ui:define>
