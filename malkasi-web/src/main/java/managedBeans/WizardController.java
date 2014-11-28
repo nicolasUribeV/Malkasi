@@ -56,6 +56,7 @@ public class WizardController implements Serializable {
 
     public Publicacion prepareEditWhitAcademic(Publicacion publicacion) {
         this.publicacion = publicacion;
+        this.listaOrden = new ArrayList<>();
         JsfUtil.redirect("/faces/roles/academico/publicacion/wizardEdit.xhtml");
         return this.publicacion;
     }
@@ -152,7 +153,30 @@ public class WizardController implements Serializable {
 
             }
         }
-        this.listaOrden.removeAll(this.listaOrden);
+        if (this.listaOrden != null) {
+            this.listaOrden.removeAll(this.listaOrden);
+        }
+        this.listaOrden.addAll(listaActual);
+        this.publicacion.setAcademicoOrden(listaActual);
+    }
+
+    public void updateOrdenEdit(Publicacion p) {
+        ArrayList<String> listaActual = new ArrayList<>();
+        for (int i = 0; i < p.getAcademicos().size(); i++) {
+            String s = p.getAcademicos().get(i).getNombres() + "_" + p.getAcademicos().get(i).getApellidos();
+            listaActual.add(s);
+
+        }
+        if (p.getAcademicosExternos() != null) {
+            for (int i = 0; i < p.getAcademicosExternos().size(); i++) {
+                String s = p.getAcademicosExternos().get(i).getNombres() + "_" + p.getAcademicosExternos().get(i).getApellidos();
+                listaActual.add(s);
+
+            }
+        }
+        if (this.listaOrden != null) {
+            this.listaOrden.removeAll(this.listaOrden);
+        }
         this.listaOrden.addAll(listaActual);
         this.publicacion.setAcademicoOrden(listaActual);
     }
@@ -168,12 +192,19 @@ public class WizardController implements Serializable {
 
     public boolean isTipoConferencia(TipoPublicacion tp) {
         if (tp != null) {
-
-            if (tp.getNombreTipo().equals("Congresos nacionales") || tp.getNombreTipo().equals("Congresos internacionales")) {
+            if (tp.getNombreTipo().equals("Publicaciones en congresos nacionales") || tp.getNombreTipo().equals("Publicaciones en congresos internacionales")) {
                 return true;
             }
         }
         return false;
     }
 
+    public boolean isIndexada(TipoPublicacion tp) {
+        if (tp != null) {
+            if (tp.getNombreTipo().equals("Publicaciones en revistas indexadas")) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

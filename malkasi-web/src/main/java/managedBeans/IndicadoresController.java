@@ -37,6 +37,8 @@ public class IndicadoresController implements Serializable {
     private sessionbeans.PublicacionFacadeLocal publicacionFacade;
     @EJB
     private sessionbeans.AcademicoFacadeLocal academicoFacade;
+    @EJB
+    private sessionbeans.CategoriaFacadeLocal categoriaFacade;
     private TipoPublicacion tipoPublicacionSeleccionada;
     private Academico academicoSeleccionado;
     List<Publicacion> todasPublicaciones = null;
@@ -47,12 +49,28 @@ public class IndicadoresController implements Serializable {
     private long categoriaElegida;
     private ArrayList<Academico> academicsCategory;
     private List<Academico> items;
+    ArrayList<ArrayList> matriz;
+    private List<Categoria> categorias;
+
+    public List<Categoria> listarCategorias(){
+        categorias = categoriaFacade.findAll();
+        return categorias;
+    }
+    
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
 
     public ArrayList<Academico> getAcademicsCategory() {
         return academicsCategory;
     }
 
     public void listCategory(long categ) {
+        listarCategorias();
         items = academicoFacade.findAll();
         ArrayList<Academico> aux = new ArrayList<Academico>();
         for (int i = 0; i < items.size(); i++) {
@@ -324,5 +342,42 @@ public class IndicadoresController implements Serializable {
 
     public void setAgnosTabla(ArrayList<Integer> agnosTabla) {
         this.agnosTabla = agnosTabla;
+    }
+    
+    public boolean isPublicacionIndexada(TipoPublicacion tp){
+        if(tp.getNombreTipo().equals("Publicaciones en revistas indexadas")){
+            return true;
+        }
+        return false;
+    }
+    
+    public ArrayList<String> tiposIndexacion(){
+        ArrayList<String> tI = new ArrayList<>();
+        tI.add("indexación ISI");
+        tI.add("indexación SCIELO");
+        tI.add("indexación SCOPUS");
+        tI.add("otro tipo de indexación");
+        return tI;
+    }
+    
+    public int cantidadPublicacionIndex(int agno, String index) {
+        int cant = 0;
+        for (int i = 0; i < getTodasPublicaciones().size(); i++) {
+            boolean ix = tipoIndex(todasPublicaciones.get(i),index);
+            if (isPublicacionIndexada(todasPublicaciones.get(i).getTipoPublicacion()) && ix) {
+                if (todasPublicaciones.get(i).getAgno() == agno) {
+                    cant++;
+                }
+            }
+        }
+        return cant;
+    }
+    
+    public boolean tipoIndex(Publicacion p, String index){
+        if(index.equals("indexación ISI") && p.isIndexIsi()){return true;}
+        else if(index.equals("indexación SCIELO") && p.isIdexScielo()){return true;}
+        else if(index.equals("indexación SCOPUS") && p.isIndexScopus()){return true;}
+        else if(index.equals("otro tipo de indexación") && p.isIdexOther()){return true;}
+        return false;
     }
 }
