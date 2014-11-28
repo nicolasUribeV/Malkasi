@@ -29,22 +29,14 @@
                             <f:selectItems value="#{indicadoresController.agnos}" />
                         </p:selectOneMenu>
 
-                        <p:outputLabel value="Categoría: " for="categoria" />
-                        <p:selectOneMenu  id="categoria" value="#{indicadoresController.categoriaElegida}" >
-                            <f:selectItem itemLabel="Todas las categorías" itemValue="#{null}" />
-                            <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}" var="categ"
-                                           itemLabel="#{categ.nombreCategoria}" itemValue="#{categ.id}"/>
-                        </p:selectOneMenu>
-
                     </h:panelGrid>
-                    <p:commandButton id="verTabla" value="Ver tabla" actionListener="#{indicadoresController.listCategory(indicadoresController.categoriaElegida)}">
-                        <f:ajax event="click" render="columnAgnos"></f:ajax>
+                    <p:commandButton id="verTabla" value="Ver tabla" update="columnAgnos">
                     </p:commandButton>
                     <p:tooltip id="ver" for="verTabla" value="Presione click para ver resultados" trackMouse="true" />
 
                 </p:panel>
 
-                <p:dataTable id="columnAgnos" var="categoria" value="#{indicadoresController.categorias}" style="margin-top:40px" >
+                <p:dataTable id="columnAgnos" var="categoria" value="#{categoriaController.items}" style="margin-top:40px" >
                     <f:facet name="header">
                         Cantidad de Publicaciones
                     </f:facet>
@@ -59,10 +51,19 @@
                             </c:forEach>
                         </p:row>
                     </p:columnGroup>
-                    <p:subTable>
+                    <p:subTable value="#{indicadoresController.academicosPorCategoria(categoria)}" var="Cat">
                         <f:facet name="header">
                             <h:outputText value="#{categoria.nombreCategoria}"/>
                         </f:facet>
+                        
+                            <p:column>
+                                <h:outputText value="#{Cat.nombres} #{Cat.apellidos}"/>
+                            </p:column>
+                            <c:forEach items="#{tipoPublicacionController.items}" var="PublicacionesTipoCat">
+                                <p:column>
+                                    <h:outputText value="#{indicadoresController.cantidadPublicacion(PublicacionesTipoCat,Cat,indicadoresController.agnoInicial,indicadoresController.agnoFinal)}"/>
+                                </p:column>
+                            </c:forEach>
                     </p:subTable>
                 </p:dataTable>
             </h:form>

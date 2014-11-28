@@ -380,4 +380,18 @@ public class IndicadoresController implements Serializable {
         else if(index.equals("otro tipo de indexación") && p.isIdexOther()){return true;}
         return false;
     }
+    
+    public ArrayList<Academico> academicosPorCategoria(Categoria c){
+        //System.out.println("CAT: " + id);
+        //Categoria c = categoriaFacade.find(id);
+        ArrayList<Academico> cat = new ArrayList<>();
+        items = academicoFacade.findAll();
+        for (int i = 0; i < items.size(); i++) {
+            if(items.get(i).getCategoria().getId() == c.getId()){
+                System.out.println("NAME: " + items.get(i).getApellidos());
+                cat.add(items.get(i));
+            }
+        }
+        return cat;
+    }
 }
