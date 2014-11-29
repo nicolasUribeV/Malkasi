@@ -15,40 +15,67 @@
 
         <ui:define name="body">
             <h:form styleClass="centered" style="width: 900px">
-                <h:panelGrid columns="2">
-                    <p:column style="width: 450px">
+                <h:panelGrid columns="3">
+                    
+                    <p:column >
 
-                        <p:outputPanel deferred="true" style="width: 450px">
+                        <p:outputPanel deferred="true" style="width: 300px;text-align: justify;border-bottom-color:  #5b6968">
+                            <br></br>
+                            <h4 style="color: #5b6968">
+                                En el sistema de administración usted puede hacer gestión de usuarios, ver los proyectos actuales del Diinf
+                                realizar gráficos y obtener estadísticas.
+                            </h4>
+                            <br></br> <br></br> 
+
+
+                        </p:outputPanel>
+                        <p:outputPanel deferred="true" style="width: 300px;text-align: justify">
 
                             <h4 style="color: #5b6968">
-                                Puede ver indicadores de publicaciones, </h4>
+                                Este sistema permite generar estadísticas y tablas de resumen acerca de las actividades
+                                que se esten realizando en el departamento.
+                            </h4>
+                            <br></br> <br></br> 
+
+
+                        </p:outputPanel>
+                        <p:outputPanel deferred="true" style="width: 300px;text-align: justify">
+
+                            <h4 style="color: #5b6968">
+                                Log permite saber que acciones han realizado los usuarios del sistema en el contexto de las
+                                publicaciones
+                            </h4>
                             <br></br> <br></br> 
 
 
                         </p:outputPanel>
 
                     </p:column>
-                    <p:column style="width: 450px">
-                        <p:outputPanel deferred="true" style="width: 450px">
-
-                            <h4 style="color: #5b6968">
-                                Puede ver indicadores de publicaciones, </h4>
-                            <br></br> <br></br> 
-
-
-                        </p:outputPanel>
+                    <p:column>
+                        <h:outputText value="&#160;" style="width: 300px"/>
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
+                        <h:outputText value="&#160;" />
                     </p:column>
+                    <p:column style="width: 600px">
+                        <p:graphicImage styleClass="centered" library="images" name="Logo1.png" style="width: 400px;height: 400px"/>
+
+                    </p:column>
+                    
+
 
 
 
                 </h:panelGrid>
-                <h:form styleClass="centered" style="width: 900px">
-                    <p:galleria value="#{homeController.images}" var="image" panelWidth="800" panelHeight="313" showCaption="true">
 
-                        <p:graphicImage library="images" name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
-                    </p:galleria>
-
-                </h:form>
             </h:form> 
         </ui:define>
     </ui:composition>

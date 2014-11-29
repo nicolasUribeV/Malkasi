@@ -101,6 +101,7 @@ public class Academico implements Serializable {
         return "entities.Academico[ rut=" + rut + " ]";
     }  
 
+
     public String getNombres() {
         return nombres;
     }

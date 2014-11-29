@@ -14,6 +14,8 @@
 
     </h:head>
 
+   
+
     <h:body>
 
         <p:growl id="growl" life="3000" />
@@ -29,18 +31,18 @@
                         <c:if test="#{sessionUtilTest.hasIdentity()}">
                             <c:if test="#{sessionUtilTest.admin}">
                                 <h3 style="text-align: center;color: #1c94c4;font-weight:  bold">Sistema de administración</h3>
-           
+
                                 <h:form>  
-                                    <p:menubar>
-                                        <p:menuitem value="Inicio" icon="ui-icon-home" url="/faces/roles/admin/index.xhtml">
+                                    <p:menubar styleClass="ui-menubar" >
+                                        <p:menuitem value="Inicio" styleClass="centered" icon="ui-icon-home" url="/faces/roles/admin/index.xhtml" style="color: #106a8c;font-weight: bold;width: 70px">
                                         </p:menuitem>
-                                        <p:menuitem value="Gestión Usuarios" icon="ui-icon-person" outcome="/roles/admin/academico/List.xhtml" onclick="#{academicoController.refresh()}">
+                                        <p:menuitem value="Gestión Usuarios" icon="ui-icon-person" outcome="/roles/admin/academico/List.xhtml" style="color: #106a8c;font-weight: bold" onclick="#{academicoController.refresh()}">
                                         </p:menuitem>
-                                        <p:menuitem value="Publicaciones" icon="ui-icon-bookmark"  outcome="/roles/admin/publicaciones/index.xhtml" onclick="#{publicacionController.refresh()}">
+                                        <p:menuitem value="Publicaciones" icon="ui-icon-bookmark"  outcome="/roles/admin/publicaciones/index.xhtml" style="color: #106a8c;font-weight: bold" onclick="#{publicacionController.refresh()}">
                                         </p:menuitem>
-                                        <p:menuitem value="Proyectos" icon="ui-icon-document"  url="/faces/roles/admin/proyectos/List.xhtml" onclick="#{proyectoController.itemsAvailableSelectOne}">
+                                        <p:menuitem value="Proyectos" icon="ui-icon-clipboard"  url="/faces/roles/admin/proyectos/List.xhtml" style="color: #106a8c;font-weight: bold" onclick="#{proyectoController.itemsAvailableSelectOne}">
                                         </p:menuitem>
-                                        <p:submenu label="Ver indicadores" icon="ui-icon-signal">
+                                        <p:submenu label="Ver indicadores" icon="ui-icon-signal" style="color: #106a8c;font-weight: bold">
                                             <p:menuitem value="Publicaciones por Tipo" url="/faces/roles/admin/estadistica/indicador.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
                                             <p:menuitem value="Publicaciones por académico" url="/faces/roles/admin/estadistica/indicadorAcademico.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
                                             <p:menuitem value="Publicaciones por académico y tipo de publicación" url="/faces/roles/admin/estadistica/indicadorAcademicoTipo.xhtml" onclick="#{indicadoresController.refresh()}"></p:menuitem>
@@ -48,14 +50,14 @@
                                             <p:menuitem value="Cuadro Resumen de Tipo de Publicaciones" url="/faces/roles/admin/estadistica/tablaResumenTipo.xhtml" onclick="#{academicoController.refresh()}"></p:menuitem>
                                         </p:submenu>
 
-                                        <p:menuitem value="Log" icon="ui-icon-document"  url="/faces/roles/admin/log/List.xhtml" onclick="#{logController.refresh()}">
+                                        <p:menuitem value="Log" icon="ui-icon-document"  url="/faces/roles/admin/log/List.xhtml" style="color: #106a8c;font-weight: bold" onclick="#{logController.refresh()}">
                                         </p:menuitem>
 
                                     </p:menubar>
                                 </h:form> 
                             </c:if>
                         </c:if>
-                     
+
                         <ui:insert name="body"/>
                     </div>
                 </div> 
