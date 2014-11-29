@@ -15,64 +15,53 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form>
+
+
+            <h:form id="ProyectoListForm">
                 <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/admin/index.xhtml" onclick="#{academicoController.setSelected(null)}"/>
-                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
+                <br></br>
+                <p:panel header="Usuarios del sistema">
+                    <p:dataTable id="datalist" value="#{proyectoController.items}" var="item"
+                                 selectionMode="single" selection="#{proyectoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,20,30,40"
+                                 >
 
 
-                <h:panelGrid columns="3">
-                    <p:outputLabel value="Buscar"></p:outputLabel>
-                    <p:inputText value="#{buscadorController.buscado}"/>
-                    <p:commandButton update="proyectos" action="#{buscadorController.searchProyect()}" value="Ver"/>
-                </h:panelGrid>
+                        <p:column id="rut" filterBy="#{item.codigoProyecto}" headerText="Código" >
+                            <h:outputText id="buscarRut" value="#{item.codigoProyecto}" />
+                        </p:column> 
 
 
-                <p:selectOneRadio requiredMessage="Campo requerido" required ="true"  id="buscado" value="#{buscadorController.opcion}">  
-                    <f:selectItem itemLabel="Codigo" itemValue="codigo" />  
-                    <f:selectItem itemLabel="Nombre Proyecto" itemValue="nombreProyecto" />
-                    <f:selectItem itemLabel="Mostrar todos" itemValue="todos" />
-                </p:selectOneRadio>
-                 
-                <p:dataGrid var="proyecto" value="#{buscadorController.buscados}" columns="3" 
-                                layout="grid"
-                                id="proyectos"
-                                emptyMessage="No hay proyectos para mostrar"
-                                >
+                        <p:column filterBy="#{item.nombreProyecto}" headerText="Nombre" >
+                            <h:outputText value="#{item.nombreProyecto}"  />
+                        </p:column> 
 
-                        <f:facet  name="header">
-                            Proyectos
-                        </f:facet>
+                        <p:column filterBy="#{item.estadoProyecto}" headerText="Estado" >
+                            <h:outputText value="#{item.estadoProyecto}"  />
+                        </p:column> 
 
-                        <p:panel header="#{proyecto.nombreProyecto}" style="text-align:center;word-wrap: break-word">
-                            <h:panelGrid columns="3" style="width:100%">
-                                <p:column >
-                                    <h:panelGrid columns="2" style="text-align: left">
-                                        <h:outputLabel value="Código: "/>
-                                        <h:outputText value="#{proyecto.codigoProyecto}"/>
-
-
-
-                                        <h:outputLabel value="Fuente financiamiento: "/>
-                                        <h:outputText value="#{proyecto.tipoFinanciamiento.nombreFinanciamiento}"/>
-
-                                    </h:panelGrid>
-                                </p:column>
-
-                                <p:column>
-                                    <p:commandButton id="viewButton" icon="ui-icon-search" actionListener="#{proyectoController.viewProyectoAdmin(proyecto)}" >
-                                    </p:commandButton>
-                                    <p:tooltip id="verProyecto" for="viewButton" value="Ver detalle proyecto" trackMouse="true" />
-
-                                </p:column>
-                            </h:panelGrid>
-
-                        </p:panel>
-
-                    </p:dataGrid>
-               
+                        <p:column filterBy="#{item.tipoFinanciamiento}" headerText="Tipo de Financiamento" >
+                            <h:outputText value="#{item.tipoFinanciamiento.nombreFinanciamiento}  "  />
+                        </p:column>
+                        <p:column style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="Acción"/>
+                            </f:facet>
+                            <p:commandButton id="verProyectoBoton" icon="ui-icon-search" action="#{proyectoController.prepareViewProyect(proyectoController.selected)}">
+                                <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />  
+                            </p:commandButton>
+                            <p:tooltip id="verAcademico" for="verProyectoBoton" value="Ver Proyecto" trackMouse="true" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
             </h:form>
-
         </ui:define>
+        <ui:include src="View.xhtml"/>
+
+
     </ui:composition>
 
 </html>

@@ -36,11 +36,12 @@ public class BuscadorController implements Serializable {
         buscados = ejbFacade.findAll();
     }
 
-    public void refresh(){
+    public void refresh() {
         buscado = null;
         opcion = null;
         buscados = ejbFacade.findAll();
     }
+
     public void searchProyect() {
 
         System.out.println("opcion " + opcion + "buscado " + buscado);
@@ -48,7 +49,7 @@ public class BuscadorController implements Serializable {
         switch (opcion) {
             case "todos":
                 buscados = ejbFacade.findAll();
-                
+
                 break;
 
             case "codigo":
@@ -93,7 +94,7 @@ public class BuscadorController implements Serializable {
     public void setOpcion(String opcion) {
         this.opcion = opcion;
     }
-    
-    
+
+
 
 }
