@@ -24,7 +24,7 @@ public class SameUserNameValidator implements Validator {
     @EJB
     private AcademicoFacadeLocal ejbFacade;
     
-    private final static Logger logger= Logger.getLogger(SameUserNameValidator.class.getName());
+   // private final static Logger logger= Logger.getLogger(SameUserNameValidator.class.getName());
     
     private String userName;
 
