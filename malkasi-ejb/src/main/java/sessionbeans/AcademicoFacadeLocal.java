@@ -36,4 +36,6 @@ public interface AcademicoFacadeLocal {
     List<Academico> FindWithUserName(String userName);
     
     List<Academico> FindWithRut(String rut);
+    
+    void actualizarPerfil(Academico academico);
 }

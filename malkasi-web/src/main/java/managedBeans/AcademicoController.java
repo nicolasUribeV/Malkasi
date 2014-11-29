@@ -100,6 +100,12 @@ public class AcademicoController implements Serializable {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoUpdated"));
     }
 
+    public void updateProfile(Academico academico) {
+        Academico a = ejbFacade.find(academico.getId());
+        System.out.println("Editando: " + a.getNombres() + " " + a.getApellidos());
+        ejbFacade.edit(a);
+    }
+    
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("AcademicoDeleted"));
         if (!JsfUtil.isValidationFailed()) {

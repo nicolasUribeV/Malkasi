@@ -56,4 +56,9 @@ public class AcademicoFacade extends AbstractFacade<Academico> implements Academ
             return q.getResultList();
         }
     }
+    
+    @Override
+    public void actualizarPerfil(Academico academico){
+        em.persist(academico);
+    }
 }
