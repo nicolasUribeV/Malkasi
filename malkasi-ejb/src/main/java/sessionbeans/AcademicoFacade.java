@@ -6,7 +6,7 @@
 
 package sessionbeans;
 
-//import com.sun.istack.internal.logging.Logger;
+
 import entities.Academico;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -61,4 +61,5 @@ public class AcademicoFacade extends AbstractFacade<Academico> implements Academ
     public void actualizarPerfil(Academico academico){
         em.persist(academico);
     }
+
 }
