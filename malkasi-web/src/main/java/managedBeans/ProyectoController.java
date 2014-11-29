@@ -62,8 +62,6 @@ public class ProyectoController implements Serializable {
         JsfUtil.redirect("/faces/roles/academico/proyectos/editar.xhtml");
         return proyecto;
     }
- 
-    
 
     public Proyecto prepareCreateViewProyecto() {
         selected = null;
@@ -226,4 +224,8 @@ public class ProyectoController implements Serializable {
 
     }
 
+    public Proyecto prepareViewProyect(Proyecto proyecto) {
+        JsfUtil.redirect("/faces/roles/admin/proyectos/View.xhtml");
+        return proyecto;
+    }
 }

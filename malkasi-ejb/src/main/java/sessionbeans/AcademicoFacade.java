@@ -6,7 +6,6 @@
 
 package sessionbeans;
 
-import com.sun.istack.internal.logging.Logger;
 import entities.Academico;
 import java.util.List;
 import javax.ejb.Stateless;

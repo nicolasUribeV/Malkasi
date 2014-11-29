@@ -5,6 +5,7 @@ import managedBeans.util.JsfUtil;
 import managedBeans.util.PaginationHelper;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -29,8 +30,20 @@ public class TipoFinanciamientoController implements Serializable {
     private TipoFinanciamientoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private List<TipoFinanciamiento> listaTipoFinanciamiento = null;
 
     public TipoFinanciamientoController() {
+    }
+
+    public List<TipoFinanciamiento> getListaTipoFinanciamiento() {
+        if (listaTipoFinanciamiento == null) {
+            listaTipoFinanciamiento = getFacade().findAll();
+        }
+        return listaTipoFinanciamiento;
+    }
+
+    public void setListaTipoFinanciamiento(List<TipoFinanciamiento> listaTipoFinanciamiento) {
+        this.listaTipoFinanciamiento = listaTipoFinanciamiento;
     }
 
     public TipoFinanciamiento getSelected() {
@@ -39,6 +52,10 @@ public class TipoFinanciamientoController implements Serializable {
             selectedItemIndex = -1;
         }
         return current;
+    }
+    
+    public void refresh() {
+        listaTipoFinanciamiento = getFacade().findAll();
     }
 
     private TipoFinanciamientoFacadeLocal getFacade() {
