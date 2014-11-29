@@ -13,11 +13,11 @@
             <h:outputText value="Bienvenido"></h:outputText>
         </ui:define>
         <ui:define name="body" >
-            <h:form styleClass="centered">
-                <div  style="width: 100%" class="col-md-8">
-                    <h:form style="text-align: left">
+            <h:form>
+                <div>
+                    <h:form>
                         <h3 style="text-align: center;color: #1c94c4;font-weight:  bold">Sistema Malkasi</h3>
-                        <p:outputPanel deferred="true">
+                        <p:outputPanel>
 
                             <h4 style="color: #5b6968; text-align: center">
                                 Este sistema ha sido desarrollado por el grupo DRENC, para poder
@@ -30,12 +30,12 @@
                     </h:form>
                 </div>
             </h:form>
-            <h:form styleClass="centered">
-                <h:form  styleClass="centered">
-                    <div align="center">
-                        <p:galleria style="" value="#{homeController.images}" var="image" panelWidth="850" panelHeight="313" showCaption="true">
+            <h:form>
+                <h:form>
+                    <div>
+                        <p:galleria  value="#{homeController.images}" var="image" showCaption="true">
 
-                            <p:graphicImage value="/resources/images/#{image}" alt="Image Description for #{image}" title="#{image}"/>
+                            <p:graphicImage style="width: 800px" value="/resources/images/#{image}" alt="Image Description for #{image}" title="#{image}"/>
                         </p:galleria>
                     </div>
 
@@ -61,7 +61,6 @@
                             <h:inputSecret id="password" styleClass="form-control" autocomplete="off" size="20" value="#{loginController.password}"/>
                             <p:watermark for="password" value="Contraseña" />
 
-                            <!--<a href="/revalora-web/faces/passwordRecovery.xhtml" class="btn btn-link" style="margin-top: 10px">¿Olvidó su contraseña?</a>-->
                             <p:commandButton styleClass="btn btn-default float-right" type="submit" value="Ingresar" update=":growl" action="#{loginController.login()}"/>
                             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
