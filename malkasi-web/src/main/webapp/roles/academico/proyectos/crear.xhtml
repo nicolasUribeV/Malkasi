@@ -50,8 +50,10 @@
 
 
                                 <h:outputLabel value="Duración (meses)" for="duracionProyecto" style="color: #0c2465;font-size: small"/>
-                                <p:inputText id="duracionProyecto" value="#{proyetoWizard.proyecto.duracionProyecto}" title="#{bundle.CreateProyectoTitle_duracionProyecto}" />
-                                <p:outputLabel value="" style="padding: 20px" />
+                                <p:inputText id="duracionProyecto" validatorMessage="Duración mínima de 1 mes y máxima de 24 meses" value="#{proyetoWizard.proyecto.duracionProyecto}" title="#{bundle.CreateProyectoTitle_duracionProyecto}" >
+                                <f:validateLongRange minimum="1" maximum="24" />
+                                </p:inputText>
+                                <p:message id="msgDuracionCrearProyecto" for="duracionProyecto" style="padding: 20px" />
 
 
                                 <p:outputLabel value="Estado Proyecto" for="estadoProyecto" style="color: #0c2465;font-size: small"/>
@@ -114,23 +116,35 @@
                                 value="#{proyetoWizard.roles}" id="academicosSel" var="rolProyectos"
                                 rowKey="#{rolProyectos.id}" selection="#{proyetoWizard.rolSeleccionado}"
                                 selectionMode="single" emptyMessage="No existen académicos agregados" >
-                                
+
                                 <p:ajax event="rowSelect"   update="eliminarAcadem"/>
-                                
-                                
+
+
                                 <p:column headerText="Nombres">
                                     <h:outputText value="#{rolProyectos.academico.nombres} #{rolProyectos.academico.apellidos}" />
                                 </p:column>         
                                 <p:column headerText="Rol">
                                     <h:outputText value="#{rolProyectos.rol}" />
                                 </p:column>
-                                <p:column headerText="Eliminar académico">
-                                    <p:commandButton id="eliminarAcadem"
-                                                    icon="ui-icon-trash"
+                                <p:column headerText="Acción" style="width: 100px">
+                                    <p:commandButton id="eliminarAcadem" 
+                                                     update="academicosSel"
+                                                     icon="ui-icon-trash"
                                                      title="Eliminar"
-                                                     actionListener="#{proyetoWizard.eliminarAcademico()}"
-                                                     ajax="false" />
+                                                     action="#{proyetoWizard.eliminarAcademico()}"
+                                                     >
+                                        <f:setPropertyActionListener value="#{rolProyectos}" target="#{proyetoWizard.rolSeleccionado}" for="eliminarAcadem" /> 
+                                        <p:confirm header="Confirmación" message="¿Está seguro de eliminar el proyecto: #{proyetoWizard.proyecto.nombreProyecto} ?" icon="ui-icon-alert" />
+
+                                    </p:commandButton>
+                                    <p:tooltip id="eliminarAcademProyect" for="eliminarAcadem" value="Quitar académico del proyecto" trackMouse="true" />
+
+                                    <p:confirmDialog global="true" showEffect="fade" >
+                                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
                                 </p:column>
+
 
 
                             </p:dataTable> 

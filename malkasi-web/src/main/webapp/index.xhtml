@@ -33,9 +33,9 @@
             <h:form>
                 <h:form>
                     <div>
-                        <p:galleria  value="#{homeController.images}" var="image" showCaption="true">
+                        <p:galleria  value="#{homeController.images}" var="image" transitionInterval="400" showCaption="false" showFilmstrip="false" panelWidth="850" panelHeight="275">
 
-                            <p:graphicImage style="width: 800px" value="/resources/images/#{image}" alt="Image Description for #{image}" title="#{image}"/>
+                            <p:graphicImage value="/resources/images/#{image}" />
                         </p:galleria>
                     </div>
 

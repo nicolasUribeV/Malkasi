@@ -32,10 +32,6 @@ public class HomeController {
             images.add("home" + i + ".jpg");
             System.out.println("imagen" + images.get(i));
         }
-        for(int i = 1; i < 2; i++){
-            images.add("home"+i+".png");
-            System.out.println("imagen" + images.get(i));
-        }
         
     }
 

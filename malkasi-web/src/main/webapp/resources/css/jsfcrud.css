@@ -9,6 +9,15 @@ body {
 .centered {
     margin: 0px auto;
 }
+
+
+.ui-menubar,.ui-menu-child,.ui-menu {
+    background: #ffffff !important;
+}
+
+
+
+
 article,
 aside,
 details,
