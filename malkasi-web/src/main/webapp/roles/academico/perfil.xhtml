@@ -20,31 +20,31 @@
             </span>
             <h:form id="AcademicoEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{sessionUtilTest.currentUser != null}">
+                    <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_rut}" for="rut" />
-                        <p:inputText id="rut" value="#{sessionUtilTest.currentUser.rut}" title="#{bundle.EditAcademicoTitle_rut}" disabled="true">
+                        <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.EditAcademicoTitle_rut}" disabled="true">
                         </p:inputText>
                         <p:outputLabel value="Nombre" for="nombres" />
-                        <p:inputText id="nombres" value="#{sessionUtilTest.currentUser.nombres} #{sessionUtilTest.currentUser.apellidos}" disabled="true"/>
+                        <p:inputText id="nombres" value="#{academicoController.selected.nombres} #{academicoController.selected.apellidos}" disabled="true"/>
                         
                         <p:outputLabel value="Nombre de Usuario" for="username" />
-                        <p:inputText id="username" value="#{sessionUtilTest.currentUser.userName}" disabled="true"> 
+                        <p:inputText id="username" value="#{academicoController.selected.userName}" disabled="true"> 
                         </p:inputText>
 
                         <p:outputLabel value="Categoría" for="categoria" />
-                        <p:inputText id="categoria" value="#{sessionUtilTest.currentUser.categoria.nombreCategoria}" disabled="true"/>
+                        <p:inputText id="categoria" value="#{academicoController.selected.categoria.nombreCategoria}" disabled="true"/>
                         
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_mail}" for="mail" />
-                        <p:inputText id="mail" value="#{sessionUtilTest.currentUser.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
+                        <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
                             <f:validator validatorId="CorreoValidator"/>
                         </p:inputText>
                         <p:outputLabel value="Reseña" for="resegna" />
                         <p:scrollPanel mode="native" style="width: 300px;height: 200px">
-                            <p:inputTextarea id="resegna" value="#{sessionUtilTest.currentUser.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" rows="10" cols="50"  />
+                            <p:inputTextarea id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" rows="10" cols="50"  />
                         </p:scrollPanel>
                     </p:panelGrid>
 
-                    <p:commandButton actionListener="#{academicoController.updateProfile(sessionUtilTest.currentUser)}" value="Guardar" update="display"/>
+                    <p:commandButton action="#{academicoController.updateProfileE()}" value="Guardar" update="display"/>
                     <p:button value="Volver" href="/faces/roles/academico/index.xhtml"/>
                 </h:panelGroup>
             </h:form>

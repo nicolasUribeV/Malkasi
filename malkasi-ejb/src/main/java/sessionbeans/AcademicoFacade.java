@@ -59,7 +59,10 @@ public class AcademicoFacade extends AbstractFacade<Academico> implements Academ
     
     @Override
     public void actualizarPerfil(Academico academico){
-        em.persist(academico);
+        Academico academicoAuxiliar = em.find(Academico.class, academico.getId());
+        academicoAuxiliar.setMail(academico.getMail());
+        academicoAuxiliar.setResegna(academico.getResegna());
+        em.merge(academicoAuxiliar);
     }
 
 }

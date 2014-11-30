@@ -101,9 +101,12 @@ public class AcademicoController implements Serializable {
     }
 
     public void updateProfile(Academico academico) {
-        Academico a = ejbFacade.find(academico.getId());
-        System.out.println("Editando: " + a.getNombres() + " " + a.getApellidos());
-        ejbFacade.edit(a);
+        this.setSelected(academico);
+        JsfUtil.redirect("/faces/roles/academico/perfil.xhtml");
+    }
+    
+    public void updateProfileE(){
+        ejbFacade.actualizarPerfil(selected);
     }
     
     public void destroy() {

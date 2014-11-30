@@ -27,8 +27,10 @@
                         #{gradosAcademicos.institucion} <br />
                     </c:forEach> 
                 </p:panelGrid>
-                <p:button style="width: 100%" value="Mi Perfil" href="/faces/roles/academico/perfil.xhtml"/>
-            </p:dataList>
+                <h:form>
+                      <p:commandButton style="width: 100%" value="Mi Perfil" action="#{academicoController.updateProfile(sessionUtilTest.currentUser)}"/>
+                </h:form>
+              </p:dataList>
             <h:form >
 
                 <p:commandButton style="width: 100%" value="Agregar actividad académica" icon="ui-icon-circle-plus" actionListener="#{wizardController.prepareCreateWithAcademic(sessionUtilTest.currentUser)}"/>
