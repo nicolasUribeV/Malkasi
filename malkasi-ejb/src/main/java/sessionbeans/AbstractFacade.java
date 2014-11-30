@@ -31,7 +31,7 @@ public abstract class AbstractFacade<T> {
     }
 
     public void edit(T entity) {
-      //  log.info("editing "+entity);
+        //log.info("editing "+entity);
         getEntityManager().merge(entity);
     }
 
@@ -69,3 +69,4 @@ public abstract class AbstractFacade<T> {
     }
     
 }
+

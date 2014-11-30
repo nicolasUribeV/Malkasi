@@ -7,7 +7,9 @@ package managedBeans;
 
 import entities.Academico;
 import entities.Categoria;
+import entities.Proyecto;
 import entities.Publicacion;
+import entities.TipoFinanciamiento;
 import entities.TipoPublicacion;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,9 +41,12 @@ public class IndicadoresController implements Serializable {
     private sessionbeans.AcademicoFacadeLocal academicoFacade;
     @EJB
     private sessionbeans.CategoriaFacadeLocal categoriaFacade;
+    @EJB
+    private sessionbeans.ProyectoFacadeLocal proyectoFacade;
     private TipoPublicacion tipoPublicacionSeleccionada;
     private Academico academicoSeleccionado;
     List<Publicacion> todasPublicaciones = null;
+    List<Proyecto> todosProyectos = null;
     private int agnoInicial;
     private int agnoFinal;
     private ArrayList<Integer> getAgnos;
@@ -52,11 +57,19 @@ public class IndicadoresController implements Serializable {
     ArrayList<ArrayList> matriz;
     private List<Categoria> categorias;
 
-    public List<Categoria> listarCategorias(){
+    public List<Proyecto> getTodosProyectos() {
+        return todosProyectos;
+    }
+
+    public void setTodosProyectos(List<Proyecto> todosProyectos) {
+        this.todosProyectos = todosProyectos;
+    }
+
+    public List<Categoria> listarCategorias() {
         categorias = categoriaFacade.findAll();
         return categorias;
     }
-    
+
     public List<Categoria> getCategorias() {
         return categorias;
     }
@@ -306,6 +319,33 @@ public class IndicadoresController implements Serializable {
         return cant;
     }
 
+    public void prepararTablaTipoFinanciamiento() {
+
+    }
+
+    public List<Proyecto> getTodasProyectos() {
+        todosProyectos = proyectoFacade.findAll();
+        return todosProyectos;
+    }
+
+    public int cantidadTipoFinanciamiento(int agno, TipoFinanciamiento TF) {
+        int cant = 0;
+        getTodasProyectos();
+        for (int i = 0; i < getTodasProyectos().size(); i++) {
+            if (todosProyectos.get(i).getFechaInicioProyecto() != null) {
+                if (todosProyectos.get(i).getTipoFinanciamiento().getId() == TF.getId()) {
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(todosProyectos.get(i).getFechaInicioProyecto());
+                    int year = cal.get(Calendar.YEAR);
+                    if (year == agno) {
+                        cant++;
+                    }
+                }
+            }
+        }
+        return cant;
+    }
+
     public ArrayList<Integer> getAgnos() {
         ArrayList<Integer> agnos = new ArrayList<>();
         int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -343,15 +383,15 @@ public class IndicadoresController implements Serializable {
     public void setAgnosTabla(ArrayList<Integer> agnosTabla) {
         this.agnosTabla = agnosTabla;
     }
-    
-    public boolean isPublicacionIndexada(TipoPublicacion tp){
-        if(tp.getNombreTipo().equals("Publicaciones en revistas indexadas")){
+
+    public boolean isPublicacionIndexada(TipoPublicacion tp) {
+        if (tp.getNombreTipo().equals("Publicaciones en revistas indexadas")) {
             return true;
         }
         return false;
     }
-    
-    public ArrayList<String> tiposIndexacion(){
+
+    public ArrayList<String> tiposIndexacion() {
         ArrayList<String> tI = new ArrayList<>();
         tI.add("indexación ISI");
         tI.add("indexación SCIELO");
@@ -359,11 +399,11 @@ public class IndicadoresController implements Serializable {
         tI.add("otro tipo de indexación");
         return tI;
     }
-    
+
     public int cantidadPublicacionIndex(int agno, String index) {
         int cant = 0;
         for (int i = 0; i < getTodasPublicaciones().size(); i++) {
-            boolean ix = tipoIndex(todasPublicaciones.get(i),index);
+            boolean ix = tipoIndex(todasPublicaciones.get(i), index);
             if (isPublicacionIndexada(todasPublicaciones.get(i).getTipoPublicacion()) && ix) {
                 if (todasPublicaciones.get(i).getAgno() == agno) {
                     cant++;
@@ -372,22 +412,27 @@ public class IndicadoresController implements Serializable {
         }
         return cant;
     }
-    
-    public boolean tipoIndex(Publicacion p, String index){
-        if(index.equals("indexación ISI") && p.isIndexIsi()){return true;}
-        else if(index.equals("indexación SCIELO") && p.isIdexScielo()){return true;}
-        else if(index.equals("indexación SCOPUS") && p.isIndexScopus()){return true;}
-        else if(index.equals("otro tipo de indexación") && p.isIdexOther()){return true;}
+
+    public boolean tipoIndex(Publicacion p, String index) {
+        if (index.equals("indexación ISI") && p.isIndexIsi()) {
+            return true;
+        } else if (index.equals("indexación SCIELO") && p.isIdexScielo()) {
+            return true;
+        } else if (index.equals("indexación SCOPUS") && p.isIndexScopus()) {
+            return true;
+        } else if (index.equals("otro tipo de indexación") && p.isIdexOther()) {
+            return true;
+        }
         return false;
     }
-    
-    public ArrayList<Academico> academicosPorCategoria(Categoria c){
+
+    public ArrayList<Academico> academicosPorCategoria(Categoria c) {
         //System.out.println("CAT: " + id);
         //Categoria c = categoriaFacade.find(id);
         ArrayList<Academico> cat = new ArrayList<>();
         items = academicoFacade.findAll();
         for (int i = 0; i < items.size(); i++) {
-            if(items.get(i).getCategoria().getId() == c.getId()){
+            if (items.get(i).getCategoria().getId() == c.getId()) {
                 System.out.println("NAME: " + items.get(i).getApellidos());
                 cat.add(items.get(i));
             }
