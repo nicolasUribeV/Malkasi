@@ -15,7 +15,7 @@
             <span>
                 <h3 style="text-align: center;color: #1c94c4;font-weight: bold">Crear proyecto</h3>
             </span>
-            <h:form id="agregarProyecto">
+            <h:form id="agregarProyecto"  style="width: 60%; margin-left: auto; margin-right: auto">
                 <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/academico/proyectos/List.xhtml" onclick="#{academicoController.setSelected(null)}"/>
                 <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
 
@@ -37,12 +37,13 @@
 
                                 <h:outputLabel value="Resumen" for="descripcionProyecto" style="color: #0c2465;font-weight: bold;font-size: small" />
                                 <p:scrollPanel mode="native" style="width: 360px;height: 200px" styleClass=".ui-scrollpanel-vbar" >
-
                                     <p:inputTextarea id="descripcionProyecto" value="#{proyetoWizard.proyecto.descripcionProyecto}" style="width: 360px;height: 200px" />
                                 </p:scrollPanel>
                                 <p:outputLabel value="" style="padding: 20px" />
 
-
+                                <h:outputLabel value="Fecha Postulación" for="fechaInicioProyecto" style="color: #0c2465;font-size: small"/>
+                                <p:calendar id="fechaPostulacionProyecto" pattern="MM/dd/yyyy" value="#{proyetoWizard.proyecto.fechaPostulacionProyecto}"  showOn="button"/>
+                                <p:outputLabel value="" style="padding: 20px" />
 
                                 <h:outputLabel value="Fecha Inicio" for="fechaInicioProyecto" style="color: #0c2465;font-size: small"/>
                                 <p:calendar id="fechaInicioProyecto" pattern="MM/dd/yyyy" value="#{proyetoWizard.proyecto.fechaInicioProyecto}" title="#{bundle.EditProyectoTitle_fechaInicioProyecto}"  showOn="button"/>
@@ -51,7 +52,7 @@
 
                                 <h:outputLabel value="Duración (meses)" for="duracionProyecto" style="color: #0c2465;font-size: small"/>
                                 <p:inputText id="duracionProyecto" validatorMessage="Duración mínima de 1 mes y máxima de 24 meses" value="#{proyetoWizard.proyecto.duracionProyecto}" title="#{bundle.CreateProyectoTitle_duracionProyecto}" >
-                                <f:validateLongRange minimum="1" maximum="24" />
+                                    <f:validateLongRange minimum="1" maximum="24" />
                                 </p:inputText>
                                 <p:message id="msgDuracionCrearProyecto" for="duracionProyecto" style="padding: 20px" />
 

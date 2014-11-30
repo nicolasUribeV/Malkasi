@@ -20,7 +20,7 @@
                 <h3 style="text-align: center;color: #1c94c4;font-weight: bold;word-wrap: break-word">Editando #{proyectoController.selected.nombreProyecto}</h3>
             </span>
 
-            <h:form id="agregarProyecto">
+            <h:form id="agregarProyecto"  style="width: 60%; margin-left: auto; margin-right: auto">
                 <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/academico/proyectos/List.xhtml" onclick="#{academicoController.setSelected(null)}"/>
                 <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
 
@@ -46,6 +46,9 @@
                                 </p:scrollPanel>
                                 <p:outputLabel value="" style="padding: 20px" />
 
+                                <h:outputLabel value="Fecha Postulación" for="fechaInicioProyecto" style="color: #0c2465;font-size: small"/>
+                                <p:calendar id="fechaPostulacionProyecto" pattern="MM/dd/yyyy" value="#{proyetoWizard.proyecto.fechaPostulacionProyecto}"  showOn="button"/>
+                                <p:outputLabel value="" style="padding: 20px" />
 
                                 <h:outputLabel value="Fecha Inicio" for="fechaInicioProyecto" style="color: #0c2465;font-size: small"/>
                                 <p:calendar id="fechaInicioProyecto" pattern="MM/dd/yyyy" value="#{proyetoWizard.proyecto.fechaInicioProyecto}" title="#{bundle.EditProyectoTitle_fechaInicioProyecto}"  showOn="button"/>
@@ -117,10 +120,10 @@
                                 value="#{proyetoWizard.roles}" id="academicosSel" var="rolProyectos"
                                 rowKey="#{rolProyectos.id}" selection="#{proyetoWizard.rolSeleccionado}"
                                 selectionMode="single" emptyMessage="No existen académicos agregados" >
-                                
+
                                 <p:ajax event="rowSelect"   update="eliminarAcadem"/>
-                                
-                                
+
+
                                 <p:column headerText="Nombres">
                                     <h:outputText value="#{rolProyectos.academico.nombres} #{rolProyectos.academico.apellidos}" />
                                 </p:column>
@@ -129,7 +132,7 @@
                                 </p:column>
                                 <p:column headerText="Eliminar académico">
                                     <p:commandButton id="eliminarAcadem"
-                                                    icon="ui-icon-trash"
+                                                     icon="ui-icon-trash"
                                                      title="Eliminar"
                                                      actionListener="#{proyetoWizard.eliminarAcademico()}"
                                                      ajax="false" />

@@ -26,34 +26,45 @@ import javax.validation.constraints.Size;
  */
 @Entity
 public class Proyecto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Size(min = 1, message="El código del proyecto no puede estar vacío")
+
+    @Size(min = 1, message = "El código del proyecto no puede estar vacío")
     private String codigoProyecto;
-    
-    @Size(min = 1, message="El nombre del proyecto no puede estar vacío")
+
+    @Size(min = 1, message = "El nombre del proyecto no puede estar vacío")
     private String nombreProyecto;
-    
-    @Column(length=1500)
+
+    @Column(length = 1500)
     private String descripcionProyecto;
-    
-    
+
+    @Temporal(TemporalType.DATE)
+    private Date fechaPostulacionProyecto;
+
     @Temporal(TemporalType.DATE)
     private Date fechaInicioProyecto;
-    
+
     private int duracionProyecto;
-    
-    @Size(min = 1, message="El estado del proyecto no puede estar vacío")
+
+    @Size(min = 1, message = "El estado del proyecto no puede estar vacío")
     private String estadoProyecto;
-    
-    @ManyToOne(optional= false)
+
+    @ManyToOne(optional = false)
     private TipoFinanciamiento tipoFinanciamiento;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
     private List<RolProyecto> academicos;
+
+    public Date getFechaPostulacionProyecto() {
+        return fechaPostulacionProyecto;
+    }
+
+    public void setFechaPostulacionProyecto(Date fechaPostulacionProyecto) {
+        this.fechaPostulacionProyecto = fechaPostulacionProyecto;
+    }
 
     public Long getId() {
         return id;
@@ -87,8 +98,6 @@ public class Proyecto implements Serializable {
     public String toString() {
         return "Proyecto{" + "id=" + id + ", codigoProyecto=" + codigoProyecto + ", nombreProyecto=" + nombreProyecto + ", estadoProyecto=" + estadoProyecto + ", tipoFinanciamiento=" + tipoFinanciamiento + '}';
     }
-
-    
 
     public String getNombreProyecto() {
         return nombreProyecto;
@@ -153,7 +162,5 @@ public class Proyecto implements Serializable {
     public void setTipoFinanciamiento(TipoFinanciamiento tipoFinanciamiento) {
         this.tipoFinanciamiento = tipoFinanciamiento;
     }
-    
-    
-    
+
 }

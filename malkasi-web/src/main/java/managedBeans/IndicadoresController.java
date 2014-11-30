@@ -332,13 +332,15 @@ public class IndicadoresController implements Serializable {
         int cant = 0;
         getTodasProyectos();
         for (int i = 0; i < getTodasProyectos().size(); i++) {
-            if (todosProyectos.get(i).getFechaInicioProyecto() != null) {
-                if (todosProyectos.get(i).getTipoFinanciamiento().getId() == TF.getId()) {
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(todosProyectos.get(i).getFechaInicioProyecto());
-                    int year = cal.get(Calendar.YEAR);
-                    if (year == agno) {
-                        cant++;
+            if (!"Presentado".equals(todosProyectos.get(i).getEstadoProyecto())) {
+                if (todosProyectos.get(i).getFechaInicioProyecto() != null) {
+                    if (todosProyectos.get(i).getTipoFinanciamiento().getId() == TF.getId()) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(todosProyectos.get(i).getFechaInicioProyecto());
+                        int year = cal.get(Calendar.YEAR);
+                        if (year == agno) {
+                            cant++;
+                        }
                     }
                 }
             }
