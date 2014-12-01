@@ -38,4 +38,6 @@ public interface AcademicoFacadeLocal {
     List<Academico> FindWithRut(String rut);
     
     void actualizarPerfil(Academico academico);
+    
+    List<Academico> FindWithName(String name, String lastName);
 }

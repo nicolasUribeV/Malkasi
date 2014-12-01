@@ -68,6 +68,16 @@ public class Academico implements Serializable {
     
     private boolean permisoAdmin;
     
+    private String userAlias;
+
+    public String getUserAlias() {
+        return userAlias;
+    }
+
+    public void setUserAlias(String userAlias) {
+        this.userAlias = userAlias;
+    }
+    
     public String getRut() {
         return rut;
     }

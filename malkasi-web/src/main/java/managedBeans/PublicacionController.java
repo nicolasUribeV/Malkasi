@@ -28,6 +28,7 @@ public class PublicacionController implements Serializable {
 
     @EJB
     private PublicacionFacadeLocal ejbFacade;
+    @EJB
     private AcademicoFacadeLocal ejbFacadeAcademic;
     private List<Publicacion> items = null;
     private Publicacion selected;
@@ -85,7 +86,7 @@ public class PublicacionController implements Serializable {
         items = academico.getPublicaciones();
         JsfUtil.redirect("/faces/roles/academico/publicacion/List.xhtml");
     }
-    
+
     public void prepareEditWithAcademic(Publicacion publicacion) {
         setSelected(ejbFacade.find(publicacion.getId()));
         JsfUtil.redirect("/faces/roles/academico/publicacion/Editar.xhtml");
@@ -126,10 +127,10 @@ public class PublicacionController implements Serializable {
         }
         return usuarios;
     }
-    
+
     public ArrayList<String> usuariosExternosDePublicacion(Publicacion publicacion) {
         ArrayList<String> usuarios = new ArrayList<>();
-        if (publicacion != null && publicacion.getAcademicosExternos()!= null) {
+        if (publicacion != null && publicacion.getAcademicosExternos() != null) {
             for (int i = 0; i < publicacion.getAcademicosExternos().size(); i++) {
                 usuarios.add(publicacion.getAcademicosExternos().get(i).getNombres() + " " + publicacion.getAcademicosExternos().get(i).getApellidos());
             }
@@ -157,12 +158,11 @@ public class PublicacionController implements Serializable {
     public void comeBack() {
         JsfUtil.redirect("/faces/roles/academico/index.xhtml");
     }
-    
+
     public void comeBackEdit() {
         selected = null;
         JsfUtil.redirect("/faces/roles/academico/publicacion/List.xhtml");
     }
-
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PublicacionUpdated"));
@@ -176,17 +176,35 @@ public class PublicacionController implements Serializable {
     public String getStringPublicacion(Publicacion publicacion) {
         String rP = "";
         if (publicacion != null) {
-            if(publicacion.getAcademicoOrden()!=null){
-                for (int i = 0; i < publicacion.getAcademicoOrden().size(); i++) { 
+            if (publicacion.getAcademicoOrden() != null) {
+                for (int i = 0; i < publicacion.getAcademicoOrden().size(); i++) {
                     String[] academico = publicacion.getAcademicoOrden().get(i).split("_");
                     String[] aux = academico[1].split(" ");
+                    String name = academico[0];
+                    String lastName = academico[1];
+                    List<Academico> academicoRef = ejbFacadeAcademic.FindWithName(name, lastName);
+                    String ref = "";
+                    //identificación alias
+                    int flag = 0;
+                    if (academicoRef != null) {
+                        if (academicoRef.get(0).getUserAlias() != null) {
+                            if (!academicoRef.get(0).getUserAlias().equals("")) {
+                                flag = 1;
+                                ref = academicoRef.get(0).getUserAlias();
+                            }
+                        }
+                    }
+                    if(flag == 0){
+                        ref = aux[0] + ", " + academico[0].charAt(0);
+                    }
+                    //Llenado de Ref
                     if (i == 0) {
-                        rP = aux[0] + ", " + academico[0].charAt(0) + ".";
+                        rP = ref + ".";
                     } else {
                         if (i == publicacion.getAcademicoOrden().size() - 1) {
-                            rP = rP + "& " + aux[0] + ", " + academico[0].charAt(0) + ".";
+                            rP = rP + "& " + ref + ".";
                         } else {
-                            rP = rP + ", " + aux[0] + ", " + academico[0].charAt(0) + ".";
+                            rP = rP + ", " + ref + ".";
                         }
                     }
                 }

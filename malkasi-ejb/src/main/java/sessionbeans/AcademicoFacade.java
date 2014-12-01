@@ -58,10 +58,29 @@ public class AcademicoFacade extends AbstractFacade<Academico> implements Academ
     }
     
     @Override
+    public List<Academico> FindWithName(String name, String lastName){
+        System.out.println("Buscando EJB : " + name + " " + lastName);
+        Query q = em.createQuery("SELECT c FROM Academico c WHERE c.nombres = :name AND c.apellidos = :lastName");
+        System.out.println("1");
+        q.setParameter("name", name);
+        System.out.println("2");
+        q.setParameter("lastName", lastName);
+        if(q.getResultList().size() == 0){
+            System.out.println("No encontrado");
+            return null;
+        }
+        else{
+            System.out.println("Encontrado !!!!");
+            return q.getResultList();
+        }
+    }
+    
+    @Override
     public void actualizarPerfil(Academico academico){
         Academico academicoAuxiliar = em.find(Academico.class, academico.getId());
         academicoAuxiliar.setMail(academico.getMail());
         academicoAuxiliar.setResegna(academico.getResegna());
+        academicoAuxiliar.setUserAlias(academico.getUserAlias());
         em.merge(academicoAuxiliar);
     }
 

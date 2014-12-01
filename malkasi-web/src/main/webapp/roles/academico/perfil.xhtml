@@ -34,6 +34,9 @@
                         <p:outputLabel value="Categoría" for="categoria" />
                         <p:inputText id="categoria" value="#{academicoController.selected.categoria.nombreCategoria}" disabled="true"/>
                         
+                        <p:outputLabel value="Alias" for="alias" />
+                        <p:inputText id="alias" value="#{academicoController.selected.userAlias}"/>
+                        
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_mail}" for="mail" />
                         <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
                             <f:validator validatorId="CorreoValidator"/>
