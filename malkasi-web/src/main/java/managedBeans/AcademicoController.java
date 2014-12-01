@@ -107,6 +107,7 @@ public class AcademicoController implements Serializable {
     
     public void updateProfileE(){
         ejbFacade.actualizarPerfil(selected);
+        JsfUtil.addSuccessMessage("La información ha sido actualizada con éxito");
     }
     
     public void destroy() {

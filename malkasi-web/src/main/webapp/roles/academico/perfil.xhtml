@@ -47,7 +47,14 @@
                         </p:scrollPanel>
                     </p:panelGrid>
 
-                    <p:commandButton action="#{academicoController.updateProfileE()}" value="Guardar" update="display"/>
+                    <p:commandButton action="#{academicoController.updateProfileE()}" value="Actualizar información" update="display, :growl" >
+                        <p:confirm header="Confirmación" message="Está seguro que desea editar su información? Cambiar su alias implica cambiar su nombre en todas las publicaciones que está asociado" icon="ui-icon-alert" />
+                    </p:commandButton>
+                   
+                    <p:confirmDialog global="true" showEffect="fade" >
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
                     <p:button value="Volver" href="/faces/roles/academico/index.xhtml"/>
                 </h:panelGroup>
             </h:form>
