@@ -29,8 +29,8 @@
 
                             <h:panelGrid columns="3"  columnClasses="label, value">
                                 <h:outputText value="Titulo Publicación *" style="color: #0c2465;font-size: small"/>
-                                <p:inputText  id="nombrePublicacion" value="#{wizardController.publicacion.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" required="true" requiredMessage="Campo obligatorio" >
-                                </p:inputText>
+                                <p:inputTextarea id="nombrePublicacion" value="#{wizardController.publicacion.nombrePublicacion}" title="#{bundle.CreatePublicacionTitle_nombrePublicacion}" required="true" requiredMessage="Campo obligatorio"  rows="4" cols="37" />
+
                                 <p:message id="msgTipoPublicacion" for="nombrePublicacion" style="padding: 20px" />
 
                                 <h:outputText value="Tipo de Publicación " style="color: #0c2465;font-weight: bold;font-size: small" />
@@ -44,8 +44,7 @@
 
                                 <p:outputLabel value="Abstract" style="color: #0c2465;font-weight: bold;font-size: small"  />
                                 <p:scrollPanel mode="native" style="width: 360px;height: 200px" styleClass=".ui-scrollpanel-vbar" >
-                                    <p:inputTextarea value="#{wizardController.publicacion.abstractP}" title="Abstract" rows="7" cols="50" />
-                                </p:scrollPanel>
+                                    <p:inputTextarea value="#{wizardController.publicacion.abstractP}" title="Abstract" rows="8" cols="37" /></p:scrollPanel>
                                 <p:outputLabel value="" style="padding: 20px" />
 
 
@@ -53,7 +52,7 @@
                                 <p:inputText value="#{wizardController.publicacion.pais}" title="PublicacionPais" 
                                              requiredMessage="Pais es campo obligatorio"
                                              validatorMessage="El país no puede contener números">
-                                    <f:validateRegex pattern="[a-zA-Z ]*" />
+                                    <f:validateRegex pattern="[a-zA-ZáéíóúÁÉÍÓÚ ]*" />
                                 </p:inputText>
                                 <p:outputLabel value="" style="padding: 20px" />
 
@@ -61,7 +60,7 @@
 
                                 <p:outputLabel value="Año *" style="color: #0c2465;font-weight: bold;font-size: small"  />
                                 <p:inputMask id="agno" value="#{wizardController.publicacion.agno}" title="#{bundle.EditPublicacionTitle_fechaPublicacion}" mask="9999" >                                 
-                                    <f:validator validatorId="AgnoValidator" />
+                                    <f:validator validatorId="AgnoValidatorPublicacion" />
                                 </p:inputMask>
                                 <p:message id="msgAgno" for="agno" style="padding: 20px" />
 
@@ -88,7 +87,7 @@
                                     </p:inputText>
 
 
-                                    <p:outputLabel value="Número de Páginas" style="color: #0c2465;font-size: small" />
+                                    <p:outputLabel value="Páginas" style="color: #0c2465;font-size: small" />
                                     <p:inputText id="referencia" value="#{wizardController.publicacion.referencia}" title="#{bundle.CreatePublicacionTitle_referencia}" >
 
                                     </p:inputText>

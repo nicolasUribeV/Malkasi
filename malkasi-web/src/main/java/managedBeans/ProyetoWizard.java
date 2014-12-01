@@ -176,7 +176,7 @@ public class ProyetoWizard implements Serializable {
             if(index != -1){
                 academicos.remove(index);
             }
-            this.rol = " ";
+            this.rol = "";
         }
         
     }
@@ -185,7 +185,6 @@ public class ProyetoWizard implements Serializable {
         academicos = academicoFacade.findAll();
         for (int i = 0; i < roles.size(); i++) {
             if (roles.get(i).getAcademico().getId() == academico.getId()) {
-                System.out.println("Eliminé: " + roles.get(i).getAcademico().getNombres());
                 roles.remove(i);
             }
         }

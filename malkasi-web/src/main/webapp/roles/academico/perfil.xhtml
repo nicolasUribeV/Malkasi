@@ -19,44 +19,48 @@
                 <h3 style="color: #1c94c4;font-weight: bold">Mi Perfil</h3>
             </span>
             <h:form id="AcademicoEditForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditAcademicoLabel_rut}" for="rut" />
-                        <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.EditAcademicoTitle_rut}" disabled="true">
-                        </p:inputText>
-                        <p:outputLabel value="Nombre" for="nombres" />
-                        <p:inputText id="nombres" value="#{academicoController.selected.nombres} #{academicoController.selected.apellidos}" disabled="true"/>
-                        
-                        <p:outputLabel value="Nombre de Usuario" for="username" />
-                        <p:inputText id="username" value="#{academicoController.selected.userName}" disabled="true"> 
-                        </p:inputText>
 
-                        <p:outputLabel value="Categoría" for="categoria" />
-                        <p:inputText id="categoria" value="#{academicoController.selected.categoria.nombreCategoria}" disabled="true"/>
-                        
-                        <p:outputLabel value="Alias" for="alias" />
-                        <p:inputText id="alias" value="#{academicoController.selected.userAlias}"/>
-                        
-                        <p:outputLabel value="#{bundle.EditAcademicoLabel_mail}" for="mail" />
-                        <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
-                            <f:validator validatorId="CorreoValidator"/>
-                        </p:inputText>
-                        <p:outputLabel value="Reseña" for="resegna" />
-                        <p:scrollPanel mode="native" style="width: 300px;height: 200px">
-                            <p:inputTextarea id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" rows="10" cols="50"  />
-                        </p:scrollPanel>
-                    </p:panelGrid>
+                <p:button style="width: 50px" id="volverButton"  icon="ui-icon-arrowreturnthick-1-w" href="/faces/roles/academico/index.xhtml"/>
+                <p:tooltip id="atras" for="volverButton" value="Presione click para volver" trackMouse="true" />
+                <p:panel>
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
+                            <p:outputLabel value="#{bundle.EditAcademicoLabel_rut}" for="rut" />
+                            <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.EditAcademicoTitle_rut}" disabled="true">
+                            </p:inputText>
+                            <p:outputLabel value="Nombre" for="nombres" />
+                            <p:inputText id="nombres" value="#{academicoController.selected.nombres} #{academicoController.selected.apellidos}" disabled="true"/>
 
-                    <p:commandButton action="#{academicoController.updateProfileE()}" value="Actualizar información" update="display, :growl" >
-                        <p:confirm header="Confirmación" message="Está seguro que desea editar su información? Cambiar su alias implica cambiar su nombre en todas las publicaciones que está asociado" icon="ui-icon-alert" />
-                    </p:commandButton>
-                   
-                    <p:confirmDialog global="true" showEffect="fade" >
-                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>
-                    <p:button value="Volver" href="/faces/roles/academico/index.xhtml"/>
-                </h:panelGroup>
+                            <p:outputLabel value="Nombre de Usuario" for="username" />
+                            <p:inputText id="username" value="#{academicoController.selected.userName}" disabled="true"> 
+                            </p:inputText>
+
+                            <p:outputLabel value="Categoría" for="categoria" />
+                            <p:inputText id="categoria" value="#{academicoController.selected.categoria.nombreCategoria}" disabled="true"/>
+
+                            <p:outputLabel value="Alias" for="alias" />
+                            <p:inputText id="alias" value="#{academicoController.selected.userAlias}"/>
+
+                            <p:outputLabel value="#{bundle.EditAcademicoLabel_mail}" for="mail" />
+                            <p:inputText id="mail" value="#{academicoController.selected.mail}" title="#{bundle.EditAcademicoTitle_mail}" >
+                                <f:validator validatorId="CorreoValidator"/>
+                            </p:inputText>
+                            <p:outputLabel value="Reseña" for="resegna" />
+                            <p:scrollPanel mode="native" style="width: 300px;height: 200px">
+                                <p:inputTextarea id="resegna" value="#{academicoController.selected.resegna}" title="#{bundle.EditAcademicoTitle_resegna}" rows="10" cols="50"  />
+                            </p:scrollPanel>
+                        </p:panelGrid>
+
+                        <p:commandButton action="#{academicoController.updateProfileE()}" value="Actualizar información" update="display, :growl" >
+                            <p:confirm header="Confirmación" message="Está seguro que desea editar su información? Cambiar su alias implica cambiar su nombre en todas las publicaciones que está asociado" icon="ui-icon-alert" />
+                        </p:commandButton>
+
+                        <p:confirmDialog global="true" showEffect="fade" >
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </h:panelGroup>
+                </p:panel>
             </h:form>
 
         </ui:define>

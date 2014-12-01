@@ -22,6 +22,7 @@ import managedBeans.util.JsfUtil;
 import managedBeans.util.JsfUtil.PersistAction;
 import org.primefaces.model.DualListModel;
 import sessionbeans.AcademicoFacadeLocal;
+import sessionbeans.PublicacionFacadeLocal;
 
 @Named("academicoController")
 @SessionScoped
@@ -29,6 +30,8 @@ public class AcademicoController implements Serializable {
 
     @EJB
     private AcademicoFacadeLocal ejbFacade;
+    @EJB
+    private PublicacionFacadeLocal ejbPublicacionFacade;     
     private List<Academico> items = null;
     private Academico selected;
     private ArrayList<Academico> academicsCategory;
@@ -97,6 +100,27 @@ public class AcademicoController implements Serializable {
     public void update() {
         String rutNuevo = rutFinal();
         selected.setRut(rutNuevo);
+        Academico academicoAnterior = ejbFacade.find(selected.getId());
+        for (int i = 0; i < academicoAnterior.getPublicaciones().size(); i++) {
+            ArrayList<String> academicosN = new ArrayList<String>();
+            ArrayList<String> refAnterior = academicoAnterior.getPublicaciones().get(i).getAcademicoOrden();
+            String refActual = "";
+            for (int j = 0; j < refAnterior.size(); j++) {
+                String[] names = refAnterior.get(j).split("_");
+                String n = names[0];
+                String ap = names[1];
+                String refPart = "";
+                if(n.equals(academicoAnterior.getNombres()) && ap.equals(academicoAnterior.getApellidos())){
+                    refPart = selected.getNombres() + "_" + selected.getApellidos();
+                }
+                else{
+                    refPart = refAnterior.get(j);
+                }
+                academicosN.add(refPart);
+            }
+            selected.getPublicaciones().get(i).setAcademicoOrden(academicosN);
+            ejbPublicacionFacade.edit(selected.getPublicaciones().get(i));
+        }
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("AcademicoUpdated"));
     }
 
