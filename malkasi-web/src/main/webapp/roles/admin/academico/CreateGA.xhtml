@@ -11,17 +11,17 @@
         <p:dialog id="GradoAcademicoCreateDlg" widgetVar="GradoAcademicoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Agregar grado académico">
             <h:form id="GradoAcademicoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{gradoAcademicoController.selected != null}">
+                    <h:panelGrid columns="2" rendered="#{gradoAcademicoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateGradoAcademicoLabel_titulo}" for="titulo" />
-                        <p:inputText id="titulo" value="#{gradoAcademicoController.selected.titulo}" title="#{bundle.CreateGradoAcademicoTitle_titulo}" />
+                        <p:inputText id="titulo" value="#{gradoAcademicoController.selected.titulo}" required="true" requiredMessage="Campo obligatorio" title="#{bundle.CreateGradoAcademicoTitle_titulo}" />
                         <p:outputLabel value="Año" for="agno" />
                         <p:inputMask id="agno" value="#{gradoAcademicoController.selected.agno}" title="#{bundle.CreateGradoAcademicoTitle_agno}" mask="9999"  >                                 
                                     <f:validator validatorId="AgnoValidator" />
                         </p:inputMask>
 
                         <p:outputLabel value="Institución" for="insitucion" />
-                        <p:inputText id="insitucion" value="#{gradoAcademicoController.selected.institucion}" title="#{bundle.CreateGradoAcademicoTitle_insitucion}" />
-                    </p:panelGrid>
+                        <p:inputText id="insitucion" value="#{gradoAcademicoController.selected.institucion}" required="true" requiredMessage="Campo obligatorio" title="#{bundle.CreateGradoAcademicoTitle_insitucion}" />
+                    </h:panelGrid>
                     <p:commandButton actionListener="#{academico_GradoAcademicoController.NuevaDependecia(gradoAcademicoController.selected.miAcademico, gradoAcademicoController.selected)}" value="Guardar" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'GradoAcademicoCreateDialog');"/>
                     <p:commandButton value="Cancelar" immediate="true" onclick="GradoAcademicoCreateDialog.hide()"/>
                 </h:panelGroup>

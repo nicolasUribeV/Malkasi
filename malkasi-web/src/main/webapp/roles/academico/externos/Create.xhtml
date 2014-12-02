@@ -42,7 +42,7 @@
                     </h:panelGrid>
                     <h5 style="text-align: center;color: #1c94c4;font-weight: bold">* Representa que el campo es obligatorio</h5>
 
-                    <p:commandButton actionListener="#{academicoExternoController.create}" value="Crear" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AcademicoExternoCreateDialog');"/>
+                    <p:commandButton actionListener="#{academicoExternoController.create}" value="Crear" update="display,:AcademicoExternoListForm:datalist" oncomplete="handleSubmit(args,'AcademicoExternoCreateDialog');"/>
                     <p:button value="Cancelar" href="/faces/roles/academico/externos/List.xhtml" />
                     
                 </h:panelGroup>

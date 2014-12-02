@@ -14,8 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{academicoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_rut}" for="rut" />
                         <p:inputText id="rut" value="#{academicoController.selected.rut}" title="#{bundle.EditAcademicoTitle_rut}" disabled="true"  >
-                           
-                            
+
+
                         </p:inputText>
                         <p:outputLabel value="#{bundle.EditAcademicoLabel_nombres}" for="nombres" />
                         <p:inputText id="nombres" value="#{academicoController.selected.nombres}" title="#{bundle.EditAcademicoTitle_nombres}"  >
@@ -26,8 +26,8 @@
                             <f:validator validatorId="ApellidoValidator"/>
                         </p:inputText>
                         <p:outputLabel value="Nombre de Usuario" for="username" />
-                        <p:inputText id="username" value="#{academicoController.selected.userName}">
-                            
+                        <p:inputText id="username" value="#{academicoController.selected.userName}" required="true" requiredMessage="Campo obligatorio">
+
                         </p:inputText>
 
                         <p:outputLabel value="Categoría" for="categoria" />
@@ -48,7 +48,14 @@
                         <p:selectBooleanCheckbox value="#{academicoController.selected.permisoAdmin}" />
                     </p:panelGrid>
 
-                    <p:commandButton actionListener="#{academicoController.update}" value="Guardar" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoEditDialog');"/>
+                    <p:commandButton actionListener="#{academicoController.update}" value="Guardar" update="display,:AcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoEditDialog');">
+                        <p:confirm header="Confirmación" message="¿Está seguro que desea realizar los cambios?" icon="ui-icon-script" />
+                            
+                    </p:commandButton>
+                    <p:confirmDialog global="true" showEffect="fade" >
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
                     <p:commandButton value="Cancelar" immediate="true" onclick="AcademicoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
