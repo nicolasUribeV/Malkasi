@@ -134,8 +134,11 @@
                                     <p:commandButton id="eliminarAcadem"
                                                      icon="ui-icon-trash"
                                                      title="Eliminar"
-                                                     actionListener="#{proyetoWizard.eliminarAcademico()}"
-                                                     ajax="false" />
+                                                     action="#{proyetoWizard.eliminarAcademico()}"
+                                                     ajax="false" >
+                                        <f:setPropertyActionListener value="#{rolProyectos}" target="#{proyetoWizard.rolSeleccionado}" for="eliminarAcadem" />
+                            
+                                    </p:commandButton>
                                 </p:column>
 
 
