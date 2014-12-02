@@ -19,7 +19,7 @@ import javax.persistence.Query;
 @Stateless
 public class AcademicoExternoFacade extends AbstractFacade<AcademicoExterno> implements AcademicoExternoFacadeLocal {
     @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
-    private EntityManager em;
+    EntityManager em;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -31,7 +31,7 @@ public class AcademicoExternoFacade extends AbstractFacade<AcademicoExterno> imp
     }
     
     @Override
-    public boolean FindWithNombreApellido(String nombres, String apellidos, long id){
+    public boolean findWithNombreApellido(String nombres, String apellidos, long id){
         Query q = em.createQuery("SELECT c FROM AcademicoExterno c WHERE c.nombres = :nombres AND c.apellidos = :apellidos AND c.id <> :id");
         q.setParameter("nombres", nombres);
         q.setParameter("apellidos", apellidos);

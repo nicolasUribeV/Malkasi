@@ -57,7 +57,7 @@ public class validatorNameAndLastName implements Validator {
     }
 
     public boolean validate(String nombre, String apellido, long id) {
-        if (ejbFacade.FindWithNombreApellido(nombre, apellido, id)) {
+        if (ejbFacade.findWithNombreApellido(nombre, apellido, id)) {
             return true;
         } else {
             return false;
