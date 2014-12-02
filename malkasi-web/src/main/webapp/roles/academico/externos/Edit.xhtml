@@ -11,15 +11,20 @@
         <p:dialog id="AcademicoExternoEditDlg" widgetVar="AcademicoExternoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar académico externo">
             <h:form id="AcademicoExternoEditForm">
                 <h:panelGroup id="display">
-                    <h:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="pg" columnClasses="label, value">
+                    <h:panelGrid columns="3" rendered="#{academicoExternoController.selected != null}" id="pg" columnClasses="label, value">
                         <h:outputLabel value="Nombres" for="nombres" style="color: #0c2465;font-size: small;width: 100px"/>
-                        <p:inputText id="nombres" required="true" value="#{academicoExternoController.selected.nombres}"  title="Nombres" >
+                        <p:inputText id="nombres" required="true" requiredMessage="Campo obligatorio" value="#{academicoExternoController.selected.nombres}"  title="Nombres" >
                             <p:ajax event="change"/>
                         </p:inputText>
+                        <p:message id="msgNombreExterno" for="nombres" style="padding: 20px" />
+
+                        
                         <h:outputLabel value="Apellidos" for="apellidoss" style="color: #0c2465;font-size: small;width: 100px"/>
-                        <p:inputText id="apellidoss" required="true" value="#{academicoExternoController.selected.apellidos}"   title="Apellidos" >
+                        <p:inputText id="apellidoss" required="true" requiredMessage="Campo obligatorio" value="#{academicoExternoController.selected.apellidos}"   title="Apellidos" >
                             <p:ajax event="change"/>
                         </p:inputText>
+                        <p:message id="msgApellidosExterno" for="apellidoss" style="padding: 20px" />
+
                     </h:panelGrid>
                     <h:inputHidden value="true">
                         <f:validator validatorId="validatorNameAndLastName" />
@@ -30,13 +35,18 @@
                     <br></br>
                     <p:outputLabel value="Filiación" style="color: #1c94c4" />
                     <br></br>
-                    <h:panelGrid columns="2" rendered="#{academicoExternoController.selected != null}" id="panel" columnClasses="label, value">
+                    <h:panelGrid columns="3" rendered="#{academicoExternoController.selected != null}" id="panel" columnClasses="label, value">
                         <h:outputLabel value="Pais" for="pais" style="color: #0c2465;font-size: small;width: 100px"/>
-                        <p:inputText id="pais" value="#{academicoExternoController.selected.pais}" title="Pais" />
+                        <p:inputText id="pais" value="#{academicoExternoController.selected.pais}" required="true" requiredMessage="Campo obligatorio" title="Pais" />
+                        <p:message id="msgPaisE" for="pais" style="padding: 20px" />
+                        
+                        
                         <h:outputLabel value="Universidad" for="universidad" style="color: #0c2465;font-size: small;width: 100px"/>
-                        <p:inputText id="universidad" value="#{academicoExternoController.selected.universidad}" title="Universidad" />
+                        <p:inputText id="universidad" value="#{academicoExternoController.selected.universidad}" required="true" requiredMessage="Campo obligatorio" title="Universidad" />
+                        <p:message id="msgUniversidadE" for="universidad" style="padding: 20px" />
+
                     </h:panelGrid>
-                    <p:commandButton actionListener="#{academicoExternoController.update}" value="Guardar" update="display,:AcademicoExternoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AcademicoExternoEditDialog');">
+                    <p:commandButton actionListener="#{academicoExternoController.update}" value="Guardar" update="display,:AcademicoExternoListForm:datalist" oncomplete="handleSubmit(args, 'AcademicoExternoEditDialog');">
                         <p:confirm header="Confirmación" message="Está seguro que desea editar la información? Esto implica cambiar toda la información en los proyectos/publicaciones asociadas " icon="ui-icon-alert" />
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" >

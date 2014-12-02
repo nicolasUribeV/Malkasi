@@ -11,16 +11,16 @@
         <p:dialog id="GradoAcademicoEditDlg" widgetVar="GradoAcademicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar Grado Académico">
             <h:form id="GradoAcademicoEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{gradoAcademicoController.selected != null}">
+                    <h:panelGrid columns="2" rendered="#{gradoAcademicoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditGradoAcademicoLabel_titulo}" for="titulo" />
-                        <p:inputText id="titulo" value="#{gradoAcademicoController.selected.titulo}" title="#{bundle.EditGradoAcademicoTitle_titulo}" />
+                        <p:inputText id="titulo" value="#{gradoAcademicoController.selected.titulo}" required="true" requiredMessage="Campo obligatorio" title="#{bundle.EditGradoAcademicoTitle_titulo}" />
                         <p:outputLabel value="Año" for="agno" />
                         <p:inputMask id="agno" value="#{gradoAcademicoController.selected.agno}" title="#{bundle.CreateGradoAcademicoTitle_agno}" mask="9999"  >                                 
                                     <f:validator validatorId="AgnoValidator" />
                         </p:inputMask>
                         <p:outputLabel value="Institución" for="insitucion" />
-                        <p:inputText id="insitucion" value="#{gradoAcademicoController.selected.institucion}" title="#{bundle.EditGradoAcademicoTitle_insitucion}" />
-                    </p:panelGrid>
+                        <p:inputText id="insitucion" value="#{gradoAcademicoController.selected.institucion}" required="true" requiredMessage="Campo obligatorio" title="#{bundle.EditGradoAcademicoTitle_insitucion}" />
+                    </h:panelGrid>
                     <p:commandButton actionListener="#{gradoAcademicoController.update}" value="Guardar" update="display,:GradoAcademicoListForm:datalistGA,:growl" oncomplete="handleSubmit(args, 'GradoAcademicoEditDialog');"/>
                     <p:commandButton value="Cancelar" immediate="true" onclick="GradoAcademicoEditDialog.hide()"/>
                 </h:panelGroup>
