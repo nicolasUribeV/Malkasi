@@ -29,8 +29,7 @@ public class RolProyecto implements Serializable {
     
     @ManyToOne(optional= false)
     private Academico academico;
-    
-    @Size(min = 1, message="El rol no puede ser nulo")
+
     private String rol;
 
     public Long getId() {
