@@ -5,7 +5,6 @@
  */
 package sessionbeans;
 
-
 import entities.AcademicoExterno;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class AcademicoExternoFacadeTest {
     @Mock
     private Query query;
 
-    public AcademicoExternoFacadeTest() {
+    public AcademicoExternoFacadeTest(){
     }
 
     @Before
@@ -54,7 +53,7 @@ public class AcademicoExternoFacadeTest {
     }
 
     @Test
-    public void testAcademicoExternoFacade() {
+    public void testAcademicoExternoFacadeFindAll() {
         AcademicoExterno a1 = new AcademicoExterno();
         AcademicoExterno a2 = new AcademicoExterno();
         AcademicoExterno a3 = new AcademicoExterno();
@@ -81,7 +80,7 @@ public class AcademicoExternoFacadeTest {
         academicos.add(a1);
         academicos.add(a2);
         academicos.add(a3);
-        
+
         List<AcademicoExterno> academicosTest = new ArrayList<>();
 
         academicosTest.add(a1);
@@ -95,9 +94,11 @@ public class AcademicoExternoFacadeTest {
         when(querys.getResultList()).thenReturn(academicos);
 
         when(academicoExternoFacade.findAll()).thenReturn(academicosTest);
-   
+
         assertEquals(academicosTest, academicos);
 
     }
+
+    
 
 }

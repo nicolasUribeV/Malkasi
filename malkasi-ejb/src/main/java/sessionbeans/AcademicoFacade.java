@@ -21,7 +21,7 @@ import javax.persistence.Query;
 @Stateless
 public class AcademicoFacade extends AbstractFacade<Academico> implements AcademicoFacadeLocal {
     @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
-    private EntityManager em;
+    EntityManager em;
     
 
     @Override

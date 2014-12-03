@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class TipoPublicacionFacade extends AbstractFacade<TipoPublicacion> implements TipoPublicacionFacadeLocal {
     @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
-    private EntityManager em;
+    EntityManager em;
 
     @Override
     protected EntityManager getEntityManager() {

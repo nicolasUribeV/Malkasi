@@ -20,7 +20,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class AgregarGradoAcademico implements AgregarGradoAcademicoLocal {
     @PersistenceContext(unitName = "com.mycompany_malkasi-ejb_ejb_1.0-SNAPSHOTPU")
-    private EntityManager em;
+    EntityManager em;
 
     protected EntityManager getEntityManager() {
         return em;
